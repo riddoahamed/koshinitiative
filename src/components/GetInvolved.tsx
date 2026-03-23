@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const columns = [
   {
@@ -39,9 +40,11 @@ const fadeUp = {
 };
 
 const GetInvolved = () => {
+  const ref = useScrollAnimation();
+
   return (
     <section className="bg-kosh-offwhite py-20 md:py-28 px-6 md:px-12 lg:px-24">
-      <div className="max-w-6xl mx-auto">
+      <div ref={ref} className="max-w-6xl mx-auto">
         <p className="text-xs font-sans font-semibold uppercase tracking-[0.2em] text-kosh-mint mb-4">
           Get involved
         </p>
