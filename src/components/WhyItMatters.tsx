@@ -1,30 +1,51 @@
 import { motion } from "framer-motion";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const WhyItMatters = () => {
+  const ref = useScrollAnimation();
+
   return (
     <section className="bg-kosh-dark py-20 md:py-28 px-6 md:px-12 lg:px-24">
-      <div className="max-w-3xl mx-auto text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <p className="font-serif text-7xl md:text-8xl text-white font-normal">28%</p>
-          <p className="text-kosh-mint text-sm font-sans font-semibold uppercase tracking-[0.15em] mt-4">
-            of Bangladeshis have basic financial literacy
-          </p>
-          <p className="text-kosh-muted text-base leading-relaxed mt-6 max-w-xl mx-auto">
-            That number covers a country of 170 million people — including a rapidly growing generation of young professionals entering the workforce without foundational financial knowledge.
-          </p>
-        </motion.div>
+      <div ref={ref} className="max-w-4xl mx-auto">
+        {/* Two stats side by side */}
+        <div className="grid md:grid-cols-2 gap-12 md:gap-16 text-center mb-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <p className="font-serif text-7xl md:text-8xl text-white font-normal">28%</p>
+            <p className="text-kosh-mint text-sm font-sans font-semibold uppercase tracking-[0.15em] mt-4">
+              of Bangladeshis have basic financial literacy
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.12 }}
+          >
+            <p className="font-serif text-7xl md:text-8xl text-white font-normal">56%</p>
+            <p className="text-kosh-mint text-sm font-sans font-semibold uppercase tracking-[0.15em] mt-4">
+              of Bangladeshis own a smartphone
+            </p>
+            <p className="text-kosh-muted text-xs font-sans mt-2">GSMA, 2023</p>
+          </motion.div>
+        </div>
+
+        <p className="text-kosh-muted text-base leading-relaxed text-center max-w-2xl mx-auto mb-12">
+          More than half of Bangladesh now has a smartphone. The knowledge to use
+          it for financial growth is still missing for most.
+        </p>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.15 }}
-          className="text-kosh-muted text-base leading-relaxed mt-12 max-w-xl mx-auto"
+          className="text-kosh-muted text-base leading-relaxed text-center max-w-xl mx-auto"
         >
           The problem is not that people are bad with money. It is that nobody taught them. The information that exists is scattered, jargon-heavy, and almost always attached to someone trying to sell something. Kosh exists to fix that.
         </motion.p>
