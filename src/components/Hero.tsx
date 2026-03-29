@@ -32,9 +32,9 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3 }}
-          className="mt-4 text-base md:text-lg text-kosh-muted"
+          className="mt-4 text-base md:text-lg text-kosh-muted max-w-2xl"
         >
-          Workshops, corporate sessions, and community programs — in plain language, with no agenda.
+          Workshops, community programs, and corporate sessions — practical financial education to help students, early-career professionals, and underserved communities understand money, save, and grow wealth.
         </motion.p>
 
         <motion.div
@@ -44,16 +44,22 @@ const Hero = () => {
           className="mt-10 flex flex-col sm:flex-row gap-4"
         >
           <a
-            href="#contact"
+            href="#join"
             className="inline-flex items-center justify-center px-8 py-3.5 rounded-md bg-kosh-mint text-kosh-dark font-sans font-semibold text-base transition-opacity hover:opacity-90"
           >
-            Partner with us
+            Join the Founding Circle
           </a>
           <a
-            href="#what-we-do"
+            href="#get-involved"
             className="inline-flex items-center justify-center px-8 py-3.5 rounded-md border border-white text-white font-sans font-medium text-base transition-opacity hover:opacity-80"
           >
-            Learn more
+            Get Involved
+          </a>
+          <a
+            href="mailto:koshinitiative@gmail.com?subject=Kosh%20Enquiry&body=Hi%20Kosh%2C%0A%0AI%20have%20a%20question%3A"
+            className="inline-flex items-center justify-center px-8 py-3.5 rounded-md border border-kosh-muted text-kosh-muted font-sans font-medium text-base transition-colors hover:border-white hover:text-white"
+          >
+            Ask Us Anything
           </a>
         </motion.div>
       </div>

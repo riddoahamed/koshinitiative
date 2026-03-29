@@ -1,28 +1,35 @@
 import { motion } from "framer-motion";
-import { GraduationCap, Building2, Users } from "lucide-react";
+import { GraduationCap, Users, Building2, Heart } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const cards = [
   {
     icon: GraduationCap,
-    title: "University workshops",
+    title: "University & Student Workshops",
     description:
-      "90-minute financial literacy sessions for students covering budgeting, saving, investing basics, and the investment instruments available to ordinary Bangladeshis.",
-    detail: "Free for participants. Delivered on campus.",
-  },
-  {
-    icon: Building2,
-    title: "Corporate wellness sessions",
-    description:
-      "Practical financial wellness sessions for company teams — managing income, building savings systems, understanding investments. Designed for working professionals.",
-    detail: "Flexible format. 60 to 90 minutes.",
+      "Interactive, hands-on sessions in universities, colleges, and schools. Free where possible. Minimal cost only to cover delivery.",
+    detail: "Budgeting, saving, investing, financial planning. Plain language. Real-life examples.",
   },
   {
     icon: Users,
-    title: "Community outreach",
+    title: "Community & Rural Programs",
     description:
-      "Financial education programs for communities with limited access — in plain Bangla, built for the realities of everyday financial life in Bangladesh.",
-    detail: "Grant-funded where possible. Bangla-primary.",
+      "Programs for rural women, factory workers, and underserved communities. Delivered in local languages, free for participants.",
+    detail: "Practical financial habits, basic banking, mobile payments, saving, and planning.",
+  },
+  {
+    icon: Building2,
+    title: "Corporate Financial Wellness",
+    description:
+      "Tailored workshops for young professionals and first-time investors.",
+    detail: "Salary management, emergency funds, investment basics, long-term planning.",
+  },
+  {
+    icon: Heart,
+    title: "Pro Bono / Sponsored Programs",
+    description:
+      "Supported by grants, sponsors, and partnerships. Designed so the end beneficiaries get full value at no cost.",
+    detail: "Maximum impact. Minimal friction. Real measurable results.",
   },
 ];
 
@@ -41,14 +48,19 @@ const WhatWeDo = () => {
   return (
     <section id="what-we-do" className="bg-kosh-offwhite py-20 md:py-28 px-6 md:px-12 lg:px-24">
       <div ref={ref} className="max-w-6xl mx-auto">
+        {/* Intro tagline */}
+        <p className="text-kosh-teal text-lg md:text-xl font-serif leading-relaxed max-w-3xl mb-14">
+          We're on a mission to make financial education accessible, practical, and actionable for every young Bangladeshi.
+        </p>
+
         <p className="text-xs font-sans font-semibold uppercase tracking-[0.2em] text-kosh-mint mb-4">
           What Kosh does
         </p>
         <h2 className="font-serif text-3xl md:text-4xl text-kosh-dark mb-14">
-          Three programmes. One mission.
+          Four programmes. One mission.
         </h2>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 gap-8">
           {cards.map((card, i) => (
             <motion.div
               key={card.title}
