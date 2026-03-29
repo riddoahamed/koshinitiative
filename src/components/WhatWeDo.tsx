@@ -50,10 +50,10 @@ const WhatWeDo = () => {
           What Kosh does
         </p>
         <h2 className="font-serif text-3xl md:text-4xl text-kosh-dark mb-14">
-          Four programmes. One mission.
+          Three programmes. One mission.
         </h2>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-3 gap-8">
           {cards.map((card, i) => (
             <motion.div
               key={card.title}
