@@ -35,6 +35,17 @@ const Footer = () => {
             <p className="text-kosh-muted text-xs font-sans mt-6">
               We read every message. We will reply within 48 hours.
             </p>
+            <p className="text-kosh-muted text-sm font-sans mt-4">
+              Join our community:{" "}
+              <a
+                href="https://linktr.ee/KoshFLI"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-kosh-mint hover:underline"
+              >
+                linktr.ee/KoshFLI
+              </a>
+            </p>
           </div>
         </div>
       </div>
