@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { GraduationCap, Users, Building2, Heart } from "lucide-react";
+import { GraduationCap, Building2, Heart } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const cards = [
