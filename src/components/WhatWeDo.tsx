@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { GraduationCap, Users, Building2, Heart } from "lucide-react";
+import { GraduationCap, Building2, Heart } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const cards = [
@@ -9,13 +9,6 @@ const cards = [
     description:
       "Interactive, hands-on sessions in universities, colleges, and schools. Free where possible. Minimal cost only to cover delivery.",
     detail: "Budgeting, saving, investing, financial planning. Plain language. Real-life examples.",
-  },
-  {
-    icon: Users,
-    title: "Community & Rural Programs",
-    description:
-      "Programs for rural women, factory workers, and underserved communities. Delivered in local languages, free for participants.",
-    detail: "Practical financial habits, basic banking, mobile payments, saving, and planning.",
   },
   {
     icon: Building2,
@@ -28,7 +21,7 @@ const cards = [
     icon: Heart,
     title: "Pro Bono / Sponsored Programs",
     description:
-      "Supported by grants, sponsors, and partnerships. Designed so the end beneficiaries get full value at no cost.",
+      "Programs for rural women, factory workers, and underserved communities — supported by grants, sponsors, and partnerships. Delivered in local languages, free for participants.",
     detail: "Maximum impact. Minimal friction. Real measurable results.",
   },
 ];
@@ -57,10 +50,10 @@ const WhatWeDo = () => {
           What Kosh does
         </p>
         <h2 className="font-serif text-3xl md:text-4xl text-kosh-dark mb-14">
-          Four programmes. One mission.
+          Three programmes. One mission.
         </h2>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-3 gap-8">
           {cards.map((card, i) => (
             <motion.div
               key={card.title}
