@@ -11,13 +11,6 @@ const cards = [
     detail: "Budgeting, saving, investing, financial planning. Plain language. Real-life examples.",
   },
   {
-    icon: Users,
-    title: "Community & Rural Programs",
-    description:
-      "Programs for rural women, factory workers, and underserved communities. Delivered in local languages, free for participants.",
-    detail: "Practical financial habits, basic banking, mobile payments, saving, and planning.",
-  },
-  {
     icon: Building2,
     title: "Corporate Financial Wellness",
     description:
@@ -28,7 +21,7 @@ const cards = [
     icon: Heart,
     title: "Pro Bono / Sponsored Programs",
     description:
-      "Supported by grants, sponsors, and partnerships. Designed so the end beneficiaries get full value at no cost.",
+      "Programs for rural women, factory workers, and underserved communities — supported by grants, sponsors, and partnerships. Delivered in local languages, free for participants.",
     detail: "Maximum impact. Minimal friction. Real measurable results.",
   },
 ];
