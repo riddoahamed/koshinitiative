@@ -4,7 +4,7 @@ import SocialLinks from "./SocialIcons";
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex flex-col justify-center bg-kosh-dark px-6 md:px-12 lg:px-24">
+    <section className="relative min-h-screen flex flex-col justify-center bg-kosh-dark px-6 md:px-12 lg:px-24 py-16 md:py-[100px]">
       <div className="absolute top-6 right-6 md:top-10 md:right-12 lg:right-24">
         <SocialLinks />
       </div>
@@ -32,7 +32,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3 }}
-          className="mt-4 text-base md:text-lg text-kosh-muted max-w-2xl"
+          className="mt-4 text-base md:text-lg text-kosh-muted max-w-2xl font-sans"
         >
           Workshops, community programs, and corporate sessions — practical financial education to help students, early-career professionals, and underserved communities understand money, save, and grow wealth.
         </motion.p>
@@ -44,13 +44,13 @@ const Hero = () => {
           className="mt-10 flex flex-col sm:flex-row gap-4"
         >
           <a
-            href="#join"
+            href="#get-involved-contributors"
             className="inline-flex items-center justify-center px-8 py-3.5 rounded-md bg-kosh-mint text-kosh-dark font-sans font-semibold text-base transition-opacity hover:opacity-90"
           >
             Join the Founding Circle
           </a>
           <a
-            href="#get-involved"
+            href="#get-involved-clients"
             className="inline-flex items-center justify-center px-8 py-3.5 rounded-md border border-white text-white font-sans font-medium text-base transition-opacity hover:opacity-80"
           >
             Get Involved

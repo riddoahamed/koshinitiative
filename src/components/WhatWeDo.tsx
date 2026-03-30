@@ -39,9 +39,8 @@ const WhatWeDo = () => {
   const ref = useScrollAnimation();
 
   return (
-    <section id="what-we-do" className="bg-kosh-offwhite py-20 md:py-28 px-6 md:px-12 lg:px-24">
+    <section id="what-we-do" className="bg-kosh-offwhite py-16 md:py-[100px] px-6 md:px-12 lg:px-24">
       <div ref={ref} className="max-w-6xl mx-auto">
-        {/* Intro tagline */}
         <p className="text-kosh-teal text-lg md:text-xl font-serif leading-relaxed max-w-3xl mb-14">
           We're on a mission to make financial education accessible, practical, and actionable for every young Bangladeshi.
         </p>
@@ -66,13 +65,13 @@ const WhatWeDo = () => {
             >
               <card.icon className="text-kosh-teal mb-5" size={32} strokeWidth={1.5} />
               <h3 className="font-serif text-xl text-kosh-dark mb-3">{card.title}</h3>
-              <p className="text-kosh-muted text-sm leading-relaxed flex-1">{card.description}</p>
+              <p className="text-kosh-muted text-sm leading-relaxed flex-1 font-sans">{card.description}</p>
               <p className="mt-4 text-xs font-sans font-medium text-kosh-teal">{card.detail}</p>
             </motion.div>
           ))}
         </div>
 
-        <p className="text-center text-kosh-muted text-sm mt-14 max-w-2xl mx-auto">
+        <p className="text-center text-kosh-muted text-sm mt-14 max-w-2xl mx-auto font-sans">
           Everything we do is education. We do not sell products, earn commissions, or make investment recommendations.
         </p>
       </div>
