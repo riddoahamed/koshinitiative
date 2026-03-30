@@ -30,12 +30,12 @@ const GetInvolvedForm = () => {
   }, []);
 
   return (
-    <section id="get-involved-form" className="bg-[#0A0E1A] py-16 md:py-[100px] px-6 md:px-12 lg:px-24">
+    <section id="get-involved-form" className="py-16 md:py-[100px] px-6 md:px-12 lg:px-24 bg-primary text-xs">
       <div ref={ref} className="max-w-2xl mx-auto">
-        <h2 className="font-serif text-3xl md:text-4xl text-white mb-3">
+        <h2 className="text-3xl text-white mb-3 md:text-5xl font-mono">
           Tell us about yourself.
         </h2>
-        <p className="text-[#9FE1CB] text-base leading-relaxed mb-12 font-sans">
+        <p className="text-[#9FE1CB] leading-relaxed mb-12 font-mono text-sm">
           Whether you want to bring Kosh to your institution or join the team — fill in the form below. We read every submission and reply within 48 hours.
         </p>
         <div className="max-w-[640px] mx-auto">
