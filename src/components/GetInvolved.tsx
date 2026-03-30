@@ -48,7 +48,7 @@ const GetInvolved = () => {
           <motion.a
             custom={2}
             variants={fadeUp}
-            href="https://wa.me/YOUR_NUMBER?text=Hi%20Kosh%2C%20I%20have%20a%20question"
+            href="https://wa.me/8801607966000?text=Hi%20Kosh%2C%20I%20have%20a%20question"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center px-8 py-3.5 rounded-md border border-kosh-muted text-kosh-muted font-sans font-medium text-sm transition-colors hover:border-kosh-teal hover:text-kosh-teal"

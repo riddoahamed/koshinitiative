@@ -33,7 +33,7 @@ const Footer = () => {
               koshinitiative@gmail.com
             </a>
             <p className="text-kosh-muted text-sm font-sans mt-4">
-              WhatsApp: <a href="https://wa.me/YOUR_WHATSAPP_NUMBER" target="_blank" rel="noopener noreferrer" className="text-kosh-mint hover:underline">YOUR_WHATSAPP_NUMBER</a>
+              WhatsApp: <a href="https://wa.me/8801607966000" target="_blank" rel="noopener noreferrer" className="text-kosh-mint hover:underline">+8801607966000</a>
             </p>
             <p className="text-kosh-muted text-sm font-sans mt-1">
               Facebook: <a href="https://facebook.com/KoshInitiative" target="_blank" rel="noopener noreferrer" className="text-kosh-mint hover:underline">facebook.com/KoshInitiative</a>

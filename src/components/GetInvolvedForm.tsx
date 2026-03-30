@@ -40,7 +40,7 @@ const GetInvolvedForm = () => {
         </p>
         <div className="max-w-[640px] mx-auto">
           <iframe
-            data-tally-src="https://tally.so/embed/FORM_ID?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+            data-tally-src="https://tally.so/embed/RGRAOQ?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
             loading="lazy"
             width="100%"
             height={500}
