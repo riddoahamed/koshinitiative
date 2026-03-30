@@ -5,9 +5,8 @@ const WhyItMatters = () => {
   const ref = useScrollAnimation();
 
   return (
-    <section className="bg-kosh-dark py-20 md:py-28 px-6 md:px-12 lg:px-24">
+    <section className="bg-kosh-dark py-16 md:py-[100px] px-6 md:px-12 lg:px-24">
       <div ref={ref} className="max-w-4xl mx-auto">
-        {/* Two stats side by side */}
         <div className="grid md:grid-cols-2 gap-12 md:gap-16 text-center mb-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -35,7 +34,7 @@ const WhyItMatters = () => {
           </motion.div>
         </div>
 
-        <p className="text-kosh-muted text-base leading-relaxed text-center max-w-2xl mx-auto mb-12">
+        <p className="text-kosh-muted text-base leading-relaxed text-center max-w-2xl mx-auto mb-12 font-sans">
           More than half of Bangladesh now has a smartphone. The knowledge to use
           it for financial growth is still missing for most.
         </p>
@@ -45,7 +44,7 @@ const WhyItMatters = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.15 }}
-          className="text-kosh-muted text-base leading-relaxed text-center max-w-xl mx-auto"
+          className="text-kosh-muted text-base leading-relaxed text-center max-w-xl mx-auto font-sans"
         >
           The problem is not that people are bad with money. It is that nobody taught them. The information that exists is scattered, jargon-heavy, and almost always attached to someone trying to sell something. Kosh exists to fix that.
         </motion.p>

@@ -66,7 +66,7 @@ export default {
         },
       },
       fontFamily: {
-        serif: ['Georgia', 'Times New Roman', 'serif'],
+        serif: ['Instrument Serif', 'Georgia', 'serif'],
         sans: ['Inter', 'sans-serif'],
       },
       borderRadius: {

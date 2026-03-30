@@ -4,7 +4,7 @@ const ForStudents = () => {
   const ref = useScrollAnimation();
 
   return (
-    <section className="bg-kosh-dark py-20 md:py-28 px-6 md:px-12 lg:px-24">
+    <section className="bg-kosh-dark py-16 md:py-[100px] px-6 md:px-12 lg:px-24">
       <div ref={ref} className="max-w-3xl mx-auto">
         <p className="text-xs font-sans font-semibold uppercase tracking-[0.2em] text-kosh-mint mb-4">
           Building foundations early
@@ -12,7 +12,7 @@ const ForStudents = () => {
         <h2 className="font-serif text-3xl md:text-4xl text-white mb-6">
           Financial literacy should not wait until university.
         </h2>
-        <p className="text-kosh-muted text-base leading-relaxed mb-10">
+        <p className="text-kosh-muted text-base leading-relaxed mb-10 font-sans">
           We run specialised sessions for secondary and higher secondary students
           across Bangladesh — introducing budgeting, savings, and financial
           decision-making before the pressure of real income begins. Because the

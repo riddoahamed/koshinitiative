@@ -1,9 +1,11 @@
 import Hero from "@/components/Hero";
 import WhatWeDo from "@/components/WhatWeDo";
-import ForStudents from "@/components/ForStudents";
 import WhyItMatters from "@/components/WhyItMatters";
-import GetInvolved from "@/components/GetInvolved";
-import JoinTeam from "@/components/JoinTeam";
+import ForStudents from "@/components/ForStudents";
+import GetInvolvedClients from "@/components/GetInvolvedClients";
+import GetInvolvedContributors from "@/components/GetInvolvedContributors";
+import GetInvolvedForm from "@/components/GetInvolvedForm";
+import Community from "@/components/Community";
 import DigitalWaitlist from "@/components/DigitalWaitlist";
 import Footer from "@/components/Footer";
 
@@ -12,10 +14,12 @@ const Index = () => {
     <main>
       <Hero />
       <WhatWeDo />
-      <ForStudents />
       <WhyItMatters />
-      <GetInvolved />
-      <JoinTeam />
+      <ForStudents />
+      <GetInvolvedClients />
+      <GetInvolvedContributors />
+      <GetInvolvedForm />
+      <Community />
       <DigitalWaitlist />
       <Footer />
     </main>
