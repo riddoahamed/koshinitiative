@@ -122,7 +122,7 @@ const JoinTeam = () => {
             Fill in the form below. We read every submission and reply within 48 hours.
           </p>
           <iframe
-            data-tally-src="https://tally.so/embed/FORM_ID"
+            data-tally-src="https://tally.so/embed/RGRAOQ"
             loading="lazy"
             width="100%"
             height={500}
@@ -135,7 +135,7 @@ const JoinTeam = () => {
         {/* WhatsApp button */}
         <div className="text-center">
           <a
-            href="https://wa.me/YOUR_NUMBER?text=Hi%20Kosh%2C%20I%20want%20to%20join%20the%20community"
+            href="https://chat.whatsapp.com/GSHCPsdgt7s2aONoVa15Zj?mode=gi_t"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center px-8 py-3.5 rounded-md border border-white text-white font-sans font-semibold text-sm transition-colors hover:bg-kosh-mint hover:border-kosh-mint hover:text-kosh-dark"
