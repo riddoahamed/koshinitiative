@@ -122,7 +122,7 @@ const JoinTeam = () => {
             Fill in the form below. We read every submission and reply within 48 hours.
           </p>
           <iframe
-            data-tally-src="https://tally.so/embed/FORM_ID"
+            data-tally-src="https://tally.so/embed/RGRAOQ"
             loading="lazy"
             width="100%"
             height={500}
