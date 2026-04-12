@@ -1,3 +1,4 @@
+import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import WhatWeDo from "@/components/WhatWeDo";
 import WhyItMatters from "@/components/WhyItMatters";
@@ -14,8 +15,8 @@ import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
-    <main>
-      <Hero />
+    <main className="scroll-smooth">
+      <Navbar />
       <WhatWeDo />
       <WhyItMatters />
       <ForStudents />
