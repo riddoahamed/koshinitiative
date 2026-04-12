@@ -17,6 +17,7 @@ const Index = () => {
   return (
     <main className="scroll-smooth">
       <Navbar />
+      <Hero />
       <WhatWeDo />
       <WhyItMatters />
       <ForStudents />
