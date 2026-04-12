@@ -14,10 +14,10 @@ const resources = [
     url: "https://www.investopedia.com/financial-term-dictionary-4769738",
   },
   {
-    emoji: "🏦",
-    title: "Bangladesh Bank — Financial Literacy",
-    desc: "Official resources from Bangladesh's central bank.",
-    url: "https://www.bb.org.bd",
+    emoji: "💬",
+    title: "r/personalfinance (Reddit)",
+    desc: "Real people, real money questions. Unfiltered and surprisingly helpful.",
+    url: "https://www.reddit.com/r/personalfinance/",
   },
   {
     emoji: "🧮",

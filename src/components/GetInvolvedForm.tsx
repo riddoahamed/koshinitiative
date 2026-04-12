@@ -35,8 +35,11 @@ const GetInvolvedForm = () => {
         <h2 className="text-3xl text-white mb-3 md:text-5xl font-mono">
           Tell us about yourself.
         </h2>
-        <p className="text-[#9FE1CB] leading-relaxed mb-12 font-mono text-sm">
+        <p className="text-[#9FE1CB] leading-relaxed mb-2 font-mono text-sm">
           Whether you want to bring Kosh to your institution or join the team — fill in the form below. We read every submission and reply within 48 hours.
+        </p>
+        <p className="text-kosh-muted/60 text-xs font-mono mb-12">
+          (heads up — the form takes a sec to load. we know. we're working on it. 🫠)
         </p>
         <div className="max-w-[640px] mx-auto">
           <iframe
