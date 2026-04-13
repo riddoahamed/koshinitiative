@@ -4,7 +4,7 @@ import koshLogo from "@/assets/kosh-logo.png";
 
 const links = [
   { label: "What We Do", href: "#what-we-do" },
-  { label: "Why It Matters", href: "#why-it-matters" },
+  { label: "Tools", href: "#tools" },
   { label: "Resources", href: "#learn" },
   { label: "Get Involved", href: "#get-involved-form" },
   { label: "Community", href: "#join" },
