@@ -9,21 +9,27 @@ const Hero = () => {
         <SocialLinks />
       </div>
 
-      <div className="max-w-3xl">
+      <div className="max-w-4xl">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
-          className="font-serif text-4xl md:text-5xl lg:text-6xl leading-tight tracking-tight text-white"
+          className="font-serif text-5xl md:text-7xl lg:text-8xl leading-[1.05] tracking-tight text-white"
         >
-          Most young Bangladeshis were never taught how money works.
+          Most young Bangladeshis were{" "}
+          <span className="italic text-kosh-mint">never taught</span>{" "}
+          how{" "}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-kosh-mint to-emerald-300">
+            money
+          </span>{" "}
+          works.
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.15 }}
-          className="mt-6 text-xl md:text-2xl font-serif text-kosh-mint"
+          className="mt-8 text-2xl md:text-4xl font-serif text-kosh-mint"
         >
           Kosh is changing that.
         </motion.p>
@@ -32,7 +38,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3 }}
-          className="mt-4 text-base md:text-lg text-kosh-muted max-w-2xl font-sans"
+          className="mt-5 text-base md:text-lg text-kosh-muted max-w-2xl font-sans leading-relaxed"
         >
           Workshops, community programs, and corporate sessions — practical financial education to help students, early-career professionals, and underserved communities understand money, save, and grow wealth.
         </motion.p>
@@ -41,7 +47,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.45 }}
-          className="mt-10 flex flex-col sm:flex-row gap-4"
+          className="mt-12 flex flex-col sm:flex-row gap-4"
         >
           <a
             href="#get-involved-contributors"
