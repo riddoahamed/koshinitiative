@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Info } from "lucide-react";
+import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid } from "recharts";
 
 function formatBDT(n: number) {
   if (n >= 1e12) return "৳" + (n / 1e12).toFixed(1) + "T";
@@ -131,7 +132,74 @@ const InvestmentComparator = () => {
         })}
       </div>
 
-      {/* Result sentence */}
+      {/* Year-by-year growth chart */}
+      <div className="mt-8">
+        <h4 className="text-sm font-sans font-semibold text-kosh-dark mb-4">Growth over time</h4>
+        <div className="h-64 w-full">
+          <ResponsiveContainer width="100%" height="100%">
+            <LineChart
+              data={(() => {
+                const data = [];
+                for (let y = 0; y <= years; y++) {
+                  const point: Record<string, any> = { year: y };
+                  ASSETS.forEach((asset) => {
+                    point[asset.id] = amount * Math.pow(1 + asset.rate / 100, y);
+                  });
+                  data.push(point);
+                }
+                return data;
+              })()}
+              margin={{ top: 5, right: 5, left: 5, bottom: 5 }}
+            >
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" />
+              <XAxis
+                dataKey="year"
+                tick={{ fontSize: 11, fill: '#6B7280' }}
+                tickFormatter={(v) => `${v}Y`}
+              />
+              <YAxis
+                tick={{ fontSize: 10, fill: '#6B7280' }}
+                tickFormatter={(v: number) => {
+                  if (v >= 1e12) return `${(v / 1e12).toFixed(0)}T`;
+                  if (v >= 1e9) return `${(v / 1e9).toFixed(0)}B`;
+                  if (v >= 1e7) return `${(v / 1e7).toFixed(0)}Cr`;
+                  if (v >= 1e5) return `${(v / 1e5).toFixed(0)}L`;
+                  if (v >= 1e3) return `${(v / 1e3).toFixed(0)}K`;
+                  return `${v}`;
+                }}
+                width={45}
+              />
+              <Tooltip
+                formatter={(value: number, name: string) => {
+                  const asset = ASSETS.find((a) => a.id === name);
+                  return [formatBDT(value), asset?.label || name];
+                }}
+                labelFormatter={(label) => `Year ${label}`}
+                contentStyle={{ fontSize: 12, borderRadius: 8, border: '1px solid rgba(0,0,0,0.08)' }}
+              />
+              {ASSETS.map((asset) => (
+                <Line
+                  key={asset.id}
+                  type="monotone"
+                  dataKey={asset.id}
+                  stroke={asset.color}
+                  strokeWidth={2}
+                  dot={false}
+                  activeDot={{ r: 4 }}
+                />
+              ))}
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+        <div className="flex flex-wrap gap-x-4 gap-y-1 mt-3 justify-center">
+          {ASSETS.map((asset) => (
+            <div key={asset.id} className="flex items-center gap-1.5">
+              <div className="w-2 h-2 rounded-full" style={{ backgroundColor: asset.color }} />
+              <span className="text-[10px] font-sans text-kosh-muted">{asset.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
       <p className="mt-6 text-sm font-sans text-kosh-muted text-center">
         If these rates continued, <span className="font-semibold text-kosh-dark">{formatBDT(amount)}</span> could become{" "}
         <span className="font-semibold text-kosh-dark">{formatBDT(results[0]?.futureValue || 0)}</span> ({results[0]?.label}) to{" "}
