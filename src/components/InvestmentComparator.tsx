@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Info } from "lucide-react";
+import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid } from "recharts";
 
 function formatBDT(n: number) {
   if (n >= 1e12) return "৳" + (n / 1e12).toFixed(1) + "T";
