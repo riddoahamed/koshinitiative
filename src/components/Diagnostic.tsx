@@ -87,11 +87,11 @@ const behaviorOptions = [
 ];
 
 const confidenceOptions = [
-  { label: "1 — একদম না (Not at all)", value: 20 },
+  { label: "1 - একদম না (Not at all)", value: 20 },
   { label: "2", value: 40 },
   { label: "3", value: 60 },
   { label: "4", value: 80 },
-  { label: "5 — Very confident", value: 100 },
+  { label: "5 - Very confident", value: 100 },
 ];
 
 const Diagnostic = () => {
