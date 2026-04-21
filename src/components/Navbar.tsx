@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import koshLogo from "@/assets/kosh-logo.png";
+import SocialLinks from "@/components/SocialIcons";
 
 const links = [
   { label: "What We Do", href: "#what-we-do" },
+  { label: "Diagnostic", href: "#diagnostic" },
   { label: "Tools", href: "#tools" },
   { label: "Resources", href: "#learn" },
   { label: "Get Involved", href: "#get-involved-form" },
