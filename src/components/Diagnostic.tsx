@@ -101,6 +101,17 @@ const Diagnostic = () => {
   // answers[i] stores numeric score (0-100) for each question
   const [answers, setAnswers] = useState<(number | null)[]>(Array(15).fill(null));
 
+  // Auto-open 1.5s after landing (once per session, respects popup dismissal)
+  useEffect(() => {
+    if (sessionStorage.getItem("kosh_diag_autoopened") === "1") return;
+    if (sessionStorage.getItem("kosh_diag_popup_dismissed") === "1") return;
+    const t = setTimeout(() => {
+      sessionStorage.setItem("kosh_diag_autoopened", "1");
+      setOpen(true);
+    }, 1500);
+    return () => clearTimeout(t);
+  }, []);
+
   const reset = () => {
     setStage("intro");
     setCurrent(0);
