@@ -120,7 +120,11 @@ const Diagnostic = () => {
 
   const handleOpenChange = (o: boolean) => {
     setOpen(o);
-    if (!o) reset();
+    if (!o) {
+      // Mark as dismissed so the floating popup can appear 5s later
+      sessionStorage.setItem("kosh_diag_popup_dismissed", "1");
+      reset();
+    }
   };
 
   const select = (score: number) => {
