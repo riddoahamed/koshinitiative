@@ -16,65 +16,65 @@ const questions: Question[] = [
   // Knowledge (5)
   {
     type: "knowledge",
-    q: "Inflation মানে কী হয়? (What does inflation mean?)",
+    q: "Inflation মানে কী? (What does inflation mean?)",
     options: [
-      { label: "Your salary increases" },
-      { label: "The value of money goes down over time", correct: true },
-      { label: "Bank interest rates go up" },
-      { label: "Stock prices fall" },
+      { label: "Your salary increases (আপনার বেতন বাড়ে)" },
+      { label: "The value of money goes down over time (টাকার মান সময়ের সাথে কমে যায়)", correct: true },
+      { label: "Bank interest rates go up (ব্যাংকের সুদের হার বাড়ে)" },
+      { label: "Stock prices fall (শেয়ারের দাম পড়ে যায়)" },
     ],
   },
   {
     type: "knowledge",
-    q: "Compound interest (interest on interest) — এটা কীভাবে কাজ করে?",
+    q: "Compound interest (interest on interest) - এটা কীভাবে কাজ করে?",
     options: [
-      { label: "You earn interest only on your original amount" },
-      { label: "You earn interest on your original amount AND the interest already earned", correct: true },
-      { label: "Your bank charges you extra fees" },
-      { label: "Interest is paid only at the end of the year" },
+      { label: "You earn interest only on your original amount (শুধু মূল টাকার উপর সুদ পান)" },
+      { label: "You earn interest on your original amount AND the interest already earned (মূল টাকা এবং আগে পাওয়া সুদ - দুটোর উপরই সুদ পান)", correct: true },
+      { label: "Your bank charges you extra fees (ব্যাংক অতিরিক্ত ফি কাটে)" },
+      { label: "Interest is paid only at the end of the year (সুদ শুধু বছর শেষে দেওয়া হয়)" },
     ],
   },
   {
     type: "knowledge",
     q: "Emergency fund রাখার standard advice কতো মাসের খরচ?",
     options: [
-      { label: "1 month" },
-      { label: "1 year" },
-      { label: "3–6 months", correct: true },
-      { label: "10 months" },
+      { label: "1 month (১ মাস)" },
+      { label: "1 year (১ বছর)" },
+      { label: "3-6 months (৩-৬ মাস)", correct: true },
+      { label: "10 months (১০ মাস)" },
     ],
   },
   {
     type: "knowledge",
     q: "DSE মানে কী?",
     options: [
-      { label: "Dhaka Savings Exchange" },
-      { label: "Dhaka Stock Exchange", correct: true },
-      { label: "Digital Securities Entity" },
-      { label: "Dhaka Sanchaypatra Exchange" },
+      { label: "Dhaka Savings Exchange (ঢাকা সেভিংস এক্সচেঞ্জ)" },
+      { label: "Dhaka Stock Exchange (ঢাকা স্টক এক্সচেঞ্জ)", correct: true },
+      { label: "Digital Securities Entity (ডিজিটাল সিকিউরিটিজ এন্টিটি)" },
+      { label: "Dhaka Sanchaypatra Exchange (ঢাকা সঞ্চয়পত্র এক্সচেঞ্জ)" },
     ],
   },
   {
     type: "knowledge",
     q: "Sanchaypatra (সঞ্চয়পত্র) কোথা থেকে কেনা যায়?",
     options: [
-      { label: "Dhaka Stock Exchange" },
-      { label: "Any private bank branch" },
-      { label: "Bangladesh Bank or designated bank branches", correct: true },
-      { label: "bKash app" },
+      { label: "Dhaka Stock Exchange (ঢাকা স্টক এক্সচেঞ্জ)" },
+      { label: "Any private bank branch (যেকোনো প্রাইভেট ব্যাংকের শাখা)" },
+      { label: "Bangladesh Bank or designated bank branches (বাংলাদেশ ব্যাংক বা নির্ধারিত ব্যাংক শাখা)", correct: true },
+      { label: "bKash app (বিকাশ অ্যাপ)" },
     ],
   },
   // Behavior (5)
-  { type: "behavior", q: "আপনি কি মাস শেষে review করেন — কোথায় টাকা গেছে? (Do you review where your money went at end of month?)" },
-  { type: "behavior", q: "Income আসার পরে কি আগে save করেন, তারপর খরচ করেন? (Do you save first before spending after income arrives?)" },
+  { type: "behavior", q: "আপনি কি মাস শেষে review করেন, কোথায় টাকা গেছে? (Do you review where your money went at end of month?)" },
+  { type: "behavior", q: "Income হাতে পাওয়ার পর save করেন, তারপর খরচ করেন? (Do you save before you spend, when your income arrives?)" },
   { type: "behavior", q: "কোনো বড় কেনাকাটার আগে কি research বা comparison করেন? (Do you research or compare before a big purchase?)" },
   { type: "behavior", q: "আপনার কি একটা emergency fund আছে যেটা আপনি regularly contribute করেন? (Do you have an emergency fund you regularly contribute to?)" },
-  { type: "behavior", q: "Financial news বা money-related content কি আপনি follow করেন? (Do you follow financial news or money content?)" },
+  { type: "behavior", q: "Apni ki financial news ba money-related content follow/consume koren? (Do you follow or consume financial news or money-related content?)" },
   // Confidence (5)
   { type: "confidence", q: "Investing শুরু করতে বললে আপনি কতটা confident feel করবেন? (How confident would you feel if asked to start investing?)" },
   { type: "confidence", q: "Apnar monthly budget বানাতে কতটা confident? (How confident are you in building a monthly budget?)" },
   { type: "confidence", q: "কাউকে compound interest explain করতে পারবেন? (Could you explain compound interest to someone else?)" },
-  { type: "confidence", q: "Stock market (share bazar) কীভাবে কাজ করে — কতটা বোঝেন? (How well do you understand how the stock market works?)" },
+  { type: "confidence", q: "Stock market (share bazar) কীভাবে কাজ করে, কতটা বোঝেন? (How well do you understand how the stock market works?)" },
   { type: "confidence", q: "5 বছর পরের জন্য একটা basic financial plan বানাতে পারবেন? (Could you build a basic financial plan for 5 years from now?)" },
 ];
 
@@ -87,11 +87,11 @@ const behaviorOptions = [
 ];
 
 const confidenceOptions = [
-  { label: "1 — একদম না (Not at all)", value: 20 },
+  { label: "1 - একদম না (Not at all)", value: 20 },
   { label: "2", value: 40 },
   { label: "3", value: 60 },
   { label: "4", value: 80 },
-  { label: "5 — Very confident", value: 100 },
+  { label: "5 - Very confident", value: 100 },
 ];
 
 const Diagnostic = () => {
@@ -101,14 +101,14 @@ const Diagnostic = () => {
   // answers[i] stores numeric score (0-100) for each question
   const [answers, setAnswers] = useState<(number | null)[]>(Array(15).fill(null));
 
-  // Auto-open 1.5s after landing (once per session, respects popup dismissal)
+  // Auto-open 3s after landing (once per session, respects popup dismissal)
   useEffect(() => {
     if (sessionStorage.getItem("kosh_diag_autoopened") === "1") return;
     if (sessionStorage.getItem("kosh_diag_popup_dismissed") === "1") return;
     const t = setTimeout(() => {
       sessionStorage.setItem("kosh_diag_autoopened", "1");
       setOpen(true);
-    }, 1500);
+    }, 3000);
     return () => clearTimeout(t);
   }, []);
 
@@ -154,10 +154,10 @@ const Diagnostic = () => {
 
   const level =
     totalScore <= 35
-      ? { title: "Curious — let's build the map", message: "You're exactly who Kosh is built for. The foundation is coming." }
+      ? { title: "Curious, let's build the map", message: "You're exactly who Kosh is built for. The foundation is coming." }
       : totalScore <= 65
-      ? { title: "Oriented — let's structure it", message: "You've got instincts. Now let's give them structure." }
-      : { title: "Structured — you're ahead of most", message: "Solid foundation. The next level is about putting it to work." };
+      ? { title: "Oriented, let's structure it", message: "You've got instincts. Now let's give them structure." }
+      : { title: "Structured, you're ahead of most", message: "Solid foundation. The next level is about putting it to work." };
 
   const goWaitlist = () => {
     setOpen(false);
@@ -194,7 +194,7 @@ const Diagnostic = () => {
 
       <Dialog open={open} onOpenChange={handleOpenChange}>
         <DialogContent
-          className="max-w-2xl w-[calc(100vw-2rem)] sm:w-full p-0 border-0 bg-[#0D2B27] text-white max-h-[90vh] overflow-hidden flex flex-col gap-0 [&>button]:text-white [&>button]:opacity-80 [&>button]:hover:opacity-100"
+          className="max-w-2xl w-[calc(100vw-2rem)] sm:w-full p-0 border-0 bg-[#0D2B27] text-white max-h-[90vh] overflow-hidden flex flex-col gap-0 duration-700 data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0 data-[state=open]:zoom-in-95 data-[state=closed]:zoom-out-95 data-[state=open]:slide-in-from-top-[40%] data-[state=closed]:slide-out-to-top-[40%] [&>button]:text-white [&>button]:opacity-80 [&>button]:hover:opacity-100"
         >
           {stage === "intro" && (
             <div className="p-8 md:p-12 text-center overflow-y-auto">
@@ -202,10 +202,10 @@ const Diagnostic = () => {
                 Financial health diagnostic
               </p>
               <h3 className="font-serif text-2xl md:text-3xl mb-6 leading-snug">
-                "এটা test না — এটা হল আপনি এখন কোথায় আছেন সেটা বোঝার জন্য।"
+                "এটা quiz না, শুধু দেখতে আপনি কী বুঝলেন আর কী না।"
               </h3>
-              <p className="text-kosh-muted text-sm md:text-base mb-10">
-                (This isn't a test. It's just a check-in.)
+              <p className="text-kosh-muted text-sm md:text-base mb-8">
+                (This isn't a quiz. Just a check-in to see what you know and what you don't.)
               </p>
               <button
                 onClick={() => setStage("questions")}
@@ -214,6 +214,9 @@ const Diagnostic = () => {
               >
                 Begin →
               </button>
+              <p className="text-kosh-muted/70 text-[11px] md:text-xs mt-6 leading-relaxed">
+                You don't have to do this now. You can find it anytime in the menu under "Diagnostic".
+              </p>
             </div>
           )}
 
