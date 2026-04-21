@@ -12,6 +12,8 @@ import FreeTools from "@/components/FreeTools";
 import FreeResources from "@/components/FreeResources";
 import CommunityCTA from "@/components/CommunityCTA";
 import Footer from "@/components/Footer";
+import Diagnostic from "@/components/Diagnostic";
+import FloatingPopup from "@/components/FloatingPopup";
 
 const Index = () => {
   return (
@@ -20,6 +22,7 @@ const Index = () => {
       <Hero />
       <WhatWeDo />
       <WhyItMatters />
+      <Diagnostic />
       <ForStudents />
       <GetInvolvedClients />
       <GetInvolvedContributors />
@@ -30,6 +33,7 @@ const Index = () => {
       <FreeResources />
       <CommunityCTA />
       <Footer />
+      <FloatingPopup />
     </main>
   );
 };
