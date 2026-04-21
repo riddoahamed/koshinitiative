@@ -154,10 +154,10 @@ const Diagnostic = () => {
 
   const level =
     totalScore <= 35
-      ? { title: "Curious — let's build the map", message: "You're exactly who Kosh is built for. The foundation is coming." }
+      ? { title: "Curious, let's build the map", message: "You're exactly who Kosh is built for. The foundation is coming." }
       : totalScore <= 65
-      ? { title: "Oriented — let's structure it", message: "You've got instincts. Now let's give them structure." }
-      : { title: "Structured — you're ahead of most", message: "Solid foundation. The next level is about putting it to work." };
+      ? { title: "Oriented, let's structure it", message: "You've got instincts. Now let's give them structure." }
+      : { title: "Structured, you're ahead of most", message: "Solid foundation. The next level is about putting it to work." };
 
   const goWaitlist = () => {
     setOpen(false);
