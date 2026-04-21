@@ -194,7 +194,7 @@ const Diagnostic = () => {
 
       <Dialog open={open} onOpenChange={handleOpenChange}>
         <DialogContent
-          className="max-w-2xl w-[calc(100vw-2rem)] sm:w-full p-0 border-0 bg-[#0D2B27] text-white max-h-[90vh] overflow-hidden flex flex-col gap-0 [&>button]:text-white [&>button]:opacity-80 [&>button]:hover:opacity-100"
+          className="max-w-2xl w-[calc(100vw-2rem)] sm:w-full p-0 border-0 bg-[#0D2B27] text-white max-h-[90vh] overflow-hidden flex flex-col gap-0 duration-700 data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0 data-[state=open]:zoom-in-95 data-[state=closed]:zoom-out-95 data-[state=open]:slide-in-from-top-[40%] data-[state=closed]:slide-out-to-top-[40%] [&>button]:text-white [&>button]:opacity-80 [&>button]:hover:opacity-100"
         >
           {stage === "intro" && (
             <div className="p-8 md:p-12 text-center overflow-y-auto">
@@ -202,10 +202,10 @@ const Diagnostic = () => {
                 Financial health diagnostic
               </p>
               <h3 className="font-serif text-2xl md:text-3xl mb-6 leading-snug">
-                "এটা test না — এটা হল আপনি এখন কোথায় আছেন সেটা বোঝার জন্য।"
+                "এটা quiz না, শুধু দেখতে আপনি কী বুঝলেন আর কী না।"
               </h3>
-              <p className="text-kosh-muted text-sm md:text-base mb-10">
-                (This isn't a test. It's just a check-in.)
+              <p className="text-kosh-muted text-sm md:text-base mb-8">
+                (This isn't a quiz. Just a check-in to see what you know and what you don't.)
               </p>
               <button
                 onClick={() => setStage("questions")}
@@ -214,6 +214,9 @@ const Diagnostic = () => {
               >
                 Begin →
               </button>
+              <p className="text-kosh-muted/70 text-[11px] md:text-xs mt-6 leading-relaxed">
+                You don't have to do this now. You can find it anytime in the menu under "Diagnostic".
+              </p>
             </div>
           )}
 
