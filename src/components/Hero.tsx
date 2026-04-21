@@ -1,8 +1,35 @@
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import { useEffect, useState } from "react";
 import SocialLinks from "./SocialIcons";
 
+const TYPED_TEXT = "Kosh is changing that.";
+
 const Hero = () => {
+  const [typed, setTyped] = useState("");
+
+  useEffect(() => {
+    // Start typing after the headline animation settles
+    const startDelay = 700;
+    const charDelay = 70; // semi-fast
+    let i = 0;
+    let interval: ReturnType<typeof setInterval> | null = null;
+    const start = setTimeout(() => {
+      interval = setInterval(() => {
+        i += 1;
+        setTyped(TYPED_TEXT.slice(0, i));
+        if (i >= TYPED_TEXT.length && interval) {
+          clearInterval(interval);
+        }
+      }, charDelay);
+    }, startDelay);
+
+    return () => {
+      clearTimeout(start);
+      if (interval) clearInterval(interval);
+    };
+  }, []);
+
   return (
     <section className="relative min-h-screen flex flex-col justify-center bg-kosh-dark px-6 md:px-12 lg:px-24 py-16 md:py-[100px]">
       <div className="absolute top-6 right-6 md:top-10 md:right-12 lg:right-24">
@@ -25,14 +52,15 @@ const Hero = () => {
           works.
         </motion.h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.15 }}
-          className="mt-8 text-2xl md:text-4xl font-serif text-kosh-mint"
+        <p
+          className="mt-8 text-2xl md:text-4xl font-serif text-kosh-mint min-h-[1.4em]"
+          aria-label={TYPED_TEXT}
         >
-          Kosh is changing that.
-        </motion.p>
+          <span>{typed}</span>
+          <span className="inline-block ml-1 animate-blink" aria-hidden="true">
+            _
+          </span>
+        </p>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -40,7 +68,7 @@ const Hero = () => {
           transition={{ duration: 0.7, delay: 0.3 }}
           className="mt-5 text-base md:text-lg text-kosh-muted max-w-2xl font-sans leading-relaxed"
         >
-          Workshops, community programs, and corporate sessions — practical financial education to help students, early-career professionals, and underserved communities understand money, save, and grow wealth.
+          Workshops, community programs, and corporate sessions, practical financial education to help students, early-career professionals, and underserved communities understand money, save, and grow wealth.
         </motion.p>
 
         <motion.div
@@ -50,22 +78,16 @@ const Hero = () => {
           className="mt-12 flex flex-col sm:flex-row gap-4"
         >
           <a
-            href="#get-involved-contributors"
+            href="#diagnostic"
             className="inline-flex items-center justify-center px-8 py-3.5 rounded-md bg-kosh-mint text-kosh-dark font-sans font-semibold text-base transition-opacity hover:opacity-90"
           >
-            Join the Founding Circle
+            Check your financial literacy (basics) with us
           </a>
           <a
             href="#get-involved-clients"
             className="inline-flex items-center justify-center px-8 py-3.5 rounded-md border border-white text-white font-sans font-medium text-base transition-opacity hover:opacity-80"
           >
             Get Involved
-          </a>
-          <a
-            href="mailto:koshinitiative@gmail.com?subject=Kosh%20Enquiry&body=Hi%20Kosh%2C%0A%0AI%20have%20a%20question%3A"
-            className="inline-flex items-center justify-center px-8 py-3.5 rounded-md border border-kosh-muted text-kosh-muted font-sans font-medium text-base transition-colors hover:border-white hover:text-white"
-          >
-            Ask Us Anything
           </a>
         </motion.div>
       </div>
