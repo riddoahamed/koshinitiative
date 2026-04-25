@@ -60,9 +60,9 @@ const audiences = [
 ];
 
 const stats = [
-  { num: "8+", label: "BD-specific learning modules" },
+  { num: "800+", label: "Bangladesh-specific learning modules" },
+  { num: "0→1 · 1→10 · 10→100", label: "Progression tracks from beginner to mastery" },
   { num: "3", label: "Deployment modes (app · web · SDK)" },
-  { num: "0→1", label: "Measurable literacy score improvement" },
 ];
 
 const checklist = [
