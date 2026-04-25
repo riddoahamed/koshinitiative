@@ -61,12 +61,12 @@ const WhatWeDo = () => {
               whileInView="visible"
               viewport={{ once: true, margin: "-60px" }}
               variants={fadeUp}
-              className="bg-white rounded-lg p-8 flex flex-col"
+              className="bg-white/[0.03] backdrop-blur-sm rounded-lg p-8 flex flex-col border border-primary/15 hover:border-primary/50 hover:shadow-[0_0_30px_-10px_hsl(var(--primary)/0.5)] transition-all"
             >
-              <card.icon className="text-kosh-teal mb-5" size={32} strokeWidth={1.5} />
-              <h3 className="font-serif text-xl text-kosh-dark mb-3">{card.title}</h3>
+              <card.icon className="text-accent mb-5" size={32} strokeWidth={1.5} />
+              <h3 className="font-serif text-xl text-kosh-offwhite mb-3">{card.title}</h3>
               <p className="text-kosh-muted text-sm leading-relaxed flex-1 font-sans">{card.description}</p>
-              <p className="mt-4 text-xs font-sans font-medium text-kosh-teal">{card.detail}</p>
+              <p className="mt-4 text-xs font-sans font-medium text-primary">{card.detail}</p>
             </motion.div>
           ))}
         </div>
