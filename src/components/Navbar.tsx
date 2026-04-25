@@ -8,6 +8,7 @@ const links = [
   { label: "Diagnostic", href: "#diagnostic" },
   { label: "Tools", href: "#tools" },
   { label: "Resources", href: "#learn" },
+  { label: "For Organizations", href: "#for-organizations" },
   { label: "Get Involved", href: "#get-involved-form" },
   { label: "Community", href: "#join" },
 ];
