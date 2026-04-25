@@ -23,8 +23,8 @@
     --secondary: 250 25% 14%;
     --secondary-foreground: 240 20% 96%;
 
-    /* Kosh mint as accent (neon glow) */
-    --accent: 163 97% 50%;
+    /* Kosh logo neon green as accent */
+    --accent: 142 100% 54%;
     --accent-foreground: 250 35% 7%;
 
     --muted: 250 15% 60%;
@@ -39,18 +39,18 @@
 
     --radius: 0.5rem;
 
-    /* Kosh palette: dark + neon purple + retained teal/mint accents */
+    /* Kosh palette: dark + neon purple + neon green from logo */
     --kosh-dark: 250 35% 7%;
     --kosh-offwhite: 240 20% 96%;
-    --kosh-mint: 163 97% 55%;
+    --kosh-mint: 142 100% 54%;
     --kosh-teal: 270 95% 65%;
     --kosh-muted: 250 15% 60%;
 
     /* Gradients & glows */
-    --gradient-neon: linear-gradient(135deg, hsl(270 95% 65%), hsl(163 97% 55%));
+    --gradient-neon: linear-gradient(135deg, hsl(270 95% 65%), hsl(142 100% 54%));
     --gradient-purple: linear-gradient(135deg, hsl(270 95% 65%), hsl(290 90% 60%));
     --shadow-neon-purple: 0 0 40px -10px hsl(270 95% 65% / 0.6);
-    --shadow-neon-mint: 0 0 40px -10px hsl(163 97% 55% / 0.5);
+    --shadow-neon-mint: 0 0 40px -10px hsl(142 100% 54% / 0.5);
 
     --sidebar-background: 250 35% 9%;
     --sidebar-foreground: 240 20% 90%;
