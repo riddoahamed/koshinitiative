@@ -73,9 +73,9 @@ const FreeTools = () => {
   const ref = useScrollAnimation();
 
   return (
-    <section id="tools" className="bg-kosh-offwhite py-16 md:py-[100px] px-6 md:px-12 lg:px-24">
+    <section id="tools" className="bg-kosh-dark py-16 md:py-[100px] px-6 md:px-12 lg:px-24">
       <div ref={ref} className="max-w-6xl mx-auto">
-        <h2 className="font-serif text-3xl md:text-5xl text-kosh-dark tracking-tight">
+        <h2 className="font-serif text-3xl md:text-5xl text-kosh-offwhite tracking-tight">
           Free financial tools
         </h2>
         <p className="text-kosh-muted text-sm font-mono mt-3 mb-12">
@@ -87,21 +87,21 @@ const FreeTools = () => {
             <Link
               key={t.title}
               to={t.link}
-              className="group relative rounded-xl border border-kosh-teal/15 bg-white p-6 md:p-7 flex flex-col hover:border-kosh-teal/40 hover:shadow-md transition-all"
+              className="group relative rounded-xl border border-primary/20 bg-white/[0.03] backdrop-blur-sm p-6 md:p-7 flex flex-col hover:border-primary/60 hover:shadow-[0_0_30px_-10px_hsl(var(--primary)/0.6)] transition-all"
             >
               <div className="flex items-start justify-between mb-4">
                 <div className={`w-11 h-11 rounded-lg flex items-center justify-center ${t.iconBg}`}>
                   <t.icon className={t.iconColor} size={22} strokeWidth={2} />
                 </div>
                 <ArrowUpRight
-                  className="text-kosh-muted group-hover:text-kosh-teal transition-colors"
+                  className="text-kosh-muted group-hover:text-accent transition-colors"
                   size={18}
                 />
               </div>
 
               <div className="flex items-center gap-2 mb-2">
-                <h3 className="font-serif text-xl md:text-2xl text-kosh-dark">{t.title}</h3>
-                <span className="px-2 py-0.5 rounded-full bg-kosh-mint/15 text-kosh-dark text-[10px] font-sans font-semibold uppercase tracking-wider">
+                <h3 className="font-serif text-xl md:text-2xl text-kosh-offwhite">{t.title}</h3>
+                <span className="px-2 py-0.5 rounded-full bg-accent/15 border border-accent/30 text-accent text-[10px] font-sans font-semibold uppercase tracking-wider">
                   {t.tag}
                 </span>
               </div>
