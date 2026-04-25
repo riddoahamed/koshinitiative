@@ -130,11 +130,11 @@ const ForOrganizations = () => {
             {audiences.map((a) => (
               <div
                 key={a.label}
-                className="flex items-start gap-4 bg-white/60 rounded-lg p-5 border border-kosh-teal/10"
+                className="flex items-start gap-4 bg-white/[0.03] backdrop-blur-sm rounded-lg p-5 border border-accent/15 hover:border-accent/40 transition-colors"
               >
-                <CheckCircle2 className="text-kosh-teal shrink-0 mt-0.5" size={22} strokeWidth={2} />
+                <CheckCircle2 className="text-accent shrink-0 mt-0.5" size={22} strokeWidth={2} />
                 <div>
-                  <p className="font-sans font-semibold text-kosh-dark text-base mb-1">
+                  <p className="font-sans font-semibold text-kosh-offwhite text-base mb-1">
                     {a.label}
                   </p>
                   <p className="text-kosh-muted text-sm leading-relaxed font-sans">{a.body}</p>
