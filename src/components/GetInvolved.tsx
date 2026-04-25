@@ -14,7 +14,7 @@ const GetInvolved = () => {
   const ref = useScrollAnimation();
 
   return (
-    <section id="get-involved" className="bg-kosh-offwhite py-20 md:py-28 px-6 md:px-12 lg:px-24">
+    <section id="get-involved" className="bg-kosh-dark py-20 md:py-28 px-6 md:px-12 lg:px-24">
       <div ref={ref} className="max-w-5xl mx-auto text-center">
         <p className="text-xs font-sans font-semibold uppercase tracking-[0.2em] text-kosh-mint mb-4">
           Get involved

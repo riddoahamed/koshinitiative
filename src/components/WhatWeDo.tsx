@@ -39,7 +39,7 @@ const WhatWeDo = () => {
   const ref = useScrollAnimation();
 
   return (
-    <section id="what-we-do" className="bg-kosh-offwhite py-16 md:py-[100px] px-6 md:px-12 lg:px-24">
+    <section id="what-we-do" className="bg-kosh-dark py-16 md:py-[100px] px-6 md:px-12 lg:px-24">
       <div ref={ref} className="max-w-6xl mx-auto">
         <p className="text-kosh-teal text-lg md:text-xl font-serif leading-relaxed max-w-3xl mb-14">
           We're on a mission to make financial education accessible, practical, and actionable for every young Bangladeshi.

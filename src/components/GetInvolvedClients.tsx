@@ -39,7 +39,7 @@ const GetInvolvedClients = () => {
   const ref = useScrollAnimation();
 
   return (
-    <section id="get-involved-clients" className="bg-[#F4F8F7] py-16 md:py-[100px] px-6 md:px-12 lg:px-24">
+    <section id="get-involved-clients" className="bg-kosh-dark py-16 md:py-[100px] px-6 md:px-12 lg:px-24">
       <div ref={ref} className="max-w-6xl mx-auto">
         <p className="text-xs font-sans font-semibold uppercase tracking-[0.2em] text-kosh-mint mb-4">
           Work with Kosh
