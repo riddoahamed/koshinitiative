@@ -112,12 +112,12 @@ const ForOrganizations = () => {
               whileInView="visible"
               viewport={{ once: true, margin: "-60px" }}
               variants={fadeUp}
-              className="bg-white rounded-xl p-7 border border-transparent hover:border-kosh-mint/40 hover:shadow-md transition-all"
+              className="bg-white/[0.03] backdrop-blur-sm rounded-xl p-7 border border-primary/20 hover:border-primary/60 hover:shadow-[0_0_30px_-10px_hsl(var(--primary)/0.6)] transition-all"
             >
-              <div className="w-11 h-11 rounded-lg bg-kosh-teal/10 flex items-center justify-center mb-5">
-                <f.icon className="text-kosh-teal" size={22} strokeWidth={1.8} />
+              <div className="w-11 h-11 rounded-lg bg-primary/15 border border-primary/30 flex items-center justify-center mb-5">
+                <f.icon className="text-primary" size={22} strokeWidth={1.8} />
               </div>
-              <h3 className="font-serif text-xl text-kosh-dark mb-2">{f.title}</h3>
+              <h3 className="font-serif text-xl text-kosh-offwhite mb-2">{f.title}</h3>
               <p className="text-kosh-muted text-sm leading-relaxed font-sans">{f.body}</p>
             </motion.div>
           ))}
