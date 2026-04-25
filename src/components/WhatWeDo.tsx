@@ -48,7 +48,7 @@ const WhatWeDo = () => {
         <p className="text-xs font-sans font-semibold uppercase tracking-[0.2em] text-kosh-mint mb-4">
           What Kosh does
         </p>
-        <h2 className="font-serif text-3xl md:text-4xl text-kosh-dark mb-14">
+        <h2 className="font-serif text-3xl md:text-4xl text-kosh-offwhite mb-14">
           Three programmes. One mission.
         </h2>
 

@@ -95,7 +95,7 @@ const ForOrganizations = () => {
         <p className="text-xs font-sans font-semibold uppercase tracking-[0.2em] text-kosh-mint mb-4">
           For Organizations
         </p>
-        <h2 className="font-serif text-3xl md:text-5xl text-kosh-dark mb-5 tracking-tight">
+        <h2 className="font-serif text-3xl md:text-5xl text-kosh-offwhite mb-5 tracking-tight">
           Financial Literacy as a Product
         </h2>
         <p className="text-kosh-muted text-base md:text-lg leading-relaxed mb-14 max-w-3xl font-sans">
@@ -125,7 +125,7 @@ const ForOrganizations = () => {
 
         {/* Who it's for */}
         <div className="mb-16">
-          <h3 className="font-serif text-2xl md:text-3xl text-kosh-dark mb-8">Who it's for</h3>
+          <h3 className="font-serif text-2xl md:text-3xl text-kosh-offwhite mb-8">Who it's for</h3>
           <div className="grid md:grid-cols-2 gap-5 md:gap-6">
             {audiences.map((a) => (
               <div

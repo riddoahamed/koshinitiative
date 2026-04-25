@@ -44,7 +44,7 @@ const GetInvolvedClients = () => {
         <p className="text-xs font-sans font-semibold uppercase tracking-[0.2em] text-kosh-mint mb-4">
           Work with Kosh
         </p>
-        <h2 className="font-serif text-3xl md:text-4xl text-kosh-dark mb-4">
+        <h2 className="font-serif text-3xl md:text-4xl text-kosh-offwhite mb-4">
           Bring financial literacy to your people.
         </h2>
         <p className="text-kosh-muted text-base leading-relaxed mb-14 max-w-2xl font-sans">

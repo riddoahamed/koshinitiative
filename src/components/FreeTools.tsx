@@ -75,7 +75,7 @@ const FreeTools = () => {
   return (
     <section id="tools" className="bg-kosh-dark py-16 md:py-[100px] px-6 md:px-12 lg:px-24">
       <div ref={ref} className="max-w-6xl mx-auto">
-        <h2 className="font-serif text-3xl md:text-5xl text-kosh-dark tracking-tight">
+        <h2 className="font-serif text-3xl md:text-5xl text-kosh-offwhite tracking-tight">
           Free financial tools
         </h2>
         <p className="text-kosh-muted text-sm font-mono mt-3 mb-12">
