@@ -145,29 +145,30 @@ const ForOrganizations = () => {
         </div>
 
         {/* Stats + Checklist + CTA */}
-        <div className="rounded-2xl bg-kosh-dark p-8 md:p-12">
-          <div className="grid md:grid-cols-3 gap-8 mb-10 pb-10 border-b border-white/10">
+        <div className="relative rounded-2xl p-8 md:p-12 overflow-hidden bg-gradient-to-br from-primary/15 via-background to-accent/10 border border-primary/30 shadow-[0_0_60px_-20px_hsl(var(--primary)/0.6)]">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,hsl(var(--accent)/0.15),transparent_60%)] pointer-events-none" />
+          <div className="relative grid md:grid-cols-3 gap-8 mb-10 pb-10 border-b border-white/10">
             {stats.map((s) => (
               <div key={s.label}>
-                <p className="font-serif text-4xl md:text-5xl text-kosh-mint mb-2">{s.num}</p>
+                <p className="font-serif text-3xl md:text-4xl bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-2">{s.num}</p>
                 <p className="text-kosh-muted text-sm font-sans leading-snug">{s.label}</p>
               </div>
             ))}
           </div>
 
-          <div className="grid sm:grid-cols-2 gap-x-8 gap-y-3 mb-10">
+          <div className="relative grid sm:grid-cols-2 gap-x-8 gap-y-3 mb-10">
             {checklist.map((item) => (
               <div key={item} className="flex items-start gap-2.5">
-                <CheckCircle2 className="text-kosh-mint shrink-0 mt-0.5" size={16} strokeWidth={2.5} />
-                <p className="text-white/85 text-sm font-sans">{item}</p>
+                <CheckCircle2 className="text-accent shrink-0 mt-0.5" size={16} strokeWidth={2.5} />
+                <p className="text-kosh-offwhite/85 text-sm font-sans">{item}</p>
               </div>
             ))}
           </div>
 
-          <div className="flex flex-col items-start gap-3">
+          <div className="relative flex flex-col items-start gap-3">
             <a
               href="mailto:koshinitiative@gmail.com?subject=Pilot%20enquiry%20-%20Kosh%20for%20organizations&body=Hi%20Kosh%2C%0A%0AWe%27d%20like%20to%20explore%20a%20pilot.%20Our%20organization%3A"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-md bg-kosh-mint text-kosh-dark font-sans font-semibold text-sm transition-opacity hover:opacity-90"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-md bg-gradient-to-r from-primary to-accent text-primary-foreground font-sans font-semibold text-sm transition-all hover:shadow-[0_0_30px_-5px_hsl(var(--primary)/0.8)] hover:scale-[1.02]"
             >
               Talk to us about a pilot
               <ArrowRight size={16} />
