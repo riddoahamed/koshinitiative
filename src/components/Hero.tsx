@@ -79,9 +79,9 @@ const Hero = () => {
         >
           <a
             href="#diagnostic"
-            className="inline-flex items-center justify-center px-8 py-3.5 rounded-md bg-kosh-mint text-kosh-dark font-sans font-semibold text-base transition-opacity hover:opacity-90"
+            className="inline-flex items-center justify-center px-8 py-3.5 rounded-md bg-kosh-mint/15 backdrop-blur-sm border border-kosh-mint/40 text-kosh-mint font-sans font-semibold text-base transition-all hover:bg-kosh-mint/25 hover:border-kosh-mint/70 shadow-[0_0_24px_-8px_hsl(var(--accent)/0.6)]"
           >
-            Check your financial literacy (basics) with us
+            How personal are you with your finances?
           </a>
           <a
             href="#get-involved-clients"
