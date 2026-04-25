@@ -5,6 +5,7 @@ import WhyItMatters from "@/components/WhyItMatters";
 import ForStudents from "@/components/ForStudents";
 import GetInvolvedClients from "@/components/GetInvolvedClients";
 import GetInvolvedContributors from "@/components/GetInvolvedContributors";
+import ForOrganizations from "@/components/ForOrganizations";
 import GetInvolvedForm from "@/components/GetInvolvedForm";
 import Community from "@/components/Community";
 import DigitalWaitlist from "@/components/DigitalWaitlist";
@@ -25,6 +26,7 @@ const Index = () => {
       <Diagnostic />
       <ForStudents />
       <GetInvolvedClients />
+      <ForOrganizations />
       <GetInvolvedContributors />
       <GetInvolvedForm />
       <Community />
