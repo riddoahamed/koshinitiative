@@ -1,5 +1,18 @@
+import { Link } from "react-router-dom";
 import SocialLinks from "./SocialIcons";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+
+const toolLinks = [
+  { label: "Scam Spotter", to: "/scam-spotter" },
+  { label: "Comparator", to: "/comparator" },
+  { label: "EMI Calculator", to: "/emi-calculator" },
+  { label: "SIP Calculator", to: "/sip-calculator" },
+  { label: "Car Calculator", to: "/car-calculator" },
+  { label: "Budget Planner", to: "/budget-planner" },
+  { label: "FDR Calculator", to: "/comparator" },
+  { label: "Goal Planner", to: "/sip-calculator" },
+  { label: "Money Check", to: "/#diagnostic" },
+];
 
 const Footer = () => {
   const ref = useScrollAnimation();
@@ -53,6 +66,25 @@ const Footer = () => {
               </a>
             </p>
           </div>
+        </div>
+      </div>
+
+      {/* Tool links row */}
+      <div className="border-t border-kosh-muted/20 px-6 md:px-12 lg:px-24 py-6">
+        <div className="max-w-6xl mx-auto flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+          {toolLinks.map((l, i) => (
+            <span key={l.label} className="flex items-center gap-x-4">
+              <Link
+                to={l.to}
+                className="text-kosh-muted hover:text-kosh-mint text-xs font-mono transition-colors"
+              >
+                {l.label}
+              </Link>
+              {i < toolLinks.length - 1 && (
+                <span className="text-kosh-muted/40 text-xs">|</span>
+              )}
+            </span>
+          ))}
         </div>
       </div>
 
