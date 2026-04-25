@@ -96,10 +96,10 @@ const ForOrganizations = () => {
           For Organizations
         </p>
         <h2 className="font-serif text-3xl md:text-5xl text-kosh-dark mb-5 tracking-tight">
-          Sell financial literacy as a product
+          Financial Literacy as a Product
         </h2>
         <p className="text-kosh-muted text-base md:text-lg leading-relaxed mb-14 max-w-3xl font-sans">
-          Kosh's gamified education platform is available as a white-label app, web SDK, or embedded module. Your brand. Your users. Kosh's content engine and engagement layer - ready to deploy.
+          Ready-to-deploy gamified financial literacy - white-label app, web SDK, or embedded module. Your brand, your users, Kosh's content engine and engagement layer powering it all.
         </p>
 
         {/* Feature cards */}
