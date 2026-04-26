@@ -1,10 +1,12 @@
 import { motion } from "framer-motion";
 import { GraduationCap, Building2, Trophy } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { GlassIcon } from "@/components/ui/glass-icon";
 
 const cards = [
   {
     icon: GraduationCap,
+    variant: "primary" as const,
     title: "Academic Institutions",
     body: "Bring a Kosh financial literacy session to your campus or school. We handle content and delivery. You provide the room and the students.",
     tag: "Free for students",
@@ -12,6 +14,7 @@ const cards = [
   },
   {
     icon: Building2,
+    variant: "mixed" as const,
     title: "Corporate Partners",
     body: "Run a practical financial wellness session for your team. Budgeting, saving, investing basics. 60 to 90 minutes. Fits a lunch break or half-day.",
     tag: "For teams of any size",
@@ -19,6 +22,7 @@ const cards = [
   },
   {
     icon: Trophy,
+    variant: "accent" as const,
     title: "Events and Competitions",
     body: "Planning a financial literacy competition, hackathon, or awareness event? We can design and facilitate it with you.",
     tag: "Workshops · Competitions · Group learning",
