@@ -1,10 +1,12 @@
 import { motion } from "framer-motion";
 import { GraduationCap, Building2, Trophy } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { GlassIcon } from "@/components/ui/glass-icon";
 
 const cards = [
   {
     icon: GraduationCap,
+    variant: "primary" as const,
     title: "Academic Institutions",
     body: "Bring a Kosh financial literacy session to your campus or school. We handle content and delivery. You provide the room and the students.",
     tag: "Free for students",
@@ -12,6 +14,7 @@ const cards = [
   },
   {
     icon: Building2,
+    variant: "mixed" as const,
     title: "Corporate Partners",
     body: "Run a practical financial wellness session for your team. Budgeting, saving, investing basics. 60 to 90 minutes. Fits a lunch break or half-day.",
     tag: "For teams of any size",
@@ -19,6 +22,7 @@ const cards = [
   },
   {
     icon: Trophy,
+    variant: "accent" as const,
     title: "Events and Competitions",
     body: "Planning a financial literacy competition, hackathon, or awareness event? We can design and facilitate it with you.",
     tag: "Workshops · Competitions · Group learning",
@@ -60,17 +64,18 @@ const GetInvolvedClients = () => {
               whileInView="visible"
               viewport={{ once: true, margin: "-60px" }}
               variants={fadeUp}
-              className="bg-white/[0.03] backdrop-blur-sm rounded-xl p-8 flex flex-col border border-primary/15 hover:border-primary/50 hover:shadow-[0_0_30px_-10px_hsl(var(--primary)/0.5)] transition-all"
+              className="relative overflow-hidden bg-white/[0.04] backdrop-blur-xl rounded-2xl p-8 flex flex-col border border-white/10 hover:border-primary/50 hover:shadow-[0_0_40px_-10px_hsl(var(--primary)/0.6),0_0_25px_-12px_hsl(var(--accent)/0.5)] transition-all"
             >
-              <card.icon className="text-accent mb-5" size={32} strokeWidth={1.5} />
-              <h3 className="font-serif text-xl text-kosh-offwhite mb-3">{card.title}</h3>
-              <p className="text-kosh-muted text-sm leading-relaxed flex-1 font-sans">{card.body}</p>
-              <span className="inline-block mt-5 mb-5 px-3 py-1 rounded-full bg-accent/15 border border-accent/30 text-accent text-xs font-sans font-medium w-fit">
+              <div className="pointer-events-none absolute -top-20 -right-20 w-48 h-48 rounded-full bg-primary/15 blur-3xl" />
+              <GlassIcon icon={card.icon} variant={card.variant} size="md" className="mb-5" />
+              <h3 className="font-serif text-xl text-kosh-offwhite mb-3 relative">{card.title}</h3>
+              <p className="text-kosh-muted text-sm leading-relaxed flex-1 font-sans relative">{card.body}</p>
+              <span className="relative inline-block mt-5 mb-5 px-3 py-1 rounded-full bg-accent/15 border border-accent/30 text-accent text-xs font-sans font-medium w-fit">
                 {card.tag}
               </span>
               <a
                 href="#get-involved-form"
-                className="inline-flex items-center text-primary text-sm font-sans font-semibold hover:text-accent transition-colors"
+                className="relative inline-flex items-center text-primary text-sm font-sans font-semibold hover:text-accent transition-colors"
               >
                 {card.cta}
               </a>

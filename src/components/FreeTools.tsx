@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import { AlertTriangle, Scale, CreditCard, TrendingUp, Car, Wallet, ArrowUpRight, LucideIcon } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { GlassIcon } from "@/components/ui/glass-icon";
+
+type Variant = "primary" | "accent" | "mixed" | "warning" | "info";
 
 type Tool = {
   icon: LucideIcon;
-  iconColor: string;
-  iconBg: string;
+  variant: Variant;
   title: string;
   tag: string;
   description: string;
@@ -15,8 +17,7 @@ type Tool = {
 const tools: Tool[] = [
   {
     icon: AlertTriangle,
-    iconColor: "text-red-500",
-    iconBg: "bg-red-500/10",
+    variant: "warning",
     title: "Scam Spotter",
     tag: "Game",
     description: "6 real BD scenarios. Spot scams - halal forex, bKash Ponzis, Telegram crypto - before they spot you.",
@@ -24,8 +25,7 @@ const tools: Tool[] = [
   },
   {
     icon: Scale,
-    iconColor: "text-blue-500",
-    iconBg: "bg-blue-500/10",
+    variant: "info",
     title: "Savings Comparator",
     tag: "Calculator",
     description: "FDR vs Sanchaypatra vs DPS vs savings - after-tax returns with inflation benchmark.",
@@ -33,8 +33,7 @@ const tools: Tool[] = [
   },
   {
     icon: CreditCard,
-    iconColor: "text-violet-500",
-    iconBg: "bg-violet-500/10",
+    variant: "primary",
     title: "EMI Calculator",
     tag: "Calculator",
     description: "Bank loans or credit card EMI - iPhone, bike, PC. Monthly payment + total interest before you borrow.",
@@ -42,8 +41,7 @@ const tools: Tool[] = [
   },
   {
     icon: TrendingUp,
-    iconColor: "text-emerald-500",
-    iconBg: "bg-emerald-500/10",
+    variant: "accent",
     title: "Goal-based SIP",
     tag: "Planner",
     description: "Studies abroad, wedding, car down payment - exact monthly savings needed to hit your goal.",
@@ -51,8 +49,7 @@ const tools: Tool[] = [
   },
   {
     icon: Car,
-    iconColor: "text-amber-500",
-    iconBg: "bg-amber-500/10",
+    variant: "warning",
     title: "Car Affordability",
     tag: "Calculator",
     description: "EMI + fuel + insurance + maintenance. See the real monthly cost and 5-year ownership bill before buying.",
@@ -60,8 +57,7 @@ const tools: Tool[] = [
   },
   {
     icon: Wallet,
-    iconColor: "text-slate-500",
-    iconBg: "bg-slate-500/10",
+    variant: "mixed",
     title: "Budget Planner",
     tag: "Planner",
     description: "50% Needs · 30% Wants · 20% Savings. BD-specific categories - see your real savings rate.",
@@ -87,26 +83,25 @@ const FreeTools = () => {
             <Link
               key={t.title}
               to={t.link}
-              className="group relative rounded-xl border border-primary/20 bg-white/[0.03] backdrop-blur-sm p-6 md:p-7 flex flex-col hover:border-primary/60 hover:shadow-[0_0_30px_-10px_hsl(var(--primary)/0.6)] transition-all"
+              className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-6 md:p-7 flex flex-col hover:border-primary/50 hover:shadow-[0_0_40px_-10px_hsl(var(--primary)/0.6),0_0_25px_-12px_hsl(var(--accent)/0.5)] transition-all"
             >
-              <div className="flex items-start justify-between mb-4">
-                <div className={`w-11 h-11 rounded-lg flex items-center justify-center ${t.iconBg}`}>
-                  <t.icon className={t.iconColor} size={22} strokeWidth={2} />
-                </div>
+              <div className="pointer-events-none absolute -top-20 -right-20 w-48 h-48 rounded-full bg-primary/15 blur-3xl opacity-60 group-hover:opacity-100 transition-opacity" />
+              <div className="relative flex items-start justify-between mb-4">
+                <GlassIcon icon={t.icon} variant={t.variant} size="md" />
                 <ArrowUpRight
                   className="text-kosh-muted group-hover:text-accent transition-colors"
                   size={18}
                 />
               </div>
 
-              <div className="flex items-center gap-2 mb-2">
+              <div className="relative flex items-center gap-2 mb-2">
                 <h3 className="font-serif text-xl md:text-2xl text-kosh-offwhite">{t.title}</h3>
                 <span className="px-2 py-0.5 rounded-full bg-accent/15 border border-accent/30 text-accent text-[10px] font-sans font-semibold uppercase tracking-wider">
                   {t.tag}
                 </span>
               </div>
 
-              <p className="text-kosh-muted text-sm leading-relaxed font-sans">
+              <p className="relative text-kosh-muted text-sm leading-relaxed font-sans">
                 {t.description}
               </p>
             </Link>
