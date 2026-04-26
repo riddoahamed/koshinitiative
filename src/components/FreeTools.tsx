@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import { AlertTriangle, Scale, CreditCard, TrendingUp, Car, Wallet, ArrowUpRight, LucideIcon } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { GlassIcon } from "@/components/ui/glass-icon";
+
+type Variant = "primary" | "accent" | "mixed" | "warning" | "info";
 
 type Tool = {
   icon: LucideIcon;
-  iconColor: string;
-  iconBg: string;
+  variant: Variant;
   title: string;
   tag: string;
   description: string;
@@ -15,8 +17,7 @@ type Tool = {
 const tools: Tool[] = [
   {
     icon: AlertTriangle,
-    iconColor: "text-red-500",
-    iconBg: "bg-red-500/10",
+    variant: "warning",
     title: "Scam Spotter",
     tag: "Game",
     description: "6 real BD scenarios. Spot scams - halal forex, bKash Ponzis, Telegram crypto - before they spot you.",
@@ -24,8 +25,7 @@ const tools: Tool[] = [
   },
   {
     icon: Scale,
-    iconColor: "text-blue-500",
-    iconBg: "bg-blue-500/10",
+    variant: "info",
     title: "Savings Comparator",
     tag: "Calculator",
     description: "FDR vs Sanchaypatra vs DPS vs savings - after-tax returns with inflation benchmark.",
@@ -33,8 +33,7 @@ const tools: Tool[] = [
   },
   {
     icon: CreditCard,
-    iconColor: "text-violet-500",
-    iconBg: "bg-violet-500/10",
+    variant: "primary",
     title: "EMI Calculator",
     tag: "Calculator",
     description: "Bank loans or credit card EMI - iPhone, bike, PC. Monthly payment + total interest before you borrow.",
@@ -42,8 +41,7 @@ const tools: Tool[] = [
   },
   {
     icon: TrendingUp,
-    iconColor: "text-emerald-500",
-    iconBg: "bg-emerald-500/10",
+    variant: "accent",
     title: "Goal-based SIP",
     tag: "Planner",
     description: "Studies abroad, wedding, car down payment - exact monthly savings needed to hit your goal.",
@@ -51,8 +49,7 @@ const tools: Tool[] = [
   },
   {
     icon: Car,
-    iconColor: "text-amber-500",
-    iconBg: "bg-amber-500/10",
+    variant: "warning",
     title: "Car Affordability",
     tag: "Calculator",
     description: "EMI + fuel + insurance + maintenance. See the real monthly cost and 5-year ownership bill before buying.",
@@ -60,8 +57,7 @@ const tools: Tool[] = [
   },
   {
     icon: Wallet,
-    iconColor: "text-slate-500",
-    iconBg: "bg-slate-500/10",
+    variant: "mixed",
     title: "Budget Planner",
     tag: "Planner",
     description: "50% Needs · 30% Wants · 20% Savings. BD-specific categories - see your real savings rate.",
