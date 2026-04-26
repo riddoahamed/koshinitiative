@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import {
   Smartphone,
-  Code2,
+  Puzzle,
   Gamepad2,
   BarChart3,
   CheckCircle2,
@@ -12,25 +12,30 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { GlassIcon } from "@/components/ui/glass-icon";
 
 const features = [
   {
     icon: Smartphone,
+    variant: "primary" as const,
     title: "White-label mobile app",
     body: "Your brand, your colors. Full Kosh education platform deployed to your users as a standalone app on Android and iOS.",
   },
   {
-    icon: Code2,
-    title: "SDK / web embed",
-    body: "Drop financial literacy modules directly into your existing banking app, website, or employee portal with a single integration.",
+    icon: Puzzle,
+    variant: "mixed" as const,
+    title: "Plug-in for your app or website",
+    body: "Drop financial literacy modules straight into your existing banking app, website, or employee portal with one simple integration.",
   },
   {
     icon: Gamepad2,
+    variant: "accent" as const,
     title: "Gamified learning engine",
     body: "Points, streaks, levels, challenges, and leaderboards - the same engagement layer that keeps Kosh learners coming back, under your roof.",
   },
   {
     icon: BarChart3,
+    variant: "primary" as const,
     title: "Analytics dashboard",
     body: "Track literacy baseline scores, module completion, engagement trends, and real learning outcomes across your user base.",
   },
@@ -39,30 +44,39 @@ const features = [
 const audiences = [
   {
     icon: Building2,
+    variant: "primary" as const,
     label: "Banks & NBFIs",
     body: "Boost customer engagement and digital product adoption through embedded financial education.",
   },
   {
     icon: Wallet,
+    variant: "accent" as const,
     label: "MFS Platforms",
     body: "bKash, Nagad, Rocket - help users understand what they're doing with their money.",
   },
   {
     icon: HeartHandshake,
+    variant: "mixed" as const,
     label: "NGOs & MFIs",
     body: "Embed financial literacy into microcredit programs and community outreach at scale.",
   },
   {
     icon: Briefcase,
+    variant: "primary" as const,
     label: "Employers & HR",
     body: "Employee financial wellness programs - measurable, gamified, and locally relevant.",
   },
 ];
 
+const progression = [
+  { label: "0 → 1", sub: "Beginner" },
+  { label: "1 → 10", sub: "Building" },
+  { label: "10 → 100", sub: "Mastery" },
+];
+
 const stats = [
   { num: "800+", label: "Bangladesh-specific learning modules" },
-  { num: "0→1 · 1→10 · 10→100", label: "Progression tracks from beginner to mastery" },
-  { num: "3", label: "Deployment modes (app · web · SDK)" },
+  { num: "3", label: "Deployment modes (app · web · plug-in)" },
 ];
 
 const checklist = [
