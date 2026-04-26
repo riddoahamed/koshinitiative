@@ -1,10 +1,12 @@
 import { motion } from "framer-motion";
 import { GraduationCap, Building2, Heart } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { GlassIcon } from "@/components/ui/glass-icon";
 
 const cards = [
   {
     icon: GraduationCap,
+    variant: "primary" as const,
     title: "University & Student Workshops",
     description:
       "Interactive, hands-on sessions in universities, colleges, and schools. Free where possible. Minimal cost only to cover delivery.",
@@ -12,6 +14,7 @@ const cards = [
   },
   {
     icon: Building2,
+    variant: "mixed" as const,
     title: "Corporate Financial Wellness",
     description:
       "Tailored workshops for young professionals and first-time investors.",
@@ -19,6 +22,7 @@ const cards = [
   },
   {
     icon: Heart,
+    variant: "accent" as const,
     title: "Pro Bono / Sponsored Programs",
     description:
       "Programs for rural women, factory workers, and underserved communities — supported by grants, sponsors, and partnerships. Delivered in local languages, free for participants.",
