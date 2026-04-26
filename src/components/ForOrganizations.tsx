@@ -126,11 +126,10 @@ const ForOrganizations = () => {
               whileInView="visible"
               viewport={{ once: true, margin: "-60px" }}
               variants={fadeUp}
-              className="bg-white/[0.03] backdrop-blur-sm rounded-xl p-7 border border-primary/20 hover:border-primary/60 hover:shadow-[0_0_30px_-10px_hsl(var(--primary)/0.6)] transition-all"
+              className="relative rounded-2xl p-7 border border-white/10 bg-white/[0.04] backdrop-blur-xl hover:border-primary/50 hover:shadow-[0_0_40px_-10px_hsl(var(--primary)/0.6),0_0_25px_-12px_hsl(var(--accent)/0.5)] transition-all overflow-hidden"
             >
-              <div className="w-11 h-11 rounded-lg bg-primary/15 border border-primary/30 flex items-center justify-center mb-5">
-                <f.icon className="text-primary" size={22} strokeWidth={1.8} />
-              </div>
+              <div className="pointer-events-none absolute -top-20 -right-20 w-48 h-48 rounded-full bg-primary/15 blur-3xl" />
+              <GlassIcon icon={f.icon} variant={f.variant} size="md" className="mb-5" />
               <h3 className="font-serif text-xl text-kosh-offwhite mb-2">{f.title}</h3>
               <p className="text-kosh-muted text-sm leading-relaxed font-sans">{f.body}</p>
             </motion.div>
@@ -144,10 +143,11 @@ const ForOrganizations = () => {
             {audiences.map((a) => (
               <div
                 key={a.label}
-                className="flex items-start gap-4 bg-white/[0.03] backdrop-blur-sm rounded-lg p-5 border border-accent/15 hover:border-accent/40 transition-colors"
+                className="relative flex items-start gap-4 rounded-2xl p-5 border border-white/10 bg-white/[0.04] backdrop-blur-xl hover:border-accent/40 hover:shadow-[0_0_30px_-12px_hsl(var(--accent)/0.6)] transition-all overflow-hidden"
               >
-                <CheckCircle2 className="text-accent shrink-0 mt-0.5" size={22} strokeWidth={2} />
-                <div>
+                <div className="pointer-events-none absolute -bottom-16 -left-16 w-40 h-40 rounded-full bg-accent/10 blur-3xl" />
+                <GlassIcon icon={a.icon} variant={a.variant} size="sm" className="shrink-0" />
+                <div className="relative">
                   <p className="font-sans font-semibold text-kosh-offwhite text-base mb-1">
                     {a.label}
                   </p>
@@ -161,10 +161,33 @@ const ForOrganizations = () => {
         {/* Stats + Checklist + CTA */}
         <div className="relative rounded-2xl p-8 md:p-12 overflow-hidden bg-gradient-to-br from-primary/15 via-background to-accent/10 border border-primary/30 shadow-[0_0_60px_-20px_hsl(var(--primary)/0.6)]">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,hsl(var(--accent)/0.15),transparent_60%)] pointer-events-none" />
-          <div className="relative grid md:grid-cols-3 gap-8 mb-10 pb-10 border-b border-white/10">
+
+          {/* Progression tracks - own row, generously spaced */}
+          <div className="relative mb-10 pb-10 border-b border-white/10">
+            <p className="text-xs font-sans font-semibold uppercase tracking-[0.2em] text-kosh-muted mb-6">
+              Progression tracks · beginner to mastery
+            </p>
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-6 sm:gap-10">
+              {progression.map((p, idx) => (
+                <div key={p.label} className="flex-1 flex items-center justify-between gap-6 sm:gap-10">
+                  <div className="flex flex-col items-center sm:items-start text-center sm:text-left mx-auto sm:mx-0">
+                    <p className="font-serif text-3xl md:text-4xl bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent leading-none mb-2 tracking-tight">
+                      {p.label}
+                    </p>
+                    <p className="text-kosh-muted text-xs font-sans uppercase tracking-[0.18em]">{p.sub}</p>
+                  </div>
+                  {idx < progression.length - 1 && (
+                    <div className="hidden sm:block h-10 w-px bg-gradient-to-b from-transparent via-white/20 to-transparent" />
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="relative grid sm:grid-cols-2 gap-8 mb-10 pb-10 border-b border-white/10">
             {stats.map((s) => (
               <div key={s.label}>
-                <p className="font-serif text-3xl md:text-4xl bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-2">{s.num}</p>
+                <p className="font-serif text-3xl md:text-4xl bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent mb-2">{s.num}</p>
                 <p className="text-kosh-muted text-sm font-sans leading-snug">{s.label}</p>
               </div>
             ))}
