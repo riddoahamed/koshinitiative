@@ -1,5 +1,5 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { User, Mic, HandHelping, Building } from "lucide-react";
+import { User, Mic, HandHelping } from "lucide-react";
 import { useEffect } from "react";
 
 const roles = [
