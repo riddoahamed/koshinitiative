@@ -31,12 +31,15 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center bg-kosh-dark px-6 md:px-12 lg:px-24 py-16 md:py-[100px]">
-      <div className="absolute top-6 right-6 md:top-10 md:right-12 lg:right-24">
+    <section className="relative min-h-screen flex flex-col justify-center bg-kosh-dark px-6 md:px-12 lg:px-24 py-16 md:py-[100px] overflow-hidden">
+      {/* Subtle greenish ambient glow */}
+      <div aria-hidden className="pointer-events-none absolute -bottom-40 left-1/2 -translate-x-1/2 w-[80vw] h-[60vh] rounded-full bg-kosh-mint/15 blur-[140px] opacity-60" />
+      <div aria-hidden className="pointer-events-none absolute top-1/3 -left-32 w-[40vw] h-[40vh] rounded-full bg-kosh-mint/10 blur-[120px]" />
+      <div className="absolute top-6 right-6 md:top-10 md:right-12 lg:right-24 z-10">
         <SocialLinks />
       </div>
 
-      <div className="max-w-4xl">
+      <div className="max-w-4xl relative z-10">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

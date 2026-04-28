@@ -75,7 +75,7 @@ const FreeTools = () => {
           Free financial tools
         </h2>
         <p className="text-kosh-muted text-sm font-mono mt-3 mb-12">
-          6 calculators built for Bangladesh. No sign-up needed.
+          Tools for you on our app
         </p>
 
         <div className="grid md:grid-cols-2 gap-5 md:gap-6">
