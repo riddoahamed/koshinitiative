@@ -27,14 +27,6 @@ const roles = [
     accent: "from-primary to-accent",
     number: "03",
   },
-  {
-    icon: Building,
-    title: "Founding Partner",
-    description:
-      "University, company, or organisation that wants to bring financial literacy to your people. Let us talk.",
-    accent: "from-accent to-primary",
-    number: "04",
-  },
 ];
 
 const JoinTeam = () => {
