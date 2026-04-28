@@ -181,7 +181,7 @@ const Diagnostic = () => {
             Quick check-in
           </p>
           <h2 className="font-serif text-3xl md:text-4xl text-white mb-4 tracking-tight">
-            What's your financial health score?
+            Check Your Personal Finance Level
           </h2>
           <p className="text-kosh-muted text-sm md:text-base leading-relaxed mb-8">
             15 questions across knowledge, habits, and confidence. No grades. Just clarity.
