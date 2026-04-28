@@ -44,6 +44,12 @@ const features = [
 
 const audiences = [
   {
+    icon: Sparkles,
+    variant: "mixed" as const,
+    label: "Fintech Platforms",
+    body: "Differentiate your product with built-in financial education. Drive activation, retention, and trust with embedded learning.",
+  },
+  {
     icon: Building2,
     variant: "primary" as const,
     label: "Banks & NBFIs",
