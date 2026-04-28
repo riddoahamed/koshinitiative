@@ -39,7 +39,7 @@ const Hero = () => {
         <SocialLinks />
       </div>
 
-      <div className="max-w-4xl">
+      <div className="max-w-4xl relative z-10">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
