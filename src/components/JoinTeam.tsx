@@ -1,5 +1,5 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { User, Mic, HandHelping, Building } from "lucide-react";
+import { User, Mic, HandHelping } from "lucide-react";
 import { useEffect } from "react";
 
 const roles = [
@@ -26,14 +26,6 @@ const roles = [
       "Content creation, translation, outreach, photography at events. Any capacity, any time commitment.",
     accent: "from-primary to-accent",
     number: "03",
-  },
-  {
-    icon: Building,
-    title: "Founding Partner",
-    description:
-      "University, company, or organisation that wants to bring financial literacy to your people. Let us talk.",
-    accent: "from-accent to-primary",
-    number: "04",
   },
 ];
 
