@@ -9,6 +9,7 @@ import {
   Wallet,
   HeartHandshake,
   Briefcase,
+  Sparkles,
   ArrowRight,
 } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
@@ -42,6 +43,12 @@ const features = [
 ];
 
 const audiences = [
+  {
+    icon: Sparkles,
+    variant: "mixed" as const,
+    label: "Fintech Platforms",
+    body: "Differentiate your product with built-in financial education. Drive activation, retention, and trust with embedded learning.",
+  },
   {
     icon: Building2,
     variant: "primary" as const,
