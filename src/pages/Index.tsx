@@ -8,6 +8,7 @@ import GetInvolvedContributors from "@/components/GetInvolvedContributors";
 import ForOrganizations from "@/components/ForOrganizations";
 import GetInvolvedForm from "@/components/GetInvolvedForm";
 import ScrollGlow from "@/components/ScrollGlow";
+import ScrollProgress from "@/components/ScrollProgress";
 import DigitalWaitlist from "@/components/DigitalWaitlist";
 import FreeTools from "@/components/FreeTools";
 import FreeResources from "@/components/FreeResources";
@@ -21,6 +22,7 @@ const Index = () => {
     <main className="scroll-smooth">
       <ScrollGlow />
       <Navbar />
+      <ScrollProgress />
       <Hero />
       <WhatWeDo />
       <WhyItMatters />
