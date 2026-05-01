@@ -43,8 +43,10 @@ const FreeResources = () => {
   const ref = useScrollAnimation();
 
   return (
-    <section id="learn" className="bg-kosh-dark py-16 md:py-[100px] px-6 md:px-12 lg:px-24">
-      <div ref={ref} className="max-w-6xl mx-auto">
+    <section id="learn" className="relative bg-kosh-dark py-16 md:py-[100px] px-6 md:px-12 lg:px-24 overflow-hidden">
+      <div className="pointer-events-none absolute -top-32 -left-32 w-[420px] h-[420px] rounded-full bg-accent/10 blur-[140px]" />
+      <div className="pointer-events-none absolute -bottom-32 -right-32 w-[420px] h-[420px] rounded-full bg-primary/10 blur-[140px]" />
+      <div ref={ref} className="relative max-w-6xl mx-auto">
         <h2 className="font-serif text-3xl md:text-5xl text-white tracking-tight">
           Start learning. For free.
         </h2>
