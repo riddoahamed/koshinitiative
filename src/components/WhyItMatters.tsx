@@ -5,8 +5,10 @@ const WhyItMatters = () => {
   const ref = useScrollAnimation();
 
   return (
-    <section className="bg-kosh-dark py-16 md:py-[100px] px-6 md:px-12 lg:px-24">
-      <div ref={ref} className="max-w-4xl mx-auto">
+    <section className="relative bg-kosh-dark py-16 md:py-[100px] px-6 md:px-12 lg:px-24 overflow-hidden">
+      <div className="pointer-events-none absolute -top-32 -left-32 w-[420px] h-[420px] rounded-full bg-accent/10 blur-[140px]" />
+      <div className="pointer-events-none absolute -bottom-32 -right-32 w-[420px] h-[420px] rounded-full bg-primary/10 blur-[140px]" />
+      <div ref={ref} className="relative max-w-4xl mx-auto">
         <div className="grid md:grid-cols-3 gap-12 md:gap-16 text-center mb-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

@@ -5,8 +5,10 @@ const CommunityCTA = () => {
   const ref = useScrollAnimation();
 
   return (
-    <section id="join" className="bg-kosh-dark py-16 md:py-[100px] px-6 md:px-12 lg:px-24">
-      <div ref={ref} className="max-w-3xl mx-auto text-center">
+    <section id="join" className="relative bg-kosh-dark py-16 md:py-[100px] px-6 md:px-12 lg:px-24 overflow-hidden">
+      <div className="pointer-events-none absolute -top-32 -left-32 w-[420px] h-[420px] rounded-full bg-accent/12 blur-[140px]" />
+      <div className="pointer-events-none absolute -bottom-32 -right-32 w-[420px] h-[420px] rounded-full bg-primary/12 blur-[140px]" />
+      <div ref={ref} className="relative max-w-3xl mx-auto text-center">
         <h2 className="font-serif text-3xl md:text-5xl text-white tracking-tight mb-6">
           This is just the beginning.
         </h2>
