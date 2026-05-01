@@ -51,7 +51,18 @@ const WhatWeDo = () => {
   const ref = useScrollAnimation();
 
   return (
-    <section id="what-we-do" className="bg-kosh-dark py-16 md:py-[100px] px-6 md:px-12 lg:px-24">
+    <section id="what-we-do" className="relative bg-kosh-dark py-16 md:py-[100px] px-6 md:px-12 lg:px-24 overflow-hidden">
+      {/* Top transition glow — continues the green flow from hero into this section */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -top-40 left-0 right-0 h-80 z-0"
+        style={{
+          background:
+            "radial-gradient(ellipse 80% 100% at 50% 100%, hsl(156 85% 62% / 0.18), hsl(85 95% 65% / 0.10) 35%, hsl(270 95% 65% / 0.06) 60%, transparent 78%)",
+        }}
+      />
+      <div className="pointer-events-none absolute top-20 -left-32 w-[400px] h-[400px] rounded-full bg-kosh-mint/10 blur-[120px]" />
+      <div className="pointer-events-none absolute top-40 -right-32 w-[400px] h-[400px] rounded-full bg-primary/10 blur-[120px]" />
       <div ref={ref} className="max-w-6xl mx-auto">
         <p className="text-kosh-teal text-lg md:text-xl font-serif leading-relaxed max-w-3xl mb-14">
           We're on a mission to make financial education accessible, practical, and actionable for every young Bangladeshi.
