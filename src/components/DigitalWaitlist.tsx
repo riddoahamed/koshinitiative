@@ -1,58 +1,63 @@
-import { useState } from "react";
+import { ArrowRight } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+
+const PLATFORM_URL = "https://kosh-ten.vercel.app/";
 
 const DigitalWaitlist = () => {
   const ref = useScrollAnimation();
-  const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email.trim()) return;
-    // Open mailto as a lightweight approach (no backend)
-    window.location.href = `mailto:koshinitiative@gmail.com?subject=Waitlist%20Signup&body=Please%20add%20me%20to%20the%20digital%20platform%20waitlist.%0A%0AEmail%3A%20${encodeURIComponent(email)}`;
-    setSubmitted(true);
-  };
 
   return (
-    <section className="bg-kosh-dark py-20 md:py-28 px-6 md:px-12 lg:px-24 border-t border-kosh-muted/20">
-      <div ref={ref} className="max-w-2xl mx-auto text-center">
-        <p className="text-xs font-sans font-semibold uppercase tracking-[0.2em] text-kosh-mint mb-4">
-          Coming soon
+    <section className="relative bg-kosh-dark py-20 md:py-28 px-6 md:px-12 lg:px-24 border-t border-white/5 overflow-hidden">
+      {/* Ambient glows to match palette */}
+      <div className="pointer-events-none absolute -top-32 -left-32 w-[420px] h-[420px] rounded-full bg-accent/15 blur-[140px]" />
+      <div className="pointer-events-none absolute -bottom-32 -right-32 w-[420px] h-[420px] rounded-full bg-primary/15 blur-[140px]" />
+
+      <div ref={ref} className="relative max-w-5xl mx-auto text-center">
+        <p className="text-xs font-sans font-semibold uppercase tracking-[0.2em] mb-4 bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">
+          Now live
         </p>
-        <h2 className="font-serif text-3xl md:text-4xl text-white mb-4">
-          Digital Platform Waitlist
+        <h2 className="font-serif text-3xl md:text-4xl text-kosh-offwhite mb-4">
+          Try the Kosh platform
         </h2>
-        <p className="text-kosh-muted text-base leading-relaxed mb-10">
-          Join the waitlist for our digital platform and be the first to access
-          financial tools, resources, and workshops online.
+        <p className="text-white/60 text-base leading-relaxed mb-12 max-w-2xl mx-auto font-sans">
+          Explore our tools, calculators, and learning resources. Free to use, no sign-up required.
         </p>
 
-        {submitted ? (
-          <p className="text-kosh-mint font-sans font-medium text-base">
-            Thank you! We'll be in touch.
-          </p>
-        ) : (
-          <form
-            onSubmit={handleSubmit}
-            className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
+        <div className="grid sm:grid-cols-2 gap-5 md:gap-6 max-w-3xl mx-auto text-left">
+          <a
+            href={PLATFORM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative bg-white/[0.04] backdrop-blur-xl border border-white/10 rounded-2xl p-7 flex flex-col transition-all duration-300 hover:border-accent/40 hover:bg-white/[0.06] hover:shadow-[0_0_40px_-10px_hsl(var(--accent)/0.5)] overflow-hidden"
           >
-            <input
-              type="email"
-              required
-              placeholder="Your email address"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="flex-1 px-4 py-3 rounded-md bg-white/10 border border-kosh-muted/30 text-white placeholder:text-kosh-muted font-sans text-sm focus:outline-none focus:border-kosh-mint transition-colors"
-            />
-            <button
-              type="submit"
-              className="px-8 py-3 rounded-md bg-kosh-mint text-kosh-dark font-sans font-semibold text-sm transition-opacity hover:opacity-90 whitespace-nowrap"
-            >
-              Join Waitlist
-            </button>
-          </form>
-        )}
+            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-accent to-primary opacity-70 group-hover:opacity-100 transition-opacity" />
+            <h3 className="font-serif text-xl text-kosh-offwhite mb-3">Try our platform</h3>
+            <p className="text-white/60 text-sm leading-relaxed flex-1 font-sans">
+              Open the Kosh app, try the tools, and see how we make personal finance simple.
+            </p>
+            <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-sans font-semibold bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">
+              Open the platform
+              <ArrowRight size={14} className="text-accent" />
+            </span>
+          </a>
+
+          <a
+            href={PLATFORM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative bg-white/[0.04] backdrop-blur-xl border border-white/10 rounded-2xl p-7 flex flex-col transition-all duration-300 hover:border-primary/40 hover:bg-white/[0.06] hover:shadow-[0_0_40px_-10px_hsl(var(--primary)/0.5)] overflow-hidden"
+          >
+            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-primary to-accent opacity-70 group-hover:opacity-100 transition-opacity" />
+            <h3 className="font-serif text-xl text-kosh-offwhite mb-3">Try a pilot for your Organization</h3>
+            <p className="text-white/60 text-sm leading-relaxed flex-1 font-sans">
+              Run a pilot session or workshop with your team or campus. Use the platform alongside our facilitators.
+            </p>
+            <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-sans font-semibold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              Start a pilot
+              <ArrowRight size={14} className="text-primary" />
+            </span>
+          </a>
+        </div>
       </div>
     </section>
   );

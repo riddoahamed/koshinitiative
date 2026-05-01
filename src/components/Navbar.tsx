@@ -6,11 +6,10 @@ import SocialLinks from "@/components/SocialIcons";
 const links = [
   { label: "What We Do", href: "#what-we-do" },
   { label: "Diagnostic", href: "#diagnostic" },
+  { label: "For Organizations", href: "#for-organizations" },
   { label: "Tools", href: "#tools" },
   { label: "Resources", href: "#learn" },
-  { label: "For Organizations", href: "#for-organizations" },
   { label: "Get Involved", href: "#get-involved-form" },
-  { label: "Community", href: "#join" },
 ];
 
 const Navbar = () => {
