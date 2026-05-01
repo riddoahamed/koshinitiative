@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { GraduationCap, Building2, Heart } from "lucide-react";
+import { GraduationCap, Building2, Heart, Gamepad2 } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { GlassIcon } from "@/components/ui/glass-icon";
 
@@ -25,8 +25,16 @@ const cards = [
     variant: "accent" as const,
     title: "Pro Bono / Sponsored Programs",
     description:
-      "Programs for rural women, factory workers, and underserved communities — supported by grants, sponsors, and partnerships. Delivered in local languages, free for participants.",
+      "Programs for rural women, factory workers, and underserved communities, supported by grants, sponsors, and partnerships. Delivered in local languages, free for participants.",
     detail: "Maximum impact. Minimal friction. Real measurable results.",
+  },
+  {
+    icon: Gamepad2,
+    variant: "primary" as const,
+    title: "Gamified Financial Literacy with AI",
+    description:
+      "AI-assisted learning that turns personal finance into something you actually want to play. Built for the way young Bangladeshis learn online.",
+    detail: "Personal finance. Investing awareness. Guided, informed decision-making.",
   },
 ];
 
@@ -53,10 +61,10 @@ const WhatWeDo = () => {
           What Kosh does
         </p>
         <h2 className="font-serif text-3xl md:text-4xl text-kosh-offwhite mb-14">
-          Three programmes. One mission.
+          Four programmes. One mission.
         </h2>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           {cards.map((card, i) => (
             <motion.div
               key={card.title}
