@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Users, Mic, FileText, Handshake, ArrowRight } from "lucide-react";
+import { Users, Mic, FileText, ArrowRight } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { GlassIcon } from "@/components/ui/glass-icon";
 
@@ -33,16 +33,6 @@ const roles = [
     accent: "from-primary to-accent",
     number: "03",
     isFounder: false,
-  },
-  {
-    icon: Handshake,
-    variant: "primary" as const,
-    title: "Co-Founding Partners",
-    body: "You believe financial education in Bangladesh should be different, exciting, honest, not boring or intimidating. You want to build something that actually changes how people relate to money. And you want to build it with others who feel the same. If that is you, this is the most important card on this page.",
-    cta: "Let us talk",
-    accent: "from-accent to-primary",
-    number: "04",
-    isFounder: true,
   },
 ];
 
