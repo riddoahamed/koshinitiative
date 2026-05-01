@@ -79,9 +79,11 @@ const FreeTools = () => {
 
         <div className="grid md:grid-cols-2 gap-5 md:gap-6">
           {tools.map((t) => (
-            <Link
+            <a
               key={t.title}
-              to={t.link}
+              href="https://kosh-ten.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-6 md:p-7 flex flex-col hover:border-primary/50 hover:shadow-[0_0_40px_-10px_hsl(var(--primary)/0.6),0_0_25px_-12px_hsl(var(--accent)/0.5)] transition-all"
             >
               <div className="pointer-events-none absolute -top-20 -right-20 w-48 h-48 rounded-full bg-primary/15 blur-3xl opacity-60 group-hover:opacity-100 transition-opacity" />
@@ -103,7 +105,7 @@ const FreeTools = () => {
               <p className="relative text-kosh-muted text-sm leading-relaxed font-sans">
                 {t.description}
               </p>
-            </Link>
+            </a>
           ))}
         </div>
       </div>
