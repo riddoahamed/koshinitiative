@@ -9,8 +9,8 @@ const cards = [
     variant: "primary" as const,
     title: "University & Student Workshops",
     description:
-      "Interactive, hands-on sessions in universities, colleges, and schools. Free where possible. Minimal cost only to cover delivery.",
-    detail: "Budgeting, saving, investing, financial planning. Plain language. Real-life examples.",
+      "Hands-on sessions in universities, colleges, and schools.",
+    detail: "Budgeting, saving, investing in plain language.",
   },
   {
     icon: Building2,
@@ -18,23 +18,23 @@ const cards = [
     title: "Corporate Financial Wellness",
     description:
       "Tailored workshops for young professionals and first-time investors.",
-    detail: "Salary management, emergency funds, investment basics, long-term planning.",
+    detail: "Salary, emergency funds, investment basics.",
   },
   {
     icon: Heart,
     variant: "accent" as const,
-    title: "Pro Bono / Sponsored Programs",
+    title: "Pro Bono Programs",
     description:
-      "Programs for rural women, factory workers, and underserved communities, supported by grants, sponsors, and partnerships. Delivered in local languages, free for participants.",
-    detail: "Maximum impact. Minimal friction. Real measurable results.",
+      "Free programs for rural women, factory workers, and underserved communities.",
+    detail: "Local languages. Maximum impact. Zero cost.",
   },
   {
     icon: Gamepad2,
     variant: "primary" as const,
-    title: "Gamified Financial Literacy with AI",
+    title: "Gamified Learning with AI",
     description:
-      "AI-assisted learning that turns personal finance into something you actually want to play. Built for the way young Bangladeshis learn online.",
-    detail: "Personal finance. Investing awareness. Guided, informed decision-making.",
+      "AI-assisted personal finance you actually want to play.",
+    detail: "Built for how young Bangladeshis learn online.",
   },
 ];
 
@@ -63,11 +63,7 @@ const WhatWeDo = () => {
       />
       <div className="pointer-events-none absolute top-20 -left-32 w-[400px] h-[400px] rounded-full bg-kosh-mint/10 blur-[120px]" />
       <div className="pointer-events-none absolute top-40 -right-32 w-[400px] h-[400px] rounded-full bg-primary/10 blur-[120px]" />
-      <div ref={ref} className="relative z-10 max-w-6xl mx-auto">
-        <p className="text-kosh-teal text-lg md:text-xl font-serif leading-relaxed max-w-3xl mb-14">
-          We're on a mission to make financial education accessible, practical, and actionable for every young Bangladeshi.
-        </p>
-
+      <div ref={ref} className="relative z-10 max-w-7xl mx-auto">
         <p className="text-xs font-sans font-semibold uppercase tracking-[0.2em] text-kosh-mint mb-4">
           What Kosh does
         </p>
@@ -75,7 +71,7 @@ const WhatWeDo = () => {
           Four programmes. One mission.
         </h2>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-7">
           {cards.map((card, i) => (
             <motion.div
               key={card.title}
@@ -84,7 +80,7 @@ const WhatWeDo = () => {
               whileInView="visible"
               viewport={{ once: true, margin: "-60px" }}
               variants={fadeUp}
-              className="relative overflow-hidden bg-white/[0.04] backdrop-blur-xl rounded-2xl p-8 flex flex-col border border-white/10 hover:border-primary/50 hover:shadow-[0_0_40px_-10px_hsl(var(--primary)/0.6),0_0_25px_-12px_hsl(var(--accent)/0.5)] transition-all"
+              className="relative overflow-hidden bg-white/[0.04] backdrop-blur-xl rounded-2xl p-7 flex flex-col border border-white/10 hover:border-primary/50 hover:shadow-[0_0_40px_-10px_hsl(var(--primary)/0.6),0_0_25px_-12px_hsl(var(--accent)/0.5)] transition-all"
             >
               <div className="pointer-events-none absolute -top-20 -right-20 w-48 h-48 rounded-full bg-primary/15 blur-3xl" />
               <GlassIcon icon={card.icon} variant={card.variant} size="md" className="mb-5" />
