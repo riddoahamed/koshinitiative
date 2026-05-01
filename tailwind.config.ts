@@ -52,6 +52,7 @@ export default {
           offwhite: "hsl(var(--kosh-offwhite))",
           mint: "hsl(var(--kosh-mint))",
           teal: "hsl(var(--kosh-teal))",
+          lime: "hsl(var(--kosh-lime))",
           muted: "hsl(var(--kosh-muted))",
         },
         sidebar: {
