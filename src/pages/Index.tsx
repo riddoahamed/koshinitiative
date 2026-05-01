@@ -7,7 +7,7 @@ import GetInvolvedClients from "@/components/GetInvolvedClients";
 import GetInvolvedContributors from "@/components/GetInvolvedContributors";
 import ForOrganizations from "@/components/ForOrganizations";
 import GetInvolvedForm from "@/components/GetInvolvedForm";
-import Community from "@/components/Community";
+import ScrollGlow from "@/components/ScrollGlow";
 import DigitalWaitlist from "@/components/DigitalWaitlist";
 import FreeTools from "@/components/FreeTools";
 import FreeResources from "@/components/FreeResources";
@@ -19,6 +19,7 @@ import FloatingPopup from "@/components/FloatingPopup";
 const Index = () => {
   return (
     <main className="scroll-smooth">
+      <ScrollGlow />
       <Navbar />
       <Hero />
       <WhatWeDo />
@@ -29,7 +30,6 @@ const Index = () => {
       <ForOrganizations />
       <GetInvolvedContributors />
       <GetInvolvedForm />
-      <Community />
       <DigitalWaitlist />
       <FreeTools />
       <FreeResources />
