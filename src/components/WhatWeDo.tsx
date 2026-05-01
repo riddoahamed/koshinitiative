@@ -63,7 +63,7 @@ const WhatWeDo = () => {
       />
       <div className="pointer-events-none absolute top-20 -left-32 w-[400px] h-[400px] rounded-full bg-kosh-mint/10 blur-[120px]" />
       <div className="pointer-events-none absolute top-40 -right-32 w-[400px] h-[400px] rounded-full bg-primary/10 blur-[120px]" />
-      <div ref={ref} className="max-w-6xl mx-auto">
+      <div ref={ref} className="relative z-10 max-w-6xl mx-auto">
         <p className="text-kosh-teal text-lg md:text-xl font-serif leading-relaxed max-w-3xl mb-14">
           We're on a mission to make financial education accessible, practical, and actionable for every young Bangladeshi.
         </p>
