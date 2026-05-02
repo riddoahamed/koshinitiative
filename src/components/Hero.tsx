@@ -99,15 +99,9 @@ const Hero = () => {
         <ChevronDown className="text-kosh-muted animate-bounce-down" size={28} />
       </div>
 
-      {/* Bottom transition glow — bleeds into the next section to remove the hard edge */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -bottom-32 left-0 right-0 h-64 z-[1]"
-        style={{
-          background:
-            "radial-gradient(ellipse 70% 100% at 50% 0%, hsl(156 85% 62% / 0.18), hsl(85 95% 65% / 0.08) 40%, transparent 75%)",
-        }}
-      />
+      {/* Corner accent glows */}
+      <div className="pointer-events-none absolute -top-32 -left-32 w-[420px] h-[420px] rounded-full bg-accent/15 blur-[140px]" />
+      <div className="pointer-events-none absolute -bottom-32 -right-32 w-[420px] h-[420px] rounded-full bg-primary/15 blur-[140px]" />
     </section>
   );
 };

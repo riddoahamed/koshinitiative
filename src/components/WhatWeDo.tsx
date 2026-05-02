@@ -52,17 +52,9 @@ const WhatWeDo = () => {
 
   return (
     <section id="what-we-do" className="relative bg-kosh-dark py-16 md:py-[100px] px-6 md:px-12 lg:px-24 overflow-hidden">
-      {/* Top transition glow — continues the green flow from hero into this section */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -top-40 left-0 right-0 h-80 z-0"
-        style={{
-          background:
-            "radial-gradient(ellipse 80% 100% at 50% 100%, hsl(156 85% 62% / 0.18), hsl(85 95% 65% / 0.10) 35%, hsl(270 95% 65% / 0.06) 60%, transparent 78%)",
-        }}
-      />
-      <div className="pointer-events-none absolute top-20 -left-32 w-[400px] h-[400px] rounded-full bg-kosh-mint/10 blur-[120px]" />
-      <div className="pointer-events-none absolute top-40 -right-32 w-[400px] h-[400px] rounded-full bg-primary/10 blur-[120px]" />
+      {/* Corner accent glows — match the rest of the dark sections */}
+      <div className="pointer-events-none absolute -top-32 -left-32 w-[420px] h-[420px] rounded-full bg-accent/15 blur-[140px]" />
+      <div className="pointer-events-none absolute -bottom-32 -right-32 w-[420px] h-[420px] rounded-full bg-primary/15 blur-[140px]" />
       <div ref={ref} className="relative z-10 max-w-7xl mx-auto">
         <p className="text-xs font-sans font-semibold uppercase tracking-[0.2em] text-kosh-mint mb-4">
           What Kosh does
