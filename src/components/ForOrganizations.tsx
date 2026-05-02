@@ -75,6 +75,16 @@ const audiences = [
   },
 ];
 
+const orgLogos = [
+  "bKash", "Nagad", "Rocket", "Upay", "Tap", "City Bank", "BRAC Bank", "Eastern Bank",
+  "Dutch-Bangla Bank", "Prime Bank", "Mutual Trust Bank", "IDLC Finance", "IPDC Finance",
+  "LankaBangla", "DBH Finance", "Pathao", "ShopUp", "Chaldal", "Foodpanda", "Sheba.xyz",
+  "Daraz", "Truck Lagbe", "Pickaboo", "Robi", "Grameenphone", "Banglalink", "BIDA",
+  "BSEC", "Bangladesh Bank", "ICB", "BRAC", "Grameen Bank", "ASA", "BURO Bangladesh",
+  "TMSS", "UNDP Bangladesh", "UNICEF Bangladesh", "World Bank BD", "ADB Bangladesh",
+  "JICA", "USAID Bangladesh", "Square Group", "Beximco", "ACI", "Renata", "Walton",
+];
+
 const progression = [
   { label: "0 → 1", sub: "Beginner" },
   { label: "1 → 10", sub: "Building" },
