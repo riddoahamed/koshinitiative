@@ -75,6 +75,16 @@ const audiences = [
   },
 ];
 
+const orgLogos = [
+  "bKash", "Nagad", "Rocket", "Upay", "Tap", "City Bank", "BRAC Bank", "Eastern Bank",
+  "Dutch-Bangla Bank", "Prime Bank", "Mutual Trust Bank", "IDLC Finance", "IPDC Finance",
+  "LankaBangla", "DBH Finance", "Pathao", "ShopUp", "Chaldal", "Foodpanda", "Sheba.xyz",
+  "Daraz", "Truck Lagbe", "Pickaboo", "Robi", "Grameenphone", "Banglalink", "BIDA",
+  "BSEC", "Bangladesh Bank", "ICB", "BRAC", "Grameen Bank", "ASA", "BURO Bangladesh",
+  "TMSS", "UNDP Bangladesh", "UNICEF Bangladesh", "World Bank BD", "ADB Bangladesh",
+  "JICA", "USAID Bangladesh", "Square Group", "Beximco", "ACI", "Renata", "Walton",
+];
+
 const progression = [
   { label: "0 → 1", sub: "Beginner" },
   { label: "1 → 10", sub: "Building" },
@@ -146,7 +156,7 @@ const ForOrganizations = () => {
         </div>
 
         {/* Who it's for */}
-        <div className="mb-16">
+        <div className="mb-10">
           <h3 className="font-serif text-2xl md:text-3xl text-kosh-offwhite mb-8">Who it's for</h3>
           <div className="grid md:grid-cols-2 gap-5 md:gap-6">
             {audiences.map((a) => (
@@ -166,6 +176,26 @@ const ForOrganizations = () => {
             ))}
           </div>
         </div>
+
+        {/* Organizations marquee — credibility strip */}
+        <div className="mb-16">
+          <p className="text-[10px] font-sans uppercase tracking-[0.25em] text-kosh-muted/70 mb-5 text-center">
+            The kind of organisations whose customers, members, and teams already need Kosh
+          </p>
+          <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+            <div className="flex gap-10 md:gap-14 animate-marquee whitespace-nowrap py-3">
+              {[...orgLogos, ...orgLogos].map((name, i) => (
+                <span
+                  key={`${name}-${i}`}
+                  className="font-serif text-sm md:text-base text-kosh-offwhite/55 hover:text-kosh-mint/90 transition-colors tracking-wide shrink-0"
+                >
+                  {name}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+
 
         {/* Stats + Checklist + CTA */}
         <div className="relative rounded-2xl p-8 md:p-12 overflow-hidden bg-gradient-to-br from-primary/15 via-background to-accent/10 border border-primary/30 shadow-[0_0_60px_-20px_hsl(var(--primary)/0.6)]">

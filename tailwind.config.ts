@@ -92,12 +92,17 @@ export default {
           "0%, 49%": { opacity: "1" },
           "50%, 100%": { opacity: "0" },
         },
+        marquee: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "bounce-down": "bounce-down 2s ease-in-out infinite",
         blink: "blink 1s steps(1) infinite",
+        marquee: "marquee 60s linear infinite",
       },
     },
   },
