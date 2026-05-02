@@ -75,15 +75,90 @@ const audiences = [
   },
 ];
 
-const orgLogos = [
-  "bKash", "Nagad", "Rocket", "Upay", "Tap", "City Bank", "BRAC Bank", "Eastern Bank",
-  "Dutch-Bangla Bank", "Prime Bank", "Mutual Trust Bank", "IDLC Finance", "IPDC Finance",
-  "LankaBangla", "DBH Finance", "Pathao", "ShopUp", "Chaldal", "Foodpanda", "Sheba.xyz",
-  "Daraz", "Truck Lagbe", "Pickaboo", "Robi", "Grameenphone", "Banglalink", "BIDA",
-  "BSEC", "Bangladesh Bank", "ICB", "BRAC", "Grameen Bank", "ASA", "BURO Bangladesh",
-  "TMSS", "UNDP Bangladesh", "UNICEF Bangladesh", "World Bank BD", "ADB Bangladesh",
-  "JICA", "USAID Bangladesh", "Square Group", "Beximco", "ACI", "Renata", "Walton",
+type OrgCategory = "Banks" | "NBFIs" | "MFS" | "Fintech" | "Employers" | "Regulators" | "NGOs/INGOs";
+
+type OrgItem = { name: string; category: OrgCategory; domain?: string };
+
+const orgItemsRaw: OrgItem[] = [
+  // Banks
+  { name: "City Bank", category: "Banks", domain: "thecitybank.com" },
+  { name: "BRAC Bank", category: "Banks", domain: "bracbank.com" },
+  { name: "Eastern Bank", category: "Banks", domain: "ebl.com.bd" },
+  { name: "Dutch-Bangla Bank", category: "Banks", domain: "dutchbanglabank.com" },
+  { name: "Prime Bank", category: "Banks", domain: "primebank.com.bd" },
+  { name: "Mutual Trust Bank", category: "Banks", domain: "mutualtrustbank.com" },
+  { name: "Standard Chartered BD", category: "Banks", domain: "sc.com" },
+  // NBFIs
+  { name: "IDLC Finance", category: "NBFIs", domain: "idlc.com" },
+  { name: "IPDC Finance", category: "NBFIs", domain: "ipdcbd.com" },
+  { name: "LankaBangla", category: "NBFIs", domain: "lankabangla.com" },
+  { name: "DBH Finance", category: "NBFIs", domain: "dbhfinance.com" },
+  // MFS
+  { name: "bKash", category: "MFS", domain: "bkash.com" },
+  { name: "Nagad", category: "MFS", domain: "nagad.com.bd" },
+  { name: "Rocket", category: "MFS" },
+  { name: "Upay", category: "MFS", domain: "upaybd.com" },
+  { name: "Tap", category: "MFS" },
+  // Fintech / loan / commerce platforms
+  { name: "Pathao", category: "Fintech", domain: "pathao.com" },
+  { name: "ShopUp", category: "Fintech", domain: "shopup.org" },
+  { name: "Chaldal", category: "Fintech", domain: "chaldal.com" },
+  { name: "Foodpanda", category: "Fintech", domain: "foodpanda.com.bd" },
+  { name: "Daraz", category: "Fintech", domain: "daraz.com.bd" },
+  { name: "Sheba.xyz", category: "Fintech", domain: "sheba.xyz" },
+  { name: "Truck Lagbe", category: "Fintech", domain: "trucklagbe.com" },
+  // Top employers
+  { name: "Grameenphone", category: "Employers", domain: "grameenphone.com" },
+  { name: "Robi", category: "Employers", domain: "robi.com.bd" },
+  { name: "Banglalink", category: "Employers", domain: "banglalink.net" },
+  { name: "Square Group", category: "Employers", domain: "squaregroup.com" },
+  { name: "Beximco", category: "Employers", domain: "beximco.com" },
+  { name: "ACI Limited", category: "Employers", domain: "aci-bd.com" },
+  { name: "Renata", category: "Employers", domain: "renata-ltd.com" },
+  { name: "Walton", category: "Employers", domain: "waltonbd.com" },
+  // Regulators
+  { name: "Bangladesh Bank", category: "Regulators", domain: "bb.org.bd" },
+  { name: "BIDA", category: "Regulators", domain: "bida.gov.bd" },
+  { name: "BSEC", category: "Regulators", domain: "sec.gov.bd" },
+  { name: "ICB", category: "Regulators", domain: "icb.gov.bd" },
+  // NGOs / INGOs
+  { name: "BRAC", category: "NGOs/INGOs", domain: "brac.net" },
+  { name: "Grameen Bank", category: "NGOs/INGOs", domain: "grameen.com" },
+  { name: "ASA", category: "NGOs/INGOs", domain: "asa.org.bd" },
+  { name: "BURO Bangladesh", category: "NGOs/INGOs", domain: "burobd.org" },
+  { name: "TMSS", category: "NGOs/INGOs", domain: "tmss-bd.org" },
+  { name: "UNDP Bangladesh", category: "NGOs/INGOs", domain: "undp.org" },
+  { name: "UNICEF Bangladesh", category: "NGOs/INGOs", domain: "unicef.org" },
+  { name: "World Bank BD", category: "NGOs/INGOs", domain: "worldbank.org" },
+  { name: "ADB Bangladesh", category: "NGOs/INGOs", domain: "adb.org" },
+  { name: "JICA", category: "NGOs/INGOs", domain: "jica.go.jp" },
+  { name: "USAID Bangladesh", category: "NGOs/INGOs", domain: "usaid.gov" },
 ];
+
+// Seeded shuffle (Mulberry32) + anti-cluster pass so categories don't repeat back-to-back
+const orgItems: OrgItem[] = (() => {
+  let s = 1337;
+  const rand = () => {
+    s = (s + 0x6D2B79F5) | 0;
+    let t = Math.imul(s ^ (s >>> 15), 1 | s);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+  const arr = [...orgItemsRaw].sort(() => rand() - 0.5);
+  for (let i = 1; i < arr.length; i++) {
+    if (arr[i].category === arr[i - 1].category) {
+      for (let j = i + 1; j < arr.length; j++) {
+        const prev = arr[i - 1].category;
+        const next = arr[i + 1]?.category;
+        if (arr[j].category !== prev && arr[j].category !== next) {
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+          break;
+        }
+      }
+    }
+  }
+  return arr;
+})();
 
 const progression = [
   { label: "0 → 1", sub: "Beginner" },
