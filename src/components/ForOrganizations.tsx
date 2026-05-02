@@ -255,21 +255,38 @@ const ForOrganizations = () => {
         {/* Organizations marquee — credibility strip */}
         <div className="mb-16">
           <p className="text-[10px] font-sans uppercase tracking-[0.25em] text-kosh-muted/70 mb-5 text-center">
-            The kind of organisations whose customers, members, and teams already need Kosh
+            Organisations whose customers, members, and teams already need Kosh
           </p>
           <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
-            <div className="flex gap-10 md:gap-14 animate-marquee whitespace-nowrap py-3">
-              {[...orgLogos, ...orgLogos].map((name, i) => (
-                <span
-                  key={`${name}-${i}`}
-                  className="font-serif text-sm md:text-base text-kosh-offwhite/55 hover:text-kosh-mint/90 transition-colors tracking-wide shrink-0"
+            <div className="flex gap-8 md:gap-10 animate-marquee whitespace-nowrap py-3 will-change-transform">
+              {[...orgItems, ...orgItems].map((item, i) => (
+                <div
+                  key={`${item.name}-${i}`}
+                  className="group flex items-center gap-2.5 shrink-0"
                 >
-                  {name}
-                </span>
+                  {item.domain && (
+                    <img
+                      src={`https://logo.clearbit.com/${item.domain}`}
+                      alt=""
+                      loading="lazy"
+                      onError={(e) => {
+                        (e.currentTarget as HTMLImageElement).style.display = "none";
+                      }}
+                      className="h-5 w-5 md:h-6 md:w-6 object-contain rounded-sm opacity-60 grayscale group-hover:opacity-100 group-hover:grayscale-0 transition-all"
+                    />
+                  )}
+                  <span className="font-serif text-sm md:text-base text-kosh-offwhite/65 group-hover:text-kosh-mint transition-colors tracking-wide">
+                    {item.name}
+                  </span>
+                  <span className="font-sans text-[9px] uppercase tracking-[0.2em] text-kosh-muted/55 border border-white/10 rounded-full px-2 py-0.5">
+                    {item.category}
+                  </span>
+                </div>
               ))}
             </div>
           </div>
         </div>
+
 
 
         {/* Stats + Checklist + CTA */}
