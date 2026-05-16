@@ -37,17 +37,18 @@ const Hero = () => {
         src={platformHero}
         alt=""
         aria-hidden="true"
-        className="absolute inset-0 h-full w-full object-cover object-[78%_center] opacity-75"
+        className="absolute inset-0 h-full w-full object-cover object-[36%_center] opacity-95"
       />
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,hsl(var(--kosh-dark))_0%,hsl(var(--kosh-dark))_43%,hsl(var(--kosh-dark)/0.78)_68%,hsl(var(--kosh-dark)/0.28)_100%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_42%,hsl(var(--accent)/0.16),transparent_34%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,hsl(var(--kosh-dark)/0.96)_0%,hsl(var(--kosh-dark)/0.91)_36%,hsl(var(--kosh-dark)/0.58)_58%,hsl(var(--kosh-dark)/0.18)_100%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,hsl(var(--kosh-dark)/0.38)_0%,transparent_30%,hsl(var(--kosh-dark)/0.5)_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_42%,hsl(var(--accent)/0.18),transparent_30%)]" />
 
-      <div className="max-w-4xl relative z-10">
+      <div className="relative z-10 max-w-[560px]">
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55 }}
-          className="mb-6 inline-flex max-w-full items-center rounded-full border border-kosh-mint/25 bg-kosh-mint/10 px-3 py-1.5 text-[11px] font-sans font-semibold uppercase tracking-[0.16em] text-kosh-mint"
+          className="mb-5 inline-flex max-w-full items-center rounded-full border border-kosh-mint/25 bg-kosh-mint/10 px-3 py-1.5 text-[11px] font-sans font-semibold uppercase tracking-[0.16em] text-kosh-mint"
         >
           Learn. Save. Invest. Grow.
         </motion.p>
@@ -56,14 +57,14 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
-          className="font-sans text-4xl font-extrabold leading-[1.02] tracking-tight text-white max-w-[760px] md:text-5xl lg:text-6xl xl:text-7xl"
+          className="max-w-[540px] font-sans text-4xl font-extrabold leading-[1.03] text-white md:text-5xl lg:text-[48px] xl:text-[56px]"
         >
           Money should make sense for{" "}
           <span className="text-kosh-mint">everyday Bangladeshis.</span>
         </motion.h1>
 
         <p
-          className="mt-7 text-xl md:text-3xl font-sans font-extrabold text-kosh-mint min-h-[1.4em]"
+          className="mt-5 min-h-[1.3em] font-sans text-xl font-extrabold text-kosh-mint md:text-2xl"
           aria-label={TYPED_TEXT}
         >
           <span>{typed}</span>
@@ -76,7 +77,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3 }}
-          className="mt-5 text-base md:text-lg text-kosh-muted max-w-2xl font-sans leading-relaxed"
+          className="mt-3 max-w-xl font-sans text-base leading-relaxed text-white/82 md:text-[17px]"
         >
           Kosh combines workshops, community programs, and a gamified app to help people understand money, build habits, and make better financial decisions without hidden agendas.
         </motion.p>
@@ -85,7 +86,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.45 }}
-          className="mt-10 flex flex-col sm:flex-row gap-4"
+          className="mt-6 flex flex-col gap-4 sm:flex-row"
         >
           <a
             href={KOSH_APP_URL}

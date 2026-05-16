@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import koshLogo from "@/assets/kosh-logo.png";
-import SocialLinks from "@/components/SocialIcons";
 import { KOSH_APP_URL } from "@/lib/links";
 
 const links = [
@@ -42,12 +41,10 @@ const Navbar = () => {
           >
             Open App
           </a>
-          <SocialLinks className="!gap-3 ml-2 [&_a]:text-kosh-muted [&_a:hover]:text-kosh-mint [&_svg]:w-[18px] [&_svg]:h-[18px]" />
         </div>
 
         {/* Mobile toggle */}
         <div className="md:hidden flex items-center gap-3">
-          <SocialLinks className="!gap-3 [&_a]:text-kosh-muted [&_a:hover]:text-kosh-mint [&_svg]:w-[18px] [&_svg]:h-[18px]" />
           <button
             onClick={() => setOpen(!open)}
             className="text-white"
