@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import WhatWeDo from "@/components/WhatWeDo";
+import ProofBand from "@/components/ProofBand";
 import WhyItMatters from "@/components/WhyItMatters";
 import ForStudents from "@/components/ForStudents";
 import GetInvolvedClients from "@/components/GetInvolvedClients";
@@ -23,14 +24,15 @@ const Index = () => {
       <Navbar />
       <Hero />
       <WhatWeDo />
+      <ProofBand />
       <WhyItMatters />
       <Diagnostic />
+      <DigitalWaitlist />
       <ForStudents />
       <GetInvolvedClients />
       <ForOrganizations />
       <GetInvolvedContributors />
       <GetInvolvedForm />
-      <DigitalWaitlist />
       <FreeTools />
       <FreeResources />
       <CommunityCTA />

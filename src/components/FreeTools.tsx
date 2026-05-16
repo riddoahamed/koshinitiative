@@ -1,6 +1,7 @@
 import { AlertTriangle, Scale, CreditCard, TrendingUp, Car, Wallet, ArrowUpRight, LucideIcon } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { GlassIcon } from "@/components/ui/glass-icon";
+import { KOSH_APP_URL } from "@/lib/links";
 
 type Variant = "primary" | "accent" | "mixed" | "warning" | "info";
 
@@ -83,7 +84,7 @@ const FreeTools = () => {
           {tools.map((t) => (
             <a
               key={t.title}
-              href="https://kosh-ten.vercel.app/"
+              href={KOSH_APP_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-6 md:p-7 flex flex-col hover:border-primary/50 hover:shadow-[0_0_40px_-10px_hsl(var(--primary)/0.6),0_0_25px_-12px_hsl(var(--accent)/0.5)] transition-all"

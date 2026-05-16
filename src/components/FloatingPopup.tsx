@@ -1,59 +1,40 @@
 import { useEffect, useState } from "react";
-import { X } from "lucide-react";
+import { ArrowRight, X } from "lucide-react";
 
 const FloatingPopup = () => {
   const [visible, setVisible] = useState(false);
   const [dismissed, setDismissed] = useState(false);
 
   useEffect(() => {
-    if (sessionStorage.getItem("kosh_popup_shown") === "1") {
+    if (sessionStorage.getItem("kosh_tester_popup_shown") === "1") {
       setDismissed(true);
       return;
     }
 
-    // Wait until the diagnostic modal has been opened-then-closed (opt-out),
-    // then appear 5 seconds later. Poll session flag.
-    let appearTimer: ReturnType<typeof setTimeout> | null = null;
     let dismissTimer: ReturnType<typeof setTimeout> | null = null;
-
-    const tryShow = () => {
-      // Don't show if user already scrolled past the diagnostic section
-      const el = document.getElementById("diagnostic");
-      if (el) {
-        const rect = el.getBoundingClientRect();
-        if (rect.bottom < 0) return;
-      }
+    const appearTimer = setTimeout(() => {
       setVisible(true);
-      // Auto-dismiss after 6 seconds
       dismissTimer = setTimeout(() => {
         setVisible(false);
         setDismissed(true);
-        sessionStorage.setItem("kosh_popup_shown", "1");
-      }, 6000);
-    };
-
-    const interval = setInterval(() => {
-      if (sessionStorage.getItem("kosh_diag_popup_dismissed") === "1") {
-        clearInterval(interval);
-        appearTimer = setTimeout(tryShow, 5000);
-      }
-    }, 400);
+        sessionStorage.setItem("kosh_tester_popup_shown", "1");
+      }, 12000);
+    }, 14000);
 
     return () => {
-      clearInterval(interval);
-      if (appearTimer) clearTimeout(appearTimer);
+      clearTimeout(appearTimer);
       if (dismissTimer) clearTimeout(dismissTimer);
     };
   }, []);
 
   const dismiss = () => {
-    sessionStorage.setItem("kosh_popup_shown", "1");
+    sessionStorage.setItem("kosh_tester_popup_shown", "1");
     setVisible(false);
     setDismissed(true);
   };
 
-  const goCheck = () => {
-    const el = document.getElementById("diagnostic");
+  const requestInvite = () => {
+    const el = document.getElementById("get-involved-form");
     if (el) el.scrollIntoView({ behavior: "smooth" });
     dismiss();
   };
@@ -62,12 +43,12 @@ const FloatingPopup = () => {
 
   return (
     <div
-      className="fixed bottom-4 right-4 z-[60] max-w-[260px] animate-in fade-in slide-in-from-bottom-3 duration-1000 ease-out"
+      className="fixed bottom-4 right-4 z-[60] max-w-[300px] animate-in fade-in slide-in-from-bottom-3 duration-1000 ease-out"
       role="status"
       aria-live="polite"
     >
       <div
-        className="relative rounded-2xl bg-[#0D2B27] text-white border border-white/10 shadow-2xl px-3 py-2.5 pr-7"
+        className="relative rounded-2xl bg-[#0D2B27] text-white border border-kosh-mint/20 shadow-2xl px-4 py-3.5 pr-8"
         style={{ boxShadow: "0 10px 40px -10px rgba(0,0,0,0.5)" }}
       >
         <button
@@ -78,23 +59,23 @@ const FloatingPopup = () => {
           <X size={12} />
         </button>
         <div className="flex items-start gap-2">
-          <span className="text-sm leading-none mt-0.5">🧠</span>
           <div className="flex-1">
-            <p className="text-[10px] font-mono uppercase tracking-wider text-kosh-mint mb-0.5">
-              Real quick
+            <p className="text-[10px] font-mono uppercase tracking-wider text-kosh-mint mb-1">
+              Prototype access
             </p>
-            <p className="text-xs leading-snug mb-1.5">
-              Do you actually know your money situation? Takes 6 min.
+            <p className="text-sm leading-snug mb-3">
+              Want an early invite to test what Kosh is building?
             </p>
             <button
-              onClick={goCheck}
-              className="text-[11px] font-semibold px-2.5 py-1 rounded-full hover:opacity-90 transition-opacity"
+              onClick={requestInvite}
+              className="inline-flex items-center gap-1.5 text-[12px] font-semibold px-3 py-1.5 rounded-full hover:opacity-90 transition-opacity"
               style={{ backgroundColor: "#02C39A", color: "#0D2B27" }}
             >
-              Check now
+              Request invite
+              <ArrowRight className="h-3 w-3" aria-hidden="true" />
             </button>
-            <p className="text-white/50 text-[10px] mt-1.5 leading-snug">
-              Or find it later in the menu, no rush.
+            <p className="text-white/50 text-[10px] mt-2 leading-snug">
+              We are looking for thoughtful prototype testers, not mass signups.
             </p>
           </div>
         </div>

@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ExternalLink } from "lucide-react";
 import { useEffect, useState } from "react";
-import SocialLinks from "./SocialIcons";
+import platformHero from "@/assets/brand/platform-hero.jpg";
+import { KOSH_APP_URL } from "@/lib/links";
 
 const TYPED_TEXT = "Kosh is changing that.";
 
@@ -31,32 +32,38 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center bg-kosh-dark px-6 md:px-12 lg:px-24 py-16 md:py-[100px] overflow-hidden">
-      <div className="absolute top-6 right-6 md:top-10 md:right-12 lg:right-24 z-10">
-        <SocialLinks />
-      </div>
-      <div className="absolute top-6 right-6 md:top-10 md:right-12 lg:right-24 z-10">
-        <SocialLinks />
-      </div>
+    <section className="relative min-h-screen flex flex-col justify-center bg-kosh-dark px-6 md:px-12 lg:px-24 py-24 md:py-[110px] overflow-hidden">
+      <img
+        src={platformHero}
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 h-full w-full object-cover object-[78%_center] opacity-75"
+      />
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,hsl(var(--kosh-dark))_0%,hsl(var(--kosh-dark))_43%,hsl(var(--kosh-dark)/0.78)_68%,hsl(var(--kosh-dark)/0.28)_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_42%,hsl(var(--accent)/0.16),transparent_34%)]" />
 
       <div className="max-w-4xl relative z-10">
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55 }}
+          className="mb-6 inline-flex max-w-full items-center rounded-full border border-kosh-mint/25 bg-kosh-mint/10 px-3 py-1.5 text-[11px] font-sans font-semibold uppercase tracking-[0.16em] text-kosh-mint"
+        >
+          Learn. Save. Invest. Grow.
+        </motion.p>
+
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
-          className="font-serif text-5xl md:text-7xl lg:text-8xl leading-[1.05] tracking-tight text-white"
+          className="font-sans text-4xl font-extrabold leading-[1.02] tracking-tight text-white max-w-[760px] md:text-5xl lg:text-6xl xl:text-7xl"
         >
-          Most young Bangladeshis were{" "}
-          <span className="italic text-kosh-mint">never taught</span>{" "}
-          how{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-kosh-mint to-emerald-300">
-            money
-          </span>{" "}
-          works.
+          Money should make sense for{" "}
+          <span className="text-kosh-mint">everyday Bangladeshis.</span>
         </motion.h1>
 
         <p
-          className="mt-8 text-2xl md:text-4xl font-serif text-kosh-mint min-h-[1.4em]"
+          className="mt-7 text-xl md:text-3xl font-sans font-extrabold text-kosh-mint min-h-[1.4em]"
           aria-label={TYPED_TEXT}
         >
           <span>{typed}</span>
@@ -71,20 +78,23 @@ const Hero = () => {
           transition={{ duration: 0.7, delay: 0.3 }}
           className="mt-5 text-base md:text-lg text-kosh-muted max-w-2xl font-sans leading-relaxed"
         >
-          Workshops, community programs, and corporate sessions, practical financial education to help students, early-career professionals, and underserved communities understand money, save, and grow wealth.
+          Kosh combines workshops, community programs, and a gamified app to help people understand money, build habits, and make better financial decisions without hidden agendas.
         </motion.p>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.45 }}
-          className="mt-12 flex flex-col sm:flex-row gap-4"
+          className="mt-10 flex flex-col sm:flex-row gap-4"
         >
           <a
-            href="#diagnostic"
+            href={KOSH_APP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center justify-center px-8 py-3.5 rounded-md bg-kosh-mint/15 backdrop-blur-sm border border-kosh-mint/40 text-kosh-mint font-sans font-semibold text-base transition-all hover:bg-kosh-mint/25 hover:border-kosh-mint/70 shadow-[0_0_24px_-8px_hsl(var(--accent)/0.6)]"
           >
-            How personal are you with your finances?
+            Rate your money readiness
+            <ExternalLink className="ml-2 h-4 w-4" aria-hidden="true" />
           </a>
           <a
             href="#get-involved-clients"

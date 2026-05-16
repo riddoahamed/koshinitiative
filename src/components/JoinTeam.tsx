@@ -2,6 +2,13 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { User, Mic, HandHelping } from "lucide-react";
 import { useEffect } from "react";
 
+type TallyWindow = Window &
+  typeof globalThis & {
+    Tally?: {
+      loadEmbeds: () => void;
+    };
+  };
+
 const roles = [
   {
     icon: User,
@@ -35,18 +42,17 @@ const JoinTeam = () => {
   useEffect(() => {
     const d = document;
     const w = "https://tally.so/widgets/embed.js";
+    const win = window as TallyWindow;
     const v = function () {
-      if (typeof (window as any).Tally !== "undefined") {
-        (window as any).Tally.loadEmbeds();
+      if (win.Tally) {
+        win.Tally.loadEmbeds();
       } else {
-        d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(
-          (e: any) => {
-            e.src = e.dataset.tallySrc;
-          }
-        );
+        d.querySelectorAll<HTMLIFrameElement>("iframe[data-tally-src]:not([src])").forEach((e) => {
+          e.src = e.dataset.tallySrc ?? "";
+        });
       }
     };
-    if (typeof (window as any).Tally !== "undefined") {
+    if (win.Tally) {
       v();
     } else if (d.querySelector('script[src="' + w + '"]') == null) {
       const s = d.createElement("script");

@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { GlassIcon } from "@/components/ui/glass-icon";
+import orgCollaboration from "@/assets/brand/org-collaboration.jpg";
 
 const features = [
   {
@@ -200,15 +201,28 @@ const ForOrganizations = () => {
       <div className="pointer-events-none absolute -top-32 -left-32 w-[420px] h-[420px] rounded-full bg-accent/10 blur-[140px]" />
       <div className="pointer-events-none absolute -bottom-32 -right-32 w-[420px] h-[420px] rounded-full bg-primary/10 blur-[140px]" />
       <div ref={ref} className="relative max-w-6xl mx-auto">
-        <p className="text-xs font-sans font-semibold uppercase tracking-[0.2em] text-kosh-mint mb-4">
-          For Organizations
-        </p>
-        <h2 className="font-serif text-3xl md:text-5xl text-kosh-offwhite mb-5 tracking-tight">
-          Financial Literacy as a Product
-        </h2>
-        <p className="text-kosh-muted text-base md:text-lg leading-relaxed mb-14 max-w-3xl font-sans">
-          Ready-to-deploy gamified financial literacy - white-label app, web SDK, or embedded module. Your brand, your users, Kosh's content engine and engagement layer powering it all.
-        </p>
+        <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center mb-16">
+          <div>
+            <p className="text-xs font-sans font-semibold uppercase tracking-[0.2em] text-kosh-mint mb-4">
+              For Organizations
+            </p>
+            <h2 className="font-serif text-3xl md:text-5xl text-kosh-offwhite mb-5 tracking-tight">
+              Bring Kosh to your university, team, or platform.
+            </h2>
+            <p className="text-kosh-muted text-base md:text-lg leading-relaxed max-w-3xl font-sans">
+              Run workshops, launch a campus pilot, or embed Kosh's education engine inside your
+              digital product. Your audience gets practical financial literacy built for Bangladesh.
+            </p>
+          </div>
+
+          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] shadow-[0_30px_100px_-45px_rgba(0,0,0,0.9)]">
+            <img
+              src={orgCollaboration}
+              alt="Kosh collaboration visual for universities and organizations"
+              className="w-full object-cover"
+            />
+          </div>
+        </div>
 
         {/* Feature cards */}
         <div className="grid md:grid-cols-2 gap-5 md:gap-6 mb-16">
