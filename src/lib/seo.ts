@@ -1,7 +1,7 @@
 const SITE_URL = "https://www.koshbd.com";
 const DEFAULT_TITLE = "Kosh | Financial Literacy App & Workshops in Bangladesh";
 const DEFAULT_DESCRIPTION =
-  "Kosh is a Bangladesh-focused financial literacy initiative and app helping students, young professionals, and communities learn, save, invest, and grow with confidence.";
+  "Kosh is a Bangladesh financial literacy app and workshop initiative helping students and communities learn, save, invest, and grow.";
 
 type SeoInput = {
   title?: string;
