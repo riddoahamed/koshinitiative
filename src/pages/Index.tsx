@@ -16,8 +16,14 @@ import CommunityCTA from "@/components/CommunityCTA";
 import Footer from "@/components/Footer";
 import Diagnostic from "@/components/Diagnostic";
 import FloatingPopup from "@/components/FloatingPopup";
+import { resetSeo } from "@/lib/seo";
+import { useEffect } from "react";
 
 const Index = () => {
+  useEffect(() => {
+    resetSeo();
+  }, []);
+
   return (
     <main className="scroll-smooth">
       <ScrollGlow />

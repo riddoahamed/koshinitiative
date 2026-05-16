@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 import { ArrowLeft, Wrench } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { applySeo } from "@/lib/seo";
 
 interface ToolPlaceholderProps {
   title: string;
@@ -9,6 +11,14 @@ interface ToolPlaceholderProps {
 }
 
 const ToolPlaceholder = ({ title, description }: ToolPlaceholderProps) => {
+  useEffect(() => {
+    applySeo({
+      title,
+      description,
+      path: window.location.pathname,
+    });
+  }, [title, description]);
+
   return (
     <main className="min-h-screen bg-kosh-offwhite flex flex-col">
       <Navbar />

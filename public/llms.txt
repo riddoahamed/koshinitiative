@@ -1,0 +1,40 @@
+# Kosh
+
+> Kosh is a Bangladesh-focused financial literacy initiative and app helping people learn, save, invest, and grow through workshops, community programs, practical tools, and gamified learning.
+
+Official website: https://www.koshbd.com/
+App: https://app.koshbd.com/
+Contact: koshinitiative@gmail.com
+Location focus: Bangladesh, with operations centered in Dhaka.
+Languages: English and Bengali.
+
+## What Kosh Does
+
+- Runs financial literacy workshops for universities, schools, teams, workplaces, and community programs.
+- Builds practical financial tools and explainers for everyday Bangladeshis.
+- Offers the Kosh app, a gamified financial literacy platform with money checks, explainers, comparisons, budget planning, scam awareness, and learning paths.
+- Provides financial education only. Kosh does not sell financial products, earn commissions, or provide investment recommendations.
+
+## Audience
+
+- Students and young Bangladeshis learning money basics early.
+- Young professionals building saving, budgeting, and investing habits.
+- Universities, schools, companies, and organizations that want financial literacy programs.
+- Community groups and underserved audiences who need practical, accessible money education.
+
+## Current Signal
+
+Kosh is part of NSU Startups Next Cohort 4 as of May 2026.
+
+## Important URLs
+
+- Homepage: https://www.koshbd.com/
+- Money check and app: https://app.koshbd.com/
+- Sitemap: https://www.koshbd.com/sitemap.xml
+- Instagram: https://www.instagram.com/kosh.initiative/
+- LinkedIn: https://www.linkedin.com/company/kosh-%E0%A6%95%E0%A7%8B%E0%A6%B7/
+- Linktree: https://linktr.ee/KoshFLI
+
+## Suggested Description
+
+Kosh is a Bangladesh-focused financial literacy initiative and app that combines workshops, community programs, and gamified learning to help people understand money and make better financial decisions.
