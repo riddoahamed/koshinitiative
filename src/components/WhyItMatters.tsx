@@ -1,5 +1,55 @@
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+
+type CountUpNumberProps = {
+  value: number;
+  suffix?: string;
+  delay?: number;
+};
+
+const CountUpNumber = ({ value, suffix = "", delay = 0 }: CountUpNumberProps) => {
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, amount: 0.7 });
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    let frame = 0;
+    let start: number | null = null;
+    const duration = 1300;
+    const delayMs = delay * 1000;
+
+    const tick = (timestamp: number) => {
+      if (start === null) start = timestamp;
+      const elapsed = timestamp - start;
+
+      if (elapsed < delayMs) {
+        frame = requestAnimationFrame(tick);
+        return;
+      }
+
+      const progress = Math.min((elapsed - delayMs) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.round(value * eased));
+
+      if (progress < 1) {
+        frame = requestAnimationFrame(tick);
+      }
+    };
+
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, [delay, isInView, value]);
+
+  return (
+    <span ref={ref}>
+      {count}
+      {suffix}
+    </span>
+  );
+};
 
 const WhyItMatters = () => {
   const ref = useScrollAnimation();
@@ -16,9 +66,14 @@ const WhyItMatters = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <p className="font-serif text-7xl md:text-8xl text-white font-normal">70%+</p>
+            <p className="font-serif text-7xl md:text-8xl text-white font-normal">
+              <CountUpNumber value={70} suffix="%+" />
+            </p>
+            <p className="mt-2 font-signal text-[11px] font-semibold uppercase tracking-[0.18em] text-white/45">
+              of adults in Bangladesh
+            </p>
             <p className="text-kosh-mint text-sm font-sans font-semibold uppercase tracking-[0.15em] mt-4">
-              Bangladeshis lack basic financial literacy
+              Lack basic financial literacy
             </p>
           </motion.div>
 
@@ -28,7 +83,9 @@ const WhyItMatters = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.12 }}
           >
-            <p className="font-serif text-7xl md:text-8xl text-white font-normal">45%</p>
+            <p className="font-serif text-7xl md:text-8xl text-white font-normal">
+              <CountUpNumber value={45} suffix="%" delay={0.12} />
+            </p>
             <p className="text-kosh-mint text-sm font-sans font-semibold uppercase tracking-[0.15em] mt-4">
               Population under age 25
             </p>
@@ -40,7 +97,9 @@ const WhyItMatters = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.24 }}
           >
-            <p className="font-serif text-7xl md:text-8xl text-white font-normal">~0</p>
+            <p className="font-serif text-7xl md:text-8xl text-white font-normal">
+              ~<CountUpNumber value={0} delay={0.24} />
+            </p>
             <p className="text-kosh-mint text-sm font-sans font-semibold uppercase tracking-[0.15em] mt-4">
               Formal financial education in most schools
             </p>

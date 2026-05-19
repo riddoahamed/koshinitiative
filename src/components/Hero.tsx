@@ -100,7 +100,7 @@ const Hero = () => {
                 },
               }}
             >
-              {line}
+              {index === 2 ? <span className="kosh-disco-shimmer">{line}</span> : line}
             </motion.span>
           ))}
         </motion.h1>

@@ -21,6 +21,10 @@ import { useEffect } from "react";
 const Index = () => {
   useEffect(() => {
     resetSeo();
+    if (!window.location.hash) {
+      window.history.scrollRestoration = "manual";
+      requestAnimationFrame(() => window.scrollTo(0, 0));
+    }
   }, []);
 
   return (

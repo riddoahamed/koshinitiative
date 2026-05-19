@@ -104,3 +104,62 @@ body::before {
     border-color: rgba(2, 195, 154, 0.2);
   }
 }
+
+@layer utilities {
+  .kosh-disco-shimmer {
+    position: relative;
+    display: inline-block;
+    color: hsl(var(--kosh-lime));
+    background-image:
+      linear-gradient(
+        108deg,
+        hsl(var(--kosh-lime)) 0%,
+        hsl(var(--kosh-lime)) 32%,
+        hsl(var(--kosh-offwhite)) 44%,
+        hsl(var(--kosh-mint)) 52%,
+        hsl(var(--kosh-lime)) 66%,
+        hsl(var(--kosh-lime)) 100%
+      );
+    background-size: 260% 100%;
+    background-position: 100% 50%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 22px hsl(var(--kosh-lime) / 0.26));
+    animation: kosh-disco-shimmer 7.5s ease-in-out infinite;
+  }
+
+  .kosh-disco-shimmer::after {
+    content: "";
+    position: absolute;
+    inset: -0.08em -0.1em;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 18% 34%, hsl(var(--kosh-offwhite) / 0.46) 0 2px, transparent 3px),
+      radial-gradient(circle at 54% 20%, hsl(var(--kosh-mint) / 0.42) 0 1.5px, transparent 3px),
+      radial-gradient(circle at 78% 62%, hsl(var(--kosh-offwhite) / 0.34) 0 1.5px, transparent 3px);
+    opacity: 0;
+    transform: translateX(-10%);
+    animation: kosh-disco-glints 7.5s ease-in-out infinite;
+  }
+
+  @keyframes kosh-disco-shimmer {
+    0%, 24% {
+      background-position: 100% 50%;
+    }
+    54%, 100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  @keyframes kosh-disco-glints {
+    0%, 20%, 68%, 100% {
+      opacity: 0;
+      transform: translateX(-10%);
+    }
+    38%, 48% {
+      opacity: 0.55;
+      transform: translateX(4%);
+    }
+  }
+}
