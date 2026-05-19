@@ -1,4 +1,5 @@
 import { ArrowRight, CheckCircle2, ExternalLink } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import appHome from "@/assets/brand/app-home.jpg";
 import appTools from "@/assets/brand/app-tools.jpg";
@@ -11,8 +12,47 @@ const appHighlights = [
   "Short explainers and comparisons",
 ];
 
+const cardDeck = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.08,
+    },
+  },
+};
+
+const cardReveal = (rotation: number, xStart: number, yStart: number, delay = 0) => ({
+  hidden: {
+    opacity: 0,
+    x: xStart,
+    y: yStart,
+    rotate: rotation + 18,
+    scale: 0.78,
+    filter: "blur(16px)",
+  },
+  visible: {
+    opacity: 1,
+    x: [xStart, Math.round(xStart * 0.42), 0],
+    y: [yStart, -22, 0],
+    rotate: [rotation + 18, rotation - Math.sign(rotation || 1) * 6, rotation],
+    scale: [0.78, 1.055, 1],
+    filter: ["blur(16px)", "blur(3px)", "blur(0px)"],
+    transition: {
+      duration: 1.12,
+      delay,
+      ease: [0.16, 1, 0.3, 1],
+    },
+  },
+});
+
+const leftCard = cardReveal(-12, 360, 170, 0);
+const centerCard = cardReveal(0, 330, 92, 0.08);
+const rightCard = cardReveal(12, 300, 170, 0.16);
+
 const DigitalWaitlist = () => {
   const ref = useScrollAnimation();
+  const prefersReducedMotion = useReducedMotion();
 
   return (
     <section className="relative bg-kosh-dark py-20 md:py-28 px-6 md:px-12 lg:px-24 border-t border-white/5 overflow-hidden">
@@ -59,35 +99,107 @@ const DigitalWaitlist = () => {
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </a>
           </div>
+
+          <p className="mt-5 max-w-lg font-signal text-[11px] font-semibold uppercase leading-relaxed tracking-[0.15em] text-kosh-muted/80">
+            No products. No commissions. No hidden agenda. Just education built around the
+            money decisions Bangladeshis actually face.
+          </p>
         </div>
 
-        <div className="relative min-h-[560px] lg:min-h-[680px]">
-          <div className="absolute left-1/2 top-10 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-primary/20 blur-[120px]" />
-          <img
-            src={appHome}
-            alt="Kosh app home screen with money level check"
-            className="absolute left-1/2 top-0 z-20 w-[58%] max-w-[310px] -translate-x-1/2 rounded-[1.8rem] border border-white/15 shadow-[0_30px_100px_-28px_rgba(0,0,0,0.9)] sm:w-[46%]"
+        <motion.div
+          className="relative min-h-[540px] origin-[88%_48%] perspective-[1200px] md:min-h-[620px] lg:min-h-[660px]"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.26, margin: "-80px" }}
+          variants={cardDeck}
+        >
+          <motion.div
+            className="absolute left-1/2 top-16 h-[440px] w-[440px] -translate-x-1/2 rounded-full bg-kosh-lime/14 blur-[120px]"
+            initial={{ opacity: 0, scale: 0.82 }}
+            whileInView={prefersReducedMotion ? { opacity: 0.45, scale: 1 } : { opacity: [0, 0.5, 0.34], scale: [0.82, 1.08, 1] }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 1.6, delay: 1.05, ease: [0.16, 1, 0.3, 1] }}
           />
-          <img
-            src={appTools}
-            alt="Kosh app tools screen"
-            className="absolute left-0 top-24 z-10 w-[45%] max-w-[250px] -rotate-6 rounded-[1.6rem] border border-white/12 opacity-[0.82] shadow-[0_24px_80px_-30px_rgba(0,0,0,0.85)] sm:w-[39%]"
+          <motion.div
+            aria-hidden="true"
+            className="pointer-events-none absolute left-1/2 top-28 z-0 h-[420px] w-[420px] -translate-x-1/2 rounded-full border border-kosh-lime/10"
+            initial={{ opacity: 0, scale: 0.66 }}
+            whileInView={prefersReducedMotion ? { opacity: 0.12, scale: 1 } : { opacity: [0, 0.22, 0.08], scale: [0.66, 1.04, 1] }}
+            viewport={{ once: true, amount: 0.35 }}
+            transition={{ duration: 1.5, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
           />
-          <img
-            src={appExplainers}
-            alt="Kosh app explainers screen"
-            className="absolute right-0 top-32 z-10 w-[45%] max-w-[250px] rotate-6 rounded-[1.6rem] border border-white/12 opacity-[0.82] shadow-[0_24px_80px_-30px_rgba(0,0,0,0.85)] sm:w-[39%]"
-          />
-          <div className="absolute bottom-0 left-0 right-0 z-30 rounded-2xl border border-kosh-mint/20 bg-[#071210]/80 px-5 py-4 backdrop-blur-md">
-            <p className="text-[11px] uppercase tracking-[0.22em] text-kosh-mint mb-2 font-sans font-semibold">
-              Product principle
-            </p>
-            <p className="text-sm md:text-base text-kosh-offwhite/85 font-sans leading-relaxed">
-              No products. No commissions. No hidden agenda. Just education built around the
-              money decisions Bangladeshis actually face.
-            </p>
+
+          <div className="relative mx-auto h-[540px] max-w-[760px] md:h-[620px] lg:h-[660px]">
+            <div className="absolute left-[2%] top-[168px] z-20 w-[33%] max-w-[245px] min-w-[170px] origin-bottom">
+              <motion.div variants={leftCard} className="origin-bottom">
+                <motion.img
+                  src={appTools}
+                  alt="Kosh app tools screen"
+                  className="w-full rounded-[1.45rem] border border-kosh-lime/18 opacity-[0.9] shadow-[0_24px_80px_-30px_rgba(0,0,0,0.85)]"
+                  animate={
+                    prefersReducedMotion
+                      ? undefined
+                      : {
+                          y: [0, 10, 0],
+                          boxShadow: [
+                            "0 24px 80px -30px rgba(0,0,0,0.85), 0 0 0 rgba(184,255,70,0)",
+                            "0 24px 80px -30px rgba(0,0,0,0.85), 0 0 34px rgba(184,255,70,0.16)",
+                            "0 24px 80px -30px rgba(0,0,0,0.85), 0 0 0 rgba(184,255,70,0)",
+                          ],
+                        }
+                  }
+                  transition={{ duration: 6.3, repeat: Infinity, ease: "easeInOut", delay: 1.8 }}
+                />
+              </motion.div>
+            </div>
+
+            <div className="absolute left-1/2 top-2 z-30 w-[40%] max-w-[315px] min-w-[210px] -translate-x-1/2 origin-bottom">
+              <motion.div variants={centerCard} className="origin-bottom">
+              <motion.img
+                src={appHome}
+                alt="Kosh app home screen with money level check"
+                className="w-full rounded-[1.8rem] border border-kosh-lime/20 shadow-[0_30px_100px_-28px_rgba(0,0,0,0.9)]"
+                animate={
+                  prefersReducedMotion
+                    ? undefined
+                    : {
+                        y: [0, -10, 0],
+                        boxShadow: [
+                          "0 30px 100px -28px rgba(0,0,0,0.9), 0 0 0 rgba(184,255,70,0)",
+                          "0 30px 100px -28px rgba(0,0,0,0.9), 0 0 38px rgba(184,255,70,0.18)",
+                          "0 30px 100px -28px rgba(0,0,0,0.9), 0 0 0 rgba(184,255,70,0)",
+                        ],
+                      }
+                }
+                transition={{ duration: 5.8, repeat: Infinity, ease: "easeInOut", delay: 1.35 }}
+              />
+              </motion.div>
+            </div>
+
+            <div className="absolute right-[2%] top-[168px] z-20 w-[33%] max-w-[245px] min-w-[170px] origin-bottom">
+              <motion.div variants={rightCard} className="origin-bottom">
+              <motion.img
+                src={appExplainers}
+                alt="Kosh app explainers screen"
+                className="w-full rounded-[1.45rem] border border-kosh-lime/18 opacity-[0.9] shadow-[0_24px_80px_-30px_rgba(0,0,0,0.85)]"
+                animate={
+                  prefersReducedMotion
+                    ? undefined
+                    : {
+                        y: [0, -14, 0],
+                        boxShadow: [
+                          "0 24px 80px -30px rgba(0,0,0,0.85), 0 0 0 rgba(184,255,70,0)",
+                          "0 24px 80px -30px rgba(0,0,0,0.85), 0 0 34px rgba(184,255,70,0.16)",
+                          "0 24px 80px -30px rgba(0,0,0,0.85), 0 0 0 rgba(184,255,70,0)",
+                        ],
+                      }
+                }
+                transition={{ duration: 6.8, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+              />
+              </motion.div>
+            </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

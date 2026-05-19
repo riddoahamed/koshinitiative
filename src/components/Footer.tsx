@@ -24,7 +24,14 @@ const Footer = () => {
           {/* Left */}
           <div className="flex flex-col justify-between">
             <div>
-              <h2 className="font-serif text-4xl md:text-5xl text-white tracking-tight">KOSH</h2>
+              <div className="flex items-center gap-4">
+                <img
+                  src="/favicon.png"
+                  alt="Kosh treasure icon"
+                  className="h-14 w-14 rounded-md border border-kosh-lime/25 object-contain shadow-[0_0_34px_-12px_rgba(184,255,70,0.9)]"
+                />
+                <h2 className="font-serif text-4xl md:text-5xl text-white tracking-tight">KOSH</h2>
+              </div>
               <p className="text-kosh-mint text-sm font-sans mt-2">Financial Literacy Initiative</p>
               <p className="text-kosh-muted text-sm font-sans mt-1">Bangladesh · 2025</p>
               <SocialLinks className="mt-6" />

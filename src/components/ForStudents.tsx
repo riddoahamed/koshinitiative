@@ -23,7 +23,7 @@ const ForStudents = () => {
         </p>
         <a
           href="mailto:koshinitiative@gmail.com?subject=School%20Session%20Enquiry&body=Hi%20Kosh%2C%20I%20would%20like%20to%20bring%20a%20session%20to%20my%20school.%20Here%20are%20my%20details%3A"
-          className="inline-flex items-center justify-center px-8 py-3.5 rounded-md bg-kosh-mint text-kosh-dark font-sans font-semibold text-sm transition-opacity hover:opacity-90"
+          className="inline-flex items-center justify-center rounded-md border border-kosh-lime/50 bg-gradient-to-r from-kosh-lime to-kosh-mint px-8 py-3.5 text-sm font-sans font-semibold text-kosh-dark shadow-[0_0_28px_-10px_hsl(var(--kosh-lime)/0.9)] transition-all hover:brightness-110"
         >
           Bring Kosh to your school
         </a>

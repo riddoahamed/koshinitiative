@@ -44,11 +44,14 @@ const Hero = () => {
         animate={{ scale: [1.08, 1.14, 1.08], x: [0, -10, 0] }}
         transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
       />
-      <img
+      <motion.img
         src={archiveHero}
         alt=""
         aria-hidden="true"
         className="absolute inset-0 hidden h-full w-full object-cover object-[76%_24%] opacity-95 md:block"
+        initial={{ scale: 1.03 }}
+        animate={{ scale: [1.03, 1.075, 1.03], x: [0, -18, 0], y: [0, -8, 0] }}
+        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
       />
       <div className="absolute inset-0 hidden bg-[linear-gradient(90deg,hsl(var(--kosh-dark)/0.98)_0%,hsl(var(--kosh-dark)/0.92)_38%,hsl(var(--kosh-dark)/0.64)_64%,hsl(var(--kosh-dark)/0.22)_100%)] md:block" />
       <div className="absolute inset-0 hidden bg-[linear-gradient(180deg,hsl(var(--kosh-dark)/0.38)_0%,transparent_30%,hsl(var(--kosh-dark)/0.5)_100%)] md:block" />
