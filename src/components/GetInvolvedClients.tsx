@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { GraduationCap, Building2, Trophy } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { GlassIcon } from "@/components/ui/glass-icon";
+import { KOSH_CONTACT_EMAIL_URL } from "@/lib/links";
 
 const cards = [
   {
@@ -76,7 +77,7 @@ const GetInvolvedClients = () => {
                 {card.tag}
               </span>
               <a
-                href="#get-involved-form"
+                href={KOSH_CONTACT_EMAIL_URL}
                 className="relative inline-flex items-center text-primary text-sm font-sans font-semibold hover:text-accent transition-colors"
               >
                 {card.cta}

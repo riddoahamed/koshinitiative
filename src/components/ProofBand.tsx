@@ -33,7 +33,9 @@ const ProofBand = () => {
             </div>
           </div>
 
-          <span className="hidden sm:inline text-kosh-mint/70 font-sans font-semibold">x</span>
+          <span className="flex justify-center text-kosh-mint/70 font-sans font-semibold leading-none sm:inline">
+            x
+          </span>
 
           <div className="flex items-center gap-3 rounded-xl border border-kosh-mint/20 bg-kosh-mint/10 px-5 py-4">
             <img src={koshLogo} alt="Kosh" className="h-10 w-10 object-contain" />

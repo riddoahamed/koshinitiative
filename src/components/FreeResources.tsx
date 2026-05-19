@@ -1,6 +1,14 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { KOSH_APP_URL } from "@/lib/links";
 
 const resources = [
+  {
+    emoji: "K",
+    title: "Kosh beta app",
+    desc: "Early access preview. Try the money check, expect rough edges, and help shape the full app.",
+    url: KOSH_APP_URL,
+    featured: true,
+  },
   {
     emoji: "📘",
     title: "Khan Academy — Personal Finance",
@@ -31,12 +39,6 @@ const resources = [
     desc: "A free template to track your monthly spending.",
     url: "https://www.notion.so/templates/personal-finance-tracker",
   },
-  {
-    emoji: "🎥",
-    title: "Two Cents (YouTube)",
-    desc: "Short, honest videos on real financial decisions.",
-    url: "https://www.youtube.com/@TwoCentsPBS",
-  },
 ];
 
 const FreeResources = () => {
@@ -50,8 +52,8 @@ const FreeResources = () => {
         <h2 className="font-serif text-3xl md:text-5xl text-white tracking-tight">
           Start learning. For free.
         </h2>
-        <p className="text-kosh-muted text-sm font-mono mt-3 mb-12">
-          Vetted resources we would recommend to anyone starting out.
+        <p className="text-kosh-muted text-sm font-mono mt-3 mb-12 max-w-2xl">
+          Start with trusted basics. The Kosh app is in beta: useful, early, and still being shaped with real users.
         </p>
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
@@ -61,16 +63,20 @@ const FreeResources = () => {
               href={r.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group rounded-lg border border-white/10 bg-white/5 p-5 md:p-6 backdrop-blur-sm transition-all duration-300 hover:border-kosh-mint/50 hover:shadow-[0_0_20px_rgba(2,195,154,0.1)]"
+              className={`group rounded-lg border p-5 md:p-6 backdrop-blur-sm transition-all duration-300 ${
+                r.featured
+                  ? "border-kosh-lime/40 bg-kosh-lime/[0.08] shadow-[0_0_36px_-24px_hsl(var(--kosh-lime)/0.95)] hover:border-kosh-lime/75 hover:shadow-[0_0_34px_-16px_hsl(var(--kosh-lime)/0.75)]"
+                  : "border-white/10 bg-white/5 hover:border-kosh-lime/45 hover:shadow-[0_0_20px_rgba(184,255,70,0.1)]"
+              }`}
             >
-              <span className="text-2xl md:text-3xl block mb-3">{r.emoji}</span>
-              <h3 className="font-serif text-base md:text-lg text-white mb-1 group-hover:text-kosh-mint transition-colors">
+              <span className={`block mb-3 ${r.featured ? "font-display text-3xl font-extrabold text-kosh-lime" : "text-2xl md:text-3xl"}`}>{r.emoji}</span>
+              <h3 className="font-serif text-base md:text-lg text-white mb-1 group-hover:text-kosh-lime transition-colors">
                 {r.title}
               </h3>
               <p className="text-kosh-muted text-xs md:text-sm font-sans leading-relaxed">
                 {r.desc}
               </p>
-              <span className="inline-block mt-3 text-xs font-mono text-kosh-mint opacity-0 group-hover:opacity-100 transition-opacity">
+              <span className="inline-block mt-3 text-xs font-mono text-kosh-lime opacity-0 group-hover:opacity-100 transition-opacity">
                 Visit →
               </span>
             </a>

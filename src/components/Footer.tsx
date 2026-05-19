@@ -35,7 +35,7 @@ const Footer = () => {
           <div className="flex flex-col justify-center">
             <a
               href="mailto:koshinitiative@gmail.com?subject=Kosh%20Enquiry&body=Hi%20Kosh%2C%0A%0AI%20am%20reaching%20out%20because%3A"
-              className="inline-flex items-center justify-center px-8 py-3.5 rounded-md bg-kosh-mint text-kosh-dark font-sans font-semibold text-sm transition-opacity hover:opacity-90 self-start"
+              className="inline-flex items-center justify-center px-8 py-3.5 rounded-md border border-kosh-lime/50 bg-gradient-to-r from-kosh-lime to-kosh-mint text-kosh-dark font-sans font-semibold text-sm shadow-[0_0_28px_-10px_hsl(var(--kosh-lime)/0.9)] transition-all hover:brightness-110 self-start"
             >
               Send us a message
             </a>
@@ -46,7 +46,7 @@ const Footer = () => {
               koshinitiative@gmail.com
             </a>
             <p className="text-kosh-muted text-sm font-sans mt-4">
-              WhatsApp: <a href="https://wa.me/8801607966000" target="_blank" rel="noopener noreferrer" className="text-kosh-mint hover:underline">+8801607966000</a>
+              WhatsApp: <a href="https://wa.me/8801632253842" target="_blank" rel="noopener noreferrer" className="text-kosh-lime hover:underline">+8801632253842</a>
             </p>
             <p className="text-kosh-muted text-sm font-sans mt-1">
               Facebook: <a href="https://facebook.com/KoshInitiative" target="_blank" rel="noopener noreferrer" className="text-kosh-mint hover:underline">facebook.com/KoshInitiative</a>

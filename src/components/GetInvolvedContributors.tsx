@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Users, Mic, FileText, ArrowRight } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { GlassIcon } from "@/components/ui/glass-icon";
+import { KOSH_CONTACT_EMAIL_URL } from "@/lib/links";
 
 const roles = [
   {
@@ -92,7 +93,7 @@ const GetInvolvedContributors = () => {
               <p className="text-kosh-muted text-sm leading-relaxed flex-1 font-sans relative">{role.body}</p>
 
               <a
-                href="#get-involved-form"
+                href={KOSH_CONTACT_EMAIL_URL}
                 className="mt-6 inline-flex items-center gap-1.5 text-sm font-sans font-semibold bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent hover:opacity-80 transition-opacity"
               >
                 {role.cta}

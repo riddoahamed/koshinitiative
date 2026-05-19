@@ -70,6 +70,8 @@ export default {
       fontFamily: {
         serif: ["Manrope", "Inter", "sans-serif"],
         sans: ["Inter", "sans-serif"],
+        display: ["Bricolage Grotesque", "Manrope", "sans-serif"],
+        signal: ["IBM Plex Mono", "ui-monospace", "monospace"],
       },
       borderRadius: {
         lg: "var(--radius)",

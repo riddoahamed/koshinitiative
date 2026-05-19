@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import koshLogo from "@/assets/kosh-logo.png";
-import { KOSH_APP_URL } from "@/lib/links";
+import { KOSH_APP_URL, KOSH_WAITLIST_EMAIL_URL } from "@/lib/links";
 
 const links = [
   { label: "What We Do", href: "#what-we-do" },
@@ -9,7 +9,7 @@ const links = [
   { label: "For Organizations", href: "#for-organizations" },
   { label: "Tools", href: "#tools" },
   { label: "Resources", href: "#learn" },
-  { label: "Get Involved", href: "#get-involved-form" },
+  { label: "Waitlist", href: KOSH_WAITLIST_EMAIL_URL },
 ];
 
 const Navbar = () => {
@@ -39,7 +39,7 @@ const Navbar = () => {
             rel="noopener noreferrer"
             className="text-xs font-mono text-kosh-mint hover:text-white transition-colors whitespace-nowrap"
           >
-            Open App
+            Beta App
           </a>
         </div>
 
@@ -75,7 +75,7 @@ const Navbar = () => {
             onClick={() => setOpen(false)}
             className="block text-sm font-mono text-kosh-mint hover:text-white transition-colors"
           >
-            Open App
+            Beta App
           </a>
         </div>
       )}

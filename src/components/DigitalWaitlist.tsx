@@ -3,7 +3,7 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import appHome from "@/assets/brand/app-home.jpg";
 import appTools from "@/assets/brand/app-tools.jpg";
 import appExplainers from "@/assets/brand/app-explainers.jpg";
-import { KOSH_APP_URL } from "@/lib/links";
+import { KOSH_APP_URL, KOSH_WAITLIST_EMAIL_URL } from "@/lib/links";
 
 const appHighlights = [
   "Money level check",
@@ -46,16 +46,16 @@ const DigitalWaitlist = () => {
               href={KOSH_APP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-md bg-kosh-mint px-6 py-3.5 text-sm font-sans font-semibold text-[#071210] transition-opacity hover:opacity-90"
+              className="inline-flex items-center justify-center gap-2 rounded-md border border-kosh-lime/50 bg-gradient-to-r from-kosh-lime to-kosh-mint px-6 py-3.5 text-sm font-sans font-semibold text-[#071210] shadow-[0_0_28px_-10px_hsl(var(--kosh-lime)/0.9)] transition-all hover:brightness-110"
             >
               Open app.koshbd.com
               <ExternalLink className="h-4 w-4" aria-hidden="true" />
             </a>
             <a
-              href="#get-involved-form"
-              className="inline-flex items-center justify-center gap-2 rounded-md border border-white/20 px-6 py-3.5 text-sm font-sans font-semibold text-white transition-colors hover:border-kosh-mint/50 hover:text-kosh-mint"
+              href={KOSH_WAITLIST_EMAIL_URL}
+              className="inline-flex items-center justify-center gap-2 rounded-md border border-kosh-lime/30 px-6 py-3.5 text-sm font-sans font-semibold text-kosh-lime transition-colors hover:border-kosh-lime/70 hover:bg-kosh-lime/10"
             >
-              Request prototype access
+              Join full app waitlist
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </a>
           </div>

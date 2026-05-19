@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { ArrowRight, X } from "lucide-react";
+import { ArrowRight, ExternalLink, X } from "lucide-react";
+import { KOSH_APP_URL, KOSH_WAITLIST_EMAIL_URL } from "@/lib/links";
 
 const FloatingPopup = () => {
   const [visible, setVisible] = useState(false);
@@ -33,12 +34,6 @@ const FloatingPopup = () => {
     setDismissed(true);
   };
 
-  const requestInvite = () => {
-    const el = document.getElementById("get-involved-form");
-    if (el) el.scrollIntoView({ behavior: "smooth" });
-    dismiss();
-  };
-
   if (dismissed || !visible) return null;
 
   return (
@@ -61,21 +56,32 @@ const FloatingPopup = () => {
         <div className="flex items-start gap-2">
           <div className="flex-1">
             <p className="text-[10px] font-mono uppercase tracking-wider text-kosh-mint mb-1">
-              Prototype access
+              Beta access
             </p>
             <p className="text-sm leading-snug mb-3">
-              Want an early invite to test what Kosh is building?
+              Try the current Kosh beta, or join the waitlist for the full app.
             </p>
-            <button
-              onClick={requestInvite}
+            <a
+              href={KOSH_APP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={dismiss}
               className="inline-flex items-center gap-1.5 text-[12px] font-semibold px-3 py-1.5 rounded-full hover:opacity-90 transition-opacity"
               style={{ backgroundColor: "#02C39A", color: "#0D2B27" }}
             >
-              Request invite
+              Try beta app
+              <ExternalLink className="h-3 w-3" aria-hidden="true" />
+            </a>
+            <a
+              href={KOSH_WAITLIST_EMAIL_URL}
+              onClick={dismiss}
+              className="ml-2 inline-flex items-center gap-1 text-[12px] font-semibold text-kosh-mint hover:text-white"
+            >
+              Waitlist
               <ArrowRight className="h-3 w-3" aria-hidden="true" />
-            </button>
+            </a>
             <p className="text-white/50 text-[10px] mt-2 leading-snug">
-              We are looking for thoughtful prototype testers, not mass signups.
+              Early access now. Full app waitlist for what comes next.
             </p>
           </div>
         </div>

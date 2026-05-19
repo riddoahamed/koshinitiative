@@ -7,7 +7,6 @@ import ForStudents from "@/components/ForStudents";
 import GetInvolvedClients from "@/components/GetInvolvedClients";
 import GetInvolvedContributors from "@/components/GetInvolvedContributors";
 import ForOrganizations from "@/components/ForOrganizations";
-import GetInvolvedForm from "@/components/GetInvolvedForm";
 import ScrollGlow from "@/components/ScrollGlow";
 import DigitalWaitlist from "@/components/DigitalWaitlist";
 import FreeTools from "@/components/FreeTools";
@@ -34,11 +33,10 @@ const Index = () => {
       <WhyItMatters />
       <Diagnostic />
       <DigitalWaitlist />
-      <ForStudents />
       <GetInvolvedClients />
       <ForOrganizations />
+      <ForStudents />
       <GetInvolvedContributors />
-      <GetInvolvedForm />
       <FreeTools />
       <FreeResources />
       <CommunityCTA />

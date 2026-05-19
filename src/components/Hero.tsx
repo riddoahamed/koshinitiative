@@ -1,10 +1,12 @@
 import { motion } from "framer-motion";
 import { ChevronDown, ExternalLink } from "lucide-react";
 import { useEffect, useState } from "react";
-import platformHero from "@/assets/brand/platform-hero.jpg";
-import { KOSH_APP_URL } from "@/lib/links";
+import archiveHero from "@/assets/brand/kosh-archive.jpg";
+import { KOSH_APP_URL, KOSH_WAITLIST_EMAIL_URL } from "@/lib/links";
 
-const TYPED_TEXT = "Kosh is changing that.";
+const TYPED_TEXT = "From money confusion to confident moves.";
+const SIGNAL_WORDS = ["Bangladesh-first", "No jargon", "No product push"];
+const HEADLINE_LINES = ["Money should", "finally make", "sense."];
 
 const Hero = () => {
   const [typed, setTyped] = useState("");
@@ -33,38 +35,100 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex flex-col justify-center bg-kosh-dark px-6 md:px-12 lg:px-24 py-24 md:py-[110px] overflow-hidden">
-      <img
-        src={platformHero}
+      <motion.img
+        src={archiveHero}
         alt=""
         aria-hidden="true"
-        className="absolute inset-0 h-full w-full object-cover object-[36%_center] opacity-95"
+        className="absolute inset-0 h-full w-full object-cover object-[66%_28%] opacity-90 md:hidden"
+        initial={{ scale: 1.08 }}
+        animate={{ scale: [1.08, 1.14, 1.08], x: [0, -10, 0] }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
       />
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,hsl(var(--kosh-dark)/0.96)_0%,hsl(var(--kosh-dark)/0.91)_36%,hsl(var(--kosh-dark)/0.58)_58%,hsl(var(--kosh-dark)/0.18)_100%)]" />
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,hsl(var(--kosh-dark)/0.38)_0%,transparent_30%,hsl(var(--kosh-dark)/0.5)_100%)]" />
+      <img
+        src={archiveHero}
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 hidden h-full w-full object-cover object-[76%_24%] opacity-95 md:block"
+      />
+      <div className="absolute inset-0 hidden bg-[linear-gradient(90deg,hsl(var(--kosh-dark)/0.98)_0%,hsl(var(--kosh-dark)/0.92)_38%,hsl(var(--kosh-dark)/0.64)_64%,hsl(var(--kosh-dark)/0.22)_100%)] md:block" />
+      <div className="absolute inset-0 hidden bg-[linear-gradient(180deg,hsl(var(--kosh-dark)/0.38)_0%,transparent_30%,hsl(var(--kosh-dark)/0.5)_100%)] md:block" />
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,hsl(var(--kosh-dark)/0.94)_0%,hsl(var(--kosh-dark)/0.78)_52%,hsl(var(--kosh-dark)/0.28)_100%)] md:hidden" />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,hsl(var(--kosh-dark)/0.72)_0%,hsl(var(--kosh-dark)/0.62)_42%,hsl(var(--kosh-dark)/0.28)_68%,hsl(var(--kosh-dark)/0.95)_100%)] md:hidden" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_42%,hsl(var(--accent)/0.18),transparent_30%)]" />
+      <motion.div
+        aria-hidden="true"
+        className="absolute inset-y-0 left-[32%] z-[1] hidden w-24 -skew-x-12 bg-gradient-to-r from-transparent via-kosh-mint/14 to-transparent blur-sm md:block"
+        animate={{ x: ["-28vw", "62vw"], opacity: [0, 0.85, 0] }}
+        transition={{ duration: 5.5, repeat: Infinity, repeatDelay: 1.2, ease: "easeInOut" }}
+      />
+      <motion.div
+        aria-hidden="true"
+        className="absolute left-6 top-20 z-[1] h-px w-[calc(100%-3rem)] origin-left bg-gradient-to-r from-transparent via-kosh-mint/60 to-transparent md:left-12 md:w-[calc(100%-6rem)] lg:left-24 lg:w-[calc(100%-12rem)]"
+        animate={{ scaleX: [0.15, 1, 0.15], opacity: [0.12, 0.55, 0.12] }}
+        transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut" }}
+      />
 
       <div className="relative z-10 max-w-[560px]">
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55 }}
-          className="mb-5 inline-flex max-w-full items-center rounded-full border border-kosh-mint/25 bg-kosh-mint/10 px-3 py-1.5 text-[11px] font-sans font-semibold uppercase tracking-[0.16em] text-kosh-mint"
+          className="mb-5 inline-flex max-w-full items-center rounded-full border border-kosh-mint/25 bg-kosh-mint/10 px-3 py-1.5 font-signal text-[11px] font-semibold uppercase tracking-[0.16em] text-kosh-mint"
         >
           Learn. Save. Invest. Grow.
         </motion.p>
 
         <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="max-w-[540px] font-sans text-4xl font-extrabold leading-[1.03] text-white md:text-5xl lg:text-[48px] xl:text-[56px]"
+          initial="hidden"
+          animate="show"
+          className="max-w-[590px] font-display text-[46px] font-extrabold leading-[0.92] text-white md:text-[64px] lg:text-[68px] xl:text-[76px]"
         >
-          Money should make sense for{" "}
-          <span className="text-kosh-mint">everyday Bangladeshis.</span>
+          {HEADLINE_LINES.map((line, index) => (
+            <motion.span
+              key={line}
+          className={index === 2 ? "block text-kosh-lime drop-shadow-[0_0_26px_hsl(var(--kosh-lime)/0.34)]" : "block"}
+              variants={{
+                hidden: { y: 42, opacity: 0, filter: "blur(8px)" },
+                show: {
+                  y: 0,
+                  opacity: 1,
+                  filter: "blur(0px)",
+                  transition: { duration: 0.72, delay: index * 0.11, ease: [0.16, 1, 0.3, 1] },
+                },
+              }}
+            >
+              {line}
+            </motion.span>
+          ))}
         </motion.h1>
 
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, delay: 0.18 }}
+          className="mt-5 hidden max-w-full flex-wrap items-center gap-2 sm:flex"
+          aria-label="Kosh learning path: learn, save, invest, grow"
+        >
+          {SIGNAL_WORDS.map((word, index) => (
+            <motion.span
+              key={word}
+              className="relative overflow-hidden rounded-full border border-white/12 bg-white/[0.06] px-3 py-1.5 font-signal text-[10px] font-semibold uppercase tracking-[0.12em] text-white/78 md:text-[11px]"
+              animate={{ borderColor: ["rgba(255,255,255,0.12)", "rgba(184,255,70,0.58)", "rgba(255,255,255,0.12)"] }}
+              transition={{ duration: 2.4, repeat: Infinity, delay: index * 0.35 }}
+            >
+              <motion.span
+                aria-hidden="true"
+                className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-transparent via-kosh-lime/20 to-transparent"
+                animate={{ x: ["-120%", "240%"] }}
+                transition={{ duration: 2.4, repeat: Infinity, delay: index * 0.35, ease: "easeInOut" }}
+              />
+              <span className="relative">{word}</span>
+            </motion.span>
+          ))}
+        </motion.div>
+
         <p
-          className="mt-5 min-h-[1.3em] font-sans text-xl font-extrabold text-kosh-mint md:text-2xl"
+          className="mt-5 hidden min-h-[1.3em] font-display text-xl font-semibold text-kosh-lime sm:block md:text-2xl"
           aria-label={TYPED_TEXT}
         >
           <span>{typed}</span>
@@ -77,9 +141,9 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3 }}
-          className="mt-3 max-w-xl font-sans text-base leading-relaxed text-white/82 md:text-[17px]"
+          className="mt-3 max-w-xl font-sans text-[14px] leading-relaxed text-white/84 sm:text-base md:text-[17px]"
         >
-          Kosh combines workshops, community programs, and a gamified app to help people understand money, build habits, and make better financial decisions without hidden agendas.
+          Kosh combines workshops, community programs, and a gamified app so Bangladeshis can understand how money works, because most of us were never taught.
         </motion.p>
 
         <motion.div
@@ -92,18 +156,19 @@ const Hero = () => {
             href={KOSH_APP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center px-8 py-3.5 rounded-md bg-kosh-mint/15 backdrop-blur-sm border border-kosh-mint/40 text-kosh-mint font-sans font-semibold text-base transition-all hover:bg-kosh-mint/25 hover:border-kosh-mint/70 shadow-[0_0_24px_-8px_hsl(var(--accent)/0.6)]"
+            className="inline-flex items-center justify-center px-8 py-3.5 rounded-md border border-kosh-lime/50 bg-gradient-to-r from-kosh-lime to-kosh-mint text-[#071210] font-sans font-semibold text-base transition-all hover:brightness-110 shadow-[0_0_30px_-10px_hsl(var(--kosh-lime)/0.8)]"
           >
-            Rate your money readiness
+            Try the beta app
             <ExternalLink className="ml-2 h-4 w-4" aria-hidden="true" />
           </a>
           <a
-            href="#get-involved-clients"
+            href={KOSH_WAITLIST_EMAIL_URL}
             className="inline-flex items-center justify-center px-8 py-3.5 rounded-md border border-white text-white font-sans font-medium text-base transition-opacity hover:opacity-80"
           >
-            Get Involved
+            Join full app waitlist
           </a>
         </motion.div>
+
       </div>
 
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10">
