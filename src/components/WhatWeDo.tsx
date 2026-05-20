@@ -15,10 +15,10 @@ const cards = [
   {
     icon: Building2,
     variant: "mixed" as const,
-    title: "Corporate Financial Wellness",
+    title: "Financial Education for Businesses",
     description:
-      "Tailored workshops for young professionals and first-time investors.",
-    detail: "Salary, emergency funds, investment basics.",
+      "Corporate financial wellness workshops for teams, young professionals, and first-time investors.",
+    detail: "Salary, emergency funds, personal finance basics.",
   },
   {
     icon: Heart,
@@ -31,9 +31,9 @@ const cards = [
   {
     icon: Gamepad2,
     variant: "primary" as const,
-    title: "Gamified Learning with AI",
+    title: "Kosh App & Gamified Learning",
     description:
-      "AI-assisted personal finance you actually want to play.",
+      "A financial literacy app for personal finance education that people actually want to use.",
     detail: "Built for how young Bangladeshis learn online.",
   },
 ];

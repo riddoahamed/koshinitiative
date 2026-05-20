@@ -146,7 +146,7 @@ const Hero = () => {
           transition={{ duration: 0.7, delay: 0.3 }}
           className="mt-3 max-w-xl font-sans text-[14px] leading-relaxed text-white/84 sm:text-base md:text-[17px]"
         >
-          Kosh combines workshops, community programs, and a gamified app so Bangladeshis can understand how money works, because most of us were never taught.
+          Kosh is a Bangladesh financial literacy initiative combining workshops, community programs, and a gamified app so Bangladeshis can understand how money works, because most of us were never taught.
         </motion.p>
 
         <motion.div

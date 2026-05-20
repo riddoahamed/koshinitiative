@@ -16,6 +16,7 @@ const ToolPlaceholder = ({ title, description }: ToolPlaceholderProps) => {
       title,
       description,
       path: window.location.pathname,
+      robots: "noindex, follow",
     });
   }, [title, description]);
 

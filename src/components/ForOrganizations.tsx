@@ -211,7 +211,8 @@ const ForOrganizations = () => {
             </h2>
             <p className="text-kosh-muted text-base md:text-lg leading-relaxed max-w-3xl font-sans">
               Run workshops, launch a campus pilot, or embed Kosh's education engine inside your
-              digital product. Your audience gets practical financial literacy built for Bangladesh.
+              digital product. Your audience gets practical financial education for Bangladesh,
+              from personal finance basics to workplace financial wellness.
             </p>
           </div>
 
