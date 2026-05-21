@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import WhatWeDo from "@/components/WhatWeDo";
+import FounderSection from "@/components/FounderSection";
 import ProofBand from "@/components/ProofBand";
 import WhyItMatters from "@/components/WhyItMatters";
 import ForStudents from "@/components/ForStudents";
@@ -21,10 +22,9 @@ import { useEffect } from "react";
 const Index = () => {
   useEffect(() => {
     resetSeo();
-    if (!window.location.hash) {
-      window.history.scrollRestoration = "manual";
-      requestAnimationFrame(() => window.scrollTo(0, 0));
-    }
+
+    window.history.scrollRestoration = "manual";
+    requestAnimationFrame(() => window.scrollTo(0, 0));
   }, []);
 
   return (
@@ -40,6 +40,7 @@ const Index = () => {
       <GetInvolvedClients />
       <ForOrganizations />
       <ForStudents />
+      <FounderSection />
       <GetInvolvedContributors />
       <FreeTools />
       <FreeResources />
