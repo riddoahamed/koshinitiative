@@ -100,6 +100,25 @@ const Footer = () => {
         <p className="text-kosh-muted text-xs font-sans">
           © 2026 Kosh Financial Literacy Initiative · koshinitiative@gmail.com · This is financial education, not financial advice.
         </p>
+        <p className="mt-2 text-xs font-sans">
+          <a
+            href="https://app.koshbd.com/privacy"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-kosh-mint hover:text-kosh-lime underline underline-offset-2 transition-colors"
+          >
+            Privacy Policy
+          </a>
+          <span className="text-kosh-muted/40"> · </span>
+          <a
+            href="https://app.koshbd.com/terms"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-kosh-mint hover:text-kosh-lime underline underline-offset-2 transition-colors"
+          >
+            Terms of Service
+          </a>
+        </p>
       </div>
     </footer>
   );
