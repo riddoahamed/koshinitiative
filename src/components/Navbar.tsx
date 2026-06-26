@@ -34,6 +34,14 @@ const Navbar = () => {
             </a>
           ))}
           <a
+            href="https://app.koshbd.com/privacy"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs font-mono text-kosh-muted hover:text-kosh-mint transition-colors whitespace-nowrap"
+          >
+            Privacy
+          </a>
+          <a
             href={KOSH_APP_URL}
             target="_blank"
             rel="noopener noreferrer"
@@ -68,6 +76,15 @@ const Navbar = () => {
               {l.label}
             </a>
           ))}
+          <a
+            href="https://app.koshbd.com/privacy"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setOpen(false)}
+            className="block text-sm font-mono text-kosh-muted hover:text-kosh-mint transition-colors"
+          >
+            Privacy
+          </a>
           <a
             href={KOSH_APP_URL}
             target="_blank"
