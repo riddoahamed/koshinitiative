@@ -161,7 +161,7 @@ const Hero = () => {
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center px-8 py-3.5 rounded-md border border-kosh-lime/50 bg-gradient-to-r from-kosh-lime to-kosh-mint text-[#071210] font-sans font-semibold text-base transition-all hover:brightness-110 shadow-[0_0_30px_-10px_hsl(var(--kosh-lime)/0.8)]"
           >
-            Try the beta app
+            Open Kosh: Learn to Invest
             <ExternalLink className="ml-2 h-4 w-4" aria-hidden="true" />
           </a>
           <a
