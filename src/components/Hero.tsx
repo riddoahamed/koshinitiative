@@ -146,7 +146,7 @@ const Hero = () => {
           transition={{ duration: 0.7, delay: 0.3 }}
           className="mt-3 max-w-xl font-sans text-[14px] leading-relaxed text-white/84 sm:text-base md:text-[17px]"
         >
-          Kosh is a Bangladesh financial literacy initiative combining workshops, community programs, and a gamified app so Bangladeshis can understand how money works, because most of us were never taught.
+<strong className="font-semibold text-white">Kosh is a financial-literacy app for young Bangladeshis</strong> — learn to budget, save, spot scams, and start investing through bite-sized lessons and money games. Signing in (including with Google) is optional and is used only to save your learning progress across devices. Kosh is the digital home of the Kosh Financial Literacy Initiative (workshops and community programs).
         </motion.p>
 
         <motion.div
