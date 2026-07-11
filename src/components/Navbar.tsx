@@ -5,6 +5,7 @@ import { KOSH_APP_URL, KOSH_WAITLIST_EMAIL_URL } from "@/lib/links";
 
 const links = [
   { label: "What We Do", href: "#what-we-do" },
+  { label: "Why It Matters", href: "#why-it-matters" },
   { label: "Money Check", href: "#diagnostic" },
   { label: "For Organizations", href: "#for-organizations" },
   { label: "Tools", href: "#tools" },
