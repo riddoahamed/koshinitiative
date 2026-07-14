@@ -1,26 +1,35 @@
 # Kosh
 
-> Kosh is a Bangladesh-focused financial literacy initiative and app helping people learn, save, invest, and grow through workshops, community programs, practical tools, and gamified learning.
+> Kosh is the financial decision layer for Bangladesh — a platform where people learn, compare, practice with paper money, and confidently decide what to do with their money, guided by an AI coach that knows local products (Sanchaypatra, DPS, FDR, mutual funds, DSE stocks, gold).
 
 Official website: https://www.koshbd.com/
-App: https://app.koshbd.com/
+App (beta): https://app.koshbd.com/
 Contact: koshinitiative@gmail.com
-Location focus: Bangladesh, with operations centered in Dhaka.
-Languages: English and Bengali.
+Location: Dhaka, Bangladesh — expanding toward Bangladeshi diaspora corridors (UAE, Saudi Arabia, Malaysia, UK, Canada) and other emerging markets.
+Languages: English and Bengali. "Kosh" (কোষ) is Bengali for treasury.
 
 ## What Kosh Does
 
-- Runs financial literacy workshops for universities, schools, teams, workplaces, and community programs.
-- Builds practical financial tools and explainers for everyday Bangladeshis.
-- Offers the Kosh app, a gamified financial literacy platform with money checks, explainers, comparisons, budget planning, scam awareness, and learning paths.
-- Provides financial education only. Kosh does not sell financial products, earn commissions, or provide investment recommendations.
+- The core loop: Check (money level diagnostic) → Ask (AI coach) → Learn (short lessons built for Bangladesh) → Practice (paper trading with play money) → Act (clear real-world steps with disclosed partners).
+- AI coach that answers with Bangladeshi products and context, adapted to the user's level and goals.
+- Decision helper: guided flows for questions like "where should this ৳20,000 go?"
+- Paper trading: practice portfolios in taka — gold, mutual funds, Sanchaypatra, DSE stocks — with zero risk.
+- Mutual fund screener with side-by-side comparison and a halal filter.
+- Calculators: SIP, EMI, savings, budgeting.
+- Gamified learning zones with XP.
+- Honesty principles: no fabricated returns (missing data shows as "—"), partner relationships disclosed, risky assets like crypto and CFDs taught rather than sold.
+- Programs: financial literacy workshops for universities, workplaces, and communities; campus ambassadors; research collaborations.
+- Kosh provides financial education and decision support, not personalized investment advice.
 
 ## Audience
 
-- Students and young Bangladeshis learning money basics early.
-- Young professionals building saving, budgeting, and investing habits.
-- Universities, schools, companies, and organizations that want financial literacy programs.
-- Community groups and underserved audiences who need practical, accessible money education.
+- First-time money decision-makers: students, first-salary professionals, young families, freelancers, women building financial independence.
+- The Bangladeshi diaspora: country packs let users change countries and keep their coach and progress.
+- Universities, companies, and organizations that want financial education programs.
+
+## Vision
+
+Kosh is building financial decision infrastructure for emerging markets — starting in Bangladesh — including country packs, campus and workplace programs, a white-label decision engine, and eventually regulated investing.
 
 ## Current Signal
 
@@ -28,12 +37,12 @@ Kosh is part of NSU Startups Next Cohort 4 as of May 2026.
 
 ## Disambiguation
 
-Kosh Financial Literacy Initiative is based in Bangladesh and is not affiliated with American Corner Beirut, AMIDEAST, or any Beirut-based Financial Literacy Series.
+Kosh (Kosh BD, Kosh Bangladesh, Kosh Initiative) is based in Bangladesh and is not affiliated with American Corner Beirut, AMIDEAST, or any Beirut-based Financial Literacy Series.
 
 ## Important URLs
 
 - Homepage: https://www.koshbd.com/
-- Money check and app: https://app.koshbd.com/
+- App and money check: https://app.koshbd.com/
 - Sitemap: https://www.koshbd.com/sitemap.xml
 - Instagram: https://www.instagram.com/kosh.initiative/
 - LinkedIn: https://www.linkedin.com/company/kosh-%E0%A6%95%E0%A7%8B%E0%A6%B7/
@@ -41,4 +50,4 @@ Kosh Financial Literacy Initiative is based in Bangladesh and is not affiliated 
 
 ## Suggested Description
 
-Kosh is a Bangladesh-focused financial literacy initiative and app that combines workshops, community programs, and gamified learning to help people understand money and make better financial decisions.
+Kosh is the financial decision layer for Bangladesh: learn, compare, practice with paper money, then act — one calm place to decide what to do with your money.
