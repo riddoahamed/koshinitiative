@@ -92,7 +92,7 @@ const HeroMachine = () => {
             invalidateOnRefresh: true,
             onUpdate: (self) => {
               const p = self.progress;
-              if (p > 0.02 && phaseRef.current === "off") powerOn(true);
+              if (p > 0.06 && phaseRef.current === "off") powerOn(true);
               if (p > 0.38 && (phaseRef.current === "chest" || phaseRef.current === "static")) {
                 setPhase("ui");
               } else if (p <= 0.34 && phaseRef.current === "ui") {
@@ -156,7 +156,7 @@ const HeroMachine = () => {
             <nav className="crt__ui" aria-label="Kosh menu">
               <div className="crt__top">
                 <a className="crt__home" href="#vision">
-                  <img src="/img/kosh-logo.png" alt="" />
+                  <img src="/img/mascot.png" alt="" className="px" />
                   <span>Vision</span>
                 </a>
                 <div className="crt__nav">
@@ -187,21 +187,24 @@ const HeroMachine = () => {
             className="hero__power"
             aria-label="Power on the Kosh machine"
             onClick={() => powerOn()}
-          >
-            <span className="hero__tip">power on</span>
+          />
+
+          {/* annotation-style callout pointing at the K power badge */}
+          <button className="hero__callout" onClick={() => powerOn()}>
+            <span className="hero__callout-text">
+              power on<em>explore kosh</em>
+            </span>
+            <span className="hero__callout-line" />
+            <span className="hero__callout-tip">▸</span>
           </button>
-          <div className="hero__led" />
-          <div className="hero__flicker" />
         </div>
 
         <div className="hero__vign" />
 
-        <p className="hero__hint pre" aria-hidden="true">
-          the machine is asleep — press <b>[k]</b> to wake it
-        </p>
-        <p className="hero__hint post" aria-hidden="true">
-          scroll
-        </p>
+        <div className="hero__scrollcue" aria-hidden="true">
+          <span>scroll</span>
+          <i />
+        </div>
 
         <button className="hero__skip" onClick={() => { powerOn(true); explore(); }}>
           skip intro

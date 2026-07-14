@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { ArrowUpRight, GraduationCap, Search, Gamepad2 } from "lucide-react";
 import { KOSH_APP_URL, KOSH_WAITLIST_EMAIL_URL } from "@/lib/links";
+import ShaderBg from "./ShaderBg";
+import Starfield from "./Starfield";
 
 const MAIL = "koshinitiative@gmail.com";
 const mailto = (subject: string) =>
@@ -15,26 +17,26 @@ export const Orgs = () => (
         <h2 className="h-display" data-reveal style={{ ["--d" as string]: "80ms" }}>
           The app is free. This is how we sustain it.
         </h2>
-        <div className="orows">
-          <div className="orow" data-reveal>
+        <div className="orows" data-stagger="130">
+          <div className="orow" data-reveal="left">
             <div className="orow__icon"><GraduationCap size={20} strokeWidth={1.9} /></div>
             <div>
               <h3>Financial literacy, as a product</h3>
               <p>Programs for universities, employers, and NGOs — designed, delivered, and measured.</p>
             </div>
           </div>
-          <div className="orow" data-reveal style={{ ["--d" as string]: "100ms" }}>
+          <div className="orow" data-reveal="left">
             <div className="orow__icon"><Search size={20} strokeWidth={1.9} /></div>
             <div>
               <h3>Research &amp; engagement</h3>
               <p>User research, acquisition, and engagement consulting for banks and fintechs.</p>
             </div>
           </div>
-          <div className="orow" data-reveal style={{ ["--d" as string]: "200ms" }}>
+          <div className="orow" data-reveal="left">
             <div className="orow__icon"><Gamepad2 size={20} strokeWidth={1.9} /></div>
             <div>
               <h3>Games that teach</h3>
-              <p>Custom games for investing, personal finance, and scam awareness — fun, never boring.</p>
+              <p>Playable simulations of investing, money habits, and scam defense — gamified user experiences people actually finish, built for classrooms, campaigns, and fintech products.</p>
             </div>
           </div>
         </div>
@@ -49,8 +51,8 @@ export const Orgs = () => (
 /* ---------------- VISION ---------------- */
 export const Vision = () => (
   <section className="sec vision" id="vision">
-    <div className="stars" aria-hidden="true" />
-    <div className="blob m" style={{ width: 420, height: 420, left: "-8%", bottom: "10%" }} />
+    <ShaderBg intensity={0.7} />
+    <div className="veil" aria-hidden="true" />
     <div className="wrap">
       <p className="eyebrow" data-reveal>the long game</p>
       <h2 className="h-display" data-reveal style={{ ["--d" as string]: "80ms" }}>
@@ -146,14 +148,15 @@ const TRACKS = [
 
 export const Join = () => (
   <section className="sec join" id="join">
+    <Starfield density={0.8} />
     <div className="wrap">
       <p className="eyebrow" data-reveal>join us</p>
       <h2 className="h-display" data-reveal style={{ ["--d" as string]: "80ms" }}>
         Build the treasury with us.
       </h2>
-      <div className="join__rows">
-        {TRACKS.map((r, i) => (
-          <a className="jrow" key={r.t} href={mailto(r.s)} data-reveal style={{ ["--d" as string]: `${i * 60}ms` }}>
+      <div className="join__rows" data-stagger="90">
+        {TRACKS.map((r) => (
+          <a className="jrow" key={r.t} href={mailto(r.s)} data-reveal>
             <h3>{r.t}</h3>
             <p>{r.p}</p>
             <span className="go"><ArrowUpRight size={18} /></span>

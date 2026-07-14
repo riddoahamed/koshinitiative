@@ -2,13 +2,29 @@
    Deliberately not IntersectionObserver: IO rootMargin is ignored in
    cross-origin embeds and never fires for elements jumped past by
    instant scrolls. A cheap rAF-throttled position check is deterministic
-   everywhere and stops listening once everything has revealed. */
+   everywhere and stops listening once everything has revealed.
+
+   Variants: data-reveal="" (up, default) | "left" | "right" | "scale" | "fade"
+   Cascades: put data-stagger (optionally ="120") on a parent — its direct
+   [data-reveal] children get incremental --d delays automatically. */
 export function initFx(): () => void {
   /* ?still=1 renders everything final-state with no motion (QA + captures) */
   const still = new URLSearchParams(window.location.search).has("still");
   if (still) document.documentElement.classList.add("kosh-still");
   const reduced =
     still || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* auto-stagger groups */
+  document.querySelectorAll<HTMLElement>("[data-stagger]").forEach((group) => {
+    const step = parseInt(group.dataset.stagger || "", 10) || 90;
+    group
+      .querySelectorAll<HTMLElement>(":scope > [data-reveal], :scope > * > [data-reveal]")
+      .forEach((el, i) => {
+        if (!el.style.getPropertyValue("--d")) {
+          el.style.setProperty("--d", `${i * step}ms`);
+        }
+      });
+  });
 
   const pending = new Set<HTMLElement>(
     Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"))
@@ -24,7 +40,7 @@ export function initFx(): () => void {
       return;
     }
     const t0 = performance.now();
-    const dur = 1500;
+    const dur = 1600;
     const tick = (t: number) => {
       const p = Math.min(1, (t - t0) / dur);
       el.textContent = String(Math.round(target * (1 - Math.pow(1 - p, 3))));
@@ -49,7 +65,7 @@ export function initFx(): () => void {
       lastY = window.scrollY;
       const vh = window.innerHeight;
       pending.forEach((el) => {
-        if (el.getBoundingClientRect().top < vh * 0.94) {
+        if (el.getBoundingClientRect().top < vh * 0.92) {
           el.classList.add("in");
           pending.delete(el);
         }

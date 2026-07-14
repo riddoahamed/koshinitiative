@@ -1,4 +1,7 @@
 import { useEffect } from "react";
+import Lenis from "lenis";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HeroMachine from "@/v2/HeroMachine";
 import { About, Problem, Numbers, Product, Pillars, Who } from "@/v2/Sections";
 import { Orgs, Vision, Founder, Join, FootV2, NavV2 } from "@/v2/Closing";
@@ -27,6 +30,29 @@ const Index = () => {
     }
 
     const cleanup = initFx();
+
+    /* premium inertia scroll — one flick glides sections in slowly */
+    let lenis: Lenis | null = null;
+    const reduced =
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      new URLSearchParams(window.location.search).has("still");
+    if (!reduced) {
+      lenis = new Lenis({
+        lerp: 0.085,
+        wheelMultiplier: 0.9,
+        smoothWheel: true,
+      });
+      lenis.on("scroll", ScrollTrigger.update);
+      const raf = (time: number) => lenis?.raf(time * 1000);
+      gsap.ticker.add(raf);
+      gsap.ticker.lagSmoothing(0);
+      return () => {
+        gsap.ticker.remove(raf);
+        lenis?.destroy();
+        cleanup();
+      };
+    }
+
     return cleanup;
   }, []);
 

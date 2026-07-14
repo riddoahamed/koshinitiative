@@ -1,31 +1,30 @@
 import { BookOpen, Compass, PiggyBank, TrendingUp } from "lucide-react";
 import { KOSH_APP_URL, KOSH_WAITLIST_EMAIL_URL } from "@/lib/links";
+import ShaderBg from "./ShaderBg";
+import Starfield from "./Starfield";
 
-/* ---------------- ABOUT — one sentence, ambient video ---------------- */
+/* ---------------- ABOUT — one sentence over the living shader ---------------- */
 export const About = () => (
   <section className="sec about" id="about">
-    <div className="about__video" aria-hidden="true">
-      <video src="/media/ambient.mp4" autoPlay muted loop playsInline />
-    </div>
-    <div className="blob p" style={{ width: 420, height: 420, left: "-8%", top: "10%" }} />
-    <div className="blob m" style={{ width: 380, height: 380, right: "-6%", bottom: "0%", animationDelay: "-8s" }} />
-    <div className="wrap">
+    <ShaderBg />
+    <div className="veil" aria-hidden="true" />
+    <div className="wrap" data-stagger="110">
       <p className="eyebrow" data-reveal>what kosh is</p>
-      <h2 className="h-display" data-reveal style={{ ["--d" as string]: "80ms" }}>
+      <h2 className="h-display" data-reveal>
         Better <span className="grad-text">decisions</span>, not more information.
       </h2>
-      <p className="h-sub" data-reveal style={{ ["--d" as string]: "160ms" }}>
+      <p className="h-sub" data-reveal>
         Kosh is an AI-native financial decision and investment discovery
         platform for emerging markets — starting with Bangladesh.
       </p>
-      <div className="about__ctas" data-reveal style={{ ["--d" as string]: "240ms" }}>
+      <div className="about__ctas" data-reveal="scale">
         <a className="btn btn-primary" href={KOSH_APP_URL}>Try the beta</a>
         <a className="btn btn-glass" href={KOSH_WAITLIST_EMAIL_URL}>Join the waitlist</a>
       </div>
-      <div className="about__chips" data-reveal style={{ ["--d" as string]: "320ms" }}>
+      <div className="about__chips" data-reveal="fade">
         <span>Free for people</span>
         <span>AI-native</span>
-        <span>Built in Dhaka</span>
+        <span>Human-supervised</span>
       </div>
     </div>
   </section>
@@ -34,7 +33,7 @@ export const About = () => (
 /* ---------------- PROBLEM — two broken things ---------------- */
 export const Problem = () => (
   <section className="sec problem" id="problem">
-    <div className="stars" aria-hidden="true" />
+    <Starfield density={1.6} />
     <div className="wrap">
       <p className="eyebrow" data-reveal>the problem</p>
       <h2 className="h-display" data-reveal style={{ ["--d" as string]: "80ms" }}>
@@ -46,7 +45,7 @@ export const Problem = () => (
       </p>
 
       <div className="problem__cards">
-        <div className="pcard glass a" data-reveal>
+        <div className="pcard glass a" data-reveal="left">
           <span className="pcard__tag">discovery is broken</span>
           <h3>What&rsquo;s actually worth your money?</h3>
           <p>
@@ -55,7 +54,7 @@ export const Problem = () => (
             opportunity is a full-time job.</strong>
           </p>
         </div>
-        <div className="pcard glass b" data-reveal style={{ ["--d" as string]: "120ms" }}>
+        <div className="pcard glass b" data-reveal="right" style={{ ["--d" as string]: "140ms" }}>
           <span className="pcard__tag">trust is broken</span>
           <h3>Decades of scams taught one lesson: stay out.</h3>
           <p>
@@ -66,7 +65,7 @@ export const Problem = () => (
         </div>
       </div>
 
-      <p className="problem__punch" data-reveal>
+      <p className="problem__punch" data-reveal="scale">
         So money sits still — <span className="grad-text">while prices don&rsquo;t.</span>
       </p>
     </div>
@@ -106,7 +105,7 @@ export const Numbers = () => (
       </h2>
       <div className="numbers__grid">
         {STATS.map((s, i) => (
-          <div className="stat glass" key={s.src} data-reveal style={{ ["--d" as string]: `${i * 90}ms` }}>
+          <div className="stat glass" key={s.src} data-reveal="scale" style={{ ["--d" as string]: `${i * 110}ms` }}>
             <div className="stat__num grad-text">{s.num}</div>
             <p className="stat__lede">{s.lede}</p>
             <p className="stat__src">{s.src}</p>
@@ -168,24 +167,37 @@ const FeedCard = ({ c }: { c: (typeof FEED)[number] }) => (
   </article>
 );
 
+const feedTilt = (e: { currentTarget: HTMLDivElement; clientX: number; clientY: number }) => {
+  const el = e.currentTarget;
+  const r = el.getBoundingClientRect();
+  const x = (e.clientX - r.left) / r.width - 0.5;
+  const y = (e.clientY - r.top) / r.height - 0.5;
+  el.style.setProperty("--ry", `${x * 7}deg`);
+  el.style.setProperty("--rx", `${-y * 7}deg`);
+};
+const feedTiltReset = (e: { currentTarget: HTMLDivElement }) => {
+  e.currentTarget.style.setProperty("--rx", "0deg");
+  e.currentTarget.style.setProperty("--ry", "0deg");
+};
+
 export const Product = () => (
   <section className="sec product" id="product">
     <div className="blob p" style={{ width: 460, height: 460, right: "-10%", top: "6%" }} />
     <div className="wrap">
       <p className="eyebrow" data-reveal>how kosh works</p>
       <h2 className="h-display" data-reveal style={{ ["--d" as string]: "80ms" }}>
-        Agents find it. Humans check it. You decide.
+        Agents find it. Humans check it. You get to decide.
       </h2>
 
       <div className="product__grid">
-        <div>
+        <div data-stagger="120">
           {[
             ["01", "Agents scan the market", "AI agents read funds, gold, Sanchaypatra, and DSE filings — around the clock."],
             ["02", "Humans supervise", "Real people verify every idea before it ever reaches your feed."],
             ["03", "You get a digest, not a dump", "Opportunities arrive like content — short, visual, sourced, with the why attached."],
-            ["04", "You decide", "Learn it, simulate it, act when you're ready. Nothing is ever pushed."],
-          ].map(([n, h, p], i) => (
-            <div className="pstep" key={n} data-reveal style={{ ["--d" as string]: `${i * 80}ms` }}>
+            ["04", "You get to decide", "Learn it, simulate it, act when you're ready. Nothing is ever pushed."],
+          ].map(([n, h, p]) => (
+            <div className="pstep" key={n} data-reveal="left">
               <span className="pstep__n">{n}</span>
               <div>
                 <h3>{h}</h3>
@@ -193,12 +205,18 @@ export const Product = () => (
               </div>
             </div>
           ))}
-          <p className="product__note" data-reveal>
-            <span className="dot" /> free for people · partners disclosed · nothing sold to you
+          <p className="product__note" data-reveal="fade">
+            <span className="dot" /> free for people · every partner disclosed
           </p>
         </div>
 
-        <div className="feed" data-reveal aria-label="Example of the Kosh discovery feed">
+        <div
+          className="feed"
+          data-reveal="right"
+          aria-label="Example of the Kosh discovery feed"
+          onMouseMove={feedTilt}
+          onMouseLeave={feedTiltReset}
+        >
           <div className="feed__win">
             <div className="feed__track">
               {FEED.map((c) => <FeedCard key={c.h} c={c} />)}
@@ -226,9 +244,9 @@ export const Pillars = () => (
       <h2 className="h-display" data-reveal style={{ ["--d" as string]: "80ms" }}>
         Learn. Decide. Save. Invest.
       </h2>
-      <div className="pillars__grid">
-        {PILLARS.map((c, i) => (
-          <div className="pillar glass" key={c.t} data-reveal style={{ ["--d" as string]: `${i * 80}ms` }}>
+      <div className="pillars__grid" data-stagger="110">
+        {PILLARS.map((c) => (
+          <div className="pillar glass" key={c.t} data-reveal="scale">
             <div className="pillar__icon"><c.icon size={21} strokeWidth={1.9} /></div>
             <h3>{c.t}</h3>
             <p>{c.p}</p>
