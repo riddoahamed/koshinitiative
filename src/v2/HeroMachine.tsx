@@ -5,14 +5,18 @@ import { KOSH_APP_URL, KOSH_WAITLIST_EMAIL_URL } from "@/lib/links";
 
 gsap.registerPlugin(ScrollTrigger);
 
-/* Artwork geometry (fractions of the 1672x941 plates) */
+/* Artwork geometry (fractions of the 1672x941 plate) */
 const PLATE_W = 1672;
 const PLATE_H = 941;
 const MONITOR_CX = 0.665;
 const MONITOR_CY = 0.46;
+/* black-glass quad, as fractions of the stage (matches .crt in CSS) */
+const GLASS_W = 0.246;
+const GLASS_H = 0.376;
 
-/* off → (power) static → chest (the treasury menu art) → ui (text links on the black glass) */
-type Phase = "off" | "static" | "chest" | "ui";
+/* off → (click) boot flash → ui (menu written on the black screen)
+   → dive (scroll zooms into the black screen; it takes over the viewport) */
+type Phase = "off" | "boot" | "ui" | "dive";
 
 const HeroMachine = () => {
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -45,7 +49,8 @@ const HeroMachine = () => {
       stage.style.height = `${sh}px`;
       stage.style.left = `${left}px`;
       stage.style.top = `${top}px`;
-      stage.style.transformOrigin = `${MONITOR_CX * 100}% ${MONITOR_CY * 100}%`;
+      /* zoom origin = the black-glass centre (so the dive goes *into* the screen) */
+      stage.style.transformOrigin = `${(GLASS_W / 2 + 0.5428) * 100}% ${(GLASS_H / 2 + 0.269) * 100}%`;
     };
     layout();
     const ro = new ResizeObserver(layout);
@@ -53,26 +58,26 @@ const HeroMachine = () => {
     return () => ro.disconnect();
   }, []);
 
-  /* deep-linkable screen state (?crt=chest|ui) — also used for visual QA */
+  /* deep-linkable screen state (?crt=ui) for QA */
   useEffect(() => {
     const s = new URLSearchParams(window.location.search).get("crt");
-    if (s === "chest" || s === "ui") setPhase(s);
+    if (s === "ui" || s === "chest") setPhase("ui");
   }, []);
 
-  /* ---------- power on: flicker + static, then the treasury appears ---------- */
+  /* ---------- power on: quick CRT beam, then the menu is written on screen ---------- */
   const powerOn = (fast = false) => {
     if (phaseRef.current !== "off") return;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced || fast) {
-      setPhase("chest");
+      setPhase("ui");
       return;
     }
-    setPhase("static");
-    timers.current.push(window.setTimeout(() => setPhase("chest"), 560));
+    setPhase("boot");
+    timers.current.push(window.setTimeout(() => setPhase("ui"), 480));
   };
   useEffect(() => () => timers.current.forEach(window.clearTimeout), []);
 
-  /* ---------- scroll: chest → ui → release into the site ---------- */
+  /* ---------- scroll: menu holds, then we dive into the black screen ---------- */
   useEffect(() => {
     const wrapEl = wrapRef.current;
     const hero = heroRef.current;
@@ -82,31 +87,33 @@ const HeroMachine = () => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const ctx = gsap.context(() => {
+      const diveScale = () => {
+        const vw = hero.clientWidth, vh = hero.clientHeight;
+        const gw = GLASS_W * stage.clientWidth;
+        const gh = GLASS_H * stage.clientHeight;
+        return Math.min(6, Math.max(vw / gw, vh / gh) * 1.16);
+      };
       gsap
         .timeline({
           scrollTrigger: {
             trigger: wrapEl,
             start: "top top",
             end: "bottom bottom",
-            scrub: 0.5,
+            scrub: 0.6,
             invalidateOnRefresh: true,
             onUpdate: (self) => {
               const p = self.progress;
-              if (p > 0.06 && phaseRef.current === "off") powerOn(true);
-              if (p > 0.38 && (phaseRef.current === "chest" || phaseRef.current === "static")) {
-                setPhase("ui");
-              } else if (p <= 0.34 && phaseRef.current === "ui") {
-                setPhase("chest");
-              }
+              if (p > 0.05 && phaseRef.current === "off") powerOn(true);
+              if (p > 0.30 && phaseRef.current === "boot") setPhase("ui");
+              if (p > 0.60 && phaseRef.current === "ui") setPhase("dive");
+              else if (p <= 0.55 && phaseRef.current === "dive") setPhase("ui");
             },
           },
         })
-        .fromTo(
-          stage,
-          { scale: 1 },
-          { scale: reduced ? 1 : 1.14, ease: "power1.inOut", duration: 1 }
-        )
-        .fromTo(fade, { opacity: 0 }, { opacity: 1, duration: 0.22, ease: "power1.in" }, 0.78);
+        /* the dive: the black glass grows to fill the viewport */
+        .to(stage, { scale: reduced ? 1 : diveScale, ease: "power2.in", duration: 0.45 }, 0.55)
+        /* pure violet-black takes over → seamless handoff to the next section */
+        .to(fade, { opacity: 1, ease: "power1.in", duration: 0.26 }, 0.72);
     }, wrapEl);
 
     return () => ctx.revert();
@@ -116,7 +123,7 @@ const HeroMachine = () => {
     const wrapEl = wrapRef.current;
     if (!wrapEl) return;
     window.scrollTo({
-      top: wrapEl.offsetTop + wrapEl.offsetHeight - window.innerHeight * 0.5,
+      top: wrapEl.offsetTop + wrapEl.offsetHeight + 2,
       behavior: "smooth",
     });
   };
@@ -138,25 +145,37 @@ const HeroMachine = () => {
             alt="A vintage KOSH computer resting in a Bangladeshi night landscape — a tiger, river, bridge and port cranes behind it"
             draggable={false}
           />
-          <img
-            className="hero__chest"
-            src="/img/hero-chest.jpg"
-            alt=""
-            aria-hidden="true"
-            draggable={false}
-          />
 
-          {/* CRT glass */}
+          {/* the black screen itself — text written straight on the glass */}
           <div className={`crt ${phase === "off" ? "" : "on"} ${phase}`}>
-            <div className="crt__glow" />
-            <div className="crt__static" />
             <div className="crt__beam" />
 
-            {/* the screen IS the menu — text links blended into the glass */}
+            {phase === "off" && (
+              <button className="crt__hint" onClick={() => powerOn()} aria-label="Power on Kosh">
+                <span className="crt__hint-in">
+                  power on<em>tap the screen</em>
+                </span>
+              </button>
+            )}
             <nav className="crt__ui" aria-label="Kosh menu">
               <div className="crt__top">
                 <a className="crt__home" href="#vision">
-                  <img src="/img/mascot.png" alt="" className="px" />
+                  <svg className="crt__binoc" viewBox="0 0 16 9" shapeRendering="crispEdges" aria-hidden="true">
+                    <g fill="currentColor">
+                      {/* left lens ring */}
+                      <rect x="1" y="0" width="5" height="1" />
+                      <rect x="1" y="8" width="5" height="1" />
+                      <rect x="0" y="1" width="1" height="7" />
+                      <rect x="6" y="1" width="1" height="7" />
+                      {/* right lens ring */}
+                      <rect x="10" y="0" width="5" height="1" />
+                      <rect x="10" y="8" width="5" height="1" />
+                      <rect x="9" y="1" width="1" height="7" />
+                      <rect x="15" y="1" width="1" height="7" />
+                      {/* bridge */}
+                      <rect x="6" y="3" width="4" height="2" />
+                    </g>
+                  </svg>
                   <span>Vision</span>
                 </a>
                 <div className="crt__nav">
@@ -166,21 +185,13 @@ const HeroMachine = () => {
                 </div>
               </div>
               <div className="crt__mid">
-                <a className="crt__cta" href={KOSH_APP_URL}>
-                  Try The Beta App
-                </a>
-                <a className="crt__cta" href={KOSH_WAITLIST_EMAIL_URL}>
-                  Join the Waitlist
-                </a>
+                <a className="crt__cta" href={KOSH_APP_URL}>Try the Beta App</a>
+                <a className="crt__cta" href={KOSH_WAITLIST_EMAIL_URL}>Join the Waitlist</a>
               </div>
               <button className="crt__explore" onClick={explore}>
                 Explore <span className="arr">⬇</span>
               </button>
             </nav>
-
-            <div className="crt__scan" />
-            <div className="crt__vign" />
-            <div className="crt__sheen" />
           </div>
 
           <button
@@ -189,7 +200,7 @@ const HeroMachine = () => {
             onClick={() => powerOn()}
           />
 
-          {/* annotation-style callout pointing at the K power badge */}
+          {/* clean annotation callout → the K power badge */}
           <button className="hero__callout" onClick={() => powerOn()}>
             <span className="hero__callout-text">
               power on<em>explore kosh</em>

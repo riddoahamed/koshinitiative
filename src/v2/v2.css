@@ -237,67 +237,74 @@
 .hero { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: #04070f; }
 .hero__stage { position: absolute; }
 
-.hero__plate, .hero__chest {
+.hero__plate {
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill;
 }
-.hero__chest { opacity: 0; transition: opacity 1.1s ease; }
-.hero.chest .hero__chest { opacity: 1; }
-.hero.ui .hero__chest { opacity: 0; }
 
-/* --- CRT glass quad (percent of stage), tilted on the monitor's 3D plane --- */
+/* --- the black screen: text written straight on the glass, no overlays --- */
 .crt {
   position: absolute;
   left: 54.28%; top: 26.9%; width: 24.6%; height: 37.6%;
-  transform: perspective(1400px) rotateY(4.5deg) rotateX(0.6deg) rotate(-1deg);
-  transform-origin: 50% 50%;
-  border-radius: 6% / 8%;
-  overflow: hidden;
   z-index: 3;
-}
-.crt__static {
-  position: absolute; inset: 0; opacity: 0; pointer-events: none; z-index: 2;
-  background-image:
-    repeating-linear-gradient(0deg, rgba(98, 245, 132, 0.18) 0 1px, transparent 1px 3px),
-    repeating-linear-gradient(90deg, rgba(160, 255, 190, 0.12) 0 2px, transparent 2px 5px);
-}
-.crt.static .crt__static { opacity: 1; animation: staticJitter 0.12s steps(2) infinite; }
-@keyframes staticJitter {
-  0% { transform: translate(0, 0); filter: brightness(1); }
-  50% { transform: translate(-2px, 1px); filter: brightness(1.7); }
-  100% { transform: translate(2px, -1px); filter: brightness(0.9); }
+  overflow: hidden;
 }
 .crt__beam {
-  position: absolute; left: 4%; right: 4%; top: 50%; height: 2px;
+  position: absolute; left: 6%; right: 6%; top: 50%; height: 2px;
   background: #eafff2; border-radius: 2px;
   box-shadow: 0 0 18px 4px rgba(220, 255, 240, 0.8);
   opacity: 0; z-index: 4; pointer-events: none;
 }
-.crt.static .crt__beam { animation: beamOn 0.55s ease-out forwards; }
+.crt.boot .crt__beam { animation: beamOn 0.5s ease-out forwards; }
+
+/* off-state: the whole black screen is tappable to power on.
+   desktop shows the badge annotation instead of on-screen text. */
+.crt__hint {
+  position: absolute; inset: 0; z-index: 5;
+  display: flex; align-items: center; justify-content: center;
+  background: transparent; cursor: pointer; pointer-events: auto;
+}
+.crt__hint-in {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  font-family: var(--font-px); color: var(--lime);
+  opacity: 0; animation: calloutIn 1s ease 1s forwards;
+}
+.crt__hint-in {
+  font-size: clamp(15px, 4vw, 21px); letter-spacing: 0.08em;
+  text-shadow: 0 0 12px rgba(190, 247, 89, 0.5);
+}
+.crt__hint-in em {
+  font-style: normal; font-size: 11px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: rgba(242, 242, 247, 0.6); text-shadow: none;
+}
+@media (min-width: 641px) { .crt__hint-in { display: none; } }
 @keyframes beamOn {
-  0% { opacity: 1; transform: scaleX(0.05); }
+  0% { opacity: 1; transform: scaleX(0.04); }
   55% { opacity: 1; transform: scaleX(1); }
   100% { opacity: 0; transform: scaleX(1); }
 }
 
-/* --- the in-screen UI: text as links, blended into the glass (his page 4) --- */
+/* the menu, written on the screen */
 .crt__ui {
   position: absolute; inset: 0; z-index: 3;
   display: flex; flex-direction: column;
-  padding: 8% 9.5% 10%;
+  padding: 8.5% 9.5% 9%;
   font-family: var(--font-px);
-  opacity: 0; transform: scale(0.99);
-  transition: opacity 0.7s ease 0.05s, transform 0.7s ease 0.05s;
+  opacity: 0; transform: translateY(4%);
+  transition: opacity 0.6s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: none;
-  background: radial-gradient(115% 95% at 50% 42%, rgba(24, 62, 34, 0.55) 0%, rgba(6, 16, 9, 0.35) 62%, transparent 100%);
 }
 .crt.ui .crt__ui { opacity: 1; transform: none; pointer-events: auto; }
+/* the dive: menu drifts up + off as the black screen takes over */
+.crt.dive .crt__ui { opacity: 0; transform: translateY(-11%) scale(1.05); pointer-events: none; }
 
 .crt__top { display: flex; justify-content: space-between; align-items: flex-start; }
-.crt__home { display: flex; flex-direction: column; align-items: center; gap: 3px; }
-.crt__home img { width: clamp(16px, 1.5vw, 26px); filter: drop-shadow(0 0 7px rgba(190, 247, 89, 0.7)); }
-.crt__home img.px { width: clamp(26px, 2.4vw, 42px); image-rendering: pixelated; filter: none; }
+.crt__home { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.crt__binoc {
+  width: clamp(26px, 2.5vw, 44px); height: auto; color: var(--lime);
+  filter: drop-shadow(0 0 6px rgba(190, 247, 89, 0.5));
+}
 .crt__home span { font-size: clamp(11px, 0.95vw, 15px); color: rgba(190, 247, 89, 0.85); }
-.crt__nav { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+.crt__nav { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
 .crt__nav a {
   font-size: clamp(12px, 1.05vw, 17px); letter-spacing: 0.04em;
   color: rgba(242, 242, 247, 0.88);
@@ -307,24 +314,20 @@
 
 .crt__mid {
   flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 7%; width: 100%;
+  gap: 8%; width: 100%;
 }
+/* CTAs: just glowing text, no box */
 .crt__cta {
-  width: min(84%, 320px);
-  padding: 3.2% 4%;
-  border: 1.5px solid rgba(190, 247, 89, 0.75); border-radius: 9px;
-  font-size: clamp(13px, 1.2vw, 19px); letter-spacing: 0.05em;
-  color: var(--lime); text-align: center;
-  background: rgba(190, 247, 89, 0.05);
-  transition: background 0.18s, box-shadow 0.18s, transform 0.18s;
-  display: block;
+  font-size: clamp(16px, 1.8vw, 27px); letter-spacing: 0.05em;
+  color: var(--lime); text-align: center; display: block;
+  transition: transform 0.2s, text-shadow 0.2s;
 }
+.crt__cta::before { content: "› "; opacity: 0; transition: opacity 0.2s; }
 .crt__cta:hover, .crt__cta:focus-visible {
-  background: rgba(190, 247, 89, 0.16);
-  box-shadow: 0 0 22px rgba(190, 247, 89, 0.3), inset 0 0 14px rgba(190, 247, 89, 0.12);
-  transform: translateY(-1px);
-  outline: none;
+  transform: translateY(-1px); outline: none;
+  text-shadow: 0 0 20px rgba(190, 247, 89, 0.85);
 }
+.crt__cta:hover::before, .crt__cta:focus-visible::before { opacity: 1; }
 .crt__explore {
   align-self: flex-start;
   display: inline-flex; align-items: center; gap: 7px;
@@ -335,57 +338,41 @@
 .crt__explore:hover { text-shadow: 0 0 14px rgba(190, 247, 89, 0.8); }
 @keyframes hintNudge { 50% { transform: translateY(4px); } }
 
-/* phosphor treatment: every text/border inside glows + slight RGB fringe */
+/* phosphor glow on every glass text — no overlay, just the type glowing */
 .crt__ui a, .crt__home span {
   text-shadow:
     0 0 7px rgba(140, 255, 170, 0.5),
-    0 0 20px rgba(98, 245, 132, 0.25),
-    -1px 0 rgba(255, 60, 120, 0.12),
-    1px 0 rgba(0, 255, 210, 0.12);
+    0 0 20px rgba(98, 245, 132, 0.22),
+    -1px 0 rgba(255, 60, 120, 0.1),
+    1px 0 rgba(0, 255, 210, 0.1);
 }
 
-/* glass overlays: scanlines above the UI so text sits IN the screen */
-.crt__scan {
-  position: absolute; inset: 0; pointer-events: none; z-index: 5; opacity: 0;
-  background:
-    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.28) 0 1px, transparent 1px 3px);
-}
-.crt__vign {
-  position: absolute; inset: 0; pointer-events: none; z-index: 6; opacity: 0;
-  background: radial-gradient(105% 90% at 50% 46%, transparent 58%, rgba(0, 0, 0, 0.55) 100%);
-}
-.crt__sheen {
-  position: absolute; inset: 0; pointer-events: none; z-index: 7; opacity: 0;
-  background: linear-gradient(112deg, transparent 42%, rgba(220, 255, 235, 0.05) 47%, transparent 56%);
-}
-.crt__glow {
-  position: absolute; inset: 0; pointer-events: none; z-index: 1; opacity: 0;
-  background: radial-gradient(75% 70% at 50% 50%, rgba(98, 245, 132, 0.14), transparent 75%);
-}
-.crt.on .crt__scan, .crt.on .crt__vign, .crt.on .crt__sheen { opacity: 1; }
-.crt.on .crt__glow { opacity: 1; animation: crtBreath 4.4s ease-in-out infinite; }
-@keyframes crtBreath { 0%, 88%, 100% { opacity: 1; } 92% { opacity: 0.55; } 95% { opacity: 0.85; } }
-
-/* --- power hotspot (invisible, hover glows the badge) --- */
+/* --- power hotspot (invisible; hover glows the badge, centred on it) --- */
 .hero__power {
-  position: absolute; left: 50.9%; top: 68.5%; width: 4%; height: 7.4%;
-  min-width: 44px; min-height: 44px; border-radius: 14px; z-index: 8; cursor: pointer;
+  position: absolute; left: 52.85%; top: 70.5%;
+  width: 3.4%; height: 5.2%;
+  min-width: 44px; min-height: 44px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%; z-index: 8; cursor: pointer;
 }
 .hero__power::before {
-  content: ""; position: absolute; inset: 14%; border-radius: 10px;
+  content: ""; position: absolute; inset: -28%; border-radius: 50%;
+  background: radial-gradient(circle, rgba(190, 247, 89, 0) 55%, transparent 70%);
   box-shadow: 0 0 0 0 rgba(190, 247, 89, 0);
-  transition: box-shadow 0.3s;
+  transition: box-shadow 0.3s, background 0.3s;
 }
-.hero__power:hover::before, .hero__power:focus-visible::before { box-shadow: 0 0 22px 4px rgba(190, 247, 89, 0.4); }
-.hero__power:focus-visible { outline: 2px solid var(--lime); outline-offset: 4px; }
+.hero__power:hover::before, .hero__power:focus-visible::before {
+  background: radial-gradient(circle, rgba(190, 247, 89, 0.2) 20%, transparent 68%);
+  box-shadow: 0 0 26px 5px rgba(190, 247, 89, 0.35);
+}
+.hero__power:focus-visible { outline: 2px solid var(--lime); outline-offset: 6px; }
 .hero.booted .hero__power { pointer-events: none; }
-@keyframes ledPulse { 50% { opacity: 0.5; } }
 
 /* --- clean annotation callout → the K power badge --- */
 .hero__callout {
   position: absolute;
-  left: 50.55%; top: 69.2%;
-  transform: translateX(-100%);
+  left: 51.1%; top: 70.5%;
+  transform: translate(-100%, -50%);
   display: flex; align-items: center; gap: 10px;
   z-index: 9; cursor: pointer;
   opacity: 0; animation: calloutIn 1s ease 0.9s forwards;
@@ -442,8 +429,8 @@
   animation: cueDrop 1.8s cubic-bezier(0.4, 0, 0.4, 1) infinite;
 }
 @keyframes cueDrop { to { top: 110%; } }
-.hero.booted .hero__scrollcue { opacity: 1; }
-.hero.ui .hero__scrollcue { opacity: 0; }
+.hero.ui .hero__scrollcue { opacity: 1; }
+.hero.dive .hero__scrollcue { opacity: 0; }
 
 .hero__skip {
   position: absolute; right: max(20px, 2.5vw); bottom: max(24px, 3.5vh);
@@ -855,10 +842,11 @@
   .jrow h3 { font-size: 17px; }
   .vision__close { font-size: 22px; }
   .foot__grid { grid-template-columns: 1fr; gap: 28px; }
-  .hero__callout { gap: 7px; }
-  .hero__callout-text { font-size: 9.5px; letter-spacing: 0.2em; }
-  .hero__callout-line { width: 20px; }
+  .hero__callout { display: none; } /* badge is off-screen on mobile; screen-tap hint instead */
   .hero__skip { font-size: 10px; }
+  .crt__cta { font-size: clamp(17px, 5vw, 24px); }
+  .crt__nav a { font-size: clamp(11px, 3vw, 15px); }
+  .crt__home span { font-size: clamp(10px, 2.6vw, 14px); }
 }
 
 /* ============================================================

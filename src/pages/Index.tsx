@@ -22,6 +22,10 @@ const Index = () => {
 
     /* deep links: /?goto=organizations scrolls to that section */
     const goto = new URLSearchParams(window.location.search).get("goto");
+    /* always start at the sleeping machine (no browser scroll restore) */
+    if (!goto && !new URLSearchParams(window.location.search).has("crt")) {
+      window.scrollTo(0, 0);
+    }
     if (goto) {
       window.setTimeout(
         () => document.getElementById(goto)?.scrollIntoView(),
@@ -42,6 +46,8 @@ const Index = () => {
         wheelMultiplier: 0.9,
         smoothWheel: true,
       });
+      /* start at the sleeping machine — beat any browser scroll restore */
+      if (!goto) lenis.scrollTo(0, { immediate: true, force: true });
       lenis.on("scroll", ScrollTrigger.update);
       const raf = (time: number) => lenis?.raf(time * 1000);
       gsap.ticker.add(raf);
