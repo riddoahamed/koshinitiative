@@ -1,4 +1,15 @@
-import { BookOpen, Compass, PiggyBank, TrendingUp } from "lucide-react";
+import {
+  BookOpen,
+  Compass,
+  PiggyBank,
+  TrendingUp,
+  Factory,
+  Flower2,
+  Bike,
+  Laptop,
+  HardHat,
+  ArrowRight,
+} from "lucide-react";
 import { KOSH_APP_URL, KOSH_WAITLIST_EMAIL_URL } from "@/lib/links";
 import ShaderBg from "./ShaderBg";
 import Starfield from "./Starfield";
@@ -286,6 +297,122 @@ export const Who = () => (
         <span className="who__tag" data-reveal>
           the next generation of retail investors starts here
         </span>
+      </div>
+    </div>
+  </section>
+);
+
+/* ---------------- INCLUSION / CSR — literacy → inclusion, SDGs ---------------- */
+const AUDIENCES = [
+  {
+    icon: Factory,
+    t: "Garment & factory workers",
+    p: "Cash at the gate becomes a savings habit that outlasts the shift.",
+  },
+  {
+    icon: Flower2,
+    t: "Working women",
+    p: "Money someone else managed becomes independence of her own.",
+  },
+  {
+    icon: Bike,
+    t: "Gig & delivery riders",
+    p: "An income that changes daily meets a plan that stays steady.",
+  },
+  {
+    icon: Laptop,
+    t: "Freelancers",
+    p: "Feast-or-famine invoices turn into a runway they can count on.",
+  },
+  {
+    icon: HardHat,
+    t: "Blue-collar & day workers",
+    p: "Surviving the month becomes building past it.",
+  },
+];
+
+const TEACH = [
+  ["Where the money goes", "Budgeting that survives an irregular, cash-in-hand income."],
+  ["Pay yourself first", "Turning a daily wage into a balance that actually grows."],
+  ["The safety net", "A buffer built before the emergency — not borrowed after it."],
+  ["Money you can trust", "Wallets, banks, and knowing what’s genuinely safe."],
+  ["Breaking the debt cycle", "Spotting the loan that’s designed to trap you."],
+  ["The first taka invested", "The small, confident step from saving to owning."],
+];
+
+const SDGS = [
+  ["1", "No Poverty", "#E5243B"],
+  ["4", "Quality Education", "#C5192D"],
+  ["5", "Gender Equality", "#FF3A21"],
+  ["8", "Decent Work & Growth", "#A21942"],
+  ["10", "Reduced Inequalities", "#DD1367"],
+];
+
+export const Inclusion = () => (
+  <section className="sec inclusion" id="inclusion">
+    <div className="blob m" style={{ width: 440, height: 440, left: "-10%", top: "4%" }} />
+    <div className="blob p" style={{ width: 400, height: 400, right: "-8%", bottom: "6%", animationDelay: "-9s" }} />
+    <div className="wrap">
+      <p className="eyebrow" data-reveal>sustainability · financial inclusion</p>
+      <h2 className="h-display" data-reveal style={{ ["--d" as string]: "80ms" }}>
+        Literacy today. <span className="grad-text">Inclusion tomorrow.</span>
+      </h2>
+      <p className="h-sub" data-reveal style={{ ["--d" as string]: "160ms" }}>
+        Financial confidence shouldn&rsquo;t depend on your collar, your gender,
+        or your payslip. Kosh reaches the people the system overlooked — factory
+        floors, delivery routes, home offices — and walks them from their first
+        budget to their first investment.
+      </p>
+
+      {/* literacy → inclusion path */}
+      <div className="incl__path" data-reveal="scale">
+        <div className="incl__node">
+          <span>today</span>
+          <b>We teach the concepts</b>
+          <p>Free, plain-language personal finance — built for real Bangladeshi wages and lives.</p>
+        </div>
+        <div className="incl__arrow" aria-hidden="true"><ArrowRight size={22} strokeWidth={2.2} /></div>
+        <div className="incl__node hot">
+          <span>tomorrow</span>
+          <b>We open the door</b>
+          <p>Accounts, safe savings, and first investments — inclusion, not just information.</p>
+        </div>
+      </div>
+
+      {/* who we bring in */}
+      <h3 className="incl__h" data-reveal>Who we&rsquo;re bringing in</h3>
+      <div className="incl__who" data-stagger="100">
+        {AUDIENCES.map((a) => (
+          <article className="ic glass" key={a.t} data-reveal="scale">
+            <div className="ic__icon"><a.icon size={21} strokeWidth={1.9} /></div>
+            <h4>{a.t}</h4>
+            <p>{a.p}</p>
+          </article>
+        ))}
+      </div>
+
+      {/* what we teach */}
+      <h3 className="incl__h" data-reveal>What we put in their hands</h3>
+      <ul className="tlist" data-stagger="80">
+        {TEACH.map(([t, d]) => (
+          <li key={t} data-reveal="left">
+            <b>{t}</b>
+            <span>{d}</span>
+          </li>
+        ))}
+      </ul>
+
+      {/* SDG alignment */}
+      <div className="incl__sdg">
+        <p className="incl__sdg-label" data-reveal>Aligned with the UN Sustainable Development Goals</p>
+        <div className="incl__sdg-row" data-stagger="90">
+          {SDGS.map(([n, name, color]) => (
+            <span className="sdg" key={n} data-reveal="scale" style={{ background: color }}>
+              <b>{n}</b>
+              {name}
+            </span>
+          ))}
+        </div>
       </div>
     </div>
   </section>

@@ -195,6 +195,7 @@ export const FootV2 = () => (
         <h4>Company</h4>
         <ul>
           <li><a href="#story">Why Kosh</a></li>
+          <li><a href="#inclusion">Impact &amp; inclusion</a></li>
           <li><a href="#vision">The long game</a></li>
           <li><a href="#organizations">For organizations</a></li>
           <li><a href={`mailto:${MAIL}`}>Contact</a></li>
@@ -241,6 +242,7 @@ export const NavV2 = () => {
       <div className="nav__links">
         <a href="#problem">The problem</a>
         <a href="#product">The product</a>
+        <a href="#inclusion">Impact</a>
         <a href="#organizations">For organizations</a>
         <a href="#join">Join us</a>
       </div>
