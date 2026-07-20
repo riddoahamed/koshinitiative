@@ -5,6 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HeroMachine from "@/v2/HeroMachine";
 import { About, Problem, Numbers, Product, Pillars, Who, Inclusion } from "@/v2/Sections";
 import { Orgs, Vision, Founder, Join, FootV2, NavV2 } from "@/v2/Closing";
+import { Games } from "@/v2/Games";
 import { initFx } from "@/v2/fx";
 import { applySeo } from "@/lib/seo";
 import "@/v2/v2.css";
@@ -71,6 +72,7 @@ const Index = () => {
         <Problem />
         <Numbers />
         <Product />
+        <Games />
         <Pillars />
         <Who />
         <Inclusion />
