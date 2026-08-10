@@ -1,8 +1,12 @@
 import {
-  BookOpen,
+  ShieldCheck,
+  Sparkles,
+  ShieldAlert,
   Compass,
-  PiggyBank,
-  TrendingUp,
+  LineChart,
+  PieChart,
+  Gamepad2,
+  MoonStar,
   Factory,
   Flower2,
   Bike,
@@ -22,11 +26,13 @@ export const About = () => (
     <div className="wrap" data-stagger="110">
       <p className="eyebrow" data-reveal>what kosh is</p>
       <h2 className="h-display" data-reveal>
-        Better <span className="grad-text">decisions</span>, not more information.
+        An AI-powered <span className="grad-text">investment discovery</span> and
+        trust platform.
       </h2>
       <p className="h-sub" data-reveal>
-        Kosh is an AI-native financial decision and investment discovery
-        platform for emerging markets — starting with Bangladesh.
+        A better way for people to learn, understand, and take action with
+        money — starting with the ones traditional finance leaves behind or
+        overwhelms.
       </p>
       <div className="about__ctas" data-reveal="scale">
         <a className="btn btn-primary" href={KOSH_APP_URL}>Try the beta</a>
@@ -34,8 +40,8 @@ export const About = () => (
       </div>
       <div className="about__chips" data-reveal="fade">
         <span>Free for people</span>
-        <span>AI-native</span>
-        <span>Human-supervised</span>
+        <span>We never touch your money</span>
+        <span>Starting in Bangladesh</span>
       </div>
     </div>
   </section>
@@ -199,14 +205,19 @@ export const Product = () => (
       <h2 className="h-display" data-reveal style={{ ["--d" as string]: "80ms" }}>
         Agents find it. Humans check it. You get to decide.
       </h2>
+      <p className="h-sub" data-reveal style={{ ["--d" as string]: "150ms" }}>
+        Our loop is simple:{" "}
+        <strong>Discover → Verify → Understand → Practise → Invest.</strong>
+      </p>
 
       <div className="product__grid">
         <div data-stagger="120">
           {[
-            ["01", "Agents scan the market", "AI agents read funds, gold, Sanchaypatra, and DSE filings — around the clock."],
-            ["02", "Humans supervise", "Real people verify every idea before it ever reaches your feed."],
-            ["03", "You get a digest, not a dump", "Opportunities arrive like content — short, visual, sourced, with the why attached."],
-            ["04", "You get to decide", "Learn it, simulate it, act when you're ready. Nothing is ever pushed."],
+            ["01", "Discover", "AI agents scan funds, gold, Sanchaypatra, and DSE filings around the clock, and surface what's actually worth your attention."],
+            ["02", "Verify", "Every idea is checked against real sources and screened for scams. Humans supervise before anything reaches your feed."],
+            ["03", "Understand", "Explainable AI tells you why it surfaced — in plain language, with the numbers shown. No jargon, no hype."],
+            ["04", "Practise", "Paper-invest with real market data and zero risk, until the decision feels obvious instead of scary."],
+            ["05", "Invest", "Act when you're ready, through disclosed partners. We never touch your money."],
           ].map(([n, h, p]) => (
             <div className="pstep" key={n} data-reveal="left">
               <span className="pstep__n">{n}</span>
@@ -217,7 +228,7 @@ export const Product = () => (
             </div>
           ))}
           <p className="product__note" data-reveal="fade">
-            <span className="dot" /> free for people · every partner disclosed
+            <span className="dot" /> free for people · every partner disclosed · we never hold your funds
           </p>
         </div>
 
@@ -240,12 +251,16 @@ export const Product = () => (
   </section>
 );
 
-/* ---------------- PILLARS — Learn Decide Save Invest ---------------- */
+/* ---------------- PILLARS — everything in one place ---------------- */
 const PILLARS = [
-  { icon: BookOpen, t: "Learn", p: "5-minute lessons and games, built for Bangladesh." },
-  { icon: Compass, t: "Decide", p: "Guided answers to “what should I do with ৳X?”" },
-  { icon: PiggyBank, t: "Save", p: "Goals, budgets, and habits that actually stick." },
-  { icon: TrendingUp, t: "Invest", p: "Paper-trade first. Real steps when you're ready." },
+  { icon: ShieldCheck, t: "Verified data", p: "Real numbers from real sources — never a made-up figure." },
+  { icon: Sparkles, t: "Explainable AI", p: "Guidance that always shows its reasoning, in plain language." },
+  { icon: ShieldAlert, t: "Scam detection", p: "Spot the Ponzi, the fake broker, and the too-good return." },
+  { icon: Compass, t: "Personalised guidance", p: "Answers shaped by your income, goals, and level." },
+  { icon: LineChart, t: "Paper investing", p: "Practise with real markets and zero risk." },
+  { icon: PieChart, t: "Portfolio tools", p: "See what you own, what it costs, and what it earns." },
+  { icon: Gamepad2, t: "Games", p: "Learn money the way you'd actually choose to." },
+  { icon: MoonStar, t: "Shariah screening", p: "Halal filters built in, not bolted on." },
 ];
 
 export const Pillars = () => (
@@ -253,8 +268,12 @@ export const Pillars = () => (
     <div className="wrap">
       <p className="eyebrow" data-reveal>inside the app</p>
       <h2 className="h-display" data-reveal style={{ ["--d" as string]: "80ms" }}>
-        Learn. Decide. Save. Invest.
+        Everything you need, <span className="grad-text">in one place.</span>
       </h2>
+      <p className="h-sub" data-reveal style={{ ["--d" as string]: "150ms" }}>
+        The tools scattered across a dozen apps, brokers, and group chats —
+        gathered into one loop that actually finishes.
+      </p>
       <div className="pillars__grid" data-stagger="110">
         {PILLARS.map((c) => (
           <div className="pillar glass" key={c.t} data-reveal="scale">
@@ -291,8 +310,9 @@ export const Who = () => (
           </li>
         </ul>
         <p className="who__close" data-reveal>
-          Kosh brings first-timers and new investors in with confidence, not
-          pressure — clear guidance, safe practice, honest products.
+          We start with the people traditional finance leaves behind or
+          overwhelms — <strong>students and freelancers, RMG workers,
+          immigrants, diaspora communities, and first-time investors.</strong>
         </p>
         <span className="who__tag" data-reveal>
           the next generation of retail investors starts here

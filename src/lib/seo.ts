@@ -1,7 +1,7 @@
 const SITE_URL = "https://www.koshbd.com";
-const DEFAULT_TITLE = "Kosh — Money, decided | The financial decision layer for Bangladesh";
+const DEFAULT_TITLE = "Kosh — AI-powered investment discovery & trust platform | Bangladesh";
 const DEFAULT_DESCRIPTION =
-  "Kosh is the financial decision layer for Bangladesh. Learn, compare, practice with paper money, then act — with an AI coach that knows Sanchaypatra from DPS. Built in Dhaka.";
+  "Kosh is an AI-powered investment discovery and trust platform — a better way to learn, understand, and take action with money. Verified data, explainable AI, scam detection, paper investing and Shariah screening. Starting in Bangladesh.";
 
 type SeoInput = {
   title?: string;

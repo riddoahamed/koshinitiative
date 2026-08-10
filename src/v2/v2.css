@@ -601,10 +601,10 @@
   display: flex; align-items: center; justify-content: center;
   margin-bottom: 18px;
 }
-.pillar:nth-child(1) .pillar__icon { color: var(--mint); background: hsl(156 85% 62% / 0.1); }
-.pillar:nth-child(2) .pillar__icon { color: var(--purple); background: hsl(270 95% 65% / 0.12); }
-.pillar:nth-child(3) .pillar__icon { color: var(--lime); background: hsl(85 95% 65% / 0.1); }
-.pillar:nth-child(4) .pillar__icon { color: #5eead4; background: rgba(94, 234, 212, 0.1); }
+.pillar:nth-child(4n + 1) .pillar__icon { color: var(--mint); background: hsl(156 85% 62% / 0.1); }
+.pillar:nth-child(4n + 2) .pillar__icon { color: var(--purple); background: hsl(270 95% 65% / 0.12); }
+.pillar:nth-child(4n + 3) .pillar__icon { color: var(--lime); background: hsl(85 95% 65% / 0.1); }
+.pillar:nth-child(4n + 4) .pillar__icon { color: #5eead4; background: rgba(94, 234, 212, 0.1); }
 .pillar h3 { font-size: 21px; }
 .pillar p { margin-top: 7px; font-size: 13.5px; color: var(--muted); }
 @media (max-width: 880px) { .pillars__grid { grid-template-columns: 1fr 1fr; } }

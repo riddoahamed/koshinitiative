@@ -56,8 +56,13 @@ export const Vision = () => (
     <div className="wrap">
       <p className="eyebrow" data-reveal>the long game</p>
       <h2 className="h-display" data-reveal style={{ ["--d" as string]: "80ms" }}>
-        A financial operating system for emerging markets.
+        The trusted decision layer for emerging markets.
       </h2>
+      <p className="h-sub" data-reveal style={{ ["--d" as string]: "150ms" }}>
+        Starting in Bangladesh, Kosh connects financial uncertainty with real
+        opportunity — helping people move safely from curiosity to confident
+        action. The same gap exists across every emerging market we know.
+      </p>
 
       <div className="vision__cols">
         <div className="vcol now" data-reveal>

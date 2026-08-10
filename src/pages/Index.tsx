@@ -13,9 +13,9 @@ import "@/v2/v2.css";
 const Index = () => {
   useEffect(() => {
     applySeo({
-      title: "Kosh — Better decisions, not more information",
+      title: "Kosh — AI-powered investment discovery & trust platform",
       description:
-        "Kosh is an AI-native financial decision and investment discovery platform for emerging markets, starting with Bangladesh. Agents find it. Humans check it. You decide.",
+        "A better way for people to learn, understand, and take action with money. Discover → Verify → Understand → Practise → Invest. Starting in Bangladesh. We never touch your money.",
       path: "/",
     });
 
