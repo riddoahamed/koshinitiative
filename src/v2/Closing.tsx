@@ -113,6 +113,14 @@ export const Vision = () => (
         <span className="shimmer">better decisions</span> — made possible for
         everyone.
       </p>
+
+      <a className="funband" href="/vote" data-reveal="scale">
+        <span className="funband__lead">Let&rsquo;s democratize</span>
+        <span className="funband__word shimmer">Funance</span>
+        <span className="funband__note">
+          finance, made playable — step into a live room
+        </span>
+      </a>
     </div>
   </section>
 );

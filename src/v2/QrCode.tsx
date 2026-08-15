@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, type ReactElement } from "react";
 import QRCode from "qrcode";
 
 /* Branded QR: lime modules on the violet-dark ground, rounded finder eyes,
@@ -44,7 +44,7 @@ const QrCode = ({ value, size = 220, logoRatio = 0.26, className, title }: Props
     y >= holeStart &&
     y < holeStart + holeMods;
 
-  const dots: JSX.Element[] = [];
+  const dots: ReactElement[] = [];
   for (let y = 0; y < count; y++) {
     for (let x = 0; x < count; x++) {
       if (!cells[y * count + x]) continue;

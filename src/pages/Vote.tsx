@@ -32,7 +32,20 @@ const Vote = () => {
   const [tally, setTally] = useState<Record<string, number>>({});
   const [analyseId, setAnalyseId] = useState<string | null>(null);
   const [sent, setSent] = useState(false);
+  const [left, setLeft] = useState<number | null>(null); // seconds on the clock
   const { wallet, stats, placeStake, settle, reset } = useWallet();
+
+  /* host-set countdown: when it hits zero, the room moves to the reveal */
+  useEffect(() => {
+    if (left === null) return;
+    if (left <= 0) {
+      setLeft(null);
+      setStage("reveal");
+      return;
+    }
+    const t = setTimeout(() => setLeft((n) => (n === null ? null : n - 1)), 1000);
+    return () => clearTimeout(t);
+  }, [left]);
 
   const room = useMemo(() => {
     if (typeof window === "undefined") return "live";
@@ -143,6 +156,27 @@ const Vote = () => {
                   One tap. No wrong answer — that&rsquo;s the point. We&rsquo;ll
                   show the room in a moment.
                 </p>
+
+                <div className="timer">
+                  {left === null ? (
+                    <>
+                      <span className="timer__label">Give the room a clock</span>
+                      {[30, 60, 120].map((s) => (
+                        <button key={s} onClick={() => setLeft(s)}>
+                          {s < 60 ? `${s}s` : `${s / 60} min`}
+                        </button>
+                      ))}
+                    </>
+                  ) : (
+                    <>
+                      <span className={`timer__count${left <= 10 ? " hot" : ""}`}>
+                        {Math.floor(left / 60)}:{String(left % 60).padStart(2, "0")}
+                      </span>
+                      <span className="timer__label">until the reveal</span>
+                      <button onClick={() => setLeft(null)}>stop</button>
+                    </>
+                  )}
+                </div>
 
                 <div className="opts">
                   {OPTIONS.map((o) => (
