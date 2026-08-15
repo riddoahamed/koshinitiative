@@ -1,45 +1,65 @@
 import { useEffect, useState } from "react";
-import { ArrowUpRight, GraduationCap, Search, Gamepad2 } from "lucide-react";
+import { ArrowUpRight, GraduationCap, Landmark, BarChart3 } from "lucide-react";
 import { KOSH_APP_URL, KOSH_WAITLIST_EMAIL_URL } from "@/lib/links";
 import ShaderBg from "./ShaderBg";
 import Starfield from "./Starfield";
+import QrCode from "./QrCode";
 
 const MAIL = "koshinitiative@gmail.com";
 const mailto = (subject: string) =>
   `mailto:${MAIL}?subject=${encodeURIComponent(subject)}`;
 
-/* ---------------- ORGS — the app is free; this sustains it ---------------- */
+/* ---------------- ORGS — institutions + financial partners ---------------- */
 export const Orgs = () => (
   <section className="sec paper-sec orgs" id="organizations">
     <div className="wrap">
       <div className="orgs__inner">
         <p className="eyebrow" data-reveal>for organizations</p>
         <h2 className="h-display" data-reveal style={{ ["--d" as string]: "80ms" }}>
-          The app is free. This is how we sustain it.
+          Bring Kosh to the people you serve.
         </h2>
+        <p className="h-sub" data-reveal style={{ ["--d" as string]: "150ms" }}>
+          Learning stays free for everyone. Institutions run Kosh as a program —
+          and financial partners meet people who arrive already informed.
+        </p>
         <div className="orows" data-stagger="130">
           <div className="orow" data-reveal="left">
             <div className="orow__icon"><GraduationCap size={20} strokeWidth={1.9} /></div>
             <div>
-              <h3>Financial literacy, as a product</h3>
-              <p>Programs for universities, employers, and NGOs — designed, delivered, and measured.</p>
+              <h3>Campus &amp; workplace programs</h3>
+              <p>
+                Run a cohort at your university, factory, or office — a live
+                session to start, then per-seat access for everyone who keeps
+                going.
+              </p>
             </div>
           </div>
           <div className="orow" data-reveal="left">
-            <div className="orow__icon"><Search size={20} strokeWidth={1.9} /></div>
+            <div className="orow__icon"><Landmark size={20} strokeWidth={1.9} /></div>
             <div>
-              <h3>Research &amp; engagement</h3>
-              <p>User research, acquisition, and engagement consulting for banks and fintechs.</p>
+              <h3>Financial partners</h3>
+              <p>
+                Brokers, asset managers, and banks reach people who arrive ready,
+                with a pre-filled application. One flat fee per funded account —
+                identical for every partner, disclosed on the card.
+              </p>
             </div>
           </div>
           <div className="orow" data-reveal="left">
-            <div className="orow__icon"><Gamepad2 size={20} strokeWidth={1.9} /></div>
+            <div className="orow__icon"><BarChart3 size={20} strokeWidth={1.9} /></div>
             <div>
-              <h3>Games that teach</h3>
-              <p>Playable simulations of investing, money habits, and scam defense — gamified user experiences people actually finish, built for classrooms, campaigns, and fintech products.</p>
+              <h3>Outcomes you can audit</h3>
+              <p>
+                Every cohort is instrumented. See what people learned, practised,
+                and actually did with their money — not an attendance sheet.
+              </p>
             </div>
           </div>
         </div>
+        <p className="orgs__note" data-reveal="fade">
+          We never hold anyone&rsquo;s money. Accounts are opened at a named
+          institution on disclosed terms — and no verdict is ever purchasable.
+        </p>
         <div className="orgs__cta" data-reveal>
           <a className="btn" href={mailto("Kosh partnership")}>Work with us</a>
         </div>
@@ -186,6 +206,13 @@ export const FootV2 = () => (
           <span className="bn">কোষ</span> — a treasury; a cell. The smallest
           unit things grow from.
         </p>
+        <div className="foot__qr">
+          <QrCode value={KOSH_APP_URL} size={104} />
+          <div>
+            <b>Scan to open the beta</b>
+            <span>app.koshbd.com</span>
+          </div>
+        </div>
       </div>
       <div>
         <h4>Product</h4>

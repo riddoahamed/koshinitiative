@@ -39,7 +39,7 @@ export const About = () => (
         <a className="btn btn-glass" href={KOSH_WAITLIST_EMAIL_URL}>Join the waitlist</a>
       </div>
       <div className="about__chips" data-reveal="fade">
-        <span>Free for people</span>
+        <span>Free to start</span>
         <span>We never touch your money</span>
         <span>Starting in Bangladesh</span>
       </div>
@@ -228,7 +228,7 @@ export const Product = () => (
             </div>
           ))}
           <p className="product__note" data-reveal="fade">
-            <span className="dot" /> free for people · every partner disclosed · we never hold your funds
+            <span className="dot" /> free to start · every partner disclosed · we never hold your funds
           </p>
         </div>
 
