@@ -5,8 +5,12 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
-import ToolPlaceholder from "./pages/ToolPlaceholder.tsx";
 import Vote from "./pages/Vote.tsx";
+import Start from "./pages/Start.tsx";
+import Learn from "./pages/Learn.tsx";
+import Quiz from "./pages/Quiz.tsx";
+import Blog from "./pages/Blog.tsx";
+import Post from "./pages/Post.tsx";
 
 const queryClient = new QueryClient();
 
@@ -20,60 +24,14 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/vote" element={<Vote />} />
           <Route path="/live" element={<Vote />} />
-          <Route
-            path="/scam-spotter"
-            element={
-              <ToolPlaceholder
-                title="Scam Spotter"
-                description="6 real BD scenarios. Spot scams - halal forex, bKash Ponzis, Telegram crypto - before they spot you."
-              />
-            }
-          />
-          <Route
-            path="/comparator"
-            element={
-              <ToolPlaceholder
-                title="Savings Comparator"
-                description="FDR vs Sanchaypatra vs DPS vs savings - after-tax returns with inflation benchmark."
-              />
-            }
-          />
-          <Route
-            path="/emi-calculator"
-            element={
-              <ToolPlaceholder
-                title="EMI Calculator"
-                description="Bank loans or credit card EMI - iPhone, bike, PC. Monthly payment + total interest before you borrow."
-              />
-            }
-          />
-          <Route
-            path="/sip-calculator"
-            element={
-              <ToolPlaceholder
-                title="Goal-based SIP"
-                description="Studies abroad, wedding, car down payment - exact monthly savings needed to hit your goal."
-              />
-            }
-          />
-          <Route
-            path="/car-calculator"
-            element={
-              <ToolPlaceholder
-                title="Car Affordability"
-                description="EMI + fuel + insurance + maintenance. See the real monthly cost and 5-year ownership bill before buying."
-              />
-            }
-          />
-          <Route
-            path="/budget-planner"
-            element={
-              <ToolPlaceholder
-                title="Budget Planner"
-                description="50% Needs · 30% Wants · 20% Savings. BD-specific categories - see your real savings rate."
-              />
-            }
-          />
+          {/* the beginner path */}
+          <Route path="/start" element={<Start />} />
+          <Route path="/learn" element={<Learn />} />
+          <Route path="/quiz" element={<Quiz />} />
+          <Route path="/investor-type" element={<Quiz />} />
+          {/* writing */}
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<Post />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

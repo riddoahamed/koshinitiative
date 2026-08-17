@@ -3,19 +3,19 @@ import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HeroMachine from "@/v2/HeroMachine";
-import { About, Problem, Numbers, Product, Pillars, Who, Inclusion } from "@/v2/Sections";
+import { Pitch, Paths, Problem, Product, Impact } from "@/v2/Sections";
 import { Orgs, Vision, Founder, Join, FootV2, NavV2 } from "@/v2/Closing";
-import { Games } from "@/v2/Games";
+import { Funance } from "@/v2/Funance";
 import { initFx } from "@/v2/fx";
+import { VP_LONG } from "@/v2/copy";
 import { applySeo } from "@/lib/seo";
 import "@/v2/v2.css";
 
 const Index = () => {
   useEffect(() => {
     applySeo({
-      title: "Kosh — AI-powered investment discovery & trust platform",
-      description:
-        "A better way for people to learn, understand, and take action with money. Discover → Verify → Understand → Practise → Invest. Starting in Bangladesh. We never touch your money.",
+      title: "From “where do I start?” to your first real investment",
+      description: VP_LONG,
       path: "/",
     });
 
@@ -68,14 +68,12 @@ const Index = () => {
       <NavV2 />
       <main>
         <HeroMachine />
-        <About />
+        <Pitch />
+        <Paths />
         <Problem />
-        <Numbers />
         <Product />
-        <Games />
-        <Pillars />
-        <Who />
-        <Inclusion />
+        <Funance />
+        <Impact />
         <Orgs />
         <Vision />
         <Founder />

@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react";
 import { ArrowUpRight, GraduationCap, Landmark, BarChart3 } from "lucide-react";
 import { KOSH_APP_URL, KOSH_WAITLIST_EMAIL_URL } from "@/lib/links";
+import { MAIL, mailto, VP_SHORT } from "./copy";
 import ShaderBg from "./ShaderBg";
 import Starfield from "./Starfield";
 import QrCode from "./QrCode";
-
-const MAIL = "koshinitiative@gmail.com";
-const mailto = (subject: string) =>
-  `mailto:${MAIL}?subject=${encodeURIComponent(subject)}`;
 
 /* ---------------- ORGS — institutions + financial partners ---------------- */
 export const Orgs = () => (
@@ -113,14 +110,6 @@ export const Vision = () => (
         <span className="shimmer">better decisions</span> — made possible for
         everyone.
       </p>
-
-      <a className="funband" href="/vote" data-reveal="scale">
-        <span className="funband__lead">Let&rsquo;s democratize</span>
-        <span className="funband__word shimmer">Funance</span>
-        <span className="funband__note">
-          finance, made playable — step into a live room
-        </span>
-      </a>
     </div>
   </section>
 );
@@ -210,6 +199,7 @@ export const FootV2 = () => (
       <div className="foot__brand">
         <img src="/img/kosh-logo.png" alt="Kosh logo" />
         <div className="word">KOSH</div>
+        <p className="foot__vp">{VP_SHORT}</p>
         <p className="foot__def">
           <span className="bn">কোষ</span> — a treasury; a cell. The smallest
           unit things grow from.
@@ -223,21 +213,22 @@ export const FootV2 = () => (
         </div>
       </div>
       <div>
-        <h4>Product</h4>
+        <h4>Start here</h4>
         <ul>
-          <li><a href={KOSH_APP_URL}>Open the beta</a></li>
-          <li><a href={KOSH_WAITLIST_EMAIL_URL}>Join the waitlist</a></li>
-          <li><a href="/budget-planner">Budget planner</a></li>
-          <li><a href="/sip-calculator">Goal-based SIP</a></li>
+          <li><a href="/start">If I started today</a></li>
+          <li><a href="/quiz">What kind of investor am I?</a></li>
+          <li><a href="/learn">Quick lessons</a></li>
+          <li><a href="/blog">Writing &amp; guides</a></li>
+          <li><a href="/vote">Kosh Live</a></li>
         </ul>
       </div>
       <div>
         <h4>Company</h4>
         <ul>
-          <li><a href="#story">Why Kosh</a></li>
-          <li><a href="#inclusion">Impact &amp; inclusion</a></li>
-          <li><a href="#vision">The long game</a></li>
-          <li><a href="#organizations">For organizations</a></li>
+          <li><a href={KOSH_APP_URL}>Try Kosh</a></li>
+          <li><a href={KOSH_WAITLIST_EMAIL_URL}>Join the waitlist</a></li>
+          <li><a href="/#story">Why Kosh</a></li>
+          <li><a href="/#organizations">For organizations</a></li>
           <li><a href={`mailto:${MAIL}`}>Contact</a></li>
         </ul>
       </div>
@@ -264,30 +255,34 @@ export const FootV2 = () => (
   </footer>
 );
 
-/* ---------------- NAV ---------------- */
-export const NavV2 = () => {
-  const [on, setOn] = useState(false);
+/* ---------------- NAV ----------------
+   `pinned` skips the scroll gate — the sub-pages have no hero to clear, so
+   their nav is visible from the first paint. */
+export const NavV2 = ({ pinned = false }: { pinned?: boolean }) => {
+  const [on, setOn] = useState(pinned);
   useEffect(() => {
+    if (pinned) return;
     const fn = () => setOn(window.scrollY > window.innerHeight * 1.6);
     fn();
     window.addEventListener("scroll", fn, { passive: true });
     return () => window.removeEventListener("scroll", fn);
-  }, []);
+  }, [pinned]);
   return (
     <nav className={`nav${on ? " on" : ""}`} aria-label="Main">
-      <a className="nav__brand" href="#top">
+      <a className="nav__brand" href={pinned ? "/" : "#top"}>
         <img src="/img/kosh-logo.png" alt="" />
         KOSH
       </a>
       <div className="nav__links">
-        <a href="#problem">The problem</a>
-        <a href="#product">The product</a>
-        <a href="#inclusion">Impact</a>
-        <a href="#organizations">For organizations</a>
-        <a href="#join">Join us</a>
+        <a className="nav__start" href="/start">Start here</a>
+        <a href="/learn">Learn</a>
+        <a href="/quiz">Investor type</a>
+        <a href="/blog">Writing</a>
+        <a href="/#funance">Play</a>
+        <a href="/#organizations">For organizations</a>
       </div>
       <a className="btn btn-primary" href={KOSH_APP_URL}>
-        Open the beta
+        Try Kosh
       </a>
     </nav>
   );

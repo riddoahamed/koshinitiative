@@ -265,8 +265,10 @@
 .wallet__reset:hover { color: #ff9b6b; }
 
 /* ---- games ---- */
-.games { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-@media (max-width: 940px) { .games { grid-template-columns: 1fr; } }
+/* scoped to the live room — an unscoped `.games` collided with the homepage's
+   `.sec.games` section and squashed it to half width */
+.live .games { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 940px) { .live .games { grid-template-columns: 1fr; } }
 
 .game {
   border: 1px solid var(--stroke); border-radius: 20px; padding: 20px;

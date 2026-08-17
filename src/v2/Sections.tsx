@@ -1,135 +1,175 @@
 import {
-  ShieldCheck,
-  Sparkles,
   ShieldAlert,
   Compass,
-  LineChart,
   PieChart,
-  Gamepad2,
   MoonStar,
-  Factory,
-  Flower2,
-  Bike,
-  Laptop,
-  HardHat,
   ArrowRight,
+  Target,
+  BookOpen,
+  Wallet,
 } from "lucide-react";
-import { KOSH_APP_URL, KOSH_WAITLIST_EMAIL_URL } from "@/lib/links";
+import { KOSH_APP_URL } from "@/lib/links";
+import { PROMISE_CHIPS } from "./copy";
 import ShaderBg from "./ShaderBg";
 import Starfield from "./Starfield";
 
-/* ---------------- ABOUT — one sentence over the living shader ---------------- */
-export const About = () => (
+/* ---------------- PROMISE — the one line, said plainly ----------------
+   First thing after the hero. One sentence a beginner understands, one
+   sentence explaining how, and the low-commitment door as the primary CTA. */
+export const Pitch = () => (
   <section className="sec about" id="about">
     <ShaderBg />
     <div className="veil" aria-hidden="true" />
     <div className="wrap" data-stagger="110">
-      <p className="eyebrow" data-reveal>what kosh is</p>
+      <p className="eyebrow" data-reveal>what kosh does</p>
       <h2 className="h-display" data-reveal>
-        An AI-powered <span className="grad-text">investment discovery</span> and
-        trust platform.
+        We take you from <span className="grad-text">“where do I start?”</span>{" "}
+        to your first real investment.
       </h2>
       <p className="h-sub" data-reveal>
-        A better way for people to learn, understand, and take action with
-        money — starting with the ones traditional finance leaves behind or
-        overwhelms.
+        Free lessons in plain language. Practice on real market prices with
+        money that isn&rsquo;t real. Then one honest answer to the question
+        every app dodges — <strong>what should I actually do?</strong>
       </p>
       <div className="about__ctas" data-reveal="scale">
-        <a className="btn btn-primary" href={KOSH_APP_URL}>Try the beta</a>
-        <a className="btn btn-glass" href={KOSH_WAITLIST_EMAIL_URL}>Join the waitlist</a>
+        <a className="btn btn-primary" href="/start">Learn something free</a>
+        <a className="btn btn-glass" href={KOSH_APP_URL}>Try Kosh</a>
       </div>
       <div className="about__chips" data-reveal="fade">
-        <span>Free to start</span>
-        <span>We never touch your money</span>
-        <span>Starting in Bangladesh</span>
+        {PROMISE_CHIPS.map((c) => <span key={c}>{c}</span>)}
       </div>
     </div>
   </section>
 );
 
-/* ---------------- PROBLEM — two broken things ---------------- */
+/* ---------------- PATHS — the beginner routes, made explicit ----------------
+   The thing the site was missing: an actual door for someone who has never
+   invested and doesn't want a pitch. Three, and they all really work. */
+const DOORS = [
+  {
+    icon: Target,
+    kicker: "60 seconds",
+    t: "What kind of investor am I?",
+    p: "Six honest questions. You get a straight read on where you actually stand — and what to do about it.",
+    href: "/quiz",
+    cta: "Take the quiz",
+    accent: "a",
+  },
+  {
+    icon: BookOpen,
+    kicker: "2 minutes each",
+    t: "Teach me one thing",
+    p: "Six short lessons: what investing is, the buffer that comes first, Sanchaypatra vs DPS, funds, and how a scam here actually sounds.",
+    href: "/learn",
+    cta: "Read a lesson",
+    accent: "b",
+  },
+  {
+    icon: Wallet,
+    kicker: "the whole path",
+    t: "What do I do first?",
+    p: "The full starting order, written out — from your first taka saved to your first real investment. No jargon, nothing sold.",
+    href: "/start",
+    cta: "See the path",
+    accent: "c",
+  },
+];
+
+export const Paths = () => (
+  <section className="sec paths" id="start">
+    <div className="blob m" style={{ width: 420, height: 420, right: "-8%", top: "10%" }} />
+    <div className="wrap">
+      <p className="eyebrow" data-reveal>start here</p>
+      <h2 className="h-display" data-reveal style={{ ["--d" as string]: "80ms" }}>
+        &ldquo;If I were to start investing today&hellip;&rdquo;
+      </h2>
+      <p className="h-sub" data-reveal style={{ ["--d" as string]: "150ms" }}>
+        Pick the door that sounds like you. All three are free, none of them
+        need an account, and every one of them ends with something you can
+        actually do this week.
+      </p>
+      <div className="paths__grid" data-stagger="120">
+        {DOORS.map((d) => (
+          <a className={`door glass ${d.accent}`} key={d.t} href={d.href} data-reveal="scale">
+            <div className="door__icon"><d.icon size={22} strokeWidth={1.9} /></div>
+            <span className="door__kicker">{d.kicker}</span>
+            <h3>{d.t}</h3>
+            <p>{d.p}</p>
+            <span className="door__cta">{d.cta} <ArrowRight size={15} strokeWidth={2.2} /></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+/* ---------------- PROBLEM — two broken things, with the numbers folded in ---------------- */
+const STATS = [
+  {
+    num: <>&lt;2<small>%</small></>,
+    lede: <>of adults here invest in the capital market</>,
+    src: "CDBL · BO accounts",
+  },
+  {
+    num: <>4<small> in </small>5</>,
+    lede: <>lack basic financial literacy</>,
+    src: "S&P Global FinLit Survey",
+  },
+  {
+    num: <><span data-count="53">0</span><small>%</small></>,
+    lede: <>already have a financial account</>,
+    src: "World Bank · Global Findex 2021",
+  },
+];
+
 export const Problem = () => (
   <section className="sec problem" id="problem">
     <Starfield density={1.6} />
     <div className="wrap">
       <p className="eyebrow" data-reveal>the problem</p>
       <h2 className="h-display" data-reveal style={{ ["--d" as string]: "80ms" }}>
-        Advice everywhere. Judgment nowhere.
+        Everyone tells you to invest. Nobody tells you <span className="grad-text">how.</span>
       </h2>
       <p className="h-sub" data-reveal style={{ ["--d" as string]: "160ms" }}>
-        Financial information isn&rsquo;t scarce anymore — it&rsquo;s fragmented,
-        overwhelming, and hard to trust.
+        The information isn&rsquo;t missing anymore. It&rsquo;s scattered across
+        forty tabs, group chats, and gurus selling the basics as masterclasses —
+        and you can&rsquo;t tell which half is lying.
       </p>
 
       <div className="problem__cards">
         <div className="pcard glass a" data-reveal="left">
-          <span className="pcard__tag">discovery is broken</span>
+          <span className="pcard__tag">nobody shows you the how</span>
           <h3>What&rsquo;s actually worth your money?</h3>
           <p>
-            The answer hides across forty tabs, group chats, and gurus selling
-            the basics as masterclasses. <strong>Finding and understanding an
-            opportunity is a full-time job.</strong>
+            Finding one opportunity, checking it, and understanding it is a
+            full-time job. <strong>So most people never get past deciding to
+            decide.</strong>
           </p>
         </div>
         <div className="pcard glass b" data-reveal="right" style={{ ["--d" as string]: "140ms" }}>
-          <span className="pcard__tag">trust is broken</span>
+          <span className="pcard__tag">and trust is broken</span>
           <h3>Decades of scams taught one lesson: stay out.</h3>
           <p>
-            Crashes, Ponzis, and fine print pushed a generation to the
-            sidelines — <strong>fewer than 2 in 100 adults invest</strong> in
-            the capital market.
+            Crashes, Ponzis, and fine print pushed a whole generation to the
+            sidelines — <strong>and staying out has a price nobody quotes
+            you.</strong>
           </p>
         </div>
+      </div>
+
+      <div className="problem__stats" data-stagger="110">
+        {STATS.map((s) => (
+          <div className="mini" key={s.src} data-reveal="fade">
+            <b className="grad-text">{s.num}</b>
+            <span>{s.lede}</span>
+            <i>{s.src}</i>
+          </div>
+        ))}
       </div>
 
       <p className="problem__punch" data-reveal="scale">
         So money sits still — <span className="grad-text">while prices don&rsquo;t.</span>
       </p>
-    </div>
-  </section>
-);
-
-/* ---------------- NUMBERS — access vs confidence ---------------- */
-const STATS = [
-  {
-    num: <><span data-count="53">0</span><small>%</small></>,
-    lede: <>of adults have a financial account. <strong>Access has arrived.</strong></>,
-    src: "World Bank · Global Findex 2021",
-  },
-  {
-    num: <>4<small> in </small>5</>,
-    lede: <>adults lack basic financial literacy. <strong>Confidence hasn&rsquo;t.</strong></>,
-    src: "S&P Global FinLit Survey",
-  },
-  {
-    num: <>&lt;2<small>%</small></>,
-    lede: <>of Bangladeshis invest in the capital market.</>,
-    src: "CDBL · BO accounts",
-  },
-  {
-    num: <>$<span data-count="30">0</span><small>B</small></>,
-    lede: <>sent home yearly by Bangladeshis abroad — asking <strong>“now what?”</strong></>,
-    src: "Bangladesh Bank · FY2025",
-  },
-];
-
-export const Numbers = () => (
-  <section className="sec numbers" id="numbers">
-    <div className="wrap">
-      <p className="eyebrow" data-reveal>the reality</p>
-      <h2 className="h-display" data-reveal style={{ ["--d" as string]: "80ms" }}>
-        Access arrived. <span className="shimmer">Confidence didn&rsquo;t.</span>
-      </h2>
-      <div className="numbers__grid">
-        {STATS.map((s, i) => (
-          <div className="stat glass" key={s.src} data-reveal="scale" style={{ ["--d" as string]: `${i * 110}ms` }}>
-            <div className="stat__num grad-text">{s.num}</div>
-            <p className="stat__lede">{s.lede}</p>
-            <p className="stat__src">{s.src}</p>
-          </div>
-        ))}
-      </div>
-      <p className="numbers__note" data-reveal>public sources · figures rounded</p>
     </div>
   </section>
 );
@@ -197,6 +237,14 @@ const feedTiltReset = (e: { currentTarget: HTMLDivElement }) => {
   e.currentTarget.style.setProperty("--ry", "0deg");
 };
 
+/* the four things that aren't already a step in the loop */
+const EXTRAS = [
+  { icon: ShieldAlert, t: "Scam detection" },
+  { icon: Compass, t: "Personalised guidance" },
+  { icon: PieChart, t: "Portfolio tools" },
+  { icon: MoonStar, t: "Shariah screening" },
+];
+
 export const Product = () => (
   <section className="sec product" id="product">
     <div className="blob p" style={{ width: 460, height: 460, right: "-10%", top: "6%" }} />
@@ -206,7 +254,7 @@ export const Product = () => (
         Agents find it. Humans check it. You get to decide.
       </h2>
       <p className="h-sub" data-reveal style={{ ["--d" as string]: "150ms" }}>
-        Our loop is simple:{" "}
+        Five steps, in this order, every time:{" "}
         <strong>Discover → Verify → Understand → Practise → Invest.</strong>
       </p>
 
@@ -227,6 +275,11 @@ export const Product = () => (
               </div>
             </div>
           ))}
+          <div className="product__extras" data-reveal="fade">
+            {EXTRAS.map((e) => (
+              <span key={e.t}><e.icon size={14} strokeWidth={2} />{e.t}</span>
+            ))}
+          </div>
           <p className="product__note" data-reveal="fade">
             <span className="dot" /> free to start · every partner disclosed · we never hold your funds
           </p>
@@ -251,45 +304,30 @@ export const Product = () => (
   </section>
 );
 
-/* ---------------- PILLARS — everything in one place ---------------- */
-const PILLARS = [
-  { icon: ShieldCheck, t: "Verified data", p: "Real numbers from real sources — never a made-up figure." },
-  { icon: Sparkles, t: "Explainable AI", p: "Guidance that always shows its reasoning, in plain language." },
-  { icon: ShieldAlert, t: "Scam detection", p: "Spot the Ponzi, the fake broker, and the too-good return." },
-  { icon: Compass, t: "Personalised guidance", p: "Answers shaped by your income, goals, and level." },
-  { icon: LineChart, t: "Paper investing", p: "Practise with real markets and zero risk." },
-  { icon: PieChart, t: "Portfolio tools", p: "See what you own, what it costs, and what it earns." },
-  { icon: Gamepad2, t: "Games", p: "Learn money the way you'd actually choose to." },
-  { icon: MoonStar, t: "Shariah screening", p: "Halal filters built in, not bolted on." },
+/* ---------------- IMPACT — who it's for + the inclusion case, merged ----------------
+   Was two sections saying the same thing twice. One now: the lines that land,
+   the people we start with, the literacy → inclusion path, and the SDGs. */
+const AUDIENCE = [
+  "Students",
+  "Freelancers",
+  "Garment & factory workers",
+  "Gig & delivery riders",
+  "Working women",
+  "Day workers",
+  "Diaspora & returnees",
+  "First-time investors",
 ];
 
-export const Pillars = () => (
-  <section className="sec pillars" id="pillars">
-    <div className="wrap">
-      <p className="eyebrow" data-reveal>inside the app</p>
-      <h2 className="h-display" data-reveal style={{ ["--d" as string]: "80ms" }}>
-        Everything you need, <span className="grad-text">in one place.</span>
-      </h2>
-      <p className="h-sub" data-reveal style={{ ["--d" as string]: "150ms" }}>
-        The tools scattered across a dozen apps, brokers, and group chats —
-        gathered into one loop that actually finishes.
-      </p>
-      <div className="pillars__grid" data-stagger="110">
-        {PILLARS.map((c) => (
-          <div className="pillar glass" key={c.t} data-reveal="scale">
-            <div className="pillar__icon"><c.icon size={21} strokeWidth={1.9} /></div>
-            <h3>{c.t}</h3>
-            <p>{c.p}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-);
+const SDGS = [
+  ["1", "No Poverty", "#E5243B"],
+  ["4", "Quality Education", "#C5192D"],
+  ["5", "Gender Equality", "#FF3A21"],
+  ["8", "Decent Work & Growth", "#A21942"],
+  ["10", "Reduced Inequalities", "#DD1367"],
+];
 
-/* ---------------- WHO — for the ones who haven't started ---------------- */
-export const Who = () => (
-  <section className="sec who" id="who">
+export const Impact = () => (
+  <section className="sec who" id="inclusion">
     <div className="wrap">
       <div className="who__inner">
         <p className="eyebrow" data-reveal>who it&rsquo;s for</p>
@@ -309,129 +347,40 @@ export const Who = () => (
             Meanwhile, markets move daily — and <em>waiting has a price.</em>
           </li>
         </ul>
-        <p className="who__close" data-reveal>
-          We start with the people traditional finance leaves behind or
-          overwhelms — <strong>students and freelancers, RMG workers,
-          immigrants, diaspora communities, and first-time investors.</strong>
-        </p>
-        <span className="who__tag" data-reveal>
-          the next generation of retail investors starts here
-        </span>
-      </div>
-    </div>
-  </section>
-);
 
-/* ---------------- INCLUSION / CSR — literacy → inclusion, SDGs ---------------- */
-const AUDIENCES = [
-  {
-    icon: Factory,
-    t: "Garment & factory workers",
-    p: "Cash at the gate becomes a savings habit that outlasts the shift.",
-  },
-  {
-    icon: Flower2,
-    t: "Working women",
-    p: "Money someone else managed becomes independence of her own.",
-  },
-  {
-    icon: Bike,
-    t: "Gig & delivery riders",
-    p: "An income that changes daily meets a plan that stays steady.",
-  },
-  {
-    icon: Laptop,
-    t: "Freelancers",
-    p: "Feast-or-famine invoices turn into a runway they can count on.",
-  },
-  {
-    icon: HardHat,
-    t: "Blue-collar & day workers",
-    p: "Surviving the month becomes building past it.",
-  },
-];
-
-const TEACH = [
-  ["Where the money goes", "Budgeting that survives an irregular, cash-in-hand income."],
-  ["Pay yourself first", "Turning a daily wage into a balance that actually grows."],
-  ["The safety net", "A buffer built before the emergency — not borrowed after it."],
-  ["Money you can trust", "Wallets, banks, and knowing what’s genuinely safe."],
-  ["Breaking the debt cycle", "Spotting the loan that’s designed to trap you."],
-  ["The first taka invested", "The small, confident step from saving to owning."],
-];
-
-const SDGS = [
-  ["1", "No Poverty", "#E5243B"],
-  ["4", "Quality Education", "#C5192D"],
-  ["5", "Gender Equality", "#FF3A21"],
-  ["8", "Decent Work & Growth", "#A21942"],
-  ["10", "Reduced Inequalities", "#DD1367"],
-];
-
-export const Inclusion = () => (
-  <section className="sec inclusion" id="inclusion">
-    <div className="blob m" style={{ width: 440, height: 440, left: "-10%", top: "4%" }} />
-    <div className="blob p" style={{ width: 400, height: 400, right: "-8%", bottom: "6%", animationDelay: "-9s" }} />
-    <div className="wrap">
-      <p className="eyebrow" data-reveal>sustainability · financial inclusion</p>
-      <h2 className="h-display" data-reveal style={{ ["--d" as string]: "80ms" }}>
-        Literacy today. <span className="grad-text">Inclusion tomorrow.</span>
-      </h2>
-      <p className="h-sub" data-reveal style={{ ["--d" as string]: "160ms" }}>
-        Financial confidence shouldn&rsquo;t depend on your collar, your gender,
-        or your payslip. Kosh reaches the people the system overlooked — factory
-        floors, delivery routes, home offices — and walks them from their first
-        budget to their first investment.
-      </p>
-
-      {/* literacy → inclusion path */}
-      <div className="incl__path" data-reveal="scale">
-        <div className="incl__node">
-          <span>today</span>
-          <b>We teach the concepts</b>
-          <p>Free, plain-language personal finance — built for real Bangladeshi wages and lives.</p>
+        <div className="who__aud" data-reveal="fade">
+          {AUDIENCE.map((a) => <span key={a}>{a}</span>)}
         </div>
-        <div className="incl__arrow" aria-hidden="true"><ArrowRight size={22} strokeWidth={2.2} /></div>
-        <div className="incl__node hot">
-          <span>tomorrow</span>
-          <b>We open the door</b>
-          <p>Accounts, safe savings, and first investments — inclusion, not just information.</p>
+
+        <div className="incl__path" data-reveal="scale">
+          <div className="incl__node">
+            <span>today</span>
+            <b>We teach the concepts</b>
+            <p>Free, plain-language money lessons — built for real Bangladeshi wages and lives.</p>
+          </div>
+          <div className="incl__arrow" aria-hidden="true"><ArrowRight size={22} strokeWidth={2.2} /></div>
+          <div className="incl__node hot">
+            <span>tomorrow</span>
+            <b>We open the door</b>
+            <p>Accounts, safe savings, and first investments — inclusion, not just information.</p>
+          </div>
         </div>
-      </div>
 
-      {/* who we bring in */}
-      <h3 className="incl__h" data-reveal>Who we&rsquo;re bringing in</h3>
-      <div className="incl__who" data-stagger="100">
-        {AUDIENCES.map((a) => (
-          <article className="ic glass" key={a.t} data-reveal="scale">
-            <div className="ic__icon"><a.icon size={21} strokeWidth={1.9} /></div>
-            <h4>{a.t}</h4>
-            <p>{a.p}</p>
-          </article>
-        ))}
-      </div>
+        <a className="who__learnlink" href="/learn" data-reveal>
+          The lessons are public — read them without an account
+          <ArrowRight size={15} strokeWidth={2.2} />
+        </a>
 
-      {/* what we teach */}
-      <h3 className="incl__h" data-reveal>What we put in their hands</h3>
-      <ul className="tlist" data-stagger="80">
-        {TEACH.map(([t, d]) => (
-          <li key={t} data-reveal="left">
-            <b>{t}</b>
-            <span>{d}</span>
-          </li>
-        ))}
-      </ul>
-
-      {/* SDG alignment */}
-      <div className="incl__sdg">
-        <p className="incl__sdg-label" data-reveal>Aligned with the UN Sustainable Development Goals</p>
-        <div className="incl__sdg-row" data-stagger="90">
-          {SDGS.map(([n, name, color]) => (
-            <span className="sdg" key={n} data-reveal="scale" style={{ background: color }}>
-              <b>{n}</b>
-              {name}
-            </span>
-          ))}
+        <div className="incl__sdg">
+          <p className="incl__sdg-label" data-reveal>Aligned with the UN Sustainable Development Goals</p>
+          <div className="incl__sdg-row" data-stagger="90">
+            {SDGS.map(([n, name, color]) => (
+              <span className="sdg" key={n} data-reveal="scale" style={{ background: color }}>
+                <b>{n}</b>
+                {name}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </div>

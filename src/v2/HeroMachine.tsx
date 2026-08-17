@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { KOSH_APP_URL, KOSH_WAITLIST_EMAIL_URL } from "@/lib/links";
+import { KOSH_APP_URL } from "@/lib/links";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -134,8 +134,9 @@ const HeroMachine = () => {
     <div ref={wrapRef} className="heroWrap" id="top">
       <header ref={heroRef} className={`hero ${phase}${booted ? " booted" : ""}`}>
         <h1 className="sr">
-          Kosh — an AI-native financial decision and investment discovery
-          platform for emerging markets, starting with Bangladesh.
+          Kosh — from “where do I start?” to your first real investment. Free
+          money lessons, risk-free practice on real market prices, and honest
+          answers. Starting in Bangladesh.
         </h1>
 
         <div ref={stageRef} className="hero__stage">
@@ -186,8 +187,10 @@ const HeroMachine = () => {
                 </div>
               </div>
               <div className="crt__mid">
-                <a className="crt__cta" href={KOSH_APP_URL}>Try the Beta App</a>
-                <a className="crt__cta" href={KOSH_WAITLIST_EMAIL_URL}>Join the Waitlist</a>
+                <div className="crt__ctas">
+                  <a className="crt__cta" href="/start">Learn Something Free</a>
+                  <a className="crt__cta" href={KOSH_APP_URL}>Try Kosh</a>
+                </div>
               </div>
               <button className="crt__explore" onClick={explore}>
                 Explore <span className="arr">⬇</span>
@@ -212,6 +215,19 @@ const HeroMachine = () => {
         </div>
 
         <div className="hero__vign" />
+
+        {/* The one line. Readable before the machine is even switched on —
+            the site should never be a beautiful picture that says nothing. */}
+        <div className="hero__strap">
+          <p className="hero__strap-vp">
+            From <span>&ldquo;where do I start?&rdquo;</span> to your first real
+            investment
+          </p>
+          <p className="hero__strap-sub">
+            Free money lessons · risk-free practice on real prices · we never
+            touch your money
+          </p>
+        </div>
 
         <div className="hero__scrollcue" aria-hidden="true">
           <span>scroll</span>
