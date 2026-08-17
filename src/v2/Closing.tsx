@@ -218,7 +218,8 @@ export const FootV2 = () => (
           <li><a href="/start">If I started today</a></li>
           <li><a href="/quiz">What kind of investor am I?</a></li>
           <li><a href="/learn">Quick lessons</a></li>
-          <li><a href="/blog">Writing &amp; guides</a></li>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="/blog/submit">Write for Kosh</a></li>
           <li><a href="/vote">Kosh Live</a></li>
         </ul>
       </div>
@@ -229,6 +230,7 @@ export const FootV2 = () => (
           <li><a href={KOSH_WAITLIST_EMAIL_URL}>Join the waitlist</a></li>
           <li><a href="/#story">Why Kosh</a></li>
           <li><a href="/#organizations">For organizations</a></li>
+          <li><a href="/feedback">What people are asking for</a></li>
           <li><a href={`mailto:${MAIL}`}>Contact</a></li>
         </ul>
       </div>
@@ -256,10 +258,67 @@ export const FootV2 = () => (
 );
 
 /* ---------------- NAV ----------------
-   `pinned` skips the scroll gate — the sub-pages have no hero to clear, so
-   their nav is visible from the first paint. */
+   Grouped so the whole site is reachable from any page — the flat six-link
+   row left /vote and half the homepage unreachable, and it was display:none
+   below 860px, which meant phones had no navigation at all.
+
+   `pinned` skips the scroll gate: sub-pages have no hero to clear, so their
+   nav is visible from the first paint. */
+
+interface NavItem { label: string; href: string; note?: string }
+interface NavGroup { label: string; items: NavItem[] }
+
+const NAV_GROUPS: NavGroup[] = [
+  {
+    label: "Learn",
+    items: [
+      { label: "Start here", href: "/start", note: "The five-step path" },
+      { label: "Quick lessons", href: "/learn", note: "Two minutes each" },
+      { label: "What kind of investor am I?", href: "/quiz", note: "60 seconds" },
+      { label: "Blog", href: "/blog", note: "Guides, how-tos, questions" },
+      { label: "Write for Kosh", href: "/blog/submit" },
+    ],
+  },
+  {
+    label: "Product",
+    items: [
+      { label: "How it works", href: "/#product", note: "Agents find, humans check" },
+      { label: "The problem", href: "/#problem" },
+      { label: "Games", href: "/#funance", note: "Finance, made playable" },
+      { label: "Kosh Live", href: "/vote", note: "Run a live room" },
+    ],
+  },
+  {
+    label: "Company",
+    items: [
+      { label: "Why Kosh exists", href: "/#story" },
+      { label: "Impact & inclusion", href: "/#inclusion" },
+      { label: "The long game", href: "/#vision" },
+      { label: "For organizations", href: "/#organizations" },
+      { label: "Join us", href: "/#join" },
+    ],
+  },
+];
+
+/** A `/#section` link should scroll, not reload, when we're already there. */
+const useAnchorNav = () =>
+  (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (!href.startsWith("/#")) return;
+    const id = href.slice(2);
+    if (window.location.pathname !== "/") return;
+    const el = document.getElementById(id);
+    if (!el) return;
+    e.preventDefault();
+    el.scrollIntoView({ behavior: "smooth" });
+    window.history.replaceState(null, "", href);
+  };
+
 export const NavV2 = ({ pinned = false }: { pinned?: boolean }) => {
   const [on, setOn] = useState(pinned);
+  const [open, setOpen] = useState<string | null>(null);
+  const [sheet, setSheet] = useState(false);
+  const go = useAnchorNav();
+
   useEffect(() => {
     if (pinned) return;
     const fn = () => setOn(window.scrollY > window.innerHeight * 1.6);
@@ -267,23 +326,103 @@ export const NavV2 = ({ pinned = false }: { pinned?: boolean }) => {
     window.addEventListener("scroll", fn, { passive: true });
     return () => window.removeEventListener("scroll", fn);
   }, [pinned]);
+
+  /* escape closes whatever is open; the sheet locks the page behind it */
+  useEffect(() => {
+    const key = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      setOpen(null);
+      setSheet(false);
+    };
+    window.addEventListener("keydown", key);
+    return () => window.removeEventListener("keydown", key);
+  }, []);
+  useEffect(() => {
+    document.body.style.overflow = sheet ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [sheet]);
+
+  const click = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    go(e, href);
+    setOpen(null);
+    setSheet(false);
+  };
+
   return (
-    <nav className={`nav${on ? " on" : ""}`} aria-label="Main">
-      <a className="nav__brand" href={pinned ? "/" : "#top"}>
-        <img src="/img/kosh-logo.png" alt="" />
-        KOSH
-      </a>
-      <div className="nav__links">
-        <a className="nav__start" href="/start">Start here</a>
-        <a href="/learn">Learn</a>
-        <a href="/quiz">Investor type</a>
-        <a href="/blog">Writing</a>
-        <a href="/#funance">Play</a>
-        <a href="/#organizations">For organizations</a>
+    <>
+      <nav
+        className={`nav${on ? " on" : ""}`}
+        aria-label="Main"
+        onMouseLeave={() => setOpen(null)}
+      >
+        <a className="nav__brand" href="/">
+          <img src="/img/kosh-logo.png" alt="" />
+          KOSH
+        </a>
+
+        <div className="nav__links">
+          <a className="nav__start" href="/start">Start here</a>
+          {NAV_GROUPS.map((g) => (
+            <div
+              className={`navg${open === g.label ? " open" : ""}`}
+              key={g.label}
+              onMouseEnter={() => setOpen(g.label)}
+            >
+              <button
+                className="navg__btn"
+                aria-expanded={open === g.label}
+                onClick={() => setOpen(open === g.label ? null : g.label)}
+              >
+                {g.label}
+                <svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" /></svg>
+              </button>
+              <div className="navg__menu">
+                {g.items.map((i) => (
+                  <a key={i.href} href={i.href} onClick={(e) => click(e, i.href)}>
+                    <b>{i.label}</b>
+                    {i.note && <span>{i.note}</span>}
+                  </a>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="nav__right">
+          <a className="btn btn-primary" href={KOSH_APP_URL}>Try Kosh</a>
+          <button
+            className={`nav__burger${sheet ? " x" : ""}`}
+            aria-label={sheet ? "Close menu" : "Open menu"}
+            aria-expanded={sheet}
+            onClick={() => setSheet(!sheet)}
+          >
+            <i /><i /><i />
+          </button>
+        </div>
+      </nav>
+
+      {/* phones: the full map, because the desktop row can't fit */}
+      <div className={`sheet${sheet ? " on" : ""}`} aria-hidden={!sheet}>
+        <div className="sheet__in">
+          <a className="sheet__cta btn btn-primary" href="/start" onClick={() => setSheet(false)}>
+            Start here — free
+          </a>
+          {NAV_GROUPS.map((g) => (
+            <div className="sheet__g" key={g.label}>
+              <h4>{g.label}</h4>
+              {g.items.map((i) => (
+                <a key={i.href} href={i.href} onClick={(e) => click(e, i.href)}>
+                  {i.label}
+                  {i.note && <span>{i.note}</span>}
+                </a>
+              ))}
+            </div>
+          ))}
+          <a className="sheet__app" href={KOSH_APP_URL}>Try Kosh &rarr;</a>
+        </div>
       </div>
-      <a className="btn btn-primary" href={KOSH_APP_URL}>
-        Try Kosh
-      </a>
-    </nav>
+    </>
   );
 };

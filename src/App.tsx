@@ -11,6 +11,8 @@ import Learn from "./pages/Learn.tsx";
 import Quiz from "./pages/Quiz.tsx";
 import Blog from "./pages/Blog.tsx";
 import Post from "./pages/Post.tsx";
+import Feedback from "./pages/Feedback.tsx";
+import Submit from "./pages/Submit.tsx";
 
 const queryClient = new QueryClient();
 
@@ -31,7 +33,9 @@ const App = () => (
           <Route path="/investor-type" element={<Quiz />} />
           {/* writing */}
           <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/submit" element={<Submit />} />
           <Route path="/blog/:slug" element={<Post />} />
+          <Route path="/feedback" element={<Feedback />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -1,20 +1,28 @@
-import { useEffect, useState } from "react";
-import { ArrowRight, Instagram, Facebook, Linkedin, PenLine } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { ArrowRight, Instagram, Facebook, Linkedin, PenLine, Users } from "lucide-react";
 import PageShell from "@/v2/PageShell";
 import { loadPosts } from "@/v2/postsApi";
-import { SOURCE_LABEL, type Post, type PostSource } from "@/v2/posts";
+import {
+  CATEGORIES,
+  CATEGORY_LABEL,
+  SOURCE_LABEL,
+  type Category,
+  type Post,
+  type PostSource,
+} from "@/v2/posts";
 import { KOSH_APP_URL } from "@/lib/links";
 
 /* ── /blog ────────────────────────────────────────────────────────────────────
-   Everything Kosh writes, in one place: the how-to guides written here, plus
-   whatever went out on LinkedIn, Instagram and Facebook once the sync is
-   connected. Renders from local content first so the page is never empty. */
+   The library: lessons, guides, how-tos and the questions people actually ask,
+   shelved by category. Local articles render immediately; anything synced from
+   social or approved from a submission is merged in on top.                 */
 
 const SOURCE_ICON: Record<PostSource, typeof PenLine> = {
   kosh: PenLine,
   linkedin: Linkedin,
   instagram: Instagram,
   facebook: Facebook,
+  community: Users,
 };
 
 const fmt = (iso: string) =>
@@ -24,9 +32,37 @@ const fmt = (iso: string) =>
     year: "numeric",
   });
 
+const Card = ({ p }: { p: Post }) => {
+  const Icon = SOURCE_ICON[p.source];
+  return (
+    <a className="post glass" href={`/blog/${p.slug}`} data-reveal="scale">
+      {p.cover && (
+        <div className="post__cover">
+          <img src={p.cover} alt="" loading="lazy" decoding="async" />
+        </div>
+      )}
+      <div className="post__body">
+        <span className="post__meta">
+          <b className={`cat cat--${p.category}`}>{CATEGORY_LABEL[p.category]}</b>
+          <em>{p.readMins} min</em>
+          {p.source !== "kosh" && (
+            <i title={SOURCE_LABEL[p.source]}><Icon size={12} strokeWidth={2.2} /></i>
+          )}
+        </span>
+        <h3>{p.title}</h3>
+        <p>{p.dek}</p>
+        <span className="post__foot">
+          <span className="post__go">Read <ArrowRight size={14} strokeWidth={2.4} /></span>
+          <em>{fmt(p.date)}</em>
+        </span>
+      </div>
+    </a>
+  );
+};
+
 const Blog = () => {
   const [posts, setPosts] = useState<Post[] | null>(null);
-  const [filter, setFilter] = useState<PostSource | "all">("all");
+  const [cat, setCat] = useState<Category | "all">("all");
 
   useEffect(() => {
     let live = true;
@@ -36,86 +72,67 @@ const Blog = () => {
     };
   }, []);
 
-  const all = posts ?? [];
-  const sources = [...new Set(all.map((p) => p.source))];
-  const shown = filter === "all" ? all : all.filter((p) => p.source === filter);
+  const all = useMemo(() => posts ?? [], [posts]);
+  /* only offer shelves that actually have something on them */
+  const shelves = useMemo(
+    () => CATEGORIES.filter((c) => all.some((p) => p.category === c.key)),
+    [all]
+  );
+  const shown = cat === "all" ? all : all.filter((p) => p.category === cat);
+  const active = CATEGORIES.find((c) => c.key === cat);
 
   return (
     <PageShell
-      title="Writing"
-      description="How-to guides for the Kosh app, plain-language money explainers for Bangladesh, and everything Kosh posts on LinkedIn, Instagram and Facebook — in one place."
+      title="Blog — money in Bangladesh, explained"
+      description="Free lessons, guides, how-tos and straight answers about money and investing in Bangladesh. How to start, how to spot a scam, how much you need, what Sanchaypatra and DPS really pay, and how to use the Kosh app. No account needed."
       path="/blog"
     >
       <section className="sec page-hero">
         <div className="blob p" style={{ width: 440, height: 440, right: "-10%", top: "-6%" }} />
         <div className="wrap">
-          <p className="eyebrow" data-reveal>writing</p>
+          <p className="eyebrow" data-reveal>blog</p>
           <h2 className="h-display" data-reveal style={{ ["--d" as string]: "70ms" }}>
-            How to use Kosh, and what we&rsquo;re thinking about.
+            Money in Bangladesh, explained one short read at a time.
           </h2>
           <p className="h-sub" data-reveal style={{ ["--d" as string]: "140ms" }}>
-            Guides for the app, plain-language money explainers for Bangladesh,
-            and everything we post on LinkedIn, Instagram and Facebook —
-            collected here so you don&rsquo;t have to follow us anywhere to read
-            it.
+            Lessons, guides, how-tos and straight answers to the questions people
+            actually ask us. Free, no account, no jargon — written for people who
+            are starting out, not for people who already work in finance.
           </p>
+          <div className="blog__actions" data-reveal="fade">
+            <a className="btn btn-glass" href="/blog/submit">Write something for Kosh</a>
+          </div>
         </div>
       </section>
 
       <section className="sec postlist">
         <div className="wrap">
-          {sources.length > 1 && (
-            <div className="pfilter" data-reveal="fade">
+          <div className="pfilter" data-reveal="fade">
+            <button className={cat === "all" ? "on" : ""} onClick={() => setCat("all")}>
+              Everything
+            </button>
+            {shelves.map((c) => (
               <button
-                className={filter === "all" ? "on" : ""}
-                onClick={() => setFilter("all")}
+                key={c.key}
+                className={cat === c.key ? "on" : ""}
+                onClick={() => setCat(c.key)}
               >
-                Everything
+                {c.label}
               </button>
-              {sources.map((s) => (
-                <button
-                  key={s}
-                  className={filter === s ? "on" : ""}
-                  onClick={() => setFilter(s)}
-                >
-                  {SOURCE_LABEL[s]}
-                </button>
-              ))}
-            </div>
-          )}
+            ))}
+          </div>
+
+          {active && <p className="pfilter__blurb">{active.blurb}</p>}
 
           {posts === null ? (
             <div className="pgrid">
-              {[0, 1, 2, 3].map((i) => (
+              {[0, 1, 2, 3, 4, 5].map((i) => (
                 <div className="pcard-skel" key={i} aria-hidden="true" />
               ))}
             </div>
           ) : (
-            <div className="pgrid" data-stagger="90">
-              {shown.map((p) => {
-                const Icon = SOURCE_ICON[p.source];
-                return (
-                  <a className="post glass" key={p.slug} href={`/blog/${p.slug}`} data-reveal="scale">
-                    {p.cover && (
-                      <div className="post__cover">
-                        <img src={p.cover} alt="" loading="lazy" decoding="async" />
-                      </div>
-                    )}
-                    <div className="post__body">
-                      <span className="post__meta">
-                        <i><Icon size={12} strokeWidth={2.2} /> {SOURCE_LABEL[p.source]}</i>
-                        <em>{fmt(p.date)}</em>
-                        <em>{p.readMins} min</em>
-                      </span>
-                      <h3>{p.title}</h3>
-                      <p>{p.dek}</p>
-                      <span className="post__go">
-                        Read <ArrowRight size={14} strokeWidth={2.4} />
-                      </span>
-                    </div>
-                  </a>
-                );
-              })}
+            <div className="pgrid" data-stagger="80">
+              {shown.map((p) => <Card key={p.slug} p={p} />)}
             </div>
           )}
 
@@ -129,7 +146,7 @@ const Blog = () => {
               <a className="btn btn-primary" href={KOSH_APP_URL} target="_blank" rel="noreferrer">
                 Try Kosh <ArrowRight size={16} strokeWidth={2.4} />
               </a>
-              <a className="btn btn-glass" href="/learn">Read a 2-minute lesson</a>
+              <a className="btn btn-glass" href="/learn">Take a 2-minute lesson</a>
             </div>
           </div>
         </div>

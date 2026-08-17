@@ -3,13 +3,17 @@ import { useParams } from "react-router-dom";
 import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 import PageShell from "@/v2/PageShell";
 import { loadPost } from "@/v2/postsApi";
-import { SOURCE_LABEL, type Post as TPost } from "@/v2/posts";
+import { CATEGORY_LABEL, SOURCE_LABEL, type Post as TPost } from "@/v2/posts";
 import { KOSH_APP_URL } from "@/lib/links";
 
 /* ── /blog/:slug ──────────────────────────────────────────────────────────────
    One article. Local posts may carry inline HTML because we wrote them;
-   synced social posts are rendered as plain text, always. That split is
-   enforced here rather than trusted from the data. */
+   anything from the database renders as plain text, always. That split is
+   enforced here rather than trusted from the data.
+
+   LinkedIn posts aren't copied — they render as LinkedIn's own embed, which
+   keeps attribution and engagement where it belongs. `safeEmbedUrl` in
+   postsApi has already checked the host before it reaches this component. */
 
 const fmt = (iso: string) =>
   new Date(iso).toLocaleDateString("en-GB", {
@@ -49,15 +53,15 @@ const Post = () => {
 
   return (
     <PageShell
-      title={found ? found.title : "Writing"}
-      description={found ? found.dek : "Guides, explainers and posts from Kosh."}
+      title={found ? found.title : "Blog"}
+      description={found ? found.dek : "Lessons, guides and how-tos about money in Bangladesh."}
       path={`/blog/${slug}`}
     >
       <article className="sec page-hero article">
         <div className="blob m" style={{ width: 420, height: 420, left: "-12%", top: "-8%" }} />
         <div className="wrap">
           <a className="article__back" href="/blog">
-            <ArrowLeft size={15} strokeWidth={2.2} /> All writing
+            <ArrowLeft size={15} strokeWidth={2.2} /> All posts
           </a>
 
           {post === null && <div className="article__skel" aria-hidden="true" />}
@@ -67,7 +71,7 @@ const Post = () => {
               <h2 className="h-display">We couldn&rsquo;t find that one.</h2>
               <p className="h-sub">
                 It may have moved. Everything we&rsquo;ve written is on the{" "}
-                <a className="ilink" href="/blog">writing page</a>.
+                <a className="ilink" href="/blog">blog</a>.
               </p>
             </>
           )}
@@ -75,22 +79,47 @@ const Post = () => {
           {found && (
             <>
               <span className="article__meta">
-                <i>{SOURCE_LABEL[found.source]}</i>
+                <b className={`cat cat--${found.category}`}>{CATEGORY_LABEL[found.category]}</b>
                 <em>{fmt(found.date)}</em>
                 <em>{found.readMins} min read</em>
+                {found.source !== "kosh" && <i>via {SOURCE_LABEL[found.source]}</i>}
               </span>
               <h2 className="h-display article__h">{found.title}</h2>
               <p className="h-sub">{found.dek}</p>
 
-              {found.cover && (
+              {found.author && (
+                <p className="article__by">
+                  By <b>{found.author}</b>
+                  {found.authorNote && <span> · {found.authorNote}</span>}
+                </p>
+              )}
+
+              {found.cover && !found.embedUrl && (
                 <figure className="article__cover">
                   <img src={found.cover} alt="" loading="lazy" />
                 </figure>
               )}
 
-              <div className="article__body">
-                <Body post={found} />
-              </div>
+              {/* LinkedIn keeps its own frame — we link, we don't reproduce */}
+              {found.embedUrl && (
+                <div className="article__embed">
+                  <iframe
+                    src={found.embedUrl}
+                    title={`${SOURCE_LABEL[found.source]} post`}
+                    frameBorder="0"
+                    allowFullScreen
+                    scrolling="no"
+                    sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  />
+                </div>
+              )}
+
+              {found.body.length > 0 && (
+                <div className="article__body">
+                  <Body post={found} />
+                </div>
+              )}
 
               {found.tags.length > 0 && (
                 <div className="article__tags">
@@ -105,7 +134,7 @@ const Post = () => {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Originally posted on {SOURCE_LABEL[found.source]}
+                  Read the original on {SOURCE_LABEL[found.source]}
                   <ExternalLink size={14} strokeWidth={2.2} />
                 </a>
               )}
@@ -128,6 +157,7 @@ const Post = () => {
                 Educational only. Kosh is not a licensed financial adviser, we
                 never take custody of your money, and nothing here is a
                 recommendation to buy any specific product.
+                {found.source === "community" && " Community posts are the author’s own view."}
               </p>
             </>
           )}
