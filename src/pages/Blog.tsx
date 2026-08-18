@@ -99,9 +99,11 @@ const Blog = () => {
             actually ask us. Free, no account, no jargon — written for people who
             are starting out, not for people who already work in finance.
           </p>
-          <div className="blog__actions" data-reveal="fade">
-            <a className="btn btn-glass" href="/blog/submit">Write something for Kosh</a>
-          </div>
+          <p className="blog__who" data-reveal="fade">
+            Written by the Kosh team, by readers, and by people who know a
+            subject properly. <a href="/blog/submit">Send us yours</a> — we read
+            everything and publish the good ones.
+          </p>
         </div>
       </section>
 
@@ -135,6 +137,21 @@ const Blog = () => {
               {shown.map((p) => <Card key={p.slug} p={p} />)}
             </div>
           )}
+
+          <div className="contrib" data-reveal="scale">
+            <div>
+              <p className="eyebrow">write for this page</p>
+              <h3>Know something worth knowing?</h3>
+              <p className="contrib__p">
+                Anyone can write here — readers, students, accountants, brokers,
+                anyone who has learned something the hard way. A human reads
+                every submission and edits before it goes live.
+              </p>
+            </div>
+            <a className="btn btn-glass" href="/blog/submit">
+              Submit your writing <ArrowRight size={16} strokeWidth={2.4} />
+            </a>
+          </div>
 
           <div className="page-cta" data-reveal="scale">
             <h3>Reading about it only gets you so far.</h3>

@@ -183,7 +183,7 @@ const HeroMachine = () => {
                   <a href="#problem">The Problem</a>
                   <a href="#product">The Product</a>
                   <a href="#story">About Us</a>
-                  <a className="crt__fun" href="/vote">Funance</a>
+                  <a className="crt__fun" href="#funance">Funance</a>
                 </div>
               </div>
               <div className="crt__mid">

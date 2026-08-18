@@ -6,9 +6,13 @@ import { CATEGORIES, type Category } from "@/v2/posts";
 import { MAIL } from "@/v2/copy";
 
 /* ── /blog/submit ─────────────────────────────────────────────────────────────
-   Anyone can write for Kosh. Nothing goes live on its own — every submission
-   lands in the moderation queue and a human publishes it. That rule is
-   enforced by the database policy, not by this form. */
+   One blog, three kinds of author: the Kosh team, readers, and people who know
+   a subject properly. This is the door for the last two — deliberately not a
+   nav destination of its own, it hangs off /blog.
+
+   Nothing goes live on its own. Every submission lands in the moderation queue
+   and a human publishes it, and that rule is enforced by the database policy,
+   not by this form. */
 
 const EMPTY: Submission = {
   title: "",
@@ -56,7 +60,7 @@ const Submit = () => {
 
   return (
     <PageShell
-      title="Write for Kosh"
+      title="Submit to the Kosh blog"
       description="Submit a lesson, guide, how-to or answer for the Kosh blog. Everything is reviewed by a human before it goes live."
       path="/blog/submit"
     >
@@ -92,15 +96,21 @@ const Submit = () => {
             </div>
           ) : (
             <>
-              <p className="eyebrow" data-reveal>write for kosh</p>
+              <p className="eyebrow" data-reveal>submit to the blog</p>
               <h2 className="h-display" data-reveal style={{ ["--d" as string]: "70ms" }}>
                 Know something worth knowing? Write it down.
               </h2>
               <p className="h-sub" data-reveal style={{ ["--d" as string]: "130ms" }}>
-                Lessons, guides, how-tos, or an honest answer to a question
-                people keep asking. Plain language, no hype, and nothing that
-                tells anyone what to buy. A human reads every submission before
-                it goes anywhere near the site.
+                The Kosh blog is written by our team, by readers, and by people
+                who know a subject properly — accountants, brokers, teachers,
+                and anyone who learned something the hard way. Send us a lesson,
+                a guide, a how-to, or an honest answer to a question people keep
+                asking.
+              </p>
+              <p className="h-sub" data-reveal style={{ ["--d" as string]: "180ms" }}>
+                Plain language, no hype, and nothing that tells anyone what to
+                buy. A human reads every submission before it goes anywhere near
+                the site.
               </p>
 
               <form className="wform" onSubmit={send} data-reveal="scale">

@@ -8,6 +8,7 @@ import { Orgs, Vision, Founder, Join, FootV2, NavV2 } from "@/v2/Closing";
 import { Funance } from "@/v2/Funance";
 import { initFx } from "@/v2/fx";
 import { VP_LONG } from "@/v2/copy";
+import { SCROLL_LOCK_EVENT } from "@/v2/scrollLock";
 import { applySeo } from "@/lib/seo";
 import "@/v2/v2.css";
 
@@ -53,7 +54,18 @@ const Index = () => {
       const raf = (time: number) => lenis?.raf(time * 1000);
       gsap.ticker.add(raf);
       gsap.ticker.lagSmoothing(0);
+
+      /* an overlay is open — Lenis would otherwise keep scrolling the page
+         underneath it, since it never consults overflow */
+      const onLock = (e: Event) => {
+        const { locked } = (e as CustomEvent<{ locked: boolean }>).detail;
+        if (locked) lenis?.stop();
+        else lenis?.start();
+      };
+      window.addEventListener(SCROLL_LOCK_EVENT, onLock);
+
       return () => {
+        window.removeEventListener(SCROLL_LOCK_EVENT, onLock);
         gsap.ticker.remove(raf);
         lenis?.destroy();
         cleanup();

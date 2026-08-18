@@ -409,7 +409,7 @@
   transition: color 0.15s, text-shadow 0.15s;
 }
 .crt__nav a:hover { color: var(--lime); }
-/* the one that isn't a page — it's the live room */
+/* the playable half of the site — games + the live room */
 .crt__fun { color: var(--lime) !important; position: relative; }
 .crt__fun::after {
   content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px;
@@ -1610,3 +1610,33 @@
   .page-cta__row .btn { width: 100%; max-width: 340px; }
   .result__foot .btn { width: 100%; max-width: 340px; justify-content: center; }
 }
+
+/* who writes here — sits under the blog intro */
+.blog__who {
+  margin-top: 22px; max-width: 56ch;
+  font-size: 14.5px; line-height: 1.7; color: var(--muted);
+}
+.blog__who a {
+  color: var(--lime);
+  border-bottom: 1px dashed hsl(85 95% 65% / 0.45); padding-bottom: 1px;
+  transition: border-color 0.2s;
+}
+.blog__who a:hover { border-bottom-color: var(--lime); }
+
+/* contribute band — the blog is one page, not a page plus a "write for us" page */
+.contrib {
+  margin-top: clamp(44px, 5vw, 64px);
+  padding: clamp(26px, 3.4vw, 38px);
+  border-radius: 22px; border: 1px dashed rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.02);
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 28px; flex-wrap: wrap;
+}
+.contrib .eyebrow { margin-bottom: 14px; }
+.contrib h3 { font-size: clamp(20px, 2.4vw, 26px); }
+.contrib__p {
+  margin-top: 10px; max-width: 52ch;
+  font-size: 14.5px; line-height: 1.65; color: var(--muted);
+}
+.contrib .btn { flex: none; }
+@media (max-width: 700px) { .contrib .btn { width: 100%; } }

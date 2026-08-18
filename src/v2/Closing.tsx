@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { ArrowUpRight, GraduationCap, Landmark, BarChart3 } from "lucide-react";
 import { KOSH_APP_URL, KOSH_WAITLIST_EMAIL_URL } from "@/lib/links";
 import { MAIL, mailto, VP_SHORT } from "./copy";
+import { setScrollLock } from "./scrollLock";
 import ShaderBg from "./ShaderBg";
 import Starfield from "./Starfield";
 import QrCode from "./QrCode";
@@ -219,7 +220,6 @@ export const FootV2 = () => (
           <li><a href="/quiz">What kind of investor am I?</a></li>
           <li><a href="/learn">Quick lessons</a></li>
           <li><a href="/blog">Blog</a></li>
-          <li><a href="/blog/submit">Write for Kosh</a></li>
           <li><a href="/vote">Kosh Live</a></li>
         </ul>
       </div>
@@ -270,13 +270,13 @@ interface NavGroup { label: string; items: NavItem[] }
 
 const NAV_GROUPS: NavGroup[] = [
   {
-    label: "Learn",
+    label: "Company",
     items: [
-      { label: "Start here", href: "/start", note: "The five-step path" },
-      { label: "Quick lessons", href: "/learn", note: "Two minutes each" },
-      { label: "What kind of investor am I?", href: "/quiz", note: "60 seconds" },
-      { label: "Blog", href: "/blog", note: "Guides, how-tos, questions" },
-      { label: "Write for Kosh", href: "/blog/submit" },
+      { label: "Why Kosh exists", href: "/#story", note: "We watched people freeze" },
+      { label: "Impact & inclusion", href: "/#inclusion" },
+      { label: "The long game", href: "/#vision" },
+      { label: "For organizations", href: "/#organizations", note: "Programs & partners" },
+      { label: "Join us", href: "/#join", note: "Careers, campus, research" },
     ],
   },
   {
@@ -289,13 +289,12 @@ const NAV_GROUPS: NavGroup[] = [
     ],
   },
   {
-    label: "Company",
+    label: "Learn",
     items: [
-      { label: "Why Kosh exists", href: "/#story" },
-      { label: "Impact & inclusion", href: "/#inclusion" },
-      { label: "The long game", href: "/#vision" },
-      { label: "For organizations", href: "/#organizations" },
-      { label: "Join us", href: "/#join" },
+      { label: "Start here", href: "/start", note: "The five-step path" },
+      { label: "Quick lessons", href: "/learn", note: "Two minutes each" },
+      { label: "What kind of investor am I?", href: "/quiz", note: "60 seconds" },
+      { label: "Blog", href: "/blog", note: "Lessons, guides, how-tos" },
     ],
   },
 ];
@@ -338,10 +337,9 @@ export const NavV2 = ({ pinned = false }: { pinned?: boolean }) => {
     return () => window.removeEventListener("keydown", key);
   }, []);
   useEffect(() => {
-    document.body.style.overflow = sheet ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
+    if (!sheet) return;
+    setScrollLock(true);
+    return () => setScrollLock(false);
   }, [sheet]);
 
   const click = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
