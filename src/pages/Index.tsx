@@ -6,6 +6,7 @@ import HeroMachine from "@/v2/HeroMachine";
 import { Pitch, Paths, Problem, Product, Impact } from "@/v2/Sections";
 import { Orgs, Vision, Founder, Join, FootV2, NavV2 } from "@/v2/Closing";
 import { Funance } from "@/v2/Funance";
+import { Screens } from "@/v2/Screens";
 import { initFx } from "@/v2/fx";
 import { VP_LONG } from "@/v2/copy";
 import { SCROLL_LOCK_EVENT } from "@/v2/scrollLock";
@@ -84,6 +85,7 @@ const Index = () => {
         <Paths />
         <Problem />
         <Product />
+        <Screens />
         <Funance />
         <Impact />
         <Orgs />

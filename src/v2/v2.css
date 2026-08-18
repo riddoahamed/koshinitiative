@@ -686,7 +686,7 @@
 @media (max-width: 900px) { .paths__grid { grid-template-columns: 1fr; } }
 
 /* ============================================================
-   PRODUCT — agents + humans + feed
+   PRODUCT — the loop, beside a real screenshot
    ============================================================ */
 .product { background: var(--bg2); }
 .product__grid {
@@ -720,55 +720,9 @@
 }
 .product__note .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--mint); animation: ledPulse 2s infinite; }
 
-/* feed device */
-.feed {
-  position: relative;
-  width: min(360px, 100%); margin: 0 auto;
-  border-radius: 34px;
-  padding: 16px 14px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.03));
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  box-shadow: 0 40px 90px -40px rgba(0, 0, 0, 0.85), 0 0 60px -24px hsl(270 95% 65% / 0.35);
-  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-  transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
-  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-.feed::before {
-  content: ""; display: block; width: 74px; height: 5px; border-radius: 99px;
-  background: rgba(255, 255, 255, 0.16); margin: 2px auto 12px;
-}
-.feed__win { height: 430px; overflow: hidden; border-radius: 20px; position: relative; }
-.feed__win::before, .feed__win::after {
-  content: ""; position: absolute; left: 0; right: 0; height: 44px; z-index: 2; pointer-events: none;
-}
-.feed__win::before { top: 0; background: linear-gradient(180deg, hsl(250 30% 11%) 0%, transparent 100%); }
-.feed__win::after { bottom: 0; background: linear-gradient(0deg, hsl(250 30% 11%) 0%, transparent 100%); }
-.feed__track { display: flex; flex-direction: column; gap: 12px; animation: feedRoll 26s linear infinite; }
-.feed:hover .feed__track { animation-play-state: paused; }
-@keyframes feedRoll { to { transform: translateY(calc(-50% - 6px)); } }
+/* the real Discover screenshot sits where the hand-drawn feed used to */
+.product__shot { width: min(280px, 100%); margin: 0 auto; }
 
-.fcard {
-  background: hsl(250 30% 13% / 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px; padding: 15px 16px;
-  flex: none;
-}
-.fcard__tags { display: flex; gap: 6px; margin-bottom: 9px; flex-wrap: wrap; }
-.fcard__tags i {
-  font-style: normal; font-family: var(--font-m); font-size: 9.5px; letter-spacing: 0.1em;
-  text-transform: uppercase; padding: 3px 8px; border-radius: 6px;
-}
-.fcard__tags .t1 { color: var(--mint); background: hsl(156 85% 62% / 0.1); }
-.fcard__tags .t2 { color: var(--lime); background: hsl(85 95% 65% / 0.1); }
-.fcard__tags .t3 { color: var(--purple); background: hsl(270 95% 65% / 0.12); }
-.fcard h4 { margin: 0; font-family: var(--font-h); font-weight: 800; font-size: 15px; color: var(--fg); }
-.fcard p { margin-top: 5px; font-size: 12.5px; color: var(--muted); line-height: 1.5; }
-.fcard__meta {
-  display: flex; justify-content: space-between; align-items: center;
-  margin-top: 11px; padding-top: 10px; border-top: 1px solid rgba(255, 255, 255, 0.07);
-  font-family: var(--font-m); font-size: 10px; color: rgba(242, 242, 247, 0.45);
-}
-.fcard__meta b { color: var(--mint); font-weight: 500; }
 @media (max-width: 880px) { .product__grid { grid-template-columns: 1fr; } }
 
 /* ============================================================
@@ -1082,8 +1036,6 @@
   .about__chips span { font-size: 10px; padding: 7px 12px; }
   .problem__punch { font-size: 19px; }
   .stat { text-align: left; }
-  .feed { width: min(320px, 100%); }
-  .feed__win { height: 380px; }
   .pstep p { max-width: none; }
   .who__lines li { font-size: 18px; }
   .orgs__inner, .who__inner { max-width: none; }
@@ -1104,7 +1056,6 @@
 @media (prefers-reduced-motion: reduce) {
   .v2 *, .v2 *::before, .v2 *::after { animation: none !important; transition-duration: 0.01ms !important; }
   .v2 [data-reveal] { opacity: 1; transform: none; }
-  .feed__track { animation: none !important; }
 }
 
 /* deterministic still render (?still=1) for QA and captures */
@@ -1640,3 +1591,125 @@
 }
 .contrib .btn { flex: none; }
 @media (max-width: 700px) { .contrib .btn { width: 100%; } }
+
+/* ============================================================
+   THE ACTUAL PRODUCT — real screenshots in CSS device frames
+
+   Frames are drawn, not photographed: a mockup PNG would outweigh every
+   screenshot on this page combined and still go soft on a retina display.
+   ============================================================ */
+.screens { background: linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%); }
+
+.showcase {
+  margin-top: clamp(52px, 6vw, 78px);
+  display: grid; gap: clamp(40px, 5vw, 64px);
+  justify-items: center;
+}
+
+/* ---- shared ---- */
+.dev { margin: 0; }
+.dev figcaption {
+  margin-top: 16px; text-align: center;
+  font-family: var(--font-m); font-size: 11px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: rgba(242, 242, 247, 0.42); line-height: 1.6;
+}
+.dev__screen { position: relative; overflow: hidden; background: #000; }
+.dev__screen img { width: 100%; height: auto; display: block; }
+
+/* ---- laptop ---- */
+.dev--mac { width: min(880px, 100%); }
+.dev--mac .dev__lid {
+  border-radius: 14px;
+  padding: 11px 11px 26px;
+  background: linear-gradient(165deg, #3a3d47, #16181f 42%, #24262e);
+  box-shadow:
+    0 40px 90px -40px rgba(0, 0, 0, 0.9),
+    0 0 0 1px rgba(255, 255, 255, 0.09) inset,
+    0 1px 0 rgba(255, 255, 255, 0.14) inset;
+  position: relative;
+}
+/* camera */
+.dev--mac .dev__lid::before {
+  content: ""; position: absolute; top: 5px; left: 50%; transform: translateX(-50%);
+  width: 5px; height: 5px; border-radius: 50%;
+  background: #0c0d11; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.07);
+}
+/* chin wordmark */
+.dev--mac .dev__lid::after {
+  content: ""; position: absolute; bottom: 9px; left: 50%; transform: translateX(-50%);
+  width: 46px; height: 5px; border-radius: 3px; background: rgba(255, 255, 255, 0.12);
+}
+.dev--mac .dev__screen { border-radius: 5px; }
+.dev--mac .dev__base {
+  height: 13px; margin: 0 auto;
+  width: 116%; max-width: 116%; margin-left: -8%;
+  border-radius: 0 0 13px 13px;
+  background: linear-gradient(180deg, #2a2d35, #15171d 62%, #0d0e12);
+  box-shadow: 0 22px 34px -22px rgba(0, 0, 0, 0.95);
+  position: relative;
+}
+/* the notch you push a finger into to open the lid */
+.dev--mac .dev__base::after {
+  content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 96px; height: 6px; border-radius: 0 0 8px 8px;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+/* ---- phones ---- */
+.showcase__phones {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: clamp(18px, 3vw, 40px); width: 100%;
+}
+.dev--phone { justify-self: center; width: min(260px, 100%); }
+.dev--phone .dev__screen {
+  border-radius: 40px;
+  border: 9px solid #101218;
+  background: #000;
+  box-shadow:
+    0 0 0 1.5px #3a3d47,
+    0 0 0 3px #16181f,
+    0 34px 70px -30px rgba(0, 0, 0, 0.92),
+    0 0 60px -30px hsl(270 95% 65% / 0.45);
+}
+/* the strip a real phone reserves above the app */
+.dev--phone .dev__status {
+  position: relative; z-index: 2;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 38px; padding: 0 20px 0 24px;
+  background: #000; color: #fff;
+}
+.dev--phone .dev__time {
+  font-family: var(--font-h); font-weight: 700; font-size: 12.5px;
+  letter-spacing: 0.01em;
+}
+.dev--phone .dev__island {
+  position: absolute; left: 50%; top: 7px; transform: translateX(-50%);
+  width: 33%; height: 23px; border-radius: 99px;
+  background: #000; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+.dev--phone .dev__icons { width: 46px; height: 9px; color: #fff; }
+/* the middle phone sits proud, so the row reads as a product shot */
+@media (min-width: 861px) {
+  .showcase__phones { align-items: center; }
+  .dev--phone:nth-child(2) { transform: translateY(-26px) scale(1.06); z-index: 2; }
+  .dev--phone:nth-child(1) { transform: rotate(-1.4deg); }
+  .dev--phone:nth-child(3) { transform: rotate(1.4deg); }
+}
+@media (max-width: 860px) {
+  .showcase__phones { grid-template-columns: 1fr; gap: 44px; }
+  .dev--phone { width: min(280px, 82vw); }
+}
+
+.screens__cta {
+  margin-top: clamp(46px, 5vw, 66px);
+  display: flex; align-items: center; justify-content: center;
+  gap: 16px 26px; flex-wrap: wrap; text-align: center;
+}
+.screens__cta p {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-family: var(--font-m); font-size: 12px; color: var(--muted);
+}
+.screens__cta .dot {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--mint);
+  animation: ledPulse 2s infinite;
+}

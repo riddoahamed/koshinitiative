@@ -175,67 +175,6 @@ export const Problem = () => (
 );
 
 /* ---------------- PRODUCT — agents scan, humans check, you decide ---------------- */
-const FEED = [
-  {
-    tags: [["t1", "mutual fund"], ["t2", "halal ✓"]],
-    h: "AIMS 1st Fund — NAV dips below 5-year average",
-    p: "Dividend season is close. Here's what a NAV dip means — and doesn't.",
-    why: "why it surfaced: value signal",
-  },
-  {
-    tags: [["t2", "gold"], ["t3", "explainer"]],
-    h: "Gold is up 4% this month",
-    p: "The 2-minute version of inflation hedging — before you follow the crowd.",
-    why: "agent found · human checked",
-  },
-  {
-    tags: [["t1", "sanchaypatra"]],
-    h: "Sanchaypatra rates revised",
-    p: "Old vs new rates, compared. What changes if you already hold one.",
-    why: "source: national savings directorate",
-  },
-  {
-    tags: [["t3", "dse"], ["t2", "dividend"]],
-    h: "GP declares 125% cash dividend",
-    p: "What a dividend actually pays you — beginner math, real numbers.",
-    why: "agent found · human checked",
-  },
-  {
-    tags: [["t2", "habit"]],
-    h: "Your emergency fund beats every tip",
-    p: "Three months of expenses, parked safely — the boring move that wins.",
-    why: "kosh fundamentals",
-  },
-];
-
-const FeedCard = ({ c }: { c: (typeof FEED)[number] }) => (
-  <article className="fcard">
-    <div className="fcard__tags">
-      {c.tags.map(([cls, t]) => (
-        <i key={t} className={cls}>{t}</i>
-      ))}
-    </div>
-    <h4>{c.h}</h4>
-    <p>{c.p}</p>
-    <div className="fcard__meta">
-      <span>{c.why}</span>
-      <b>✓✓</b>
-    </div>
-  </article>
-);
-
-const feedTilt = (e: { currentTarget: HTMLDivElement; clientX: number; clientY: number }) => {
-  const el = e.currentTarget;
-  const r = el.getBoundingClientRect();
-  const x = (e.clientX - r.left) / r.width - 0.5;
-  const y = (e.clientY - r.top) / r.height - 0.5;
-  el.style.setProperty("--ry", `${x * 7}deg`);
-  el.style.setProperty("--rx", `${-y * 7}deg`);
-};
-const feedTiltReset = (e: { currentTarget: HTMLDivElement }) => {
-  e.currentTarget.style.setProperty("--rx", "0deg");
-  e.currentTarget.style.setProperty("--ry", "0deg");
-};
 
 /* the four things that aren't already a step in the loop */
 const EXTRAS = [
@@ -285,20 +224,25 @@ export const Product = () => (
           </p>
         </div>
 
-        <div
-          className="feed"
-          data-reveal="right"
-          aria-label="Example of the Kosh discovery feed"
-          onMouseMove={feedTilt}
-          onMouseLeave={feedTiltReset}
-        >
-          <div className="feed__win">
-            <div className="feed__track">
-              {FEED.map((c) => <FeedCard key={c.h} c={c} />)}
-              {FEED.map((c) => <FeedCard key={`${c.h}-2`} c={c} />)}
-            </div>
+        {/* the real Discover feed, screenshotted from the app in guest mode —
+            this used to be a hand-written imitation with invented fund names */}
+        <figure className="dev dev--phone product__shot" data-reveal="right">
+          <div className="dev__screen">
+            <span className="dev__status" aria-hidden="true">
+              <span className="dev__time">9:41</span>
+              <span className="dev__island" />
+            </span>
+            <img
+              src="/img/app/discover.webp"
+              alt="The Kosh Discover feed on a phone: browse-by-type circles for savings, government-backed, halal assets, alternative and gold, then a Fixed Deposit card showing 8.5–10%, the top rate, the minimum, and the tax treatment"
+              loading="lazy"
+              decoding="async"
+              width={780}
+              height={1688}
+            />
           </div>
-        </div>
+          <figcaption>Discover · the real feed, screenshotted today</figcaption>
+        </figure>
       </div>
     </div>
   </section>
