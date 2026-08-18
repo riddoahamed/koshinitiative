@@ -89,9 +89,9 @@ const Learn = () => {
           <div className="page-cta" data-reveal="scale">
             <h3>Reading is the easy half.</h3>
             <p>
-              Now do it with money that isn&rsquo;t real. The app puts these
-              lessons to work — paper investing on real market prices, an AI
-              coach that knows Bangladeshi products, and the games. Free.
+              Now do it with money that isn&rsquo;t real. The app puts these lessons
+              to work: paper investing on real market prices, an AI coach that
+              knows Bangladeshi products, and the games. Free.
             </p>
             <div className="page-cta__row">
               <a className="btn btn-primary" href={KOSH_APP_URL} target="_blank" rel="noreferrer">
@@ -104,8 +104,8 @@ const Learn = () => {
           <p className="disclaim" data-reveal="fade">
             Educational only. Kosh is not a licensed financial adviser, we never
             take custody of your money, and nothing here is a recommendation to
-            buy any specific product. Rates and rules change — check current
-            terms with the institution before you commit.
+            buy any specific product. Rates and rules change, so check current terms
+            with the institution before you commit.
           </p>
         </div>
       </section>

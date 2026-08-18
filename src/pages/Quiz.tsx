@@ -52,8 +52,8 @@ const Quiz = () => {
               </h2>
               <p className="h-sub" data-reveal style={{ ["--d" as string]: "130ms" }}>
                 Not a personality test. Six honest questions about your buffer,
-                your income and what you&rsquo;d really do on a red month — and
-                a straight answer about where to start.
+                your income and what you&rsquo;d really do on a red month, plus a
+                straight answer about where to start.
               </p>
 
               <div className="quiz" data-reveal="scale">
@@ -136,9 +136,9 @@ const Quiz = () => {
               </div>
 
               <p className="disclaim">
-                Educational only. This is orientation, not personalised
-                financial advice — Kosh is not a licensed adviser and never
-                takes custody of your money.
+                Educational only. This is orientation, not personalised financial
+                advice. Kosh is not a licensed adviser and never takes custody
+                of your money.
               </p>
             </div>
           )}

@@ -17,8 +17,8 @@ export const Orgs = () => (
           Bring Kosh to the people you serve.
         </h2>
         <p className="h-sub" data-reveal style={{ ["--d" as string]: "150ms" }}>
-          Learning stays free for everyone. Institutions run Kosh as a program —
-          and financial partners meet people who arrive already informed.
+          Learning stays free for everyone. Institutions run Kosh as a program, and
+          financial partners meet people who arrive already informed.
         </p>
         <div className="orows" data-stagger="130">
           <div className="orow" data-reveal="left">
@@ -26,9 +26,8 @@ export const Orgs = () => (
             <div>
               <h3>Campus &amp; workplace programs</h3>
               <p>
-                Run a cohort at your university, factory, or office — a live
-                session to start, then per-seat access for everyone who keeps
-                going.
+                Run a cohort at your university, factory, or office: a live session
+                to start, then per-seat access for everyone who keeps going.
               </p>
             </div>
           </div>
@@ -38,7 +37,7 @@ export const Orgs = () => (
               <h3>Financial partners</h3>
               <p>
                 Brokers, asset managers, and banks reach people who arrive ready,
-                with a pre-filled application. One flat fee per funded account —
+                with a pre-filled application. One flat fee per funded account,
                 identical for every partner, disclosed on the card.
               </p>
             </div>
@@ -49,14 +48,14 @@ export const Orgs = () => (
               <h3>Outcomes you can audit</h3>
               <p>
                 Every cohort is instrumented. See what people learned, practised,
-                and actually did with their money — not an attendance sheet.
+                and actually did with their money. Not an attendance sheet.
               </p>
             </div>
           </div>
         </div>
         <p className="orgs__note" data-reveal="fade">
           We never hold anyone&rsquo;s money. Accounts are opened at a named
-          institution on disclosed terms — and no verdict is ever purchasable.
+          institution on disclosed terms, and no verdict is ever purchasable.
         </p>
         <div className="orgs__cta" data-reveal>
           <a className="btn" href={mailto("Kosh partnership")}>Work with us</a>
@@ -78,7 +77,7 @@ export const Vision = () => (
       </h2>
       <p className="h-sub" data-reveal style={{ ["--d" as string]: "150ms" }}>
         Starting in Bangladesh, Kosh connects financial uncertainty with real
-        opportunity — helping people move safely from curiosity to confident
+        opportunity, helping people move safely from curiosity to confident
         action. The same gap exists across every emerging market we know.
       </p>
 
@@ -86,7 +85,7 @@ export const Vision = () => (
         <div className="vcol now" data-reveal>
           <span className="vcol__tag"><span className="live" /> now</span>
           <ul>
-            <li>Bangladesh <span>— live in beta</span></li>
+            <li>Bangladesh <span>· live in beta</span></li>
             <li>Discovery, learning, paper investing</li>
           </ul>
         </div>
@@ -101,14 +100,14 @@ export const Vision = () => (
           <span className="vcol__tag">later</span>
           <ul>
             <li>Regulated investing</li>
-            <li>Diaspora corridors <span>— Dubai, Toronto, London</span></li>
+            <li>Diaspora corridors <span>· Dubai, Toronto, London</span></li>
           </ul>
         </div>
       </div>
 
       <p className="vision__close" data-reveal>
         The future of finance isn&rsquo;t more information. It&rsquo;s{" "}
-        <span className="shimmer">better decisions</span> — made possible for
+        <span className="shimmer">better decisions</span>, made possible for
         everyone.
       </p>
     </div>
@@ -121,21 +120,21 @@ export const Founder = () => (
     <div className="wrap">
       <p className="eyebrow" data-reveal>why kosh exists</p>
       <h2 className="h-display" data-reveal style={{ ["--d" as string]: "80ms" }}>
-        We watched people learn — and still freeze.
+        We watched people learn, and still freeze.
       </h2>
 
       <div className="founder__card" data-reveal>
         <div className="founder__letter">
           <p>
-            Kosh began as a literacy project — workshops, posters, a small
+            Kosh began as a literacy project: workshops, posters, a small
             gamified app. It worked. People learned. Then, at the last step,
             almost everyone froze at the same question:{" "}
             <em>“Okay… but what should I do?”</em>
           </p>
           <p>
             More content wasn&rsquo;t the answer. A platform that helps you{" "}
-            <em>decide</em> was. So we&rsquo;re building it — honestly, in
-            public, from Dhaka.
+            <em>decide</em> was. So we&rsquo;re building it, honestly, in public,
+            from Dhaka.
           </p>
           <div className="founder__sig">
             <b>Sheikh Sajid Ahamed</b>
@@ -150,7 +149,7 @@ export const Founder = () => (
         <figure className="founder__poster">
           <img
             src="/img/poster-v1.jpg"
-            alt="The original Kosh V1 poster — Learn small. Grow big."
+            alt="The original Kosh V1 poster. Learn small. Grow big."
             loading="lazy"
           />
           <figcaption>where it started · v1</figcaption>
@@ -163,10 +162,10 @@ export const Founder = () => (
 /* ---------------- JOIN ---------------- */
 const TRACKS = [
   { t: "Careers", p: "Small team, huge surface area. Ship things that matter.", s: "Careers at Kosh" },
-  { t: "Internships", p: "Real product, real users, real responsibility — in weeks.", s: "Kosh internship" },
+  { t: "Internships", p: "Real product, real users, real responsibility, in weeks.", s: "Kosh internship" },
   { t: "Campus ambassadors", p: "Bring Kosh to your university. Lead the money conversation.", s: "Kosh campus ambassador" },
   { t: "Research", p: "Study financial confidence and inclusion with us.", s: "Kosh research collaboration" },
-  { t: "Partnerships", p: "Banks, brokers, NGOs, employers — build it with us.", s: "Kosh partnership" },
+  { t: "Partnerships", p: "Banks, brokers, NGOs, employers. Build it with us.", s: "Kosh partnership" },
 ];
 
 export const Join = () => (
@@ -187,7 +186,7 @@ export const Join = () => (
         ))}
       </div>
       <p className="join__mail" data-reveal>
-        one inbox, read by humans — <a href={`mailto:${MAIL}`}>{MAIL}</a>
+        one inbox, read by humans · <a href={`mailto:${MAIL}`}>{MAIL}</a>
       </p>
     </div>
   </section>
@@ -202,7 +201,7 @@ export const FootV2 = () => (
         <div className="word">KOSH</div>
         <p className="foot__vp">{VP_SHORT}</p>
         <p className="foot__def">
-          <span className="bn">কোষ</span> — a treasury; a cell. The smallest
+          <span className="bn">কোষ</span> · a treasury; a cell. The smallest
           unit things grow from.
         </p>
         <div className="foot__qr">
@@ -258,7 +257,7 @@ export const FootV2 = () => (
 );
 
 /* ---------------- NAV ----------------
-   Grouped so the whole site is reachable from any page — the flat six-link
+   Grouped so the whole site is reachable from any page. The flat six-link
    row left /vote and half the homepage unreachable, and it was display:none
    below 860px, which meant phones had no navigation at all.
 
@@ -405,7 +404,7 @@ export const NavV2 = ({ pinned = false }: { pinned?: boolean }) => {
       <div className={`sheet${sheet ? " on" : ""}`} aria-hidden={!sheet}>
         <div className="sheet__in">
           <a className="sheet__cta btn btn-primary" href="/start" onClick={() => setSheet(false)}>
-            Start here — free
+            Start here, free
           </a>
           {NAV_GROUPS.map((g) => (
             <div className="sheet__g" key={g.label}>

@@ -25,7 +25,7 @@ const GAMES: Game[] = [
   {
     title: "MonerPoly",
     sub: "জমির খেলা, জ্ঞানের খেলা",
-    blurb: "Buy Dhaka property, survive registration, নামজারি and taxes — and learn why the paperwork is the investment.",
+    blurb: "Buy Dhaka property, survive registration, নামজারি and taxes, and learn why the paperwork is the investment.",
     image: "/games/monerpoly.webp",
     href: `${APP}/estate`,
     external: true,
@@ -41,7 +41,7 @@ const GAMES: Game[] = [
   {
     title: "Grand Trade Auto",
     sub: "Bandar City · season one",
-    blurb: "A full 3D city. Drive it, trade the DSE, buy property, run the story — investing as an open world.",
+    blurb: "A full 3D city. Drive it, trade the DSE, buy property, run the story. Investing as an open world.",
     image: "/games/grand-trade-auto.webp",
     href: `${APP}/gtm`,
     external: true,
@@ -60,9 +60,9 @@ export const Funance = () => {
           The fastest way to learn money is to <span className="grad-text">play with it.</span>
         </h2>
         <p className="games__lede" data-reveal style={{ ["--d" as string]: "140ms" }}>
-          Nobody learns investing from a PDF. Three games and one live room —
-          free, in your browser, no signup to start. Sign in with Google only
-          when you want to keep your progress.
+          Nobody learns investing from a PDF. Three games and one live room,
+          free, in your browser, with no signup to start. Sign in with Google
+          only when you want to keep your progress.
         </p>
 
         <div className="games__grid" data-stagger="120">
@@ -92,7 +92,7 @@ export const Funance = () => {
             </article>
           ))}
 
-          {/* the live room — same family, so it lives in the same grid */}
+          {/* the live room: same family, so it lives in the same grid */}
           <a
             className={`gcard gcard--live${active === GAMES.length ? " is-active" : ""}`}
             href="/vote"
@@ -109,8 +109,8 @@ export const Funance = () => {
               <h3>Kosh Live</h3>
               <p className="gcard__sub">played in a room, together</p>
               <p className="gcard__blurb">
-                A live session game for classrooms, campuses and offices —
-                everyone trades the same market from their own phone while the
+                A live session game for classrooms, campuses and offices.
+                Everyone trades the same market from their own phone while the
                 results go up on the screen.
               </p>
             </div>

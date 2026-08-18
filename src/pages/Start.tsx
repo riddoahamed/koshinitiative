@@ -13,7 +13,7 @@ const STEPS = [
     n: "01",
     when: "today · 60 seconds",
     t: "Find out where you actually stand",
-    p: "Not what you should buy — where you are. Six questions about your buffer, your income and how you'd really react to a bad month. You get a straight read and a starting point.",
+    p: "Not what you should buy, but where you are. Six questions about your buffer, your income and how you'd really react to a bad month. You get a straight read and a starting point.",
     href: "/quiz",
     cta: "Take the quiz",
   },
@@ -22,7 +22,8 @@ const STEPS = [
     n: "02",
     when: "today · 2 minutes",
     t: "Build the buffer before anything else",
-    p: "Three months of expenses you can reach in a day. It earns almost nothing, and it is still the highest-value move you will make — it's what stops one bad month from forcing you to sell at the worst time.",
+    p: "Three months of expenses you can reach in a day. It earns almost nothing, and it is still the highest-value move you will make, because it stops one bad month from forcing you to sell at the worst time.",
+  
     href: "/learn#emergency-fund",
     cta: "Read the lesson",
   },
@@ -31,7 +32,7 @@ const STEPS = [
     n: "03",
     when: "this week · 10 minutes",
     t: "Learn what you're being offered",
-    p: "Sanchaypatra, DPS, FDR, mutual funds — what each one actually pays you and where the money comes from. Then the five tells that give a scam away, so nobody sells you a shortcut.",
+    p: "Sanchaypatra, DPS, FDR, mutual funds: what each one actually pays you and where the money comes from. Then the five tells that give a scam away, so nobody sells you a shortcut.",
     href: "/learn",
     cta: "Six quick lessons",
   },
@@ -40,7 +41,7 @@ const STEPS = [
     n: "04",
     when: "this month · zero risk",
     t: "Practise with money that isn't real",
-    p: "Paper-invest on real market prices. The point isn't the return — it's finding out what you do when the number goes red, before that costs you anything.",
+    p: "Paper-invest on real market prices. The point isn't the return. It's finding out what you do when the number goes red, before that costs you anything.",
     href: KOSH_APP_URL,
     cta: "Try Kosh",
   },
@@ -58,7 +59,7 @@ const STEPS = [
 const RULES = [
   ["Nothing guaranteed is safe.", "A promised high return is the oldest lie in finance. Real returns move."],
   ["Never invest a deadline.", "If you need the money within a year, it doesn't belong in a market."],
-  ["Ask where the return comes from.", "Profits, rent, a state budget — someone can always name it. If nobody can, walk."],
+  ["Ask where the return comes from.", "Profits, rent, a state budget. Someone can always name it. If nobody can, walk."],
   ["Slow is a strategy.", "Nothing worth doing expires today. Urgency is a sales tool, not a signal."],
   ["Small first, always.", "Your first investment's job is to teach you how you behave, not to make you money."],
 ];
@@ -128,9 +129,9 @@ const Start = () => (
         <div className="page-cta" data-reveal="scale">
           <h3>Now do steps 1 to 5 for real.</h3>
           <p>
-            The app is where the path actually happens — the money check, the
-            coach, paper investing on real prices, and the games. Free, and we
-            never touch your money.
+            The app is where the path actually happens: the money check, the coach,
+            paper investing on real prices, and the games. Free, and we never
+            touch your money.
           </p>
           <div className="page-cta__row">
             <a className="btn btn-primary" href={KOSH_APP_URL} target="_blank" rel="noreferrer">

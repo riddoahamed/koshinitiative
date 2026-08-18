@@ -29,7 +29,7 @@ export const Pitch = () => (
       <p className="h-sub" data-reveal>
         Free lessons in plain language. Practice on real market prices with
         money that isn&rsquo;t real. Then one honest answer to the question
-        every app dodges — <strong>what should I actually do?</strong>
+        every app dodges. <strong>What should I actually do?</strong>
       </p>
       <div className="about__ctas" data-reveal="scale">
         <a className="btn btn-primary" href="/start">Learn something free</a>
@@ -50,7 +50,7 @@ const DOORS = [
     icon: Target,
     kicker: "60 seconds",
     t: "What kind of investor am I?",
-    p: "Six honest questions. You get a straight read on where you actually stand — and what to do about it.",
+    p: "Six honest questions. You get a straight read on where you actually stand, and what to do about it.",
     href: "/quiz",
     cta: "Take the quiz",
     accent: "a",
@@ -68,7 +68,7 @@ const DOORS = [
     icon: Wallet,
     kicker: "the whole path",
     t: "What do I do first?",
-    p: "The full starting order, written out — from your first taka saved to your first real investment. No jargon, nothing sold.",
+    p: "The full starting order, written out. From your first taka saved to your first real investment. No jargon, nothing sold.",
     href: "/start",
     cta: "See the path",
     accent: "c",
@@ -132,7 +132,7 @@ export const Problem = () => (
       </h2>
       <p className="h-sub" data-reveal style={{ ["--d" as string]: "160ms" }}>
         The information isn&rsquo;t missing anymore. It&rsquo;s scattered across
-        forty tabs, group chats, and gurus selling the basics as masterclasses —
+        forty tabs, group chats, and gurus selling the basics as masterclasses,
         and you can&rsquo;t tell which half is lying.
       </p>
 
@@ -151,7 +151,7 @@ export const Problem = () => (
           <h3>Decades of scams taught one lesson: stay out.</h3>
           <p>
             Crashes, Ponzis, and fine print pushed a whole generation to the
-            sidelines — <strong>and staying out has a price nobody quotes
+            sidelines. <strong>And staying out has a price nobody quotes
             you.</strong>
           </p>
         </div>
@@ -168,7 +168,7 @@ export const Problem = () => (
       </div>
 
       <p className="problem__punch" data-reveal="scale">
-        So money sits still — <span className="grad-text">while prices don&rsquo;t.</span>
+        So money sits still, <span className="grad-text">while prices don&rsquo;t.</span>
       </p>
     </div>
   </section>
@@ -202,7 +202,7 @@ export const Product = () => (
           {[
             ["01", "Discover", "AI agents scan funds, gold, Sanchaypatra, and DSE filings around the clock, and surface what's actually worth your attention."],
             ["02", "Verify", "Every idea is checked against real sources and screened for scams. Humans supervise before anything reaches your feed."],
-            ["03", "Understand", "Explainable AI tells you why it surfaced — in plain language, with the numbers shown. No jargon, no hype."],
+            ["03", "Understand", "Explainable AI tells you why it surfaced, in plain language, with the numbers shown. No jargon, no hype."],
             ["04", "Practise", "Paper-invest with real market data and zero risk, until the decision feels obvious instead of scary."],
             ["05", "Invest", "Act when you're ready, through disclosed partners. We never touch your money."],
           ].map(([n, h, p]) => (
@@ -224,7 +224,7 @@ export const Product = () => (
           </p>
         </div>
 
-        {/* the real Discover feed, screenshotted from the app in guest mode —
+        {/* a real app screen, captured in guest mode:
             this used to be a hand-written imitation with invented fund names */}
         <figure className="dev dev--phone product__shot" data-reveal="right">
           <div className="dev__screen">
@@ -233,15 +233,15 @@ export const Product = () => (
               <span className="dev__island" />
             </span>
             <img
-              src="/img/app/discover.webp"
-              alt="The Kosh Discover feed on a phone: browse-by-type circles for savings, government-backed, halal assets, alternative and gold, then a Fixed Deposit card showing 8.5–10%, the top rate, the minimum, and the tax treatment"
+              src="/img/app/stock.webp"
+              alt="Grameenphone's page in the Kosh app: the live share price, a one-month chart, and a plain-language explanation of what the company does"
               loading="lazy"
               decoding="async"
               width={780}
               height={1688}
             />
           </div>
-          <figcaption>Discover · the real feed, screenshotted today</figcaption>
+          <figcaption>Every listed company, explained like a person would</figcaption>
         </figure>
       </div>
     </div>
@@ -281,14 +281,14 @@ export const Impact = () => (
         <ul className="who__lines">
           {[
             "Watched from the sidelines for years.",
-            "Set up a DPS in 2021 — never looked again.",
+            "Set up a DPS in 2021. Never looked at it again.",
             "Burned once. Trust nothing now.",
             "Waiting until it “feels safe”.",
           ].map((l, i) => (
             <li key={l} data-reveal style={{ ["--d" as string]: `${i * 70}ms` }}>{l}</li>
           ))}
           <li className="hot" data-reveal style={{ ["--d" as string]: "300ms" }}>
-            Meanwhile, markets move daily — and <em>waiting has a price.</em>
+            Meanwhile, markets move daily, and <em>waiting has a price.</em>
           </li>
         </ul>
 
@@ -300,18 +300,18 @@ export const Impact = () => (
           <div className="incl__node">
             <span>today</span>
             <b>We teach the concepts</b>
-            <p>Free, plain-language money lessons — built for real Bangladeshi wages and lives.</p>
+            <p>Free, plain-language money lessons, built for real Bangladeshi wages and lives.</p>
           </div>
           <div className="incl__arrow" aria-hidden="true"><ArrowRight size={22} strokeWidth={2.2} /></div>
           <div className="incl__node hot">
             <span>tomorrow</span>
             <b>We open the door</b>
-            <p>Accounts, safe savings, and first investments — inclusion, not just information.</p>
+            <p>Accounts, safe savings, and first investments. Inclusion, not just information.</p>
           </div>
         </div>
 
         <a className="who__learnlink" href="/learn" data-reveal>
-          The lessons are public — read them without an account
+          The lessons are public. Read them without an account
           <ArrowRight size={15} strokeWidth={2.2} />
         </a>
 

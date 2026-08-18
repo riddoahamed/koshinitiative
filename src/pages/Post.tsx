@@ -11,7 +11,7 @@ import { KOSH_APP_URL } from "@/lib/links";
    anything from the database renders as plain text, always. That split is
    enforced here rather than trusted from the data.
 
-   LinkedIn posts aren't copied — they render as LinkedIn's own embed, which
+   LinkedIn posts are not copied. They render as LinkedIn's own embed, which
    keeps attribution and engagement where it belongs. `safeEmbedUrl` in
    postsApi has already checked the host before it reaches this component. */
 

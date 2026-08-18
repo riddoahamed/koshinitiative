@@ -3,7 +3,7 @@ import { randomTip, type Tip } from "./data";
 import { taka } from "./wallet";
 
 /* ============================================================
-   THE LEDGER TRAIL — eight steps, three stones each, one gives way.
+   THE LEDGER TRAIL, eight steps, three stones each, one gives way.
    Every step multiplies. Bank whenever you like. The trap that ends
    your run is always a real market risk, named.
    ============================================================ */
@@ -144,12 +144,12 @@ const TrailGame = ({ balance, onStake, onSettle }: Props) => {
 
       {deadAt && (
         <p className="trail__hazard">
-          Step {deadAt.row + 1} — <b>{deadAt.hazard}</b>. Run over, {taka(stake)} gone.
+          Step {deadAt.row + 1}, <b>{deadAt.hazard}</b>. Run over, {taka(stake)} gone.
         </p>
       )}
       {phase === "banked" && (
         <p className="trail__hazard good">
-          Banked at {multAt(step).toFixed(2)}× — <b>{taka(result || 0)}</b>.
+          Banked at {multAt(step).toFixed(2)}×, <b>{taka(result || 0)}</b>.
         </p>
       )}
 

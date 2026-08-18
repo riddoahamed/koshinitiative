@@ -1,5 +1,5 @@
 /* ============================================================
-   KOSH LIVE — poll options, sample analysis, behavioural tips
+   KOSH LIVE, poll options, sample analysis, behavioural tips
    Used by /vote for classroom sessions, demos and user testing.
    ============================================================ */
 
@@ -10,7 +10,7 @@ export type Option = {
   label: string;
   tag: string;
   hue: string;
-  /* sample analysis — structural facts, no invented returns */
+  /* sample analysis, structural facts, no invented returns */
   what: string;
   horizon: string;
   liquidity: string;
@@ -41,7 +41,7 @@ export const OPTIONS: Option[] = [
     label: "Mutual fund",
     tag: "capital market",
     hue: "156",
-    what: "A managed basket of securities — one purchase spreads you across many holdings.",
+    what: "A managed basket of securities, one purchase spreads you across many holdings.",
     horizon: "3–7 years",
     liquidity: "Open-end: redeem at NAV. Closed-end: sell on market, often below NAV",
     risk: 3,
@@ -75,7 +75,7 @@ export const OPTIONS: Option[] = [
     risk: 2,
     halal: "no",
     costs: "Source tax on interest; excise duty by balance slab",
-    watch: "Whether the rate actually beats inflation after tax — often the real question.",
+    watch: "Whether the rate actually beats inflation after tax, often the real question.",
     ask: "Is this your emergency fund, or money you're trying to grow? They need different homes.",
   },
   {
@@ -83,7 +83,7 @@ export const OPTIONS: Option[] = [
     label: "DPS / monthly scheme",
     tag: "bank",
     hue: "200",
-    what: "A recurring deposit — a fixed amount every month for a fixed term.",
+    what: "A recurring deposit, a fixed amount every month for a fixed term.",
     horizon: "3–10 years",
     liquidity: "Low. Early closure usually drops you to savings-rate profit",
     risk: 2,
@@ -103,7 +103,7 @@ export const OPTIONS: Option[] = [
     risk: 3,
     halal: "yes",
     costs: "Making charges on jewellery, purity loss on resale, storage and insurance",
-    watch: "Buying jewellery as an investment — making charges can vanish the moment you leave the shop.",
+    watch: "Buying jewellery as an investment, making charges can vanish the moment you leave the shop.",
     ask: "Are you buying gold, or buying jewellery? The two behave very differently.",
   },
   {
@@ -117,7 +117,7 @@ export const OPTIONS: Option[] = [
     risk: 4,
     halal: "yes",
     costs: "Registration, stamp duty, mutation, ongoing tax, and boundary upkeep",
-    watch: "Title defects and disputed possession — the most common way money disappears here.",
+    watch: "Title defects and disputed possession, the most common way money disappears here.",
     ask: "Have you personally verified the title chain, or are you trusting a relative's word?",
   },
   {
@@ -132,14 +132,14 @@ export const OPTIONS: Option[] = [
     halal: "screen",
     costs: "Registration, utility connections, service charge, maintenance, agent fees",
     watch: "Rental yield after service charge and vacancy is usually far below the headline.",
-    ask: "৳10 lakh rarely buys a flat outright — is the rest a loan? Then this is a debt decision first.",
+    ask: "৳10 lakh rarely buys a flat outright, is the rest a loan? Then this is a debt decision first.",
   },
   {
     id: "business",
     label: "Start a small business",
     tag: "enterprise",
     hue: "270",
-    what: "Deploying capital into your own operation — the highest-control, highest-effort option.",
+    what: "Deploying capital into your own operation, the highest-control, highest-effort option.",
     horizon: "2–5 years to a stable return",
     liquidity: "Illiquid, and often needs more capital before it returns any",
     risk: 5,
@@ -154,12 +154,12 @@ export const OPTIONS: Option[] = [
     tag: "high risk",
     hue: "0",
     what: "Digital assets traded on global venues, with no local regulatory protection.",
-    horizon: "Undefined — treat as speculation, not saving",
+    horizon: "Undefined, treat as speculation, not saving",
     liquidity: "High on major assets; on/off-ramps in Bangladesh are the real constraint",
     risk: 5,
     halal: "screen",
     costs: "Exchange fees, spreads, network fees, and total loss on custody mistakes",
-    watch: "Bangladesh Bank has repeatedly warned against crypto transactions — legal exposure is a real cost, and there is no recourse if funds vanish.",
+    watch: "Bangladesh Bank has repeatedly warned against crypto transactions, legal exposure is a real cost, and there is no recourse if funds vanish.",
     ask: "If this went to zero tomorrow, would it change your life or just annoy you?",
   },
   {
@@ -169,11 +169,11 @@ export const OPTIONS: Option[] = [
     hue: "220",
     what: "Ownership of companies or index baskets listed outside Bangladesh.",
     horizon: "7+ years",
-    liquidity: "High in the market — the constraint is moving money across the border",
+    liquidity: "High in the market, the constraint is moving money across the border",
     risk: 3,
     halal: "screen",
     costs: "FX spread, platform fees, and remittance rules that limit outward investment",
-    watch: "Outward remittance for portfolio investment is tightly restricted for residents — check what's actually permitted before you plan around it.",
+    watch: "Outward remittance for portfolio investment is tightly restricted for residents, check what's actually permitted before you plan around it.",
     ask: "Do you have a legal route to send and, more importantly, bring money back?",
   },
   {
@@ -186,9 +186,9 @@ export const OPTIONS: Option[] = [
     liquidity: "Immediate",
     risk: 1,
     halal: "no",
-    costs: "Account maintenance, source tax on interest — and inflation, the invisible fee",
+    costs: "Account maintenance, source tax on interest, and inflation, the invisible fee",
     watch: "Safety and stagnation feel identical for the first year, then diverge badly.",
-    ask: "How much of this do you genuinely need within 6 months? That part belongs here — the rest probably doesn't.",
+    ask: "How much of this do you genuinely need within 6 months? That part belongs here, the rest probably doesn't.",
   },
   {
     id: "cash",
@@ -200,7 +200,7 @@ export const OPTIONS: Option[] = [
     liquidity: "Immediate",
     risk: 2,
     halal: "yes",
-    costs: "No fee, and no protection — theft, loss, and full inflation exposure",
+    costs: "No fee, and no protection, theft, loss, and full inflation exposure",
     watch: "Cash at home loses purchasing power every single day, silently.",
     ask: "What is this protecting you from that a bank account wouldn't?",
   },
@@ -211,7 +211,7 @@ export const OPTIONS: Option[] = [
     hue: "300",
     what: "An informal loan to someone you know, usually undocumented.",
     horizon: "Whenever they can",
-    liquidity: "Socially locked — recall is a relationship decision, not a financial one",
+    liquidity: "Socially locked, recall is a relationship decision, not a financial one",
     risk: 4,
     halal: "yes",
     costs: "No paperwork cost. The cost is the relationship if it goes wrong",
@@ -225,7 +225,7 @@ export const OPTIONS: Option[] = [
     hue: "340",
     what: "Retiring existing debt instead of deploying new capital.",
     horizon: "Immediate",
-    liquidity: "Not applicable — this removes a liability",
+    liquidity: "Not applicable, this removes a liability",
     risk: 1,
     halal: "yes",
     costs: "Early-settlement fee on some loans",
@@ -246,7 +246,7 @@ export const TIPS: Tip[] = [
   },
   {
     t: "The gambler's fallacy",
-    p: "It crashed early five times, so a big one is “due”. It isn't. Each round is independent — the game has no memory of what it owes you.",
+    p: "It crashed early five times, so a big one is “due”. It isn't. Each round is independent, the game has no memory of what it owes you.",
   },
   {
     t: "Recency bias",
@@ -262,7 +262,7 @@ export const TIPS: Tip[] = [
   },
   {
     t: "Overconfidence",
-    p: "A winning streak feels like skill. In a game of chance it is variance wearing a costume — and it makes the next bet bigger.",
+    p: "A winning streak feels like skill. In a game of chance it is variance wearing a costume, and it makes the next bet bigger.",
   },
   {
     t: "The disposition effect",
@@ -274,7 +274,7 @@ export const TIPS: Tip[] = [
   },
   {
     t: "Survivorship bias",
-    p: "You hear about the one who hit 50x. You never hear from the hundred who didn't — so the odds look far better than they are.",
+    p: "You hear about the one who hit 50x. You never hear from the hundred who didn't, so the odds look far better than they are.",
   },
   {
     t: "Anchoring",
@@ -282,7 +282,7 @@ export const TIPS: Tip[] = [
   },
   {
     t: "The house edge",
-    p: "Every round carries a built-in tilt against you. You can win a round, a night, even a week — time is still on the house's side.",
+    p: "Every round carries a built-in tilt against you. You can win a round, a night, even a week, time is still on the house's side.",
   },
   {
     t: "Position sizing",
@@ -317,7 +317,7 @@ export const profileFor = (s: PlayStats) => {
   if (s.chaseRate > 0.5 && s.avgStakeFrac > 0.25)
     return {
       name: "The Chaser",
-      p: "You raise your stake after losing. That instinct is the fastest route to zero — and it's the single most common pattern we see.",
+      p: "You raise your stake after losing. That instinct is the fastest route to zero, and it's the single most common pattern we see.",
       tone: "bad",
     };
   if (s.avgStakeFrac > 0.4 || s.bankedRate < 0.3)
@@ -329,12 +329,12 @@ export const profileFor = (s: PlayStats) => {
   if (s.avgStakeFrac < 0.08 && s.bankedRate > 0.8)
     return {
       name: "The Freezer",
-      p: "You bank almost immediately and stake very little. Safe — but this is the profile that never actually starts investing either.",
+      p: "You bank almost immediately and stake very little. Safe, but this is the profile that never actually starts investing either.",
       tone: "warn",
     };
   return {
     name: "The Disciplined",
-    p: "Consistent sizing, planned exits, no chasing. This is the temperament that compounds — the boring one that wins.",
+    p: "Consistent sizing, planned exits, no chasing. This is the temperament that compounds, the boring one that wins.",
     tone: "good",
   };
 };

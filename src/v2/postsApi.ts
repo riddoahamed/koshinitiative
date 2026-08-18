@@ -194,7 +194,7 @@ export async function submitPost(
     return { ok: false, error: `The title needs to be ${SUBMIT_LIMITS.title[0]}–${SUBMIT_LIMITS.title[1]} characters.` };
   }
   if (body.length < SUBMIT_LIMITS.body[0]) {
-    return { ok: false, error: `Write a bit more — at least ${SUBMIT_LIMITS.body[0]} characters.` };
+    return { ok: false, error: `Write a bit more. At least ${SUBMIT_LIMITS.body[0]} characters.` };
   }
   if (body.length > SUBMIT_LIMITS.body[1]) {
     return { ok: false, error: "That's longer than we can take. Trim it a little." };

@@ -96,12 +96,12 @@ const Blog = () => {
           </h2>
           <p className="h-sub" data-reveal style={{ ["--d" as string]: "140ms" }}>
             Lessons, guides, how-tos and straight answers to the questions people
-            actually ask us. Free, no account, no jargon — written for people who
-            are starting out, not for people who already work in finance.
+            actually ask us. Free, no account, no jargon, written for people who are
+            starting out, not for people who already work in finance.
           </p>
           <p className="blog__who" data-reveal="fade">
             Written by the Kosh team, by readers, and by people who know a
-            subject properly. <a href="/blog/submit">Send us yours</a> — we read
+            subject properly. <a href="/blog/submit">Send us yours</a>, we read
             everything and publish the good ones.
           </p>
         </div>
@@ -143,9 +143,9 @@ const Blog = () => {
               <p className="eyebrow">write for this page</p>
               <h3>Know something worth knowing?</h3>
               <p className="contrib__p">
-                Anyone can write here — readers, students, accountants, brokers,
-                anyone who has learned something the hard way. A human reads
-                every submission and edits before it goes live.
+                Anyone can write here: readers, students, accountants, brokers, anyone
+                who has learned something the hard way. A human reads every
+                submission and edits before it goes live.
               </p>
             </div>
             <a className="btn btn-glass" href="/blog/submit">
@@ -157,7 +157,7 @@ const Blog = () => {
             <h3>Reading about it only gets you so far.</h3>
             <p>
               The money check, the coach, paper investing and the games are all
-              free — and we never touch your money.
+              free, and we never touch your money.
             </p>
             <div className="page-cta__row">
               <a className="btn btn-primary" href={KOSH_APP_URL} target="_blank" rel="noreferrer">

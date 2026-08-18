@@ -3,14 +3,14 @@ import { randomTip, type Tip } from "./data";
 import { taka } from "./wallet";
 
 /* ============================================================
-   IPO LAUNCH — a crash game, built to be enjoyed and then explained.
+   IPO LAUNCH, a crash game, built to be enjoyed and then explained.
    The price line climbs; you bank before it breaks. 3% edge against you,
    exactly like the real thing. Paper money only.
    ============================================================ */
 
 type Phase = "idle" | "running" | "crashed" | "banked";
 
-const GROWTH = 0.00022; // per ms — ~2x at 3s, ~10x at 10s
+const GROWTH = 0.00022; // per ms, ~2x at 3s, ~10x at 10s
 const EDGE = 0.97;
 
 const drawCrash = () => {

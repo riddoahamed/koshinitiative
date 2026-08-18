@@ -61,7 +61,7 @@ const Vote = () => {
 
   useEffect(() => {
     applySeo({
-      title: "Kosh Live — vote, reveal, decide",
+      title: "Kosh Live, vote, reveal, decide",
       description:
         "A live session tool from Kosh: vote on what you'd do with ৳10 lakh, see the room's answer, then walk through how the decision actually gets made.",
       path: "/vote",
@@ -153,7 +153,7 @@ const Vote = () => {
                   What do you do with it right now?
                 </h1>
                 <p className="live__sub">
-                  One tap. No wrong answer — that&rsquo;s the point. We&rsquo;ll
+                  One tap. No wrong answer, that&rsquo;s the point. We&rsquo;ll
                   show the room in a moment.
                 </p>
 
@@ -225,7 +225,7 @@ const Vote = () => {
 
             {!liveReady && (
               <p className="live__mode">
-                Solo mode — this device only. Add Supabase keys to aggregate a
+                Solo mode, this device only. Add Supabase keys to aggregate a
                 whole room live.
               </p>
             )}
@@ -358,7 +358,7 @@ const Vote = () => {
               <p className="an__note">
                 Kosh never says buy or sell. It shows the working, cites the
                 source, and leaves the decision with you. Panel figures here are
-                structural and illustrative — the live product pulls verified
+                structural and illustrative, the live product pulls verified
                 data per instrument.
               </p>
             </div>
@@ -397,7 +397,7 @@ const Vote = () => {
 
             <p className="live__mode play">
               Simulated taka. No real money, no deposits, nothing to win. These
-              two games are built the way betting apps are built — so you can
+              two games are built the way betting apps are built, so you can
               feel the pull, and then read exactly what it did to you.
             </p>
 

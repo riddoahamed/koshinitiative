@@ -2,7 +2,7 @@
    Every page, every meta tag, the hero glass and the nav all say the same
    thing. If a visitor reads exactly one sentence on this site, it is this one.
 
-   It is deliberately the answer to the question in the founder story — the
+   It is deliberately the answer to the question in the founder story, the
    question everyone froze on: "Okay… but what should I do?"                  */
 
 /** Short form — hero glass, nav, page straplines. */
@@ -10,7 +10,7 @@ export const VP_SHORT = "From “where do I start?” to your first real investm
 
 /** Full form — hero H1, meta description, page intros. */
 export const VP_LONG =
-  "Kosh takes you from “I don’t know where to start” to your first real investment — free lessons, risk-free practice on real market prices, and honest answers. Starting in Bangladesh.";
+  "Kosh takes you from “I don’t know where to start” to your first real investment. Free lessons, risk-free practice on real market prices, and honest answers. Starting in Bangladesh.";
 
 /** The three things we always promise, in the order people care about them. */
 export const PROMISE_CHIPS = [

@@ -75,7 +75,7 @@ const Submit = () => {
               <h2 className="h-display">Got it. Thank you.</h2>
               <p className="h-sub">
                 It&rsquo;s in the queue. A human reads every submission before
-                anything goes live, so give us a few days — if we publish it
+                anything goes live, so give us a few days. If we publish it
                 you&rsquo;ll see it on the blog with your name on it. If we
                 won&rsquo;t, and you left a way to reach you, we&rsquo;ll tell
                 you why.
@@ -102,8 +102,8 @@ const Submit = () => {
               </h2>
               <p className="h-sub" data-reveal style={{ ["--d" as string]: "130ms" }}>
                 The Kosh blog is written by our team, by readers, and by people
-                who know a subject properly — accountants, brokers, teachers,
-                and anyone who learned something the hard way. Send us a lesson,
+                who know a subject properly: accountants, brokers, teachers, and
+                anyone who learned something the hard way. Send us a lesson,
                 a guide, a how-to, or an honest answer to a question people keep
                 asking.
               </p>
@@ -165,7 +165,7 @@ const Submit = () => {
                     onChange={(e) => set("body", e.target.value)}
                     rows={14}
                     maxLength={SUBMIT_LIMITS.body[1]}
-                    placeholder={"Leave a blank line between paragraphs.\n\nWrite the way you'd explain it to a friend who has never invested — short sentences, real numbers, and say plainly when something is your opinion rather than a fact."}
+                    placeholder={"Leave a blank line between paragraphs.\n\nWrite the way you'd explain it to a friend who has never invested: short sentences, real numbers, and say plainly when something is your opinion rather than a fact."}
                     required
                   />
                 </label>

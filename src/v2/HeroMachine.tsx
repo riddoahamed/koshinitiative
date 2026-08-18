@@ -134,7 +134,7 @@ const HeroMachine = () => {
     <div ref={wrapRef} className="heroWrap" id="top">
       <header ref={heroRef} className={`hero ${phase}${booted ? " booted" : ""}`}>
         <h1 className="sr">
-          Kosh — from “where do I start?” to your first real investment. Free
+          Kosh. From “where do I start?” to your first real investment. Free
           money lessons, risk-free practice on real market prices, and honest
           answers. Starting in Bangladesh.
         </h1>
@@ -143,11 +143,11 @@ const HeroMachine = () => {
           <img
             className="hero__plate"
             src="/img/hero-plate-off.jpg"
-            alt="A vintage KOSH computer resting in a Bangladeshi night landscape — a tiger, river, bridge and port cranes behind it"
+            alt="A vintage KOSH computer resting in a Bangladeshi night landscape, with a tiger, river, bridge and port cranes behind it"
             draggable={false}
           />
 
-          {/* the black screen itself — text written straight on the glass */}
+          {/* the black screen itself: text written straight on the glass */}
           <div className={`crt ${phase === "off" ? "" : "on"} ${phase}`}>
             <div className="crt__beam" />
 
@@ -216,7 +216,7 @@ const HeroMachine = () => {
 
         <div className="hero__vign" />
 
-        {/* The one line. Readable before the machine is even switched on —
+        {/* The one line. Readable before the machine is even switched on:
             the site should never be a beautiful picture that says nothing. */}
         <div className="hero__strap">
           <p className="hero__strap-vp">
