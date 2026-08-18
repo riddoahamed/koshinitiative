@@ -197,53 +197,30 @@ export const Product = () => (
         <strong>Discover → Verify → Understand → Practise → Invest.</strong>
       </p>
 
-      <div className="product__grid">
-        <div data-stagger="120">
-          {[
-            ["01", "Discover", "AI agents scan funds, gold, Sanchaypatra, and DSE filings around the clock, and surface what's actually worth your attention."],
-            ["02", "Verify", "Every idea is checked against real sources and screened for scams. Humans supervise before anything reaches your feed."],
-            ["03", "Understand", "Explainable AI tells you why it surfaced, in plain language, with the numbers shown. No jargon, no hype."],
-            ["04", "Practise", "Paper-invest with real market data and zero risk, until the decision feels obvious instead of scary."],
-            ["05", "Invest", "Act when you're ready, through disclosed partners. We never touch your money."],
-          ].map(([n, h, p]) => (
-            <div className="pstep" key={n} data-reveal="left">
-              <span className="pstep__n">{n}</span>
-              <div>
-                <h3>{h}</h3>
-                <p>{p}</p>
-              </div>
-            </div>
-          ))}
-          <div className="product__extras" data-reveal="fade">
-            {EXTRAS.map((e) => (
-              <span key={e.t}><e.icon size={14} strokeWidth={2} />{e.t}</span>
-            ))}
-          </div>
-          <p className="product__note" data-reveal="fade">
-            <span className="dot" /> free to start · every partner disclosed · we never hold your funds
-          </p>
-        </div>
+      <ol className="loop" data-stagger="90">
+        {[
+          ["01", "Discover", "AI agents scan funds, gold, Sanchaypatra, and DSE filings around the clock, and surface what's actually worth your attention."],
+          ["02", "Verify", "Every idea is checked against real sources and screened for scams. Humans supervise before anything reaches your feed."],
+          ["03", "Understand", "Explainable AI tells you why it surfaced, in plain language, with the numbers shown. No jargon, no hype."],
+          ["04", "Practise", "Paper-invest with real market data and zero risk, until the decision feels obvious instead of scary."],
+          ["05", "Invest", "Act when you're ready, through disclosed partners. We never touch your money."],
+        ].map(([n, h, p]) => (
+          <li className="loop__step" key={n} data-reveal="fade">
+            <span className="loop__n">{n}</span>
+            <h3>{h}</h3>
+            <p>{p}</p>
+          </li>
+        ))}
+      </ol>
 
-        {/* a real app screen, captured in guest mode:
-            this used to be a hand-written imitation with invented fund names */}
-        <figure className="dev dev--phone product__shot" data-reveal="right">
-          <div className="dev__screen">
-            <span className="dev__status" aria-hidden="true">
-              <span className="dev__time">9:41</span>
-              <span className="dev__island" />
-            </span>
-            <img
-              src="/img/app/stock.webp"
-              alt="Grameenphone's page in the Kosh app: the live share price, a one-month chart, and a plain-language explanation of what the company does"
-              loading="lazy"
-              decoding="async"
-              width={780}
-              height={1688}
-            />
-          </div>
-          <figcaption>Every listed company, explained like a person would</figcaption>
-        </figure>
+      <div className="product__extras" data-reveal="fade">
+        {EXTRAS.map((e) => (
+          <span key={e.t}><e.icon size={14} strokeWidth={2} />{e.t}</span>
+        ))}
       </div>
+      <p className="product__note" data-reveal="fade">
+        <span className="dot" /> free to start · every partner disclosed · we never hold your funds
+      </p>
     </div>
   </section>
 );

@@ -43,69 +43,78 @@ const webp = (src, out, { height, width, q = 82 } = {}) => {
 
 const browser = await chromium.launch({ channel: "chrome" });
 try {
-  // ───────────────────────── phones ─────────────────────────
-  const p = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 3 });
-  await p.goto(APP, { waitUntil: "networkidle", timeout: 45000 });
-  await p.waitForTimeout(2000);
-  await p.locator("text=Yes, explore as guest").first().click();
-  await p.waitForTimeout(4500);
-  await prep(p);
-
-  const shot = async (name, { height = 1688 } = {}) => {
-    const raw = join(tmp, `${name}.png`);
-    await p.screenshot({ path: raw });
-    webp(raw, `${OUT}/${name}.webp`, { height });
+  // ── phones ────────────────────────────────────────────────────────────────
+  // Two sizes on purpose. 844 tall = one screen, used for stills. 1800 tall
+  // renders a long page in full without the app's lazy sections going blank,
+  // which is what a `fullPage` shot gives you instead. Those tall ones become
+  // the scrolling reels on the landing page.
+  const openGuest = async (page) => {
+    await page.goto(APP, { waitUntil: "networkidle", timeout: 45000 });
+    await page.waitForTimeout(2000);
+    await page.locator("text=Yes, explore as guest").first().click().catch(() => {});
+    await page.waitForTimeout(4500);
+    await prep(page);
   };
 
-  // a listed company, explained
-  await p.goto(`${APP}/markets/dse/GP`, { waitUntil: "networkidle" });
-  await p.waitForTimeout(4200); await prep(p);
-  await shot("stock");
+  const still = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 3 });
+  await openGuest(still);
 
-  // a mutual fund
-  await p.goto(`${APP}/markets/fund/edge-bangladesh-mutual-fund`, { waitUntil: "networkidle" });
-  await p.waitForTimeout(4200); await prep(p);
-  await shot("fund");
+  // gold: "See the full story" opens a single full-screen story, not a scroll
+  await still.goto(`${APP}/invest`, { waitUntil: "networkidle" });
+  await still.waitForTimeout(4000); await prep(still);
+  await still.locator("text=Gold").first().click().catch(() => {});
+  await still.waitForTimeout(3500); await prep(still);
+  await still.locator("text=See the full story").first().click().catch(() => {});
+  await still.waitForTimeout(4500); await prep(still);
+  let raw = join(tmp, "gold.png");
+  await still.screenshot({ path: raw });
+  webp(raw, `${OUT}/gold.webp`, { height: 1688 });
 
-  // gold, at the local rate
-  await p.goto(`${APP}/invest`, { waitUntil: "networkidle" });
-  await p.waitForTimeout(4000); await prep(p);
-  await p.locator("text=Gold").first().click().catch(() => {});
-  await p.waitForTimeout(3500); await prep(p);
-  await shot("gold");
-
-  // practise + learn, from the tab bar
   for (const [name, tab] of [["practise", "Practise"], ["learn", "Learn"]]) {
-    await p.locator(`text=${tab}`).last().click({ timeout: 9000 }).catch(() => {});
-    await p.waitForTimeout(3800); await prep(p);
-    await p.evaluate(() => window.scrollTo(0, 0));
-    await p.waitForTimeout(700); await prep(p);
-    await shot(name);
+    await still.goto(`${APP}/dashboard`, { waitUntil: "networkidle" });
+    await still.waitForTimeout(2500); await prep(still);
+    await still.locator(`text=${tab}`).last().click({ timeout: 9000 }).catch(() => {});
+    await still.waitForTimeout(3800); await prep(still);
+    await still.evaluate(() => window.scrollTo(0, 0));
+    await still.waitForTimeout(700); await prep(still);
+    raw = join(tmp, `${name}.png`);
+    await still.screenshot({ path: raw });
+    webp(raw, `${OUT}/${name}.webp`, { height: 1688 });
   }
 
-  // The Discover feed, full length, so the landing page can scroll it inside a
-  // phone frame instead of shipping a GIF. Filtered to DSE stocks so the first
-  // card is always a recognisable company rather than whatever the personalised
-  // feed happened to serve.
-  await p.goto(`${APP}/invest`, { waitUntil: "networkidle" });
-  await p.waitForTimeout(4000); await prep(p);
-  await p.locator("text=DSE stocks").first().click().catch(() => {});
-  await p.waitForTimeout(4000); await prep(p);
-  await p.evaluate(() => window.scrollTo(0, 0));
-  await p.waitForTimeout(1200);
-  const tall = join(tmp, "feed.png");
-  await p.screenshot({ path: tall, fullPage: true, clip: { x: 0, y: 0, width: 390, height: 2100 } });
-  webp(tall, `${OUT}/feed.webp`, { height: 4200, q: 80 });
+  // ── tall reels ────────────────────────────────────────────────────────────
+  const tall = await browser.newPage({ viewport: { width: 390, height: 1800 }, deviceScaleFactor: 2 });
+  await openGuest(tall);
 
-  // ───────────────────────── desktop ─────────────────────────
+  const reel = async (name, go) => {
+    await go();
+    await tall.evaluate(() => window.scrollTo(0, 0));
+    await tall.waitForTimeout(1200);
+    const r = join(tmp, `${name}.png`);
+    await tall.screenshot({ path: r });
+    webp(r, `${OUT}/${name}.webp`, { height: 3600, q: 80 });
+  };
+
+  await reel("feed", async () => {
+    await tall.goto(`${APP}/invest`, { waitUntil: "networkidle" });
+    await tall.waitForTimeout(4000); await prep(tall);
+    await tall.locator("text=DSE stocks").first().click().catch(() => {});
+    await tall.waitForTimeout(4000); await prep(tall);
+  });
+  await reel("stock", async () => {
+    await tall.goto(`${APP}/markets/dse/GP`, { waitUntil: "networkidle" });
+    await tall.waitForTimeout(4500); await prep(tall);
+  });
+  await reel("fund", async () => {
+    await tall.goto(`${APP}/markets/fund/edge-bangladesh-mutual-fund`, { waitUntil: "networkidle" });
+    await tall.waitForTimeout(4500); await prep(tall);
+  });
+
+  // ── desktop ───────────────────────────────────────────────────────────────
   const d = await browser.newPage({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 2 });
-  await d.goto(APP, { waitUntil: "networkidle", timeout: 45000 });
-  await d.waitForTimeout(2000);
-  await d.locator("text=Yes, explore as guest").first().click().catch(() => {});
-  await d.waitForTimeout(4500);
-
+  await openGuest(d);
   await d.goto(`${APP}/markets/dse/GP`, { waitUntil: "networkidle" });
-  await d.waitForTimeout(4200); await prep(d);
+  await d.waitForTimeout(4500); await prep(d);
   const deskStock = join(tmp, "stock-desktop.png");
   await d.screenshot({ path: deskStock });
   webp(deskStock, `${OUT}/stock-desktop.webp`, { width: 1760, q: 84 });
