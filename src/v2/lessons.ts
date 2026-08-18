@@ -15,7 +15,11 @@ export interface Lesson {
   hook: string;
   body: string[];
   takeaway: string;
+  /** Where this continues inside the app. Every lesson ends somewhere real. */
+  zone: { href: string; label: string; blurb: string };
 }
+
+const APP = "https://app.koshbd.com";
 
 export const LESSONS: Lesson[] = [
   {
@@ -31,6 +35,12 @@ export const LESSONS: Lesson[] = [
       "The difference between the two is one question you can always ask: <em>where does the money come from?</em> A company pays you from its profits. A fund pays you from what it owns. A Sanchaypatra pays you from the state budget. If nobody can tell you where your return comes from, that’s not an investment, and it’s usually a scam.",
     ],
     takeaway: "If you can’t explain where the return comes from, you’re not investing.",
+    zone: {
+      href: `${APP}/zones/zone-1`,
+      label: "Zone 1 · Understand how money works",
+      blurb:
+        "Eight modules on savings versus investing versus trading, emergency funds, the four-bucket system and the traps your own head sets.",
+    },
   },
   {
     id: "emergency-fund",
@@ -46,6 +56,12 @@ export const LESSONS: Lesson[] = [
       "Almost everyone who lost money in a crash and never came back had one thing in common: they were forced to sell at the worst possible time, because they needed the cash.",
     ],
     takeaway: "Build the buffer first. It’s what lets you hold on when everyone else sells.",
+    zone: {
+      href: `${APP}/zones/zone-2`,
+      label: "Zone 2 · Know where your money goes",
+      blurb:
+        "Why budgets fail, using your bKash history as a tracker, and the five-number monthly review that keeps a buffer alive.",
+    },
   },
   {
     id: "safe-instruments",
@@ -61,6 +77,12 @@ export const LESSONS: Lesson[] = [
       "All three share one honest weakness. If the rate you earn is lower than the rate prices rise, you are safely getting poorer. That’s not an argument against them. It’s an argument for knowing which part of your money should sit still and which part shouldn’t.",
     ],
     takeaway: "Safe doesn’t mean growing. Check your return against inflation, not against zero.",
+    zone: {
+      href: `${APP}/zones/zone-5`,
+      label: "Zone 5 · Choose where to keep your savings",
+      blurb:
+        "A deep dive into every major Bangladeshi savings instrument: how each works, when to use it, and how to combine them.",
+    },
   },
   {
     id: "mutual-funds",
@@ -76,6 +98,12 @@ export const LESSONS: Lesson[] = [
       "If you want Shariah-compliant options, check the fund’s own screening policy rather than the word “Islamic” in its name.",
     ],
     takeaway: "One fund spreads your risk. Its fee is the one cost you’re guaranteed to pay.",
+    zone: {
+      href: `${APP}/zones/zone-8`,
+      label: "Zone 8 · Build a mix that fits you",
+      blurb:
+        "Mutual fund types in Bangladesh, allocation by risk profile, and how to think about property without romance.",
+    },
   },
   {
     id: "spot-a-scam",
@@ -93,6 +121,12 @@ export const LESSONS: Lesson[] = [
       "The uncomfortable part: most people who get caught aren’t careless. They’re under pressure, and someone offered them a way out that matched exactly how urgently they needed it.",
     ],
     takeaway: "Guaranteed + urgent + unverifiable = walk away. You lose nothing by being slow.",
+    zone: {
+      href: `${APP}/zones/zone-7`,
+      label: "Zone 7 · Stop your own brain losing you money",
+      blurb:
+        "Loss aversion, anchoring, FOMO and herd behaviour: the patterns every scam here is built to exploit.",
+    },
   },
   {
     id: "first-1000",
@@ -108,5 +142,11 @@ export const LESSONS: Lesson[] = [
       "If you want to run the whole thing at zero risk first, practise with paper money on real market prices until the decision feels obvious instead of scary. Then do it for real, at a size that can’t hurt you.",
     ],
     takeaway: "Start small, write down why, and leave it alone. Behaviour beats stock-picking.",
+    zone: {
+      href: `${APP}/zones/zone-6`,
+      label: "Zone 6 · Buy your first share",
+      blurb:
+        "The Dhaka Stock Exchange, opening a BO account, equity fundamentals, and what retail investors get wrong.",
+    },
   },
 ];

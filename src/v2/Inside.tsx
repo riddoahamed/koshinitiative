@@ -124,16 +124,16 @@ export const Inside = () => (
           <p className="claim__kicker">priced how bangladesh buys it</p>
           <h3>Gold at the BAJUS rate, per bhori.</h3>
           <p>
-            The world spot price is not the one you pay in Dhaka. Kosh shows the
-            live 22K rate beside the world number, what it costs to start, and a
-            risk read that belongs to us rather than to a seller.
+            The world spot price is not the one you pay in Dhaka, so Kosh shows
+            the live 22K rate beside it, six months of history in taka or
+            dollars, and a written read on <b>why it moved this week.</b>
           </p>
         </div>
         <div className="claim__shot">
           <Phone
             src="/img/app/gold.webp"
-            alt="Gold in the Kosh app: a full-screen story headed 22K digital gold, explaining it can be bought from around one gram, priced off the daily BAJUS rate with insured vault custody, with entry from ৳1,000 and a moderate risk rating"
-            cap="Entry from &#2547;1,000. Vault custody and physical redemption, both stated."
+            alt="Gold in the Kosh app: a live 22-karat price of ৳239,500 per bhori next to the world spot rate, a six-month chart switchable between taka and dollars, and a macro read headed “Gold is catching its breath after a huge run”"
+            cap="Live 22K against world spot, and the week&rsquo;s read on why it moved"
           />
         </div>
       </div>

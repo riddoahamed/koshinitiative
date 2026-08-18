@@ -269,31 +269,30 @@ interface NavGroup { label: string; items: NavItem[] }
 
 const NAV_GROUPS: NavGroup[] = [
   {
-    label: "Company",
+    label: "Start learning",
     items: [
-      { label: "Why Kosh exists", href: "/#story", note: "We watched people freeze" },
-      { label: "Impact & inclusion", href: "/#inclusion" },
-      { label: "The long game", href: "/#vision" },
-      { label: "For organizations", href: "/#organizations", note: "Programs & partners" },
-      { label: "Join us", href: "/#join", note: "Careers, campus, research" },
+      { label: "If I started today", href: "/start", note: "The five-step path" },
+      { label: "Quick lessons", href: "/learn", note: "Two minutes each" },
+      { label: "What kind of investor am I?", href: "/quiz", note: "60 seconds" },
+      { label: "Blog", href: "/blog", note: "Guides, how-tos, questions" },
     ],
   },
   {
     label: "Product",
     items: [
+      { label: "Inside the app", href: "/#inside", note: "Real screens" },
       { label: "How it works", href: "/#product", note: "Agents find, humans check" },
-      { label: "The problem", href: "/#problem" },
       { label: "Games", href: "/#funance", note: "Finance, made playable" },
       { label: "Kosh Live", href: "/vote", note: "Run a live room" },
     ],
   },
   {
-    label: "Learn",
+    label: "Company",
     items: [
-      { label: "Start here", href: "/start", note: "The five-step path" },
-      { label: "Quick lessons", href: "/learn", note: "Two minutes each" },
-      { label: "What kind of investor am I?", href: "/quiz", note: "60 seconds" },
-      { label: "Blog", href: "/blog", note: "Lessons, guides, how-tos" },
+      { label: "Why Kosh exists", href: "/#story" },
+      { label: "Impact & inclusion", href: "/#inclusion" },
+      { label: "For organizations", href: "/#organizations", note: "Programs & partners" },
+      { label: "Join us", href: "/#join", note: "Careers, campus, research" },
     ],
   },
 ];
@@ -360,10 +359,9 @@ export const NavV2 = ({ pinned = false }: { pinned?: boolean }) => {
         </a>
 
         <div className="nav__links">
-          <a className="nav__start" href="/start">Start here</a>
-          {NAV_GROUPS.map((g) => (
+          {NAV_GROUPS.map((g, i) => (
             <div
-              className={`navg${open === g.label ? " open" : ""}`}
+              className={`navg${open === g.label ? " open" : ""}${i === 0 ? " navg--go" : ""}`}
               key={g.label}
               onMouseEnter={() => setOpen(g.label)}
             >
@@ -404,7 +402,7 @@ export const NavV2 = ({ pinned = false }: { pinned?: boolean }) => {
       <div className={`sheet${sheet ? " on" : ""}`} aria-hidden={!sheet}>
         <div className="sheet__in">
           <a className="sheet__cta btn btn-primary" href="/start" onClick={() => setSheet(false)}>
-            Start here, free
+            Start learning, free
           </a>
           {NAV_GROUPS.map((g) => (
             <div className="sheet__g" key={g.label}>

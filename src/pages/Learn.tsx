@@ -33,8 +33,8 @@ const Learn = () => {
           <p className="h-sub" data-reveal style={{ ["--d" as string]: "140ms" }}>
             Six lessons, in the order they actually matter. No account, no email
             wall, no half-a-lesson-then-sign-up. Read them all in about twelve
-            minutes and you will know more about money than most people who
-            already invest.
+            minutes, and each one ends with the matching zone in the app if you
+            want to go further.
           </p>
         </div>
       </section>
@@ -79,6 +79,22 @@ const Learn = () => {
                         <span>the one thing</span>
                         {l.takeaway}
                       </p>
+
+                      {/* every lesson ends somewhere real: the matching zone
+                          in the app, not another marketing page */}
+                      <a
+                        className="lesson__zone"
+                        href={l.zone.href}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <span className="lesson__zone-k">keep going in the app</span>
+                        <b>{l.zone.label}</b>
+                        <span className="lesson__zone-b">{l.zone.blurb}</span>
+                        <span className="lesson__zone-go">
+                          Open the zone <ArrowRight size={14} strokeWidth={2.4} />
+                        </span>
+                      </a>
                     </div>
                   </div>
                 </article>

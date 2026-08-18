@@ -56,16 +56,26 @@ try {
     await prep(page);
   };
 
-  const still = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 3 });
+  const stillCtx = await browser.newContext({
+    viewport: { width: 390, height: 844 }, deviceScaleFactor: 3, hasTouch: true, isMobile: true,
+  });
+  const still = await stillCtx.newPage();
   await openGuest(still);
 
-  // gold: "See the full story" opens a single full-screen story, not a scroll
+  // Gold: "See the full story" opens a story with slides. The fourth is the
+  // one worth showing — live BAJUS price, the chart, and the week's macro read
+  // — so tap through to it. Taps need touch emulation; a wheel does nothing.
   await still.goto(`${APP}/invest`, { waitUntil: "networkidle" });
   await still.waitForTimeout(4000); await prep(still);
   await still.locator("text=Gold").first().click().catch(() => {});
   await still.waitForTimeout(3500); await prep(still);
   await still.locator("text=See the full story").first().click().catch(() => {});
-  await still.waitForTimeout(4500); await prep(still);
+  await still.waitForTimeout(4000); await prep(still);
+  for (let i = 0; i < 3; i++) {
+    await still.touchscreen.tap(195, 500).catch(() => {});
+    await still.waitForTimeout(1400);
+  }
+  await still.waitForTimeout(1200);
   let raw = join(tmp, "gold.png");
   await still.screenshot({ path: raw });
   webp(raw, `${OUT}/gold.webp`, { height: 1688 });
