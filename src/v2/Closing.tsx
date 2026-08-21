@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ArrowUpRight, GraduationCap, Landmark, BarChart3 } from "lucide-react";
-import { KOSH_APP_URL, KOSH_WAITLIST_EMAIL_URL } from "@/lib/links";
+import { KOSH_APP_URL, KOSH_DOWNLOAD_URL, KOSH_WAITLIST_EMAIL_URL } from "@/lib/links";
 import { MAIL, mailto, VP_SHORT } from "./copy";
 import { setScrollLock } from "./scrollLock";
 import ShaderBg from "./ShaderBg";
@@ -226,6 +226,7 @@ export const FootV2 = () => (
         <h4>Company</h4>
         <ul>
           <li><a href={KOSH_APP_URL}>Try Kosh</a></li>
+          <li><a href={KOSH_DOWNLOAD_URL}>Get the Android app</a></li>
           <li><a href={KOSH_WAITLIST_EMAIL_URL}>Join the waitlist</a></li>
           <li><a href="/#story">Why Kosh</a></li>
           <li><a href="/#organizations">For organizations</a></li>

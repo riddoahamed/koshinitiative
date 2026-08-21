@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { KOSH_APP_URL } from "@/lib/links";
+import { KOSH_APP_URL, KOSH_DOWNLOAD_URL } from "@/lib/links";
+import { AndroidGlyph } from "@/v2/AndroidGlyph";
 import { ArrowRight } from "lucide-react";
 
 /* ── Inside Kosh ──────────────────────────────────────────────────────────────
@@ -199,6 +200,9 @@ export const Inside = () => (
       <div className="inside__cta" data-reveal="fade">
         <a className="btn btn-primary" href={KOSH_APP_URL} target="_blank" rel="noreferrer">
           Try Kosh <ArrowRight size={16} strokeWidth={2.4} />
+        </a>
+        <a className="btn btn-glass" href={KOSH_DOWNLOAD_URL} target="_blank" rel="noreferrer">
+          <AndroidGlyph size={17} /> Get the Android app
         </a>
         <p>
           <span className="dot" /> in beta · explore as a guest · we never touch
