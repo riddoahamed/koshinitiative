@@ -24,10 +24,19 @@ const Index = () => {
 
     window.history.scrollRestoration = "manual";
 
-    /* deep links: /?goto=organizations scrolls to that section */
-    const goto = new URLSearchParams(window.location.search).get("goto");
+    /* Deep links. Two spellings, because both are in the wild: /?goto=section
+       (what this page has always used) and /#section (what a normal person
+       writes, what the nav menu uses, and what a "back to where I was" link
+       from a sub-page produces).
+
+       Only ?goto= was handled, so every /#section link fell through to the
+       scrollTo(0,0) below and dumped the reader on the hero machine. That is
+       what made Back from /investkorsi feel broken — it returned to the
+       homepage and then threw away the position. */
+    const params = new URLSearchParams(window.location.search);
+    const goto = params.get("goto") ?? (window.location.hash ? window.location.hash.slice(1) : null);
     /* always start at the sleeping machine (no browser scroll restore) */
-    if (!goto && !new URLSearchParams(window.location.search).has("crt")) {
+    if (!goto && !params.has("crt")) {
       window.scrollTo(0, 0);
     }
     if (goto) {

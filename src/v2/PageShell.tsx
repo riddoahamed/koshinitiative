@@ -14,10 +14,12 @@ interface PageShellProps {
   title: string;
   description: string;
   path: string;
+  /** Where Back should go, when the page knows better than history does. */
+  backTo?: string;
   children: ReactNode;
 }
 
-const PageShell = ({ title, description, path, children }: PageShellProps) => {
+const PageShell = ({ title, description, path, backTo, children }: PageShellProps) => {
   useEffect(() => {
     applySeo({ title, description, path });
     /* deep links land on the right lesson instead of the top of the page */
@@ -39,7 +41,14 @@ const PageShell = ({ title, description, path, children }: PageShellProps) => {
      which nobody looks for on a phone. history.back() keeps the reader's
      place on the page they came from; the fallback matters because a shared
      /learn link has no history to return to. */
+  /* `backTo` overrides history for pages that know where they belong.
+     history.back() is right when the reader came from somewhere — but it is
+     wrong when they came from the homepage, because Index.tsx sets
+     scrollRestoration to manual and scrolls to the top on mount, so "back"
+     returned them to the hero rather than to the section they left. A page
+     that has a home section on the landing page should say so. */
   const goBack = () => {
+    if (backTo) { window.location.href = backTo; return; }
     if (window.history.length > 1) window.history.back();
     else window.location.href = "/";
   };

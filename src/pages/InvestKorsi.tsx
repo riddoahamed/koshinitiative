@@ -3,6 +3,7 @@ import { ArrowRight, PenLine, ShieldCheck, Compass } from "lucide-react";
 import PageShell from "@/v2/PageShell";
 import { KOSH_APP_URL } from "@/lib/links";
 import Starfield from "@/v2/Starfield";
+import PlatformLogo from "@/v2/PlatformLogo";
 import {
   fetchTotals,
   fetchIssues,
@@ -91,6 +92,8 @@ export default function InvestKorsiPage() {
       title="InvestKorsi — good or bad, how did it actually go?"
       description="Anonymous reports on the platforms, funds, brokers and groups Bangladeshis invest through. What people put in, what came back, and what didn't. Good experiences count as much as bad ones. Free to read, no account needed."
       path="/investkorsi"
+      // Back to the section that sent them, not to the top of the homepage.
+      backTo="/#investkorsi"
     >
       {/* ── 1. SEE ─────────────────────────────────────────────────────── */}
       <section className="sec ikp-hero">
@@ -173,8 +176,11 @@ export default function InvestKorsiPage() {
       <section className="sec ikp-wall">
         <div className="wrap">
           <h3 className="ikp__h" data-reveal>
-            Where people have reported
+            What&rsquo;s reported till now
           </h3>
+          <p className="ikp__lede" data-reveal="fade">
+            A summary of every place someone has written about, and how it went.
+          </p>
 
           {active.length > 0 ? (
             <div className="ikp__cards" data-stagger="80">
@@ -185,7 +191,10 @@ export default function InvestKorsiPage() {
                   href={`${APP_IK}/${p.slug}`}
                   data-reveal="fade"
                 >
-                  <span className="ikp__kind">{p.kind.replace(/_/g, " ")}</span>
+                  <span className="ikp__cardtop">
+                    <PlatformLogo domain={p.domain} name={p.name} size={30} />
+                    <span className="ikp__kind">{p.kind.replace(/_/g, " ")}</span>
+                  </span>
                   <h4>{p.name}</h4>
                   <p className="ikp__counts">
                     {p.reports} report{p.reports === 1 ? "" : "s"}
@@ -214,6 +223,7 @@ export default function InvestKorsiPage() {
               <div className="ikp__quiet-list">
                 {quiet.map((p) => (
                   <a key={p.id} href={`${APP_IK}/${p.slug}`}>
+                    <PlatformLogo domain={p.domain} name={p.name} size={22} />
                     {p.name}
                   </a>
                 ))}
@@ -223,6 +233,17 @@ export default function InvestKorsiPage() {
               </p>
             </div>
           )}
+
+          <div className="ikp__missing" data-reveal="fade">
+            <p className="ikp__missing-h">Not seeing yours?</p>
+            <p className="ikp__missing-p">
+              Any platform, firm, brokerage, collective or Facebook group can be
+              added &mdash; and it is listed the moment you add it.
+            </p>
+            <a className="btn btn-glass" href={`${APP_IK}?add=1`}>
+              Add a platform <ArrowRight size={14} strokeWidth={2.6} />
+            </a>
+          </div>
         </div>
       </section>
 
