@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { ArrowRight, PenLine, ShieldCheck, Compass } from "lucide-react";
 import PageShell from "@/v2/PageShell";
 import { KOSH_APP_URL } from "@/lib/links";
+import Starfield from "@/v2/Starfield";
 import {
   fetchTotals,
   fetchIssues,
@@ -87,22 +88,30 @@ export default function InvestKorsiPage() {
 
   return (
     <PageShell
-      title="InvestKorsi — who actually got paid?"
-      description="Anonymous reports on the platforms, funds, brokers and groups Bangladeshis invest through. What people put in, what came back, and what didn't. Free to read, no account needed."
+      title="InvestKorsi — good or bad, how did it actually go?"
+      description="Anonymous reports on the platforms, funds, brokers and groups Bangladeshis invest through. What people put in, what came back, and what didn't. Good experiences count as much as bad ones. Free to read, no account needed."
       path="/investkorsi"
     >
       {/* ── 1. SEE ─────────────────────────────────────────────────────── */}
       <section className="sec ikp-hero">
+        {/* The same field the homepage teaser and the app's own /investkorsi
+            carry, so all three surfaces read as one product. Bounded to the
+            opening section on purpose — drifting particles behind the scrolling
+            wall of company logos below would be motion competing with the
+            content instead of framing it. */}
+        <Starfield density={1.5} />
         <div className="wrap">
           <p className="eyebrow" data-reveal>
             InvestKorsi
           </p>
           <h2 className="h-display" data-reveal style={{ ["--d" as string]: "70ms" }}>
-            Who actually <span className="grad-text">got paid?</span>
+            Good or bad &mdash;{" "}
+            <span className="grad-text">how did it actually go?</span>
           </h2>
           <p className="h-sub" data-reveal style={{ ["--d" as string]: "140ms" }}>
-            Anonymous reports on the platforms, funds and groups Bangladeshis invest through.
-            Free to read. Nothing traces back to whoever wrote it.
+            You put money into a project, a fund, a broker, or something a Facebook
+            group swore by. Read what really happened to other people &mdash; then tell
+            them yours. Free, and nothing traces back to whoever wrote it.
           </p>
 
           <div className="ikp__stats" data-stagger="90">

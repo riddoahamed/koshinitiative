@@ -52,12 +52,13 @@ export const InvestKorsi = () => {
         </p>
 
         <h2 className="h-display" data-reveal style={{ ["--d" as string]: "80ms" }}>
-          Who actually <span className="grad-text">got paid?</span>
+          Good or bad &mdash;{" "}
+          <span className="grad-text">how did it actually go?</span>
         </h2>
 
         <p className="h-sub" data-reveal style={{ ["--d" as string]: "160ms" }}>
-          Anonymous reports on the platforms, funds and groups Bangladeshis invest through.
-          Read them free, then learn what to look for.
+          Anonymous reports on the platforms, funds and groups Bangladeshis invest
+          through. Read them free, then tell people how yours went.
         </p>
 
         {t.reports > 0 && (
