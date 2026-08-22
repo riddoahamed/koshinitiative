@@ -285,6 +285,11 @@ const NAV_GROUPS: NavGroup[] = [
       { label: "How it works", href: "/#product", note: "Agents find, humans check" },
       { label: "Games", href: "/#funance", note: "Finance, made playable" },
       { label: "Kosh Live", href: "/vote", note: "Run a live room" },
+      // Redirects to app.koshbd.com/investkorsi (see vercel.json). A plain
+      // <a href> here rather than a router Link, so the browser makes a real
+      // request and the redirect actually fires — a client-side navigation
+      // would find no route and render NotFound.
+      { label: "InvestKorsi", href: "/investkorsi", note: "What happened to people's money" },
     ],
   },
   {
