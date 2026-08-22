@@ -51,6 +51,17 @@ const GAMES: Game[] = [
 export const Funance = () => {
   const [active, setActive] = useState(0);
 
+  /* Touch fires mouseenter — including the finger that is starting a scroll —
+     so on a phone this state churned on every card you dragged past,
+     re-rendering the whole grid mid-scroll. The CSS ignores `is-active`
+     without a real pointer anyway, so stop tracking it there entirely. */
+  const hoverCapable =
+    typeof window !== "undefined" &&
+    window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  const hover = (i: number) => () => {
+    if (hoverCapable) setActive(i);
+  };
+
   return (
     <section className="sec games" id="funance">
       <div className="blob p" style={{ width: 420, height: 420, left: "-8%", top: "12%" }} />
@@ -71,7 +82,7 @@ export const Funance = () => {
               key={g.title}
               className={`gcard${i === active ? " is-active" : ""}`}
               data-reveal="fade"
-              onMouseEnter={() => setActive(i)}
+              onMouseEnter={hover(i)}
               onFocus={() => setActive(i)}
             >
               <a
@@ -97,7 +108,7 @@ export const Funance = () => {
             className={`gcard gcard--live${active === GAMES.length ? " is-active" : ""}`}
             href="/vote"
             data-reveal="fade"
-            onMouseEnter={() => setActive(GAMES.length)}
+            onMouseEnter={hover(GAMES.length)}
             onFocus={() => setActive(GAMES.length)}
           >
             <div className="gcard__media gcard__media--live">

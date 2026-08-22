@@ -59,11 +59,26 @@ export function initFx(): () => void {
      self-terminating once everything has revealed */
   let alive = true;
   let lastY = -1;
+  let lastH = -1;
+  let lastVH = -1;
   const loop = () => {
     if (!alive) return;
-    if (window.scrollY !== lastY) {
-      lastY = window.scrollY;
-      const vh = window.innerHeight;
+    /* Gating the reveal pass on scrollY alone meant anything that entered the
+       viewport WITHOUT a scroll stayed at opacity 0 forever: a lazy image
+       settling, an accordion opening above, a phone rotating, the mobile
+       address bar collapsing. All of those change what is on screen while
+       scrollY sits still, and the reader is left looking at a blank gap with
+       no way to fix it short of scrolling away and back. Watching document
+       height and viewport height too costs two reads a frame on a loop that
+       already terminates once everything has revealed. */
+    const y = window.scrollY;
+    const docH = document.documentElement.scrollHeight;
+    const winH = window.innerHeight;
+    if (y !== lastY || docH !== lastH || winH !== lastVH) {
+      lastY = y;
+      lastH = docH;
+      lastVH = winH;
+      const vh = winH;
       pending.forEach((el) => {
         if (el.getBoundingClientRect().top < vh * 0.92) {
           el.classList.add("in");

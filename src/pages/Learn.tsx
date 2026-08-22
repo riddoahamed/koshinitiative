@@ -10,12 +10,31 @@ import { KOSH_APP_URL } from "@/lib/links";
    the teaching has to be visible before the ask.                            */
 
 const Learn = () => {
-  /* first one open — an accordion that starts fully closed reads as empty */
-  const [open, setOpen] = useState<string | null>(
-    typeof window !== "undefined" && window.location.hash
-      ? window.location.hash.slice(1)
-      : LESSONS[0].id
-  );
+  /* Lessons open independently rather than as a one-at-a-time accordion.
+     That was a real bug, not a preference: opening a lesson closed whichever
+     one was already open, and when the open one sat ABOVE it, ~970px of
+     content vanished from above the reader mid-tap. Measured on the live page,
+     tapping "How to spot a scam" moved it from 90px down the viewport to 29px
+     ABOVE the top of it — you tapped a lesson and it scrolled itself off
+     screen. Letting them open independently means nothing above the tap point
+     ever changes height, so there is nothing to jump.
+
+     First one open, because a list of six closed rows reads as an empty page. */
+  const [open, setOpen] = useState<Set<string>>(() => {
+    const hash = typeof window !== "undefined" ? window.location.hash.slice(1) : "";
+    /* validated, not trusted: a stale or hand-typed #anchor used to open
+       nothing at all and the page looked broken */
+    const deepLinked = LESSONS.some((l) => l.id === hash) ? hash : null;
+    return new Set([deepLinked ?? LESSONS[0].id]);
+  });
+
+  const toggle = (id: string) =>
+    setOpen((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
 
   return (
     <PageShell
@@ -43,7 +62,7 @@ const Learn = () => {
         <div className="wrap">
           <div className="lesson__list" data-stagger="70">
             {LESSONS.map((l) => {
-              const isOpen = open === l.id;
+              const isOpen = open.has(l.id);
               return (
                 <article
                   className={`lesson${isOpen ? " is-open" : ""}`}
@@ -53,7 +72,7 @@ const Learn = () => {
                 >
                   <button
                     className="lesson__head"
-                    onClick={() => setOpen(isOpen ? null : l.id)}
+                    onClick={() => toggle(l.id)}
                     aria-expanded={isOpen}
                   >
                     <span className="lesson__n">{l.n}</span>

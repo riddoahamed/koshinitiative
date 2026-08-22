@@ -1,4 +1,5 @@
 import { useEffect, type ReactNode } from "react";
+import { ArrowLeft } from "lucide-react";
 import { NavV2, FootV2 } from "./Closing";
 import { initFx } from "./fx";
 import { applySeo } from "@/lib/seo";
@@ -32,10 +33,29 @@ const PageShell = ({ title, description, path, children }: PageShellProps) => {
     return initFx();
   }, [title, description, path]);
 
+  /* Back, not just the logo. These pages are reached from the homepage, from
+     the app, and from shared links, and until now the only way out was the
+     KOSH wordmark — which reads as "go to the homepage", not "go back", and
+     which nobody looks for on a phone. history.back() keeps the reader's
+     place on the page they came from; the fallback matters because a shared
+     /learn link has no history to return to. */
+  const goBack = () => {
+    if (window.history.length > 1) window.history.back();
+    else window.location.href = "/";
+  };
+
   return (
     <div className="v2 v2-page">
       <NavV2 pinned />
-      <main>{children}</main>
+      <main>
+        <div className="wrap">
+          <button className="pageback" onClick={goBack} type="button">
+            <ArrowLeft size={15} strokeWidth={2.4} />
+            Back
+          </button>
+        </div>
+        {children}
+      </main>
       <FootV2 />
     </div>
   );

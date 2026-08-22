@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { ArrowUpRight, GraduationCap, Landmark, BarChart3 } from "lucide-react";
 import { KOSH_APP_URL, KOSH_DOWNLOAD_URL, KOSH_WAITLIST_EMAIL_URL } from "@/lib/links";
+import { AndroidGlyph } from "./AndroidGlyph";
 import { MAIL, mailto, VP_SHORT } from "./copy";
 import { setScrollLock } from "./scrollLock";
 import ShaderBg from "./ShaderBg";
@@ -392,6 +393,12 @@ export const NavV2 = ({ pinned = false }: { pinned?: boolean }) => {
         </div>
 
         <div className="nav__right">
+          {/* The label collapses under 560px so the row still fits a phone —
+              the robot alone carries the meaning at that size. */}
+          <a className="nav__dl" href={KOSH_DOWNLOAD_URL} aria-label="Get the Android app">
+            <AndroidGlyph size={16} />
+            <span>Get the app</span>
+          </a>
           <a className="btn btn-primary" href={KOSH_APP_URL}>Try Kosh</a>
           <button
             className={`nav__burger${sheet ? " x" : ""}`}
@@ -422,6 +429,9 @@ export const NavV2 = ({ pinned = false }: { pinned?: boolean }) => {
             </div>
           ))}
           <a className="sheet__app" href={KOSH_APP_URL}>Try Kosh &rarr;</a>
+          <a className="sheet__dl" href={KOSH_DOWNLOAD_URL} onClick={() => setSheet(false)}>
+            <AndroidGlyph size={16} /> Get the Android app
+          </a>
         </div>
       </div>
     </>

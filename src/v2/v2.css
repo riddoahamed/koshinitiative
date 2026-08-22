@@ -237,6 +237,54 @@
 .navg--go:hover .navg__btn, .navg--go.open .navg__btn { color: var(--lime); }
 .navg--go.open .navg__btn svg { color: var(--lime); }
 .nav__right { display: flex; align-items: center; gap: 12px; }
+
+/* ── back out of a sub-page ───────────────────────────────────────────────
+   Sits below the pinned nav (67px) rather than inside it: the nav row is
+   already full on a phone, and a back control belongs with the content it
+   backs out of. */
+.pageback {
+  display: inline-flex; align-items: center; gap: 7px;
+  margin-top: calc(67px + 18px);
+  padding: 8px 14px 8px 11px; border-radius: 999px;
+  border: 1px solid var(--stroke); background: var(--glass);
+  font-family: var(--font-h); font-weight: 600; font-size: 13px;
+  color: var(--muted); line-height: 1; cursor: pointer;
+  transition: color .25s ease, border-color .25s ease, transform .25s ease;
+}
+.pageback:hover { color: var(--fg); border-color: hsl(156 85% 62% / 0.45); transform: translateX(-2px); }
+.pageback:focus-visible { outline: 2px solid var(--mint); outline-offset: 3px; }
+/* the hero right under it already carries the top padding */
+.v2-page .page-hero { padding-top: clamp(18px, 2.5vw, 30px); }
+
+/* ── the download card in the nav ─────────────────────────────────────────
+   A card, not a second primary button: "Try Kosh" is still the main action
+   and two filled buttons side by side would make the row argue with itself.
+   Under 560px the label drops and the robot carries it alone, so the nav
+   still fits a 375px phone next to the logo and the burger. */
+.nav__dl {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 13px; border-radius: 12px;
+  border: 1px solid var(--stroke); background: var(--glass);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  font-family: var(--font-h); font-weight: 700; font-size: 13px;
+  color: var(--fg); line-height: 1; white-space: nowrap;
+  transition: border-color .3s ease, color .3s ease, transform .3s ease;
+}
+.nav__dl:hover { border-color: hsl(156 85% 62% / 0.55); color: var(--mint); transform: translateY(-2px); }
+.nav__dl svg { flex-shrink: 0; }
+@media (max-width: 560px) {
+  .nav__dl span { display: none; }
+  .nav__dl { padding: 8px 10px; }
+}
+
+/* same thing, in the phone sheet */
+.sheet__dl {
+  display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+  margin-top: 10px; padding: 13px 18px; border-radius: 14px;
+  border: 1px solid var(--stroke); background: var(--glass);
+  font-family: var(--font-h); font-weight: 700; font-size: 14px; color: var(--fg);
+}
+.sheet__dl:hover { border-color: hsl(156 85% 62% / 0.55); color: var(--mint); }
 .nav .btn { padding: 10px 18px; font-size: 13.5px; border-radius: 11px; }
 
 /* ---- grouped dropdowns ---- */
@@ -1097,10 +1145,22 @@
     border-color .4s ease,
     box-shadow .55s cubic-bezier(.16,1,.3,1);
 }
-.gcard.is-active {
-  transform: translateY(-8px);
-  border-color: rgba(183,255,94,0.4);
-  box-shadow: 0 30px 60px -30px rgba(0,0,0,.9), 0 0 46px -26px hsl(85 95% 65% / .5);
+/* The lift, the glow, the image zoom and the sheen are all HOVER decoration,
+   so they are gated to devices that actually have a pointer.
+
+   On a phone there is no hover: `mouseenter` fires when a finger lands, which
+   includes the finger that is starting a scroll. Every card you dragged past
+   kicked off a 0.55s transform plus a 60px-blur box-shadow plus a 1.1s image
+   scale plus a sheen keyframe — four composited animations firing mid-scroll,
+   which is what made this section stutter on mid-range Android. It also left
+   the last card you touched stuck in the lifted state, because there is no
+   `mouseleave` on touch to put it back. */
+@media (hover: hover) and (pointer: fine) {
+  .gcard.is-active {
+    transform: translateY(-8px);
+    border-color: rgba(183,255,94,0.4);
+    box-shadow: 0 30px 60px -30px rgba(0,0,0,.9), 0 0 46px -26px hsl(85 95% 65% / .5);
+  }
 }
 .gcard__media {
   position: relative; display: block; aspect-ratio: 16/9; overflow: hidden;
@@ -1111,9 +1171,11 @@
   transition: transform 1.1s cubic-bezier(.16,1,.3,1), filter .5s ease;
   filter: saturate(.82) brightness(.86);
 }
-.gcard.is-active .gcard__media img {
-  transform: scale(1.07);
-  filter: saturate(1.06) brightness(1);
+@media (hover: hover) and (pointer: fine) {
+  .gcard.is-active .gcard__media img {
+    transform: scale(1.07);
+    filter: saturate(1.06) brightness(1);
+  }
 }
 /* a light sweeps across the art on the way in */
 .gcard__media::after {
@@ -1121,7 +1183,9 @@
   background: linear-gradient(105deg, transparent 38%, rgba(255,255,255,.16) 50%, transparent 62%);
   transform: translateX(-70%); opacity: 0; pointer-events: none;
 }
-.gcard.is-active .gcard__media::after { animation: sheen 1.1s cubic-bezier(.16,1,.3,1) forwards; }
+@media (hover: hover) and (pointer: fine) {
+  .gcard.is-active .gcard__media::after { animation: sheen 1.1s cubic-bezier(.16,1,.3,1) forwards; }
+}
 @keyframes sheen {
   0%   { transform: translateX(-70%); opacity: 0; }
   35%  { opacity: 1; }
@@ -1137,6 +1201,11 @@
 }
 .gcard.is-active .gcard__play, .gcard__media:focus-visible .gcard__play {
   opacity: 1; transform: none;
+}
+/* Without hover there is nothing to reveal it, so the one control that says
+   these are playable was invisible on every phone. Show it outright. */
+@media (hover: none) {
+  .gcard__play { opacity: 1; transform: none; transition: none; }
 }
 .gcard__body { padding: 16px 18px 20px; }
 .gcard__body h3 { font-size: 18px; font-weight: 800; letter-spacing: -0.01em; }
