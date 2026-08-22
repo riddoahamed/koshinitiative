@@ -12,7 +12,7 @@
       "permanent": true
     },
     {
-      "source": "/investkorsi/:path*",
+      "source": "/investkorsi/:path+",
       "destination": "https://app.koshbd.com/investkorsi/:path*",
       "permanent": false
     }
