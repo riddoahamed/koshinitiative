@@ -226,12 +226,22 @@ const HeroMachine = () => {
               </div>
               <div className="crt__mid">
                 <div className="crt__ctas">
-                  <a className="crt__cta" href="/start">Learn Something Free</a>
+                  {/* "Learn Something Free" was removed from the glass: it was
+                      the longest string on a ~225px screen and the only one
+                      that wrapped. /start is still one tap away in the nav
+                      under "If I started today", and the section below the
+                      hero opens on it. One CTA on the screen also gives the
+                      machine a single obvious thing to do. */}
                   <a className="crt__cta" href={KOSH_APP_URL}>Try Kosh</a>
                 </div>
               </div>
               <button className="crt__explore" onClick={explore}>
-                Explore <span className="arr">⬇</span>
+                Explore{" "}
+                <span className="arr">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M12 4v15m0 0-6-6m6 6 6-6" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </span>
               </button>
             </nav>
           </div>
