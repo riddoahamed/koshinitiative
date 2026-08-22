@@ -1802,3 +1802,53 @@
   transition: gap 0.25s;
 }
 .lesson__zone:hover .lesson__zone-go { gap: 12px; }
+
+/* ---------------- INVESTKORSI ----------------
+   Built from the same tokens as .problem and .product so it cannot drift.
+   Three pillars, one number, two doors. Nothing here glows: the section carries
+   its weight with type size and space, which is the house rule everywhere else
+   on this page too. */
+.ik__pillars {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  margin-top: 52px;
+}
+.ik__pillar { padding: clamp(22px, 2.6vw, 30px); }
+.ik__pillar svg { color: var(--lime); }
+.ik__pillar h3 {
+  margin-top: 16px;
+  font-size: clamp(17px, 1.9vw, 20px); line-height: 1.25;
+}
+.ik__pillar p {
+  margin-top: 10px; font-size: 14px; line-height: 1.55; color: var(--muted);
+}
+
+/* The number and its sentence sit on one line on desktop and stack on a phone,
+   so the figure never ends up orphaned above a paragraph it belongs to. */
+.ik__punch {
+  display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap;
+  margin-top: 46px;
+}
+.ik__punch b {
+  font-family: var(--font-d); font-weight: 800;
+  font-size: clamp(52px, 7vw, 96px); line-height: 0.9; letter-spacing: -0.04em;
+}
+.ik__punch b::before {
+  /* Part of the figure, not of the sentence — so it scales with the number and
+     never wraps away from it. Taka sign LEADS the amount, as it does everywhere
+     in the app; trailing it reads as a footnote marker. */
+  content: "৳"; font-size: 0.44em; margin-right: 0.06em; vertical-align: baseline;
+}
+.ik__punch > span {
+  flex: 1 1 320px; min-width: 0;
+  font-size: clamp(15px, 1.7vw, 18px); line-height: 1.55; color: var(--muted);
+  max-width: 46ch;
+}
+
+.ik__cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+
+.ik__fine {
+  margin-top: 26px; max-width: 62ch;
+  font-size: 12.5px; line-height: 1.6; color: var(--muted); opacity: 0.75;
+}
+
+@media (max-width: 900px) { .ik__pillars { grid-template-columns: 1fr; } }
