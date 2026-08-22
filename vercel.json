@@ -12,11 +12,6 @@
       "permanent": true
     },
     {
-      "source": "/investkorsi",
-      "destination": "https://app.koshbd.com/investkorsi",
-      "permanent": false
-    },
-    {
       "source": "/investkorsi/:path*",
       "destination": "https://app.koshbd.com/investkorsi/:path*",
       "permanent": false

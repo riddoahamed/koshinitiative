@@ -1,114 +1,96 @@
-import { ArrowRight, EyeOff, ShieldCheck, Users } from "lucide-react";
+import { useEffect, useState } from "react";
+import { ArrowRight } from "lucide-react";
 import Starfield from "./Starfield";
-import { KOSH_APP_URL } from "@/lib/links";
+import { fetchTotals, taka, EMPTY_TOTALS, type Totals } from "@/lib/investkorsiData";
 
-/* ---------------- INVESTKORSI — the wall, on the marketing site ----------------
+/* ---------------- INVESTKORSI — the teaser on the homepage ----------------
 
-   Why this section exists at all, and why it is not just a nav link:
+   InvestKorsi is the one thing Kosh has that needs NO trust to be useful.
+   Every other surface asks a sceptical Bangladeshi saver to believe an app
+   about money before it pays out. This one asks nothing — no account, no
+   email, no download — and hands over other people's real experiences
+   immediately. That makes it the best front door the product has.
 
-   InvestKorsi is the one thing Kosh has that needs NO trust to be useful. Every
-   other surface asks a sceptical Bangladeshi saver to believe an app about
-   money before it pays out. This one asks nothing — no account, no email, no
-   download — and hands over other people's real experiences immediately. That
-   makes it the best front door the product has, and a front door deserves more
-   than a menu item.
+   A front door is not a brochure. This used to be three pillar cards, a
+   three-line sub-head and a paragraph of promises, which is a lot of reading
+   for a thing whose entire pitch is "look at the numbers". It is now the
+   claim, the numbers, and the door. Everything the pillars said — anonymity,
+   one report per investment, optional attribution — is said on /investkorsi,
+   where someone who wants it is already looking for it.
 
-   The CTAs go straight to app.koshbd.com/investkorsi rather than to a signup.
-   Anyone arriving is a stranger with a question, and a signup wall between them
-   and the answer would waste the only advantage this page has. The app greets
-   them as a guest and offers an account later, once it has been useful.
+   THE FIGURES ARE FETCHED, NOT TYPED. The old markup hardcoded 48 via
+   data-count, which is fine on the day it ships and a lie by the next report.
+   A marketing number about other people's money is exactly the wrong thing to
+   let drift, so it reads from the same table the app does and simply does not
+   render if the fetch fails.
 
-   Built entirely from the v2 primitives — .sec / .wrap / .eyebrow / .h-display /
-   .grad-text / .glass / data-reveal / data-stagger / data-count / Starfield —
-   so it inherits the site's motion, its reduced-motion handling and its ?still
-   capture mode for free, and cannot drift from the rest of the page.
+   ── THE COPY RULE ────────────────────────────────────────────────────────
+   This section describes the DATA and never a company. No firm is named.
+   "৳48 lakh reported stuck" is a fact about a table; "X is dangerous" is a
+   claim about a real business nobody at Kosh has investigated. And "stuck" is
+   only ever said of amountBad — amount_total includes money that came back
+   perfectly fine. */
 
-   ── THE COPY RULE, WHICH MATTERS MORE HERE THAN ANYWHERE ─────────────────────
-   This section describes the DATA and never a company. No firm is named. "৳48
-   lakh reported stuck" is a fact about a table; "X is dangerous" is a claim
-   about a real business nobody at Kosh has investigated. Marketing copy is
-   exactly where that line gets crossed, so it is drawn explicitly here. */
+export const InvestKorsi = () => {
+  const [t, setT] = useState<Totals>(EMPTY_TOTALS);
 
-const PILLARS = [
-  {
-    icon: EyeOff,
-    t: "Nothing traces back to you",
-    d: "No account, no email, no phone number. Post in fifteen seconds and walk away.",
-  },
-  {
-    icon: Users,
-    t: "One report each, per investment",
-    d: "Nobody can pile on a company, and nobody can pad their own. That is what makes the counts worth reading.",
-  },
-  {
-    icon: ShieldCheck,
-    t: "Or put your name to it",
-    d: "Share as much as you want — your name, your socials, proof of what you invested. Your call, every time.",
-  },
-];
+  useEffect(() => {
+    let alive = true;
+    fetchTotals().then((v) => alive && setT(v));
+    return () => {
+      alive = false;
+    };
+  }, []);
 
-export const InvestKorsi = () => (
-  <section className="sec investkorsi" id="investkorsi">
-    <Starfield density={1.4} />
+  return (
+    <section className="sec investkorsi" id="investkorsi">
+      <Starfield density={1.4} />
 
-    <div className="wrap">
-      <p className="eyebrow" data-reveal>
-        InvestKorsi
-      </p>
+      <div className="wrap">
+        <p className="eyebrow" data-reveal>
+          InvestKorsi
+        </p>
 
-      <h2 className="h-display" data-reveal style={{ ["--d" as string]: "80ms" }}>
-        Before you put money in,
-        <br />
-        <span className="grad-text">see what happened to everyone else.</span>
-      </h2>
+        <h2 className="h-display" data-reveal style={{ ["--d" as string]: "80ms" }}>
+          Who actually <span className="grad-text">got paid?</span>
+        </h2>
 
-      <p className="h-sub" data-reveal style={{ ["--d" as string]: "160ms" }}>
-        Anonymous reports on the platforms, funds, brokers and Facebook groups
-        Bangladeshis actually invest through. What people put in, what came
-        back, and what didn&rsquo;t.
-      </p>
+        <p className="h-sub" data-reveal style={{ ["--d" as string]: "160ms" }}>
+          Anonymous reports on the platforms, funds and groups Bangladeshis invest through.
+          Read them free, then learn what to look for.
+        </p>
 
-      <div className="ik__pillars" data-stagger="120">
-        {PILLARS.map((p) => {
-          const Icon = p.icon;
-          return (
-            <div className="ik__pillar glass" key={p.t} data-reveal="fade">
-              <Icon size={22} strokeWidth={1.6} aria-hidden />
-              <h3>{p.t}</h3>
-              <p>{p.d}</p>
-            </div>
-          );
-        })}
+        {t.reports > 0 && (
+          <div className="ik__figures" data-reveal="fade">
+            <span>
+              <b>{t.reports}</b> reports
+            </span>
+            <span>
+              <b>{t.platforms}</b> platforms
+            </span>
+            {t.amountBad > 0 && (
+              <span>
+                <b>{taka(t.amountBad)}</b> reported stuck
+              </span>
+            )}
+          </div>
+        )}
+
+        <div className="ik__cta" data-reveal style={{ ["--d" as string]: "120ms" }}>
+          <a className="btn btn-primary" href="/investkorsi">
+            See the reports <ArrowRight size={16} aria-hidden />
+          </a>
+          <a className="btn btn-glass" href="/investkorsi">
+            Add yours
+          </a>
+        </div>
+
+        <p className="ik__fine" data-reveal="fade">
+          People&rsquo;s own reports. Kosh has not investigated any company listed.
+        </p>
       </div>
-
-      {/* One number, and it is a fact about the wall rather than about any
-          company. `data-count` animates it on reveal — the site's own count-up,
-          not a second implementation. */}
-      <p className="ik__punch" data-reveal="scale">
-        <b className="grad-text" data-count="48">
-          0
-        </b>
-        <span>
-          lakh reported stuck, by people who told us what happened to their own
-          money. Read every report free, without signing up.
-        </span>
-      </p>
-
-      <div className="ik__cta" data-reveal style={{ ["--d" as string]: "120ms" }}>
-        <a className="btn btn-primary" href={`${KOSH_APP_URL}/investkorsi`}>
-          See the reports <ArrowRight size={16} aria-hidden />
-        </a>
-        <a className="btn btn-glass" href={`${KOSH_APP_URL}/investkorsi`}>
-          Share your experience
-        </a>
-      </div>
-
-      <p className="ik__fine" data-reveal="fade">
-        These are people&rsquo;s own reports. Kosh has not investigated any
-        company listed, and a count is what people said &mdash; nothing more.
-      </p>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default InvestKorsi;

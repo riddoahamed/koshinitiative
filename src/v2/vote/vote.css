@@ -3,6 +3,12 @@
    Inherits the brand tokens from .v2
    ============================================================ */
 
+/* ⚠ `.live` is a GLOBAL class name. Vite bundles every imported stylesheet into
+   one file, so this rule applies on every page of the site, not only /vote —
+   importing it from Vote.tsx scopes nothing. It once inflated a 7px status dot
+   in the homepage's Vision section to 812px, because min-height beats height.
+   Anything added here needs a `live__` prefix, and any generic class name added
+   anywhere in this file will leak the same way. */
 .live {
   min-height: 100vh;
   display: flex; flex-direction: column;

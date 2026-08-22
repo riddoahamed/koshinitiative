@@ -37,14 +37,52 @@ const HeroMachine = () => {
       const vw = hero.clientWidth;
       const vh = hero.clientHeight;
       if (!vw || !vh) return;
-      const scale = Math.max(vw / PLATE_W, vh / PLATE_H) * 1.02;
-      const sw = PLATE_W * scale;
-      const sh = PLATE_H * scale;
-      let left = vw / 2 - MONITOR_CX * sw;
-      let top = vh / 2 - MONITOR_CY * sh;
-      left = Math.min(0, Math.max(vw - sw, left));
-      top = Math.min(0, Math.max(vh - sh, top));
-      if (sw - vw < vw * 0.28) left = (vw - sw) / 2; // wide screens: keep the tiger
+      /* Two layouts, because one does not work for both shapes.
+
+         WIDE: cover the viewport. The plate is 16:9 and so is a laptop, so
+         covering costs almost nothing and the artwork fills the frame.
+
+         NARROW: contain the monitor instead. Covering a 16:9 plate on a 9:19.5
+         phone is driven entirely by the height term — it scaled the plate to
+         roughly four times the viewport width, so the machine's sides were cut
+         off and you got a slab of beige with no object in it. Here the scale is
+         chosen from the GLASS, whose geometry we know exactly, so the monitor
+         lands at a predictable size with real margin around it. The letterbox
+         is invisible: .hero is already #04070f. */
+      const narrow = vw < 760;
+      let sw: number;
+      let sh: number;
+      let left: number;
+      let top: number;
+
+      if (narrow) {
+        /* the black screen should occupy this much of the viewport width; the
+           bezel and casing around it land at roughly 1.5x that, which is what
+           leaves the margin */
+        const GLASS_TARGET = 0.6;
+        let scale = (vw * GLASS_TARGET) / (GLASS_W * PLATE_W);
+        scale = Math.min(scale, (vh * 0.82) / PLATE_H); // never taller than the frame
+        sw = PLATE_W * scale;
+        sh = PLATE_H * scale;
+        /* Horizontally: centre the MONITOR, because the machine sits off-centre
+           in the artwork and centring the plate buries it behind the crop.
+           Vertically: centre the PLATE, because the monitor's midpoint is at
+           0.46 and centring on that pushed the whole image down, leaving a
+           taller black band above it than below. */
+        left = vw / 2 - MONITOR_CX * sw;
+        top = (vh - sh) / 2;
+        /* deliberately NOT clamped to the viewport edges: that clamp is what
+           forces a cover fit, and a cover fit is the bug */
+      } else {
+        const scale = Math.max(vw / PLATE_W, vh / PLATE_H) * 1.02;
+        sw = PLATE_W * scale;
+        sh = PLATE_H * scale;
+        left = vw / 2 - MONITOR_CX * sw;
+        top = vh / 2 - MONITOR_CY * sh;
+        left = Math.min(0, Math.max(vw - sw, left));
+        top = Math.min(0, Math.max(vh - sh, top));
+        if (sw - vw < vw * 0.28) left = (vw - sw) / 2; // wide screens: keep the tiger
+      }
       stage.style.width = `${sw}px`;
       stage.style.height = `${sh}px`;
       stage.style.left = `${left}px`;

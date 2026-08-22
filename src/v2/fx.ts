@@ -14,17 +14,21 @@ export function initFx(): () => void {
   const reduced =
     still || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* auto-stagger groups */
-  document.querySelectorAll<HTMLElement>("[data-stagger]").forEach((group) => {
-    const step = parseInt(group.dataset.stagger || "", 10) || 90;
-    group
-      .querySelectorAll<HTMLElement>(":scope > [data-reveal], :scope > * > [data-reveal]")
-      .forEach((el, i) => {
-        if (!el.style.getPropertyValue("--d")) {
-          el.style.setProperty("--d", `${i * step}ms`);
-        }
-      });
-  });
+  /* auto-stagger groups. Re-runnable, because content that mounts later needs
+     its delays assigned too — the `--d` guard makes it idempotent. */
+  const applyStagger = () => {
+    document.querySelectorAll<HTMLElement>("[data-stagger]").forEach((group) => {
+      const step = parseInt(group.dataset.stagger || "", 10) || 90;
+      group
+        .querySelectorAll<HTMLElement>(":scope > [data-reveal], :scope > * > [data-reveal]")
+        .forEach((el, i) => {
+          if (!el.style.getPropertyValue("--d")) {
+            el.style.setProperty("--d", `${i * step}ms`);
+          }
+        });
+    });
+  };
+  applyStagger();
 
   const pending = new Set<HTMLElement>(
     Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"))
@@ -34,6 +38,10 @@ export function initFx(): () => void {
   );
 
   const runCount = (el: HTMLElement) => {
+    /* Marked so the MutationObserver below cannot re-queue an element that has
+       already animated — without this, any later DOM change would restart every
+       count-up on the page. */
+    el.dataset.counted = "1";
     const target = parseFloat(el.dataset.count || "0");
     if (reduced) {
       el.textContent = String(target);
@@ -96,7 +104,35 @@ export function initFx(): () => void {
   };
   requestAnimationFrame(loop);
 
+  /* Anything rendered AFTER this ran — a fetch resolving, a route's data
+     arriving — was never in `pending` and could therefore never reveal. It sat
+     at opacity 0 permanently, which on /investkorsi meant the entire wall of
+     reports was invisible: the heading rendered, the cards did not.
+
+     The rAF loop also self-terminates once `pending` empties, so a rescan on
+     its own is not enough; the loop has to be restarted when new work appears.
+     Both are handled here. Reduced-motion returns before this point, so the
+     observer only exists where there is animation to drive. */
+  const observer = new MutationObserver(() => {
+    let added = false;
+    document.querySelectorAll<HTMLElement>("[data-reveal]").forEach((el) => {
+      if (!el.classList.contains("in") && !pending.has(el)) {
+        pending.add(el);
+        added = true;
+      }
+    });
+    document.querySelectorAll<HTMLElement>("[data-count]").forEach((el) => {
+      if (!el.dataset.counted && !counts.has(el)) counts.add(el);
+    });
+    if (!added && !counts.size) return;
+    applyStagger();
+    lastY = -1; // force the next frame to run the reveal pass
+    requestAnimationFrame(loop);
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
+
   return () => {
     alive = false;
+    observer.disconnect();
   };
 }

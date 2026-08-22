@@ -8,6 +8,7 @@ import NotFound from "./pages/NotFound.tsx";
 import Vote from "./pages/Vote.tsx";
 import Start from "./pages/Start.tsx";
 import Learn from "./pages/Learn.tsx";
+import InvestKorsi from "./pages/InvestKorsi";
 import Quiz from "./pages/Quiz.tsx";
 import Blog from "./pages/Blog.tsx";
 import Post from "./pages/Post.tsx";
@@ -29,6 +30,7 @@ const App = () => (
           {/* the beginner path */}
           <Route path="/start" element={<Start />} />
           <Route path="/learn" element={<Learn />} />
+          <Route path="/investkorsi" element={<InvestKorsi />} />
           <Route path="/quiz" element={<Quiz />} />
           <Route path="/investor-type" element={<Quiz />} />
           {/* writing */}

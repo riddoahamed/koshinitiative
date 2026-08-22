@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ArrowUpRight, GraduationCap, Landmark, BarChart3 } from "lucide-react";
+import { ArrowUpRight, GraduationCap, Landmark, BarChart3, Download } from "lucide-react";
 import { KOSH_APP_URL, KOSH_DOWNLOAD_URL, KOSH_WAITLIST_EMAIL_URL } from "@/lib/links";
 import { AndroidGlyph } from "./AndroidGlyph";
 import { MAIL, mailto, VP_SHORT } from "./copy";
@@ -84,7 +84,7 @@ export const Vision = () => (
 
       <div className="vision__cols">
         <div className="vcol now" data-reveal>
-          <span className="vcol__tag"><span className="live" /> now</span>
+          <span className="vcol__tag"><span className="vcol__led" /> now</span>
           <ul>
             <li>Bangladesh <span>· live in beta</span></li>
             <li>Discovery, learning, paper investing</li>
@@ -286,11 +286,9 @@ const NAV_GROUPS: NavGroup[] = [
       { label: "How it works", href: "/#product", note: "Agents find, humans check" },
       { label: "Games", href: "/#funance", note: "Finance, made playable" },
       { label: "Kosh Live", href: "/vote", note: "Run a live room" },
-      // Points at the SECTION, not at /investkorsi. The section explains what
-      // the wall is before sending anyone to it, and useAnchorNav scrolls
-      // smoothly when we are already on the homepage. koshbd.com/investkorsi
-      // still redirects to the app for anyone who types or shares that URL.
-      { label: "InvestKorsi", href: "/#investkorsi", note: "What happened to people's money" },
+      // /investkorsi is a real page on this site now, not a redirect to the
+      // app, so the nav points at it rather than at the homepage teaser.
+      { label: "InvestKorsi", href: "/investkorsi", note: "What happened to people's money" },
     ],
   },
   {
@@ -395,8 +393,14 @@ export const NavV2 = ({ pinned = false }: { pinned?: boolean }) => {
         <div className="nav__right">
           {/* The label collapses under 560px so the row still fits a phone —
               the robot alone carries the meaning at that size. */}
-          <a className="nav__dl" href={KOSH_DOWNLOAD_URL} aria-label="Get the Android app">
+          {/* The robot alone was not read as a download button on a phone —
+              it says "Android", not "tap this to get a file". The arrow only
+              appears where the label is hidden, so the desktop pill stays a
+              clean mark-plus-words and the phone gets the universal symbol
+              instead of a mystery. */}
+          <a className="nav__dl" href={KOSH_DOWNLOAD_URL} aria-label="Download the Android app">
             <AndroidGlyph size={16} />
+            <Download className="nav__dl-arrow" size={14} strokeWidth={2.6} aria-hidden />
             <span>Get the app</span>
           </a>
           <a className="btn btn-primary" href={KOSH_APP_URL}>Try Kosh</a>

@@ -6,7 +6,6 @@ import {
   ArrowRight,
   Target,
   BookOpen,
-  Wallet,
 } from "lucide-react";
 import { KOSH_APP_URL } from "@/lib/links";
 import { PROMISE_CHIPS } from "./copy";
@@ -65,12 +64,17 @@ const DOORS = [
     accent: "b",
   },
   {
-    icon: Wallet,
-    kicker: "the whole path",
-    t: "What do I do first?",
-    p: "The full starting order, written out. From your first taka saved to your first real investment. No jargon, nothing sold.",
-    href: "/start",
-    cta: "See the path",
+    // The third door used to be /start, which is a page on this site — so all
+    // three doors led back into more reading. This one opens the app's Discover
+    // feed instead, which is the actual point of the funnel: read a lesson,
+    // then go look at real options. /start is still one tap away in the nav
+    // under "If I started today".
+    icon: Compass,
+    kicker: "real options",
+    t: "Show me what's out there",
+    p: "Sanchaypatra, DPS, FDR, funds, gold and shares, with what each one really pays after tax. Browse as a guest.",
+    href: `${KOSH_APP_URL}/invest`,
+    cta: "Open Discover",
     accent: "c",
   },
 ];
@@ -85,8 +89,8 @@ export const Paths = () => (
       </h2>
       <p className="h-sub" data-reveal style={{ ["--d" as string]: "150ms" }}>
         Pick the door that sounds like you. All three are free, none of them
-        need an account, and every one of them ends with something you can
-        actually do this week.
+        need an account, and every one ends with something you can actually do
+        this week.
       </p>
       <div className="paths__grid" data-stagger="120">
         {DOORS.map((d) => (
