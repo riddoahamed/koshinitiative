@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 200" width="240" height="200" role="img" aria-label="A cartoon frog panicking with both hands on its head">
+  <defs>
+    <clipPath id="cBodyB"><ellipse cx="120" cy="134" rx="60" ry="48"/></clipPath>
+  </defs>
+
+  <!-- back feet, splayed -->
+  <path d="M66 172 q-16 4 -17 12 q-1 8 9 8 q10 0 17-6 z" fill="#4E9E2C"/>
+  <path d="M174 172 q16 4 17 12 q1 8 -9 8 q-10 0 -17-6 z" fill="#4E9E2C"/>
+
+  <!-- ARMS FIRST, from inside the body up to the head, so the shoulder is
+       covered by the body and the limb reads as attached. -->
+  <path d="M78 138 q-26 -14 -24 -44" stroke="#69BE3D" stroke-width="16" stroke-linecap="round" fill="none"/>
+  <path d="M162 138 q26 -14 24 -44" stroke="#69BE3D" stroke-width="16" stroke-linecap="round" fill="none"/>
+
+  <!-- body -->
+  <ellipse cx="120" cy="134" rx="60" ry="48" fill="#69BE3D"/>
+  <ellipse cx="120" cy="149" rx="39" ry="30" fill="#B6E38A" clip-path="url(#cBodyB)"/>
+
+  <!-- eye domes, bigger and higher than the calm one: alarm reads as size -->
+  <circle cx="90" cy="70" r="30" fill="#69BE3D"/>
+  <circle cx="150" cy="70" r="30" fill="#69BE3D"/>
+  <circle cx="90" cy="70" r="22" fill="#FFFFFF"/>
+  <circle cx="150" cy="70" r="22" fill="#FFFFFF"/>
+  <!-- tiny pupils in a big white field — the whole grammar of a shocked face -->
+  <circle cx="90" cy="72" r="7" fill="#1B2F1A"/>
+  <circle cx="150" cy="72" r="7" fill="#1B2F1A"/>
+
+  <!-- HANDS ON TOP OF THE DOMES, drawn after them so the grip is unambiguous.
+       In the first pass the hands sat outboard of the head and the arms read as
+       antennae; clamped over the dome, the pose is unmistakable. -->
+  <ellipse cx="66" cy="52" rx="15" ry="13" fill="#7ACB4B" transform="rotate(-24 66 52)"/>
+  <ellipse cx="174" cy="52" rx="15" ry="13" fill="#7ACB4B" transform="rotate(24 174 52)"/>
+  <!-- three finger creases each, so the blob reads as a hand -->
+  <path d="M60 44 l5 8 M68 41 l4 8 M76 40 l3 8" stroke="#5BA834" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+  <path d="M180 44 l-5 8 M172 41 l-4 8 M164 40 l-3 8" stroke="#5BA834" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+
+  <!-- brows, dark and set INSIDE the white of the eye so they read as brows and
+       not as a cap sitting on the head -->
+  <path d="M78 54 q12 -7 24 -1" stroke="#1B2F1A" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+  <path d="M138 53 q12 -6 24 1" stroke="#1B2F1A" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+
+  <!-- nostrils -->
+  <circle cx="113" cy="105" r="2.6" fill="#3E8A22"/>
+  <circle cx="127" cy="105" r="2.6" fill="#3E8A22"/>
+
+  <!-- open, wailing mouth -->
+  <ellipse cx="120" cy="130" rx="17" ry="21" fill="#1B2F1A"/>
+  <ellipse cx="120" cy="142" rx="10" ry="9" fill="#E4695E"/>
+
+  <!-- sweat, flying off -->
+  <path d="M36 34 q5 -9 10 0 a6 6.5 0 0 1 -10 0 z" fill="#7FC7E8"/>
+  <path d="M196 30 q5 -9 10 0 a6 6.5 0 0 1 -10 0 z" fill="#7FC7E8"/>
+  <path d="M168 20 q4 -7 8 0 a4.7 5 0 0 1 -8 0 z" fill="#7FC7E8" opacity="0.75"/>
+
+  <!-- shock lines -->
+  <path d="M20 86 h13" stroke="#F0A93B" stroke-width="4" stroke-linecap="round"/>
+  <path d="M207 86 h13" stroke="#F0A93B" stroke-width="4" stroke-linecap="round"/>
+  <path d="M26 106 l11 5" stroke="#F0A93B" stroke-width="4" stroke-linecap="round"/>
+  <path d="M214 106 l-11 5" stroke="#F0A93B" stroke-width="4" stroke-linecap="round"/>
+</svg>
