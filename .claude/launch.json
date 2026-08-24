@@ -1,1 +1,12 @@
-cat /Users/riddo/Desktop/koshlanding/.claude/launch.json 2>/dev/null | head -3
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "landing",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "port": 8080,
+      "autoPort": true
+    }
+  ]
+}
