@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 200" width="240" height="200" role="img" aria-label="A cartoon frog sitting calmly, sipping tea from a mug">
+  <defs>
+    <clipPath id="cBodyA"><ellipse cx="100" cy="130" rx="66" ry="52"/></clipPath>
+  </defs>
+
+  <!-- back feet -->
+  <path d="M40 168 q-16 2 -18 10 q-2 8 8 9 q10 1 18-4 z" fill="#4E9E2C"/>
+  <path d="M158 168 q16 2 18 10 q2 8 -8 9 q-10 1 -18-4 z" fill="#4E9E2C"/>
+
+  <!-- ARM FIRST, so the body overlaps its shoulder and it reads as attached.
+       Drawn as a fat round-capped stroke from inside the body out to the mug —
+       the first version started at the body's edge, which left the mug looking
+       like it was floating beside the frog rather than being held. -->
+  <path d="M138 140 q34 6 54 -14" stroke="#69BE3D" stroke-width="17" stroke-linecap="round" fill="none"/>
+
+  <!-- body -->
+  <ellipse cx="100" cy="130" rx="66" ry="52" fill="#69BE3D"/>
+  <ellipse cx="100" cy="146" rx="43" ry="33" fill="#B6E38A" clip-path="url(#cBodyA)"/>
+
+  <!-- eye domes -->
+  <circle cx="70" cy="74" r="27" fill="#69BE3D"/>
+  <circle cx="130" cy="74" r="27" fill="#69BE3D"/>
+  <circle cx="70" cy="72" r="19" fill="#FFFFFF"/>
+  <circle cx="130" cy="72" r="19" fill="#FFFFFF"/>
+  <!-- half-lidded, unbothered: a solid cap over the top half of each eye -->
+  <path d="M51 72 a19 19 0 0 1 38 0 z" fill="#69BE3D"/>
+  <path d="M111 72 a19 19 0 0 1 38 0 z" fill="#69BE3D"/>
+  <circle cx="70" cy="78" r="7.5" fill="#1B2F1A"/>
+  <circle cx="130" cy="78" r="7.5" fill="#1B2F1A"/>
+  <path d="M51 72 h38" stroke="#3E8A22" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <path d="M111 72 h38" stroke="#3E8A22" stroke-width="3" stroke-linecap="round" fill="none"/>
+
+  <!-- nostrils -->
+  <circle cx="93" cy="104" r="2.6" fill="#3E8A22"/>
+  <circle cx="107" cy="104" r="2.6" fill="#3E8A22"/>
+
+  <!-- a small contented smile, not the full frog grin -->
+  <path d="M84 120 q16 12 32 0" stroke="#1B2F1A" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+
+  <!-- cheek blush. Pink, not the muddy terracotta of the first pass — over a
+       mid green, a warm brown reads as dirt rather than as a cheek. -->
+  <ellipse cx="58" cy="118" rx="9.5" ry="6.5" fill="#FF7FA0" opacity="0.42"/>
+  <ellipse cx="142" cy="118" rx="9.5" ry="6.5" fill="#FF7FA0" opacity="0.42"/>
+
+  <!-- steam -->
+  <path d="M196 92 q-6 -8 0 -16 q6 -8 0 -16" stroke="#C9D6CE" stroke-width="4.5" stroke-linecap="round" fill="none" opacity="0.85"/>
+  <path d="M209 96 q-6 -7 0 -14 q6 -7 0 -13" stroke="#C9D6CE" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.6"/>
+
+  <!-- mug, held clear of the body so both shapes stay readable -->
+  <path d="M184 104 h34 v22 a17 17 0 0 1 -34 0 z" fill="#FFFFFF"/>
+  <path d="M218 108 a10 10 0 0 1 0 15" stroke="#FFFFFF" stroke-width="5.5" fill="none" stroke-linecap="round"/>
+  <path d="M184 104 h34 v5.5 h-34 z" fill="#D8E4DA"/>
+
+  <!-- the hand, on top of the mug so the grip is unambiguous -->
+  <ellipse cx="188" cy="120" rx="11" ry="10" fill="#7ACB4B"/>
+</svg>

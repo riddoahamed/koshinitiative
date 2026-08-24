@@ -267,7 +267,9 @@ export const FootV2 = () => (
    nav is visible from the first paint. */
 
 interface NavItem { label: string; href: string; note?: string }
-interface NavGroup { label: string; items: NavItem[] }
+/** A group with `items` opens a menu. A group with a bare `href` and no items
+    is a PLAIN TOP-LEVEL LINK — see the Blog entry for why that exists. */
+interface NavGroup { label: string; href?: string; items: NavItem[] }
 
 const NAV_GROUPS: NavGroup[] = [
   {
@@ -276,7 +278,6 @@ const NAV_GROUPS: NavGroup[] = [
       { label: "If I started today", href: "/start", note: "The five-step path" },
       { label: "Quick lessons", href: "/learn", note: "Two minutes each" },
       { label: "What kind of investor am I?", href: "/quiz", note: "60 seconds" },
-      { label: "Blog", href: "/blog", note: "Guides, how-tos, questions" },
     ],
   },
   {
@@ -291,6 +292,16 @@ const NAV_GROUPS: NavGroup[] = [
       { label: "InvestKorsi", href: "/investkorsi", note: "What happened to people's money" },
     ],
   },
+  // ── BLOG IS TOP-LEVEL, NOT A MENU ITEM ───────────────────────────────────
+  // It was the fourth entry inside the "Start learning" dropdown, which meant
+  // reaching it took a hover, a scan of four labels, and a guess that a group
+  // called "Start learning" is where a blog lives. That is indistinguishable
+  // from not having navigation to it — and a blog nobody can find is a
+  // publishing programme with no readers.
+  //
+  // Every site with a blog puts "Blog" in the top row. This is one of the very
+  // few places to just do the obvious thing.
+  { label: "Blog", href: "/blog", items: [] },
   {
     label: "Company",
     items: [
@@ -370,6 +381,11 @@ export const NavV2 = ({ pinned = false }: { pinned?: boolean }) => {
               key={g.label}
               onMouseEnter={() => setOpen(g.label)}
             >
+              {g.items.length === 0 && g.href ? (
+                <a className="navg__btn" href={g.href} onClick={(e) => click(e, g.href as string)}>
+                  {g.label}
+                </a>
+              ) : (
               <button
                 className="navg__btn"
                 aria-expanded={open === g.label}
@@ -378,6 +394,7 @@ export const NavV2 = ({ pinned = false }: { pinned?: boolean }) => {
                 {g.label}
                 <svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" /></svg>
               </button>
+              )}
               <div className="navg__menu">
                 {g.items.map((i) => (
                   <a key={i.href} href={i.href} onClick={(e) => click(e, i.href)}>
@@ -423,7 +440,11 @@ export const NavV2 = ({ pinned = false }: { pinned?: boolean }) => {
           </a>
           {NAV_GROUPS.map((g) => (
             <div className="sheet__g" key={g.label}>
-              <h4>{g.label}</h4>
+              {g.items.length === 0 && g.href ? (
+                <a href={g.href} onClick={(e) => click(e, g.href as string)}>{g.label}</a>
+              ) : (
+                <h4>{g.label}</h4>
+              )}
               {g.items.map((i) => (
                 <a key={i.href} href={i.href} onClick={(e) => click(e, i.href)}>
                   {i.label}
