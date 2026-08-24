@@ -172,9 +172,7 @@ const HeroMachine = () => {
     <div ref={wrapRef} className="heroWrap" id="top">
       <header ref={heroRef} className={`hero ${phase}${booted ? " booted" : ""}`}>
         <h1 className="sr">
-          Kosh. From “where do I start?” to your first real investment. Free
-          money lessons, risk-free practice on real market prices, and honest
-          answers. Starting in Bangladesh.
+          Kosh. Scams, frauds, and the ones that paid.
         </h1>
 
         <div ref={stageRef} className="hero__stage">
@@ -268,8 +266,7 @@ const HeroMachine = () => {
             the site should never be a beautiful picture that says nothing. */}
         <div className="hero__strap">
           <p className="hero__strap-vp">
-            From <span>&ldquo;where do I start?&rdquo;</span> to your first real
-            investment
+            Scams, frauds, and <span>the ones that paid.</span>
           </p>
           <p className="hero__strap-sub">
             Free money lessons · risk-free practice on real prices · we never
