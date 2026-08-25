@@ -101,6 +101,23 @@ const Vote = () => {
     return () => clearInterval(t);
   }, [stage, refresh]);
 
+  /* ── The ticker needs its numbers before the reveal ───────────────────────
+     The polling effect above only runs on the reveal stage, which is correct —
+     nothing else needs a 3-second refresh. But it meant the running total
+     above the QUESTION had no data at first paint and simply never appeared:
+     the one place the counts do persuasion work is the moment before somebody
+     decides whether to answer.
+
+     One fetch on mount, not a poll. It is a single aggregate row, and a number
+     that is a few minutes stale is indistinguishable from a fresh one at this
+     scale. */
+  useEffect(() => {
+    if (!liveReady) return;
+    let alive = true;
+    void fetchLiveStats().then((s) => { if (alive) setLive(s); });
+    return () => { alive = false; };
+  }, []);
+
   const pick = async (id: string) => {
     setChoice(id);
     localStorage.setItem(CHOICE_KEY, id);
