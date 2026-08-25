@@ -421,3 +421,78 @@
 @media (prefers-reduced-motion: reduce) {
   .live *, .live *::before, .live *::after { animation: none !important; }
 }
+
+
+/* ══ The perpetual layer ═══════════════════════════════════════════════════
+   Kosh Live threw every session's answer away when the projector went off.
+   These two pieces keep them: a running ticker above the question, and the
+   all-time tally beside the room's own pie. */
+
+/* ---- running total, above the question ---- */
+.live__ticker {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 6px 12px;
+  margin-bottom: 14px;
+  font-family: var(--font-m, ui-monospace, monospace);
+  font-size: 11px; letter-spacing: .13em; text-transform: uppercase;
+  color: rgba(242, 242, 247, 0.5);
+}
+.live__ticker i {
+  width: 7px; height: 7px; border-radius: 999px;
+  background: hsl(156 85% 62%);
+  box-shadow: 0 0 0 3px hsl(156 85% 62% / 0.16);
+  animation: liveTick 2.4s ease-in-out infinite;
+}
+.live__ticker span { color: hsl(156 85% 62%); }
+.live__ticker em { font-style: normal; color: rgba(242, 242, 247, 0.45); }
+@keyframes liveTick { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+@media (prefers-reduced-motion: reduce) { .live__ticker i { animation: none; } }
+
+/* ---- all-time tally, under the room's pie ---- */
+.live__all {
+  margin-top: clamp(26px, 4vw, 40px);
+  padding-top: clamp(20px, 3vw, 28px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+.live__all-h {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px;
+  font-family: var(--font-h, system-ui, sans-serif);
+  font-weight: 800; font-size: 15px;
+  color: rgba(242, 242, 247, 0.9);
+}
+.live__all-h em {
+  font-style: normal; font-weight: 500;
+  font-family: var(--font-m, ui-monospace, monospace);
+  font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+  color: rgba(242, 242, 247, 0.4);
+}
+.live__all-list { margin: 16px 0 0; padding: 0; list-style: none; display: grid; gap: 9px; }
+.live__all-list li {
+  display: grid; grid-template-columns: minmax(88px, 150px) 1fr auto;
+  align-items: center; gap: 12px;
+}
+.live__all-label {
+  font-size: 13px; color: rgba(242, 242, 247, 0.78);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.live__all-bar {
+  height: 7px; border-radius: 999px;
+  background: rgba(255, 255, 255, 0.07); overflow: hidden;
+}
+.live__all-bar i { display: block; height: 100%; border-radius: 999px; }
+.live__all-pct {
+  font-family: var(--font-m, ui-monospace, monospace);
+  font-size: 12px; font-variant-numeric: tabular-nums;
+  color: rgba(242, 242, 247, 0.6); min-width: 34px; text-align: right;
+}
+/* The row you voted for, marked without a colour change — the bar already
+   carries the option's hue, and a second signal on top of it is noise. */
+.live__all-list li.mine .live__all-label { color: #fff; font-weight: 700; }
+.live__all-list li.mine .live__all-pct { color: #fff; }
+.live__all-n {
+  margin-top: 14px; font-size: 12px; line-height: 1.6;
+  color: rgba(242, 242, 247, 0.36); max-width: 58ch;
+}
+@media (max-width: 520px) {
+  .live__all-list li { grid-template-columns: minmax(76px, 110px) 1fr auto; gap: 9px; }
+  .live__all-label { font-size: 12px; }
+}

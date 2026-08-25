@@ -4,6 +4,7 @@ import PageShell from "@/v2/PageShell";
 import { KOSH_APP_URL } from "@/lib/links";
 import Starfield from "@/v2/Starfield";
 import PlatformLogo from "@/v2/PlatformLogo";
+import PerpetualPoll from "@/v2/vote/PerpetualPoll";
 import {
   fetchTotals,
   fetchIssues,
@@ -232,6 +233,14 @@ export default function InvestKorsiPage() {
           </p>
         </div>
       </section>
+
+      {/* ── The ৳10 lakh question ───────────────────────────────────────
+          Placed straight after the two frogs on purpose. The reader has just
+          been shown the two things that can happen to money; "so what would you
+          do with yours?" is the natural next beat, and it is the one moment on
+          this page where they are asked to put something IN rather than take
+          something out. Everything above it is other people's money. */}
+      <PerpetualPoll />
 
       {/* ── What actually goes wrong ───────────────────────────────────── */}
       {ranked.length > 0 && (

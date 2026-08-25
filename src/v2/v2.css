@@ -1989,7 +1989,7 @@
    next. Tightened globally for the page, and the closing disclaimer sits right
    under the block it qualifies. */
 .ikp-hero, .ikp-issues, .ikp-wall, .ikp-next, .ikp-fine,
-.ikp-frogs, .ikp-classes, .ikp-registry {
+.ikp-frogs, .ikp-classes, .ikp-registry, .ikp-poll {
   padding-block: clamp(38px, 4.5vw, 62px);
 }
 .ikp-hero { padding-top: clamp(10px, 1.6vw, 18px); }
@@ -2210,3 +2210,79 @@
 
 /* The "N went badly" tail inside a count. */
 .ikp__bad { font-style: normal; color: hsl(4 78% 68%); }
+
+
+/* ---- the ৳10 lakh poll ---- */
+/* A card, unlike everything else on this page — because it is the one block
+   that ASKS for something rather than reporting something, and the border is
+   what marks it as a place to act. */
+.poll {
+  border: 1px solid var(--stroke); border-radius: 20px;
+  padding: clamp(20px, 3.4vw, 30px);
+  background: rgba(255, 255, 255, 0.02);
+}
+.poll__eyebrow {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 6px 12px;
+  font-family: var(--font-m); font-size: 11px;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--mint);
+}
+.poll__eyebrow i {
+  width: 7px; height: 7px; border-radius: 999px; background: var(--mint);
+  box-shadow: 0 0 0 3px hsl(156 85% 62% / 0.16);
+  animation: ikpPulse 2.4s ease-in-out infinite;
+}
+.poll__eyebrow em {
+  font-style: normal; color: rgba(242, 242, 247, 0.4);
+}
+@media (prefers-reduced-motion: reduce) { .poll__eyebrow i { animation: none; } }
+
+.poll__q {
+  margin-top: 12px;
+  font-family: var(--font-d); font-weight: 800;
+  font-size: clamp(21px, 2.8vw, 28px); letter-spacing: -0.02em; line-height: 1.15;
+}
+.poll__sub {
+  margin-top: 8px; font-size: 14px; line-height: 1.6;
+  color: var(--muted); max-width: 46ch;
+}
+
+.poll__opts {
+  margin-top: 20px; display: grid; gap: 8px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+.poll__opt {
+  position: relative; overflow: hidden;
+  display: flex; align-items: center; gap: 10px;
+  min-height: 50px; padding: 12px 14px;
+  border: 1px solid var(--stroke); border-radius: 13px;
+  background: transparent; text-align: left; cursor: pointer;
+  transition: border-color .25s ease, background-color .25s ease;
+}
+.poll__opt:hover { border-color: hsl(var(--hue) 80% 58% / 0.55); }
+.poll__opt.mine { border-color: hsl(var(--hue) 80% 58%); }
+/* The bar lives inside the control and sits UNDER the label, so tapping turns
+   the button into its own chart instead of swapping it for one. */
+.poll__fill {
+  position: absolute; inset: 0 auto 0 0;
+  background: hsl(var(--hue) 80% 58% / 0.22);
+  transition: width .55s cubic-bezier(.2,.8,.2,1);
+}
+.poll__label {
+  position: relative; z-index: 1; flex: 1; min-width: 0;
+  font-size: 13.5px; font-weight: 600; color: rgba(242, 242, 247, 0.88);
+}
+.poll__opt.mine .poll__label { color: #fff; font-weight: 800; }
+.poll__pct {
+  position: relative; z-index: 1;
+  font-family: var(--font-m); font-size: 12.5px;
+  font-variant-numeric: tabular-nums; color: rgba(242, 242, 247, 0.75);
+}
+.poll__opt.mine .poll__pct { color: #fff; }
+
+.poll__n {
+  margin-top: 16px; font-size: 12.5px; line-height: 1.65;
+  color: rgba(242, 242, 247, 0.42); max-width: 62ch;
+}
+.poll__n a { color: rgba(242, 242, 247, 0.7); border-bottom: 1px solid var(--stroke); }
+.poll__n a:hover { color: var(--fg); border-bottom-color: var(--lime); }

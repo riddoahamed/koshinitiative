@@ -4,7 +4,7 @@ import QrCode from "@/v2/QrCode";
 import CrashGame from "@/v2/vote/CrashGame";
 import TrailGame from "@/v2/vote/TrailGame";
 import { OPTIONS, optionById, profileFor } from "@/v2/vote/data";
-import { castVote, fetchTally, liveReady } from "@/v2/vote/live";
+import { castVote, fetchTally, fetchPollTotals, fetchLiveStats, liveReady, type LiveStats } from "@/v2/vote/live";
 import { useWallet, taka, START_BALANCE } from "@/v2/vote/wallet";
 import { KOSH_APP_URL } from "@/lib/links";
 import { applySeo } from "@/lib/seo";
@@ -30,6 +30,17 @@ const Vote = () => {
   const [stage, setStage] = useState<Stage>("vote");
   const [choice, setChoice] = useState<string | null>(null);
   const [tally, setTally] = useState<Record<string, number>>({});
+  // ── THE PERPETUAL LAYER ───────────────────────────────────────────────────
+  // Every session's answer used to be thrown away the moment the projector went
+  // off. `totals` is every answer ever given, in every room, and `stats` is how
+  // many sessions and answers that adds up to.
+  //
+  // Both are shown NEXT TO the room's own numbers rather than instead of them:
+  // "6 of the 11 people here said land" is a fact about a room, "34% of
+  // everyone who has ever answered said land" is a fact about Bangladesh, and
+  // the first is much more interesting beside the second.
+  const [totals, setTotals] = useState<Record<string, number>>({});
+  const [live, setLive] = useState<LiveStats>({ rooms: 0, votes: 0, lastVoteAt: null });
   const [analyseId, setAnalyseId] = useState<string | null>(null);
   const [sent, setSent] = useState(false);
   const [left, setLeft] = useState<number | null>(null); // seconds on the clock
@@ -73,7 +84,14 @@ const Vote = () => {
   /* live tally polling while the reveal is on screen */
   const refresh = useCallback(async () => {
     if (!liveReady) return;
-    setTally(await fetchTally(room));
+    const [t, all, st] = await Promise.all([
+      fetchTally(room),
+      fetchPollTotals(),
+      fetchLiveStats(),
+    ]);
+    setTally(t);
+    setTotals(all);
+    setLive(st);
   }, [room]);
 
   useEffect(() => {
@@ -107,6 +125,22 @@ const Vote = () => {
         .sort((a, b) => b.n - a.n),
     [effectiveTally]
   );
+
+  /* The perpetual tally, ranked. Capped at eight rows: fifteen options with a
+     long tail of ones is a list nobody reads to the end of, and the tail is
+     exactly the part that says nothing. */
+  const allTotal = Object.values(totals).reduce((a, b) => a + b, 0);
+  const allRanked = useMemo(
+    () =>
+      OPTIONS.map((o) => ({ o, n: totals[o.id] || 0 }))
+        .filter((r) => r.n > 0)
+        .sort((a, b) => b.n - a.n)
+        .slice(0, 8),
+    [totals]
+  );
+  /* Bars scale to the top row, not to the total — against a total, everything
+     below first place is an unreadable sliver on any realistic spread. */
+  const allTop = allRanked[0]?.n ?? 1;
 
   const analysed = optionById(analyseId || choice || ranked[0]?.o.id || "dse");
   const profile = profileFor(stats);
@@ -147,6 +181,23 @@ const Vote = () => {
           <section className="live__stage">
             <div className="live__grid">
               <div>
+                {/* ── THE RUNNING TOTAL, ABOVE THE QUESTION ────────────────
+                    Kosh Live looked like a tool that had never been used: an
+                    empty room, a question, and no evidence anyone had ever
+                    answered it. The counts are the cheapest possible proof
+                    that this is a thing people do — and they are the reason
+                    to answer, because a vote that joins forty thousand others
+                    is worth casting and a vote into a void is not.
+
+                    Hidden until there is something to show. "0 sessions" is
+                    worse than no strip at all. */}
+                {live.votes > 0 && (
+                  <p className="live__ticker">
+                    <i aria-hidden />
+                    <span>{live.votes.toLocaleString("en-IN")} answers</span>
+                    <em>{live.rooms.toLocaleString("en-IN")} session{live.rooms === 1 ? "" : "s"} so far</em>
+                  </p>
+                )}
                 <p className="eyebrow">the question</p>
                 <h1 className="live__q">
                   You just got <span className="grad-text">৳10,00,000</span>.
@@ -267,6 +318,45 @@ const Vote = () => {
                 {total === 0 && <li className="empty">Waiting for the first vote…</li>}
               </ol>
             </div>
+
+            {/* ── AND WHAT EVERYONE EVER SAID ──────────────────────────
+                The room's pie answers "what do the people in front of me
+                think". This answers "what does the country think", which is the
+                only nationally interesting number Kosh collects and was being
+                discarded after every session.
+
+                Bars, not a second pie: two pies side by side invite a
+                shape-matching game between a sample of eleven and a sample of
+                thousands, and that comparison is not one the numbers support.
+                A ranked bar list reads as a reference, which is what it is. */}
+            {allTotal > 0 && (
+              <div className="live__all">
+                <p className="live__all-h">
+                  Everyone who has ever answered
+                  <em>{allTotal.toLocaleString("en-IN")} answers · {live.rooms.toLocaleString("en-IN")} session{live.rooms === 1 ? "" : "s"}</em>
+                </p>
+                <ol className="live__all-list">
+                  {allRanked.map(({ o, n }) => (
+                    <li key={o.id} className={choice === o.id ? "mine" : ""}>
+                      <span className="live__all-label">{o.label}</span>
+                      <span className="live__all-bar">
+                        <i
+                          style={{
+                            width: `${Math.max(3, (n / allTop) * 100)}%`,
+                            background: `hsl(${o.hue} 80% 58%)`,
+                          }}
+                        />
+                      </span>
+                      <span className="live__all-pct">{((n / allTotal) * 100).toFixed(0)}%</span>
+                    </li>
+                  ))}
+                </ol>
+                <p className="live__all-n">
+                  Every session ever run, added together. One answer per device
+                  per session &mdash; nobody can vote twice in the same room.
+                </p>
+              </div>
+            )}
 
             <div className="live__foot">
               {liveReady && (
