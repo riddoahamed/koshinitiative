@@ -22,6 +22,7 @@ const EMPTY: Submission = {
   tags: [],
   author: "",
   authorNote: "",
+  cover: "",
 };
 
 const Submit = () => {
@@ -165,9 +166,32 @@ const Submit = () => {
                     onChange={(e) => set("body", e.target.value)}
                     rows={14}
                     maxLength={SUBMIT_LIMITS.body[1]}
-                    placeholder={"Leave a blank line between paragraphs.\n\nWrite the way you'd explain it to a friend who has never invested: short sentences, real numbers, and say plainly when something is your opinion rather than a fact."}
+                    placeholder={"Leave a blank line between paragraphs.\n\nWrite the way you'd explain it to a friend who has never invested: short sentences, real numbers, and say plainly when something is your opinion rather than a fact.\n\nTo put a picture or a chart in, paste its link on a line of its own."}
                     required
                   />
+                </label>
+
+                {/* Pictures and charts. A LINK, not an upload — there is no
+                    auth on this site, so an upload box here would be an
+                    anonymous write into storage, which is a spam and abuse
+                    surface with no owner. A URL we parse and check costs the
+                    writer one extra step and costs us nothing to defend. */}
+                <label className="wf">
+                  <span>
+                    Lead image <em>optional</em>
+                  </span>
+                  <input
+                    value={f.cover}
+                    onChange={(e) => set("cover", e.target.value)}
+                    placeholder="https://… .jpg"
+                    inputMode="url"
+                    autoCapitalize="off"
+                    autoCorrect="off"
+                  />
+                  <small className="wf__hint">
+                    Paste a link to an image. For pictures and charts inside the
+                    piece, put each link on its own line in the post above.
+                  </small>
                 </label>
 
                 <div className="wf__row">

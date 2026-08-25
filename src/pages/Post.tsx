@@ -22,20 +22,57 @@ const fmt = (iso: string) =>
     year: "numeric",
   });
 
-const Body = ({ post }: { post: TPost }) =>
-  post.allowHtml && post.source === "kosh" ? (
+/* ── IMAGES AND CHARTS IN A SUBMITTED PIECE ──────────────────────────────────
+
+   A paragraph whose entire content is an https image URL renders as an image.
+   That is the whole syntax, and it is deliberately the whole syntax.
+
+   The obvious ask is "let contributors put pictures and charts in their posts",
+   and the obvious implementation — turn on `allowHtml` for community posts —
+   is a stored-XSS hole with a submit button on it: anybody on the internet can
+   write to `posts`, and `dangerouslySetInnerHTML` on a stranger's text hands
+   them the domain, the session and the ability to rewrite the page they are
+   published on. `allowHtml` stays exactly where it is, gated on
+   `source === "kosh"`.
+
+   Here WE build the <img>. Nothing from the submission reaches the DOM as
+   markup — only a URL that has been parsed, checked for https, and checked for
+   an image extension. A chart is a picture of a chart, which is what a chart in
+   an article always was. */
+const isImageLine = (line: string): string | null => {
+  const t = line.trim();
+  // One token only. A URL with prose around it is prose.
+  if (/\s/.test(t)) return null;
+  try {
+    const u = new URL(t);
+    if (u.protocol !== "https:") return null;
+    if (!/\.(png|jpe?g|gif|webp|avif|svg)$/i.test(u.pathname)) return null;
+    return u.toString();
+  } catch {
+    return null;
+  }
+};
+
+const Body = ({ post }: { post: TPost }) => {
+  const html = post.allowHtml && post.source === "kosh";
+  return (
     <>
-      {post.body.map((p, i) => (
-        <p key={i} dangerouslySetInnerHTML={{ __html: p }} />
-      ))}
-    </>
-  ) : (
-    <>
-      {post.body.map((p, i) => (
-        <p key={i}>{p}</p>
-      ))}
+      {post.body.map((p, i) => {
+        const img = isImageLine(p);
+        if (img) {
+          return (
+            <figure className="article__fig" key={i}>
+              <img src={img} alt="" loading="lazy" decoding="async" />
+            </figure>
+          );
+        }
+        return html
+          ? <p key={i} dangerouslySetInnerHTML={{ __html: p }} />
+          : <p key={i}>{p}</p>;
+      })}
     </>
   );
+};
 
 const Post = () => {
   const { slug = "" } = useParams();

@@ -2286,3 +2286,102 @@
 }
 .poll__n a { color: rgba(242, 242, 247, 0.7); border-bottom: 1px solid var(--stroke); }
 .poll__n a:hover { color: var(--fg); border-bottom-color: var(--lime); }
+
+
+/* ══ /blog — the index ═════════════════════════════════════════════════════
+   Replaces .pgrid / .post / .pfilter, which put five badge colours and six
+   elements on every tile and a row of outlined pills over the top. The old
+   rules are left in place; nothing renders them any more. */
+
+/* ---- categories as a table of contents ---- */
+.pindex {
+  display: flex; flex-wrap: wrap; gap: 4px 22px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--stroke);
+}
+.pindex button {
+  position: relative;
+  padding: 6px 0;
+  background: none; border: 0; cursor: pointer;
+  font-family: var(--font-h); font-size: 14px; font-weight: 600;
+  color: rgba(242, 242, 247, 0.5);
+  transition: color .2s ease;
+}
+.pindex button:hover { color: rgba(242, 242, 247, 0.85); }
+.pindex button em {
+  font-style: normal; margin-left: 5px;
+  font-family: var(--font-m); font-size: 11px;
+  color: rgba(242, 242, 247, 0.28);
+}
+.pindex button.on { color: var(--fg); font-weight: 800; }
+/* The rule sits ON the section border, so the active word looks joined to the
+   list below rather than underlined for emphasis. */
+.pindex button.on::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -15px;
+  height: 2px; background: var(--lime); border-radius: 2px;
+}
+.pindex button.on em { color: var(--lime); }
+.pindex__blurb {
+  margin-top: 16px; font-size: 14px; line-height: 1.6;
+  color: var(--muted); max-width: 62ch;
+}
+
+/* ---- the list ---- */
+.plist { margin-top: 8px; display: flex; flex-direction: column; }
+.prow {
+  display: flex; align-items: center; gap: 20px;
+  padding: 22px 4px;
+  border-bottom: 1px solid var(--stroke);
+  transition: background-color .2s ease;
+}
+.prow:hover { background: rgba(255, 255, 255, 0.022); }
+.prow__main { flex: 1; min-width: 0; }
+.prow h3 {
+  font-family: var(--font-h); font-weight: 800;
+  font-size: clamp(17px, 2.1vw, 21px); line-height: 1.3;
+  letter-spacing: -0.015em; color: var(--fg);
+}
+.prow:hover h3 { color: var(--lime); }
+/* ONE grey line, all of it. The category is a word here, not a coloured badge —
+   five badge hues down a page of writing was the whole 2003 problem. */
+.prow__meta {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px;
+  margin-top: 8px;
+  font-family: var(--font-m); font-size: 11px;
+  letter-spacing: .08em; text-transform: uppercase;
+  color: rgba(242, 242, 247, 0.34);
+}
+.prow__src { display: inline-flex; align-items: center; gap: 5px; }
+.prow__thumb {
+  flex: 0 0 auto; width: 112px; height: 76px;
+  border-radius: 10px; overflow: hidden; background: rgba(255,255,255,0.04);
+}
+.prow__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+@media (max-width: 640px) {
+  .prow { gap: 14px; padding: 18px 2px; }
+  .prow__thumb { width: 76px; height: 58px; }
+}
+
+.prow-skel {
+  height: 92px; border-bottom: 1px solid var(--stroke);
+  background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.055), rgba(255,255,255,0.03));
+  background-size: 200% 100%;
+  animation: prowShim 1.4s ease-in-out infinite;
+}
+@keyframes prowShim { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+@media (prefers-reduced-motion: reduce) { .prow-skel { animation: none; } }
+
+
+/* Images inside an article. Full bleed of the measure, never wider — a picture
+   that escapes the text column turns a read into a scroll. */
+.article__fig { margin: 26px 0; }
+.article__fig img {
+  display: block; width: 100%; height: auto;
+  border-radius: 14px; border: 1px solid var(--stroke);
+}
+
+/* Field hint under a submit-form input. */
+.wf__hint {
+  display: block; margin-top: 6px;
+  font-size: 12px; line-height: 1.55; color: rgba(242, 242, 247, 0.38);
+}

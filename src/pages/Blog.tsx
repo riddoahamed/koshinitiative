@@ -26,36 +26,50 @@ const SOURCE_ICON: Record<PostSource, typeof PenLine> = {
 };
 
 const fmt = (iso: string) =>
-  new Date(iso).toLocaleDateString("en-GB", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  });
+  new Date(iso).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
 
-const Card = ({ p }: { p: Post }) => {
+/* ── A ROW, NOT A TILE ───────────────────────────────────────────────────────
+
+   Every post used to be a bordered glass card carrying six things: a coloured
+   category badge, a read time, a title, a two-line dek, a "Read →" chevron and
+   a date. Two across, a dozen of them, five different badge colours down the
+   grid — green for questions, purple for how-tos, teal for lessons, orange for
+   stories. It looked like a portal from 2003, and none of those six things is
+   why anybody clicks.
+
+   THE TITLE IS WHY ANYBODY CLICKS. Every post here is already a question or a
+   plain statement — "How much money do you need to start investing in
+   Bangladesh?" — so the title alone does the entire job of the badge, the dek
+   and the chevron put together. Everything else is set small, in one grey line
+   underneath, and the category is a WORD rather than a coloured pill.
+
+   The whole row is the link, the rule between rows is the only decoration, and
+   a list of good questions reads faster than a grid of good cards. */
+const Row = ({ p }: { p: Post }) => {
   const Icon = SOURCE_ICON[p.source];
   return (
-    <a className="post glass" href={`/blog/${p.slug}`} data-reveal="scale">
-      {p.cover && (
-        <div className="post__cover">
-          <img src={p.cover} alt="" loading="lazy" decoding="async" />
-        </div>
-      )}
-      <div className="post__body">
-        <span className="post__meta">
-          <b className={`cat cat--${p.category}`}>{CATEGORY_LABEL[p.category]}</b>
-          <em>{p.readMins} min</em>
+    <a className="prow" href={`/blog/${p.slug}`} data-reveal="fade">
+      <span className="prow__main">
+        <h3>{p.title}</h3>
+        <span className="prow__meta">
+          <span>{CATEGORY_LABEL[p.category]}</span>
+          <span>{p.readMins} min</span>
+          <span>{fmt(p.date)}</span>
           {p.source !== "kosh" && (
-            <i title={SOURCE_LABEL[p.source]}><Icon size={12} strokeWidth={2.2} /></i>
+            <span className="prow__src" title={SOURCE_LABEL[p.source]}>
+              <Icon size={11} strokeWidth={2.2} /> {SOURCE_LABEL[p.source]}
+            </span>
           )}
         </span>
-        <h3>{p.title}</h3>
-        <p>{p.dek}</p>
-        <span className="post__foot">
-          <span className="post__go">Read <ArrowRight size={14} strokeWidth={2.4} /></span>
-          <em>{fmt(p.date)}</em>
+      </span>
+      {/* The cover survives, small and on the right. A picture is the one thing
+          on the old card that carried information a title cannot — but at
+          tile size it was the loudest element on a page of words. */}
+      {p.cover && (
+        <span className="prow__thumb">
+          <img src={p.cover} alt="" loading="lazy" decoding="async" />
         </span>
-      </div>
+      )}
     </a>
   );
 };
@@ -109,9 +123,19 @@ const Blog = () => {
 
       <section className="sec postlist">
         <div className="wrap">
-          <div className="pfilter" data-reveal="fade">
+          {/* ── AN INDEX, NOT PILLS ──────────────────────────────────────
+              A row of rounded outlined pills is the single most recognisable
+              "this was generated" tell on the web right now, and it was sitting
+              at the top of the one page whose whole claim is that a person
+              wrote everything below it.
+
+              Plain words instead, with a count beside each and a rule under the
+              one you are reading. It is a table of contents — the oldest
+              navigation there is for a page of writing, and the one nobody has
+              to learn. */}
+          <nav className="pindex" data-reveal="fade" aria-label="Filter by category">
             <button className={cat === "all" ? "on" : ""} onClick={() => setCat("all")}>
-              Everything
+              Everything <em>{all.length}</em>
             </button>
             {shelves.map((c) => (
               <button
@@ -119,22 +143,22 @@ const Blog = () => {
                 className={cat === c.key ? "on" : ""}
                 onClick={() => setCat(c.key)}
               >
-                {c.label}
+                {c.label} <em>{all.filter((p) => p.category === c.key).length}</em>
               </button>
             ))}
-          </div>
+          </nav>
 
-          {active && <p className="pfilter__blurb">{active.blurb}</p>}
+          {active && <p className="pindex__blurb">{active.blurb}</p>}
 
           {posts === null ? (
-            <div className="pgrid">
+            <div className="plist">
               {[0, 1, 2, 3, 4, 5].map((i) => (
-                <div className="pcard-skel" key={i} aria-hidden="true" />
+                <div className="prow-skel" key={i} aria-hidden="true" />
               ))}
             </div>
           ) : (
-            <div className="pgrid" data-stagger="80">
-              {shown.map((p) => <Card key={p.slug} p={p} />)}
+            <div className="plist" data-stagger="40">
+              {shown.map((p) => <Row key={p.slug} p={p} />)}
             </div>
           )}
 

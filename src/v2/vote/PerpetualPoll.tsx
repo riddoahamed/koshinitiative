@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { OPTIONS } from "@/v2/vote/data";
-import { castVote, fetchPollTotals, fetchLiveStats, liveReady } from "@/v2/vote/live";
+import { castVote, fetchPollTotals, liveReady } from "@/v2/vote/live";
 
 /* ── The ৳10 lakh question, as a perpetual public counter ────────────────────
 
@@ -35,27 +35,22 @@ import { castVote, fetchPollTotals, fetchLiveStats, liveReady } from "@/v2/vote/
 const ROOM = "public";
 const CHOICE_KEY = "kosh_poll_choice_public";
 
-/** Six, not fifteen. The full option list is right for a classroom with a
-    facilitator and two minutes; a reader scrolling a data page will not weigh
-    fifteen tiles, and the tail options are the ones nobody picks anyway.
-    Ordered as they appear on the Kosh Live board so the two agree. */
-const SHORTLIST = ["land", "dse", "mutual-fund", "sanchaypatra", "gold", "business"];
+/* EVERY option, in the order the Kosh Live board uses. An earlier pass showed
+   six on the argument that a reader scrolling a data page will not weigh
+   fifteen tiles — but cutting nine of them means somebody whose actual answer
+   is "pay off a loan first" has no honest tile to press, and the poll stops
+   measuring what people would do and starts measuring which of our six they
+   dislike least. A wrong answer offered is worse than a long list. */
 
 export default function PerpetualPoll() {
   const [choice, setChoice] = useState<string | null>(null);
   const [totals, setTotals] = useState<Record<string, number>>({});
-  const [answers, setAnswers] = useState(0);
   const [busy, setBusy] = useState(false);
 
-  const options = useMemo(
-    () => SHORTLIST.map((id) => OPTIONS.find((o) => o.id === id)).filter(Boolean) as typeof OPTIONS,
-    [],
-  );
+  const options = OPTIONS;
 
   const load = useCallback(async () => {
-    const [t, s] = await Promise.all([fetchPollTotals(), fetchLiveStats()]);
-    setTotals(t);
-    setAnswers(s.votes);
+    setTotals(await fetchPollTotals());
   }, []);
 
   useEffect(() => {
@@ -78,13 +73,12 @@ export default function PerpetualPoll() {
     setBusy(false);
   };
 
-  /* Only the shortlist is charted, but the DENOMINATOR is every answer ever
-     given to this question, including the classroom sessions and the options
-     not shown here. Charting six options against a total of six would inflate
-     every one of them — the percentages have to be of the real whole. */
+  /* The denominator is every answer ever given to this question, across every
+     Kosh Live session as well as this page. Bars scale to the top option, not
+     to the total — against a total, everything below first place is an
+     unreadable sliver on any realistic spread. */
   const total = Object.values(totals).reduce((a, b) => a + b, 0);
-  const shown = options.map((o) => ({ o, n: totals[o.id] || 0 }));
-  const top = Math.max(1, ...shown.map((r) => r.n));
+  const top = Math.max(1, ...options.map((o) => totals[o.id] || 0));
   const revealed = choice !== null && total > 0;
 
   return (
@@ -94,7 +88,6 @@ export default function PerpetualPoll() {
           <p className="poll__eyebrow">
             <i aria-hidden />
             Kosh Live
-            {answers > 0 && <em>{answers.toLocaleString("en-IN")} answers so far</em>}
           </p>
 
           <h3 className="poll__q">
@@ -135,18 +128,9 @@ export default function PerpetualPoll() {
             })}
           </div>
 
-          {revealed ? (
+          {revealed && (
             <p className="poll__n">
-              Out of {total.toLocaleString("en-IN")} answers, across every Kosh Live
-              session and everyone who has answered here. Six shown; the
-              percentages are of all of them.{" "}
               <a href="/vote">Run this in your own room &rarr;</a>
-            </p>
-          ) : (
-            <p className="poll__n">
-              {liveReady
-                ? "Your answer joins every Kosh Live session ever run."
-                : "Results are unavailable right now — your answer is kept on this device."}
             </p>
           )}
         </div>

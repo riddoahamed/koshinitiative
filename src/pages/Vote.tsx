@@ -4,7 +4,7 @@ import QrCode from "@/v2/QrCode";
 import CrashGame from "@/v2/vote/CrashGame";
 import TrailGame from "@/v2/vote/TrailGame";
 import { OPTIONS, optionById, profileFor } from "@/v2/vote/data";
-import { castVote, fetchTally, fetchPollTotals, fetchLiveStats, liveReady, type LiveStats } from "@/v2/vote/live";
+import { castVote, fetchTally, fetchPollTotals, liveReady } from "@/v2/vote/live";
 import { useWallet, taka, START_BALANCE } from "@/v2/vote/wallet";
 import { KOSH_APP_URL } from "@/lib/links";
 import { applySeo } from "@/lib/seo";
@@ -40,7 +40,6 @@ const Vote = () => {
   // everyone who has ever answered said land" is a fact about Bangladesh, and
   // the first is much more interesting beside the second.
   const [totals, setTotals] = useState<Record<string, number>>({});
-  const [live, setLive] = useState<LiveStats>({ rooms: 0, votes: 0, lastVoteAt: null });
   const [analyseId, setAnalyseId] = useState<string | null>(null);
   const [sent, setSent] = useState(false);
   const [left, setLeft] = useState<number | null>(null); // seconds on the clock
@@ -84,14 +83,9 @@ const Vote = () => {
   /* live tally polling while the reveal is on screen */
   const refresh = useCallback(async () => {
     if (!liveReady) return;
-    const [t, all, st] = await Promise.all([
-      fetchTally(room),
-      fetchPollTotals(),
-      fetchLiveStats(),
-    ]);
+    const [t, all] = await Promise.all([fetchTally(room), fetchPollTotals()]);
     setTally(t);
     setTotals(all);
-    setLive(st);
   }, [room]);
 
   useEffect(() => {
@@ -100,23 +94,6 @@ const Vote = () => {
     const t = setInterval(refresh, 3000);
     return () => clearInterval(t);
   }, [stage, refresh]);
-
-  /* ── The ticker needs its numbers before the reveal ───────────────────────
-     The polling effect above only runs on the reveal stage, which is correct —
-     nothing else needs a 3-second refresh. But it meant the running total
-     above the QUESTION had no data at first paint and simply never appeared:
-     the one place the counts do persuasion work is the moment before somebody
-     decides whether to answer.
-
-     One fetch on mount, not a poll. It is a single aggregate row, and a number
-     that is a few minutes stale is indistinguishable from a fresh one at this
-     scale. */
-  useEffect(() => {
-    if (!liveReady) return;
-    let alive = true;
-    void fetchLiveStats().then((s) => { if (alive) setLive(s); });
-    return () => { alive = false; };
-  }, []);
 
   const pick = async (id: string) => {
     setChoice(id);
@@ -198,23 +175,6 @@ const Vote = () => {
           <section className="live__stage">
             <div className="live__grid">
               <div>
-                {/* ── THE RUNNING TOTAL, ABOVE THE QUESTION ────────────────
-                    Kosh Live looked like a tool that had never been used: an
-                    empty room, a question, and no evidence anyone had ever
-                    answered it. The counts are the cheapest possible proof
-                    that this is a thing people do — and they are the reason
-                    to answer, because a vote that joins forty thousand others
-                    is worth casting and a vote into a void is not.
-
-                    Hidden until there is something to show. "0 sessions" is
-                    worse than no strip at all. */}
-                {live.votes > 0 && (
-                  <p className="live__ticker">
-                    <i aria-hidden />
-                    <span>{live.votes.toLocaleString("en-IN")} answers</span>
-                    <em>{live.rooms.toLocaleString("en-IN")} session{live.rooms === 1 ? "" : "s"} so far</em>
-                  </p>
-                )}
                 <p className="eyebrow">the question</p>
                 <h1 className="live__q">
                   You just got <span className="grad-text">৳10,00,000</span>.
@@ -350,7 +310,7 @@ const Vote = () => {
               <div className="live__all">
                 <p className="live__all-h">
                   Everyone who has ever answered
-                  <em>{allTotal.toLocaleString("en-IN")} answers · {live.rooms.toLocaleString("en-IN")} session{live.rooms === 1 ? "" : "s"}</em>
+                  <em>out of {allTotal.toLocaleString("en-IN")} answers</em>
                 </p>
                 <ol className="live__all-list">
                   {allRanked.map(({ o, n }) => (

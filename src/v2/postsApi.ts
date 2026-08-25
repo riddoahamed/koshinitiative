@@ -164,7 +164,28 @@ export interface Submission {
   tags: string[];
   author: string;
   authorNote: string;
+  /** Optional lead image, as an https URL. Validated the same way an in-body
+      image line is — parsed, https-only, image extension only — because the
+      value ends up in an `src` on our domain. */
+  cover: string;
 }
+
+/** An https URL that ends in an image extension, or nothing. Same shape as the
+    in-body image check in pages/Post.tsx and for the same reason: a submitted
+    string that reaches an `src` attribute is attacker-controlled, so it is
+    parsed and checked rather than trusted. */
+export const safeImageUrl = (raw: string | null | undefined): string | undefined => {
+  const t = (raw ?? "").trim();
+  if (!t) return undefined;
+  try {
+    const u = new URL(t);
+    if (u.protocol !== "https:") return undefined;
+    if (!/\.(png|jpe?g|gif|webp|avif|svg)$/i.test(u.pathname)) return undefined;
+    return u.toString();
+  } catch {
+    return undefined;
+  }
+};
 
 export const SUBMIT_LIMITS = {
   title: [8, 140],
@@ -220,6 +241,7 @@ export async function submitPost(
         status: "pending",
         author_name: s.author.trim().slice(0, 80) || null,
         author_note: s.authorNote.trim().slice(0, 300) || null,
+        cover_url: safeImageUrl(s.cover) ?? null,
       }),
     });
     if (!res.ok) {
