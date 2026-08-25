@@ -51,6 +51,10 @@ export interface Totals {
 export interface Issue {
   slug: string;
   label: string;
+  /** The coarse bucket — withdrawal, returns, principal, communication, fees,
+      paperwork, pressure, none, other. The rollup a reader sees before the
+      specific categories under it. */
+  family: string;
   reportCount: number;
 }
 
@@ -64,6 +68,19 @@ export interface PlatformRow {
   good: number;
   mixed: number;
   bad: number;
+  /** Sum of amounts on this platform's BAD reports only. Never amount_total —
+      see fetchTotals for why that distinction is not cosmetic. */
+  amountBad: number;
+  amountBadReports: number;
+}
+
+/** One asset class, counted across every report on the site. */
+export interface ClassRow {
+  key: string;
+  label: string;
+  reports: number;
+  bad: number;
+  amountBad: number;
 }
 
 export const EMPTY_TOTALS: Totals = {
@@ -90,11 +107,19 @@ export async function fetchTotals(): Promise<Totals> {
 
 export async function fetchIssues(): Promise<Issue[]> {
   const rows = await get<Record<string, unknown>>(
-    "ik_issues?select=slug,label,report_count&order=report_count.desc",
+    // NOT filtered on `merged_into`. A category merged away by
+    // investkorsi-converge has its links moved and its `report_count` zeroed,
+    // and this page already drops zero-count rows — so tombstones are invisible
+    // without naming the column. Naming it would couple this deploy to the
+    // migration landing first: PostgREST answers a filter on a missing column
+    // with 42703, `get()` returns [], and the issues section would silently
+    // disappear until someone ran `supabase db push`.
+    "ik_issues?select=slug,label,family,report_count&order=report_count.desc",
   );
   return rows.map((i) => ({
     slug: String(i.slug),
     label: String(i.label),
+    family: String(i.family ?? "other"),
     reportCount: Number(i.report_count ?? 0),
   }));
 }
@@ -122,8 +147,65 @@ export async function fetchWall(): Promise<PlatformRow[]> {
       good: Number(s?.good ?? 0),
       mixed: Number(s?.mixed ?? 0),
       bad: Number(s?.bad ?? 0),
+      amountBad: Number(s?.amount_bad ?? 0),
+      amountBadReports: Number(s?.amount_bad_reports ?? 0),
     };
   });
+}
+
+/* ── The asset-class ledger ──────────────────────────────────────────────────
+
+   "Which platforms go wrong" is one question and the site already answered it.
+   "Which KINDS OF INVESTMENT go wrong" is the more useful one for a stranger,
+   because they can act on it before they have picked a company — and it is the
+   question the report form's asset-class step was collecting an answer to
+   without anything ever displaying it.
+
+   Aggregated in the browser from the report rows rather than from a view. Two
+   reasons: it needs no migration, and `product_kind` is already in the column
+   grant, so nothing about the privacy boundary changes. The read is capped —
+   at the volumes this page will see for a long while it is a few kilobytes,
+   and if it ever stops being that, the fix is a view, not a bigger cap. */
+
+const CLASS_LABELS: Record<string, string> = {
+  alternative: "Projects (farm, SME)",
+  funds: "Mutual funds",
+  dse: "Shares",
+  savings: "FDR / DPS / savings",
+  gold: "Gold",
+  real_estate: "Land or property",
+  govt: "Sanchayapatra / bonds",
+  halal: "Shariah products",
+  global: "Abroad",
+  other: "Something else",
+};
+
+export async function fetchClasses(): Promise<ClassRow[]> {
+  const rows = await get<Record<string, unknown>>(
+    "ik_reports?select=product_kind,sentiment,amount_bdt&status=eq.live&limit=5000",
+  );
+
+  const acc = new Map<string, ClassRow>();
+  for (const r of rows) {
+    // A report that skipped the question is NOT an "other" — it is an absence,
+    // and folding it into a named bucket would invent an answer nobody gave.
+    const key = r.product_kind ? String(r.product_kind) : null;
+    if (!key) continue;
+    const cur = acc.get(key) ?? {
+      key,
+      label: CLASS_LABELS[key] ?? key.replace(/_/g, " "),
+      reports: 0,
+      bad: 0,
+      amountBad: 0,
+    };
+    cur.reports += 1;
+    if (r.sentiment === "bad") {
+      cur.bad += 1;
+      cur.amountBad += Number(r.amount_bdt ?? 0);
+    }
+    acc.set(key, cur);
+  }
+  return [...acc.values()].sort((a, b) => b.reports - a.reports);
 }
 
 /** ৳ figures the way Bangladeshi readers actually say them. */

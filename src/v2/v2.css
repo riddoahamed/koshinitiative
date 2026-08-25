@@ -1988,7 +1988,8 @@
    336px between blocks) put a screen of nothing between every number and the
    next. Tightened globally for the page, and the closing disclaimer sits right
    under the block it qualifies. */
-.ikp-hero, .ikp-issues, .ikp-wall, .ikp-next, .ikp-fine {
+.ikp-hero, .ikp-issues, .ikp-wall, .ikp-next, .ikp-fine,
+.ikp-frogs, .ikp-classes, .ikp-registry {
   padding-block: clamp(38px, 4.5vw, 62px);
 }
 .ikp-hero { padding-top: clamp(10px, 1.6vw, 18px); }
@@ -2090,3 +2091,122 @@
   margin: 7px 0 14px; max-width: 48ch;
   font-size: 13.5px; line-height: 1.55; color: var(--muted);
 }
+
+
+/* ══ /investkorsi — the ledger layer ═══════════════════════════════════════
+   Added with the public-ledger pass. The page already had the numbers; what it
+   did not have was a shape that said "this is a record being kept" rather than
+   "this is an article about records". Three pieces do that work: a live strip
+   at the top, a numbered register in the middle, and a pair of frogs to stop
+   the whole thing reading as a funeral. */
+
+/* ---- the live strip ---- */
+.ikp__live {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 8px 14px;
+  font-family: var(--font-m);
+  font-size: 11px; letter-spacing: .13em; text-transform: uppercase;
+  color: rgba(242, 242, 247, 0.5);
+}
+.ikp__live i {
+  width: 7px; height: 7px; border-radius: 999px; background: var(--mint);
+  box-shadow: 0 0 0 3px hsl(156 85% 62% / 0.16);
+  animation: ikpPulse 2.4s ease-in-out infinite;
+}
+.ikp__live span { color: rgba(242, 242, 247, 0.72); }
+.ikp__live em { font-style: normal; color: var(--mint); }
+.ikp__live em + em::before {
+  content: "·"; margin-right: 14px; color: rgba(242, 242, 247, 0.28);
+}
+@keyframes ikpPulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.35; }
+}
+@media (prefers-reduced-motion: reduce) { .ikp__live i { animation: none; } }
+
+/* One line, set apart. It is the argument the whole page rests on, so it gets
+   its own air rather than being the third sentence of the lede. */
+.ikp__thesis {
+  margin-top: 18px; padding-left: 14px;
+  border-left: 2px solid hsl(85 95% 65% / 0.5);
+  font-size: 15px; line-height: 1.6; color: rgba(242, 242, 247, 0.8);
+  max-width: 52ch;
+}
+
+/* ---- the frogs ---- */
+/* Stickers, not cards. No border, no plate, no figure box — the frame is what
+   turned a reaction image into a thumbnail of one. Transparent SVG straight on
+   the page background is the entire treatment. */
+.ikp__frogs {
+  display: flex; flex-wrap: wrap; gap: clamp(20px, 5vw, 64px);
+  align-items: flex-start;
+}
+.ikp__frog { flex: 1 1 240px; max-width: 340px; }
+.ikp__frog img { display: block; width: clamp(150px, 26vw, 210px); height: auto; }
+/* One of the pair sits a few degrees off-axis. Two illustrations both squared
+   to the grid read as a diagram; one nudged reads as something stuck on. */
+.ikp__frog--tilt img { transform: rotate(5deg); }
+.ikp__frog p {
+  margin-top: 10px; font-size: 14px; line-height: 1.6; color: var(--muted);
+  max-width: 30ch;
+}
+.ikp__frog p b {
+  display: block; font-family: var(--font-h); font-weight: 800; font-size: 17px;
+  color: var(--fg); letter-spacing: -0.01em;
+}
+.ikp__frogs-n {
+  margin-top: clamp(18px, 3vw, 28px); font-size: 13px; line-height: 1.65;
+  color: rgba(242, 242, 247, 0.42); max-width: 56ch;
+}
+
+/* ---- the register ---- */
+.ikp__reg { margin-top: 22px; list-style: none; padding: 0; display: grid; gap: 2px; }
+.ikp__reg > li { border-top: 1px solid var(--stroke); }
+.ikp__reg > li:last-child { border-bottom: 1px solid var(--stroke); }
+.ikp__reg a {
+  display: grid;
+  grid-template-columns: auto auto 1fr auto;
+  align-items: center; gap: 12px;
+  padding: 15px 6px;
+  transition: background-color .25s ease;
+}
+.ikp__reg a:hover { background: rgba(255, 255, 255, 0.03); }
+.ikp__reg-n {
+  font-family: var(--font-m); font-size: 12px;
+  color: rgba(242, 242, 247, 0.3); font-variant-numeric: tabular-nums;
+}
+.ikp__reg-main { min-width: 0; }
+.ikp__reg-main b {
+  display: block; font-family: var(--font-h); font-weight: 800; font-size: 15.5px;
+  letter-spacing: -0.01em;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.ikp__reg-sub { display: block; margin-top: 2px; font-size: 12.5px; color: var(--muted); }
+.ikp__reg-sub em { font-style: normal; }
+.ikp__reg-sub .is-bad { color: hsl(4 78% 68%); }
+.ikp__reg-sub .is-good { color: var(--mint); }
+/* The proportion bar reuses .ikp__bar from the issues list, but has to be a
+   block here because it sits inside a <span> chain. */
+.ikp__reg-main .ikp__bar { display: block; margin-top: 8px; max-width: 320px; }
+.ikp__reg-amt { text-align: right; }
+.ikp__reg-amt b {
+  display: block; font-family: var(--font-m); font-size: 14px;
+  color: hsl(4 78% 68%); font-variant-numeric: tabular-nums;
+}
+.ikp__reg-amt span {
+  display: block; margin-top: 2px; font-size: 10.5px;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: rgba(242, 242, 247, 0.34);
+}
+.ikp__reg-none {
+  font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase;
+  color: rgba(242, 242, 247, 0.26);
+}
+/* On a phone the amount column starves the name. It moves under the bar. */
+@media (max-width: 560px) {
+  .ikp__reg a { grid-template-columns: auto auto 1fr; row-gap: 8px; }
+  .ikp__reg-amt { grid-column: 3; text-align: left; }
+  .ikp__reg-amt b { font-size: 13px; }
+}
+
+/* The "N went badly" tail inside a count. */
+.ikp__bad { font-style: normal; color: hsl(4 78% 68%); }
