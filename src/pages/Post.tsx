@@ -53,6 +53,21 @@ const isImageLine = (line: string): string | null => {
   }
 };
 
+/* ── BLOCKS, NOT JUST PARAGRAPHS ─────────────────────────────────────────────
+
+   Every body entry used to be wrapped in a <p>, which is fine for prose and
+   quietly broken for anything else. An SVG chart survives inside a paragraph;
+   a <figure>, a <table> or a list does not — the HTML parser closes the <p>
+   the moment a block element opens inside it, and React then reconciles
+   against a tree the browser rearranged behind its back.
+
+   So an entry whose first tag is a block element gets a <div> wrapper instead.
+   THE SECURITY GATE IS UNCHANGED: this only ever applies where `html` is
+   already true, which is still `allowHtml && source === "kosh"`. Nothing from
+   the database gains a single new capability here — a submitted post is still
+   plain text, and its one picture syntax is still a URL we parse ourselves. */
+const BLOCK_START = /^\s*<(figure|div|table|ul|ol|h3|h4|blockquote|aside|svg|section)\b/i;
+
 const Body = ({ post }: { post: TPost }) => {
   const html = post.allowHtml && post.source === "kosh";
   return (
@@ -66,9 +81,12 @@ const Body = ({ post }: { post: TPost }) => {
             </figure>
           );
         }
-        return html
-          ? <p key={i} dangerouslySetInnerHTML={{ __html: p }} />
-          : <p key={i}>{p}</p>;
+        if (html) {
+          return BLOCK_START.test(p)
+            ? <div key={i} dangerouslySetInnerHTML={{ __html: p }} />
+            : <p key={i} dangerouslySetInnerHTML={{ __html: p }} />;
+        }
+        return <p key={i}>{p}</p>;
       })}
     </>
   );
@@ -156,6 +174,31 @@ const Post = () => {
                 <div className="article__body">
                   <Body post={found} />
                 </div>
+              )}
+
+              {/* ── The lesson half ───────────────────────────────────────
+                  A post and its in-app lesson are two shapes of one argument:
+                  the post has the charts and the room to argue, the lesson has
+                  the checks, the game and the quiz that make it stick. Linking
+                  them was the whole point of writing both, and the link only
+                  ever appears where a lesson genuinely exists — this is a
+                  field on the post, not a guess from the category. */}
+              {found.lesson && (
+                <a
+                  className="article__lesson"
+                  href={found.lesson.href}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <span className="article__lesson__kicker">The lesson version</span>
+                  <span className="article__lesson__title">{found.lesson.label}</span>
+                  {found.lesson.note && (
+                    <span className="article__lesson__note">{found.lesson.note}</span>
+                  )}
+                  <span className="article__lesson__go">
+                    Open in the app <ArrowRight size={15} strokeWidth={2.4} />
+                  </span>
+                </a>
               )}
 
               {found.tags.length > 0 && (

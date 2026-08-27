@@ -2385,3 +2385,186 @@
   display: block; margin-top: 6px;
   font-size: 12px; line-height: 1.55; color: rgba(242, 242, 247, 0.38);
 }
+
+
+/* ══════════════════════════════════════════════════════════════════════════
+   LONG-FORM ARTICLE FURNITURE
+   ──────────────────────────────────────────────────────────────────────────
+   The blog started as short pieces: a dek, six paragraphs, done. Two of them
+   are now proper guides with tables, charts and a ladder of steps, and prose
+   styles alone cannot carry that — a fee comparison rendered as a sentence is
+   a fee comparison nobody reads.
+
+   Everything here is authored by us (`allowHtml && source === "kosh"`), so
+   these classes are only ever reachable from a local post. A submitted post
+   still renders as plain text with one parsed image URL, exactly as before.
+
+   Charts are inline SVG rather than images on purpose: they inherit the theme
+   tokens, they stay sharp on every screen, they cost no request, and a chart
+   whose numbers live in the markup is a chart somebody can correct later.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Section headings inside the body. Sits between the article h2 and bold
+   prose — a signpost, not a shout. */
+.article__body h3 {
+  margin: 46px 0 14px;
+  font-family: var(--font-h);
+  font-size: 24px; line-height: 1.25; letter-spacing: -0.02em;
+  color: var(--fg);
+}
+.article__body h3:first-child { margin-top: 0; }
+.article__body h4 {
+  margin: 30px 0 10px;
+  font-family: var(--font-h);
+  font-size: 17px; line-height: 1.35; color: var(--fg);
+}
+
+/* Lists. Marker in mint so the eye can find the structure while scanning. */
+.article__body ul, .article__body ol { margin: 18px 0; padding-left: 22px; }
+.article__body li {
+  font-size: 16.5px; line-height: 1.75;
+  color: rgba(242, 242, 247, 0.82);
+  margin-bottom: 10px;
+}
+.article__body li::marker { color: var(--mint); }
+.article__body ul li::marker { color: var(--mint); }
+
+/* ── The ladder / step list ────────────────────────────────────────────────
+   A numbered sequence where the number is the point (rung 1, rung 2 …). A
+   plain <ol> buries the number in the gutter; here it is the anchor. */
+.artsteps { margin: 26px 0; display: grid; gap: 12px; }
+.artstep {
+  display: grid; grid-template-columns: 46px 1fr; gap: 16px;
+  padding: 18px 18px 18px 14px;
+  border: 1px solid var(--stroke); border-radius: 16px;
+  background: var(--glass);
+}
+.artstep__n {
+  font-family: var(--font-m); font-size: 13px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  width: 46px; height: 46px; border-radius: 12px;
+  background: rgba(98, 245, 132, 0.1);
+  color: var(--mint);
+  border: 1px solid rgba(98, 245, 132, 0.22);
+}
+.artstep__b h4 { margin: 2px 0 6px; font-size: 16.5px; }
+.artstep__b p { font-size: 15.5px !important; line-height: 1.65 !important; margin: 0 !important; }
+@media (max-width: 520px) {
+  .artstep { grid-template-columns: 38px 1fr; gap: 12px; padding: 15px; }
+  .artstep__n { width: 38px; height: 38px; font-size: 12px; }
+}
+
+/* ── Tables ────────────────────────────────────────────────────────────────
+   Scroll inside their own box. A table that widens the page turns every
+   paragraph above it into a horizontal scroll, which is the single most
+   common way a good article becomes unreadable on a phone. */
+.arttable { margin: 28px 0; border: 1px solid var(--stroke); border-radius: 16px; overflow: hidden; }
+.arttable__scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.arttable table { width: 100%; min-width: 520px; border-collapse: collapse; }
+.arttable th {
+  text-align: left; padding: 13px 16px;
+  font-family: var(--font-h); font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  color: rgba(242, 242, 247, 0.55);
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid var(--stroke);
+  white-space: nowrap;
+}
+.arttable td {
+  padding: 14px 16px; font-size: 15px; line-height: 1.6;
+  color: rgba(242, 242, 247, 0.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+  vertical-align: top;
+}
+.arttable tr:last-child td { border-bottom: 0; }
+.arttable td b, .arttable th b { color: var(--fg); }
+.arttable__cap {
+  padding: 11px 16px; font-size: 12.5px; line-height: 1.6;
+  color: rgba(242, 242, 247, 0.4);
+  border-top: 1px solid var(--stroke);
+  background: rgba(255, 255, 255, 0.02);
+}
+.arttable .num { font-family: var(--font-m); font-size: 14px; white-space: nowrap; }
+.arttable .good { color: var(--mint); }
+.arttable .bad  { color: #ff8f8f; }
+
+/* ── Charts ────────────────────────────────────────────────────────────────
+   figure > svg > figcaption. The SVG scales to the measure and keeps its
+   aspect ratio; the caption carries the source and the date, because a chart
+   without a date is a chart that will be wrong later and never say so. */
+.artchart { margin: 30px 0; }
+.artchart svg { display: block; width: 100%; height: auto; overflow: visible; }
+.artchart figcaption {
+  margin-top: 12px; font-size: 13px; line-height: 1.6;
+  color: rgba(242, 242, 247, 0.42);
+}
+.artchart figcaption b { color: rgba(242, 242, 247, 0.7); font-weight: 600; }
+.artchart__t {
+  font-family: var(--font-h); font-size: 15px; font-weight: 700;
+  color: var(--fg); margin: 0 0 3px;
+}
+.artchart__s { font-size: 13.5px; color: rgba(242, 242, 247, 0.5); margin: 0 0 16px; }
+/* SVG text scales badly if left to the browser's default sizing. */
+.artchart text { font-family: var(--font-b); }
+.artchart .cl { fill: rgba(242, 242, 247, 0.55); font-size: 11px; }
+.artchart .cv { fill: var(--fg); font-size: 12px; font-weight: 700; font-family: var(--font-m); }
+.artchart .cg { stroke: rgba(255, 255, 255, 0.08); }
+
+/* ── Callout ───────────────────────────────────────────────────────────────
+   One idea the reader must not miss. Deliberately only three variants, so it
+   stays rare enough to mean something. */
+.artnote {
+  margin: 28px 0; padding: 20px 22px;
+  border: 1px solid var(--stroke); border-left: 3px solid var(--mint);
+  border-radius: 14px; background: var(--glass);
+}
+.artnote p { font-size: 16px !important; line-height: 1.72 !important; margin: 0 !important; }
+.artnote p + p { margin-top: 12px !important; }
+.artnote__k {
+  display: block; font-family: var(--font-h); font-size: 11.5px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--mint); margin-bottom: 8px;
+}
+.artnote--warn { border-left-color: #ffc46b; }
+.artnote--warn .artnote__k { color: #ffc46b; }
+.artnote--stop { border-left-color: #ff8f8f; }
+.artnote--stop .artnote__k { color: #ff8f8f; }
+
+/* Pull quote — the one line you'd screenshot. */
+.artpull {
+  margin: 34px 0; padding: 0 0 0 22px;
+  border-left: 3px solid var(--purple);
+  font-family: var(--font-d);
+  font-size: 22px; line-height: 1.4; letter-spacing: -0.02em;
+  color: var(--fg);
+}
+@media (max-width: 520px) { .artpull { font-size: 19px; } }
+
+/* ── The link to the in-app lesson ─────────────────────────────────────────
+   Placed after the body and before the tags: the reader has finished the
+   argument and this is the one useful thing to do next. Styled as a card
+   rather than a link because it is a destination, not a citation. */
+.article__lesson {
+  display: block; margin-top: 40px; padding: 22px 24px;
+  border: 1px solid rgba(98, 245, 132, 0.28); border-radius: 20px;
+  background: linear-gradient(135deg, rgba(98, 245, 132, 0.09), rgba(168, 85, 247, 0.07));
+  text-decoration: none; transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.article__lesson:hover { border-color: rgba(98, 245, 132, 0.5); transform: translateY(-2px); }
+.article__lesson__kicker {
+  display: block; font-family: var(--font-h); font-size: 11.5px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.1em; color: var(--mint);
+}
+.article__lesson__title {
+  display: block; margin-top: 7px;
+  font-family: var(--font-h); font-size: 19px; line-height: 1.3; color: var(--fg); font-weight: 700;
+}
+.article__lesson__note {
+  display: block; margin-top: 8px; font-size: 14.5px; line-height: 1.6;
+  color: rgba(242, 242, 247, 0.6);
+}
+.article__lesson__go {
+  display: inline-flex; align-items: center; gap: 8px; margin-top: 14px;
+  font-family: var(--font-h); font-size: 14.5px; font-weight: 700; color: var(--mint);
+}
+@media (prefers-reduced-motion: reduce) { .article__lesson:hover { transform: none; } }

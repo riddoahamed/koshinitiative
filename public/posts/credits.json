@@ -1,0 +1,28 @@
+{
+  "tradingscreen": {
+    "file": "post-tradingscreen.jpg",
+    "title": "Investment sticker, laptop and smartphone",
+    "creator": "Artem Beliaikin",
+    "creatorUrl": "https://www.flickr.com/photos/157635012@N07",
+    "license": "CC CC0 1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "sourceUrl": "https://www.flickr.com/photos/157635012@N07/49207862562",
+    "provider": "flickr",
+    "query": "computer monitor financial data",
+    "note": "Terra / Luna",
+    "fetchedAt": "2026-07-26"
+  },
+  "usd": {
+    "file": "post-usd-note.jpg",
+    "title": "United States one-dollar billlabel QS:Les,\"billete de un dólar estadounidense\"label QS:Lfr,\"billet de 1 dollar américain\"label QS:Lvi,\"Tiền giấy 1 đô la Mỹ\"label QS:Lpt,\"Cédula de um dólar dos Estados Unidos\"label QS:Lro,\"Bancnota americană de un dolar\"label QS:Lfa,\"اسکناس یک دلاری آمریکا\"label QS:Lzh,\"一美元纸币\"label QS:Lar,\"ورقة 1 دولار أمريكي\"label QS:Ltr,\"1 Amerikan doları banknotu\"label QS:Lzh-hk,\"一美元紙幣\"label QS:Lru,\"Один доллар США\"label QS:Lhu,\"1 USA-dolláros bankjegy\"label QS:Lit,\"Banconota da 1 dollaro\"label QS:Laz,\"Bir dollarlıq əsginas (ABŞ)\"label QS:Luk,\"Один долар США\"label QS:Lnl,\"United States one-dollar bill\"label QS:Lzh-hant,\"一美元紙幣\"label QS:Lhi,\"1 डॉलर बिल (संयुक्त राज्य अमेरिका)\"label QS:Lja,\"1ドル紙幣\"label QS:Lko,\"1 달러 지폐\"label QS:Len,\"United States one-dollar bill\"label QS:Leo,\"usona unudolara monbileto\"label QS:Lzh-hans,\"一美元纸币\"label QS:Lhy,\"ԱՄՆ-ի մեկ դոլարանոց թղթադրամ\"",
+    "creator": "Hamster28",
+    "creatorUrl": null,
+    "license": "Public domain",
+    "licenseUrl": null,
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File%3A1%20United%20States%20dollar%20banknotes%20(348734).jpg",
+    "provider": "wikimedia commons",
+    "query": "File:1 United States dollar banknotes (348734).jpg",
+    "note": "foreign-currency FDR — the currency it is held in",
+    "fetchedAt": "2026-08-18T06:52:22.675Z"
+  }
+}
