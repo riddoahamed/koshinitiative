@@ -117,8 +117,6 @@ export default function InvestKorsiPage() {
 
   return (
     <PageShell
-      title="InvestKorsi — scams, frauds, and the ones that paid"
-      description="A public ledger of what happened to people's money at Bangladeshi platforms, companies and ventures. Anonymous reports on the frauds, the projects that went quiet, and the investments that did exactly what they said. Free to read, no account needed."
       path="/investkorsi"
       // Back to the section that sent them, not to the top of the homepage.
       backTo="/#investkorsi"

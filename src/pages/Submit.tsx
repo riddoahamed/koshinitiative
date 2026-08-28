@@ -61,8 +61,6 @@ const Submit = () => {
 
   return (
     <PageShell
-      title="Submit to the Kosh blog"
-      description="Submit a lesson, guide, how-to or answer for the Kosh blog. Everything is reviewed by a human before it goes live."
       path="/blog/submit"
     >
       <section className="sec page-hero">

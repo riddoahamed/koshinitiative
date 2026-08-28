@@ -97,8 +97,6 @@ const Blog = () => {
 
   return (
     <PageShell
-      title="Blog — money in Bangladesh, explained"
-      description="Free lessons, guides, how-tos and straight answers about money and investing in Bangladesh. How to start, how to spot a scam, how much you need, what Sanchaypatra and DPS really pay, and how to use the Kosh app. No account needed."
       path="/blog"
     >
       <section className="sec page-hero">

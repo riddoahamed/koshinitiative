@@ -12,15 +12,12 @@ import { initFx } from "@/v2/fx";
 import { VP_LONG } from "@/v2/copy";
 import { SCROLL_LOCK_EVENT } from "@/v2/scrollLock";
 import { applySeo } from "@/lib/seo";
+import { PAGE_META } from "@/v2/pageMeta";
 import "@/v2/v2.css";
 
 const Index = () => {
   useEffect(() => {
-    applySeo({
-      title: "From “where do I start?” to your first real investment",
-      description: VP_LONG,
-      path: "/",
-    });
+    applySeo({ ...PAGE_META["/"], path: "/" });
 
     window.history.scrollRestoration = "manual";
 

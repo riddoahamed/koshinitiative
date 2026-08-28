@@ -38,8 +38,6 @@ const Learn = () => {
 
   return (
     <PageShell
-      title="Quick money lessons"
-      description="Six two-minute lessons for first-time investors in Bangladesh: what investing actually is, the emergency fund, Sanchaypatra vs DPS vs FDR, mutual funds, how to spot a scam, and your first ৳1,000. Free, no account needed."
       path="/learn"
     >
       <section className="sec page-hero">

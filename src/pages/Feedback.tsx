@@ -52,8 +52,6 @@ const Feedback = () => {
 
   return (
     <PageShell
-      title="What people are telling us"
-      description="Real feedback from Kosh users, grouped into themes by AI — anonymous, paraphrased, and never the raw text. See what people are asking us to fix or build next."
       path="/feedback"
     >
       <section className="sec page-hero">

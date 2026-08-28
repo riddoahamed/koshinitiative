@@ -66,8 +66,6 @@ const RULES = [
 
 const Start = () => (
   <PageShell
-    title="If I were to start investing today"
-    description="The honest starting order for a first-time investor in Bangladesh — where you stand, the buffer that comes first, what you're actually being offered, risk-free practice, and a first real move that can't hurt you."
     path="/start"
   >
     <section className="sec page-hero">

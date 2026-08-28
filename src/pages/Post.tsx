@@ -110,6 +110,7 @@ const Post = () => {
     <PageShell
       title={found ? found.title : "Blog"}
       description={found ? found.dek : "Lessons, guides and how-tos about money in Bangladesh."}
+      image={found?.cover}
       path={`/blog/${slug}`}
     >
       <article className="sec page-hero article">

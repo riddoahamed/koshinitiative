@@ -36,8 +36,6 @@ const Quiz = () => {
 
   return (
     <PageShell
-      title="What kind of investor am I?"
-      description="A 60-second, six-question read on where you actually stand as a first-time investor in Bangladesh — your buffer, your income, and how you'd really react to a bad month. Free, no account, no advice pitch."
       path="/quiz"
     >
       <section className="sec page-hero quizsec">

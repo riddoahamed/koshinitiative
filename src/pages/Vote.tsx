@@ -8,6 +8,7 @@ import { castVote, fetchTally, fetchPollTotals, liveReady } from "@/v2/vote/live
 import { useWallet, taka, START_BALANCE } from "@/v2/vote/wallet";
 import { KOSH_APP_URL } from "@/lib/links";
 import { applySeo } from "@/lib/seo";
+import { PAGE_META } from "@/v2/pageMeta";
 import "@/v2/v2.css";
 import "@/v2/vote/vote.css";
 
@@ -70,13 +71,7 @@ const Vote = () => {
   }, []);
 
   useEffect(() => {
-    applySeo({
-      title: "Kosh Live, vote, reveal, decide",
-      description:
-        "A live session tool from Kosh: vote on what you'd do with ৳10 lakh, see the room's answer, then walk through how the decision actually gets made.",
-      path: "/vote",
-      robots: "noindex, follow",
-    });
+    applySeo({ ...PAGE_META["/vote"], path: "/vote", robots: "noindex, follow" });
     setChoice(localStorage.getItem(CHOICE_KEY));
   }, []);
 
