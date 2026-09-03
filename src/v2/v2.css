@@ -2568,3 +2568,96 @@
   font-family: var(--font-h); font-size: 14.5px; font-weight: 700; color: var(--mint);
 }
 @media (prefers-reduced-motion: reduce) { .article__lesson:hover { transform: none; } }
+
+/* ── /quiz — the investor personas ────────────────────────────────────────────
+   The quiz used to end on a name and three steps. It ends on a face now, drawn
+   pixel by pixel onto a canvas, so these rules are mostly about giving that
+   canvas room and keeping it crisp: `image-rendering: pixelated` is the whole
+   difference between pixel art and a blurry photograph of pixel art.          */
+
+.persona-lead {
+  display: flex;
+  justify-content: center;
+  margin: 22px 0 26px;
+}
+.persona-lead canvas {
+  image-rendering: pixelated;
+  border-radius: 18px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.persona-local {
+  margin: -6px 0 0;
+  font-size: 14px;
+  opacity: 0.5;
+}
+
+.persona-shape {
+  display: grid;
+  gap: 14px;
+  margin: 26px 0 4px;
+  padding: 18px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.03);
+}
+.persona-axis__labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  opacity: 0.45;
+  margin-bottom: 6px;
+}
+.persona-axis__labels .on { opacity: 1; font-weight: 700; }
+.persona-axis__track {
+  position: relative;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+/* The centre tick. Without it a bar reads as a score out of 100 rather than a
+   position between two ends, which is the opposite of what these axes mean. */
+.persona-axis__track i {
+  position: absolute;
+  inset: 0 auto;
+  left: 50%;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.28);
+}
+.persona-axis__track b {
+  position: absolute;
+  inset-block: 0;
+  border-radius: 999px;
+  background: currentColor;
+  transition: left 0.7s ease, width 0.7s ease;
+}
+.acc-mint .persona-axis__track b { color: var(--mint); }
+.acc-lime .persona-axis__track b { color: var(--lime); }
+.acc-purple .persona-axis__track b { color: var(--purple); }
+.acc-teal .persona-axis__track b { color: #5eead4; }
+
+.persona-tradition {
+  margin: 18px 0 0;
+  padding-left: 14px;
+  border-left: 2px solid rgba(255, 255, 255, 0.2);
+  font-size: 14px;
+  line-height: 1.6;
+  opacity: 0.6;
+}
+
+.persona-runner {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 24px 0 22px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.03);
+}
+.persona-runner canvas { image-rendering: pixelated; flex: none; }
+.persona-runner span { display: block; font-size: 12px; opacity: 0.45; }
+.persona-runner b { font-size: 15px; }

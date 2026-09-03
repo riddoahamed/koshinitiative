@@ -1,23 +1,49 @@
-import { useState } from "react";
-import { ArrowRight, ArrowLeft, RotateCcw } from "lucide-react";
+import { useEffect, useState } from "react";
+import { ArrowLeft, ArrowRight, RotateCcw } from "lucide-react";
 import PageShell from "@/v2/PageShell";
-import { QUESTIONS, scoreQuiz, type Choice, type Profile } from "@/v2/quiz";
+import { PixelPortrait } from "@/v2/PixelPortrait";
+import { ARCHETYPES, AXIS_LABEL, type Traits } from "@/v2/persona/archetypes";
+import { SCENARIOS } from "@/v2/persona/scenarios";
+import { AXES, classify, type Answers, type Result } from "@/v2/persona/engine";
 import { KOSH_APP_URL } from "@/lib/links";
 
-/* ── /quiz ────────────────────────────────────────────────────────────────────
-   "What kind of investor am I?" — six questions, sixty seconds.
-   Deliberately ends on a lesson, never on a product. Orientation, not advice. */
+/* ── /quiz — "What kind of investor am I?" ────────────────────────────────────
+   Was six questions about your buffer and your income. That version asked you
+   to rate yourself, which is the one thing nobody can do: people are poor at
+   describing their own behaviour and very good at recognising it.
+
+   Now it is eight scenes you have already lived through — a cousin at a wedding
+   with a share that has tripled, salary day, a red week, a group chat twenty
+   messages deep — and the only question is what you would actually do. The
+   answer is a face, drawn pixel by pixel on a canvas, which is the part people
+   screenshot.
+
+   Same deck and same art as the app's /investor-type, copied rather than
+   shared: these are two repos with two deploys and no package between them.
+   quiz.test.ts pins the two copies together so they cannot drift silently. */
+
+const CAST = ["compounder", "veteran", "momentum", "land"] as const;
 
 const Quiz = () => {
   const [step, setStep] = useState(0);
-  const [answers, setAnswers] = useState<Choice[]>([]);
-  const [result, setResult] = useState<Profile | null>(null);
+  const [answers, setAnswers] = useState<Answers>({});
+  const [result, setResult] = useState<Result | null>(null);
+  const [lead, setLead] = useState(0);
 
-  const pick = (c: Choice) => {
-    const next = [...answers.slice(0, step), c];
+  useEffect(() => {
+    if (result || step > 0) return;
+    const t = setInterval(() => setLead((i) => (i + 1) % CAST.length), 1500);
+    return () => clearInterval(t);
+  }, [result, step]);
+
+  const s = SCENARIOS[step];
+  const pct = result ? 100 : (step / SCENARIOS.length) * 100;
+
+  const pick = (choiceId: string) => {
+    const next = { ...answers, [s.id]: choiceId };
     setAnswers(next);
-    if (step === QUESTIONS.length - 1) {
-      setResult(scoreQuiz(next));
+    if (step === SCENARIOS.length - 1) {
+      setResult(classify(next));
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
       setStep(step + 1);
@@ -26,49 +52,56 @@ const Quiz = () => {
 
   const restart = () => {
     setStep(0);
-    setAnswers([]);
+    setAnswers({});
     setResult(null);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const q = QUESTIONS[step];
-  const pct = result ? 100 : (step / QUESTIONS.length) * 100;
-
   return (
-    <PageShell
-      path="/quiz"
-    >
+    <PageShell path="/quiz">
       <section className="sec page-hero quizsec">
         <div className="blob p" style={{ width: 480, height: 480, right: "-12%", top: "-8%" }} />
         <div className="blob m" style={{ width: 380, height: 380, left: "-8%", bottom: "0%", animationDelay: "-7s" }} />
         <div className="wrap">
           {!result ? (
             <>
-              <p className="eyebrow" data-reveal>60 seconds · 6 questions</p>
+              <p className="eyebrow" data-reveal>8 scenes · about 90 seconds</p>
               <h2 className="h-display quiz__h" data-reveal style={{ ["--d" as string]: "70ms" }}>
                 What kind of investor am I?
               </h2>
               <p className="h-sub" data-reveal style={{ ["--d" as string]: "130ms" }}>
-                Not a personality test. Six honest questions about your buffer,
-                your income and what you&rsquo;d really do on a red month, plus a
-                straight answer about where to start.
+                Not questions about yourself — eight moments you have already
+                lived through. Say what you would actually do and you get a face.
               </p>
+
+              {step === 0 && (
+                <div className="persona-lead" data-reveal="scale">
+                  <PixelPortrait
+                    key={CAST[lead]}
+                    face={ARCHETYPES[CAST[lead]].face}
+                    scale={6}
+                    reveal
+                    duration={520}
+                    label="An investor portrait"
+                  />
+                </div>
+              )}
 
               <div className="quiz" data-reveal="scale">
                 <div className="quiz__bar" aria-hidden="true">
                   <span style={{ width: `${pct}%` }} />
                 </div>
                 <div className="quiz__count">
-                  Question {step + 1} of {QUESTIONS.length}
+                  {step + 1} of {SCENARIOS.length}
                 </div>
 
-                <h3 className="quiz__q" key={q.id}>{q.q}</h3>
-                {q.note && <p className="quiz__note">{q.note}</p>}
+                <h3 className="quiz__q" key={s.id}>{s.scene}</h3>
+                <p className="quiz__note">{s.ask}</p>
 
                 <div className="quiz__choices">
-                  {q.choices.map((c) => (
-                    <button className="qchoice" key={c.label} onClick={() => pick(c)}>
-                      <span>{c.label}</span>
+                  {s.choices.map((c) => (
+                    <button className="qchoice" key={c.id} onClick={() => pick(c.id)}>
+                      <span>{c.text}</span>
                       <ArrowRight size={16} strokeWidth={2.2} />
                     </button>
                   ))}
@@ -87,62 +120,87 @@ const Quiz = () => {
               </p>
             </>
           ) : (
-            <div className={`result acc-${result.accent}`}>
-              <p className="eyebrow" data-reveal>your result</p>
-              <h2 className="h-display result__name" data-reveal style={{ ["--d" as string]: "60ms" }}>
-                {result.name}
-              </h2>
-              <p className="result__line" data-reveal style={{ ["--d" as string]: "120ms" }}>
-                {result.line}
-              </p>
-              <p className="result__meaning" data-reveal style={{ ["--d" as string]: "180ms" }}>
-                {result.meaning}
-              </p>
-
-              <h3 className="result__h" data-reveal>Do these three, in this order</h3>
-              <ol className="result__steps" data-stagger="100">
-                {result.steps.map((s, i) => (
-                  <li key={s.t} data-reveal="left">
-                    <b>{i + 1}</b>
-                    <div>
-                      <h4>{s.t}</h4>
-                      <p>{s.p}</p>
-                      <a
-                        className="result__cta"
-                        href={s.href}
-                        {...(s.href.startsWith("http") ? { target: "_blank", rel: "noreferrer" } : {})}
-                      >
-                        {s.cta} <ArrowRight size={14} strokeWidth={2.4} />
-                      </a>
-                    </div>
-                  </li>
-                ))}
-              </ol>
-
-              <p className="result__caution" data-reveal="fade">
-                <b>One caution.</b> {result.caution}
-              </p>
-
-              <div className="result__foot" data-reveal="fade">
-                <a className="btn btn-primary" href={KOSH_APP_URL} target="_blank" rel="noreferrer">
-                  Do all three in the app — Try Kosh <ArrowRight size={16} strokeWidth={2.4} />
-                </a>
-                <a className="btn btn-glass" href="/start">See the full starting path</a>
-                <button className="btn btn-ghost" onClick={restart}>
-                  <RotateCcw size={15} /> Take it again
-                </button>
-              </div>
-
-              <p className="disclaim">
-                Educational only. This is orientation, not personalised financial
-                advice. Kosh is not a licensed adviser and never takes custody
-                of your money.
-              </p>
-            </div>
+            <Reveal r={result} onRestart={restart} />
           )}
         </div>
       </section>
     </PageShell>
+  );
+};
+
+const Reveal = ({ r, onRestart }: { r: Result; onRestart: () => void }) => {
+  const a = r.archetype;
+  return (
+    <div className={`result acc-${a.accent}`}>
+      <p className="eyebrow" data-reveal>you are</p>
+
+      <div className="persona-lead" data-reveal="scale">
+        <PixelPortrait face={a.face} scale={8} reveal duration={950} label={a.name} />
+      </div>
+
+      <h2 className="h-display result__name" data-reveal style={{ ["--d" as string]: "60ms" }}>
+        {a.name}
+      </h2>
+      {a.nameLocal && <p className="persona-local" data-reveal>{a.nameLocal}</p>}
+      <p className="result__line" data-reveal style={{ ["--d" as string]: "120ms" }}>
+        {a.tagline}
+      </p>
+      <p className="result__meaning" data-reveal style={{ ["--d" as string]: "180ms" }}>
+        {a.blurb}
+      </p>
+
+      <div className="persona-shape" data-reveal>
+        {AXES.map((ax) => (
+          <Axis key={ax} axis={ax} value={r.traits[ax]} />
+        ))}
+      </div>
+
+      <h3 className="result__h" data-reveal>What it costs you</h3>
+      <p className="result__meaning" data-reveal>{a.costs}</p>
+
+      {a.tradition && (
+        <p className="persona-tradition" data-reveal>{a.tradition}</p>
+      )}
+
+      <div className="persona-runner" data-reveal>
+        <PixelPortrait face={r.runnerUp.face} scale={3} label={r.runnerUp.name} />
+        <div>
+          <span>You were nearly</span>
+          <b>{r.runnerUp.name}</b>
+        </div>
+      </div>
+
+      <a
+        className="result__cta"
+        href={`${KOSH_APP_URL}${a.next.href}`}
+        target="_blank"
+        rel="noreferrer"
+      >
+        {a.next.label} <ArrowRight size={14} strokeWidth={2.4} />
+      </a>
+
+      <button className="quiz__back" onClick={onRestart}>
+        <RotateCcw size={14} strokeWidth={2.2} /> again
+      </button>
+    </div>
+  );
+};
+
+const Axis = ({ axis, value }: { axis: keyof Traits; value: number }) => {
+  const [lo, hi] = AXIS_LABEL[axis];
+  /* Centred, because these axes have two ends and neither is the good one. */
+  const half = Math.min(50, Math.abs(value) / 2);
+  return (
+    <div className="persona-axis">
+      <div className="persona-axis__labels">
+        <span className={value < 0 ? "on" : ""}>{lo}</span>
+        <span className={value > 0 ? "on" : ""}>{hi}</span>
+      </div>
+      <div className="persona-axis__track">
+        <i />
+        <b style={{ left: value >= 0 ? "50%" : `${50 - half}%`, width: `${Math.max(2, half)}%` }} />
+      </div>
+    </div>
   );
 };
 

@@ -60,7 +60,7 @@ export const PAGE_META: Record<string, PageMeta> = {
   "/quiz": {
     title: "What kind of investor am I?",
     description:
-      "A 60-second, six-question read on where you actually stand as a first-time investor in Bangladesh — your buffer, your income, and how you'd really react to a bad month. Free, no account, no advice pitch.",
+      "Eight moments every Bangladeshi saver has lived through — a cousin at a wedding, salary day, a red week — and one of eight investor types at the end of it. About 90 seconds. Free, no account, no advice pitch.",
   },
   "/investkorsi": {
     title: "InvestKorsi — scams, frauds, and the ones that paid",
