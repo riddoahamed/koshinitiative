@@ -11,6 +11,74 @@ import { BASE, FACE_H, FACE_W, type Face } from "./persona/faces";
 // answer" into a moment worth waiting through, which is the entire reason
 // anyone screenshots one of these.
 
+/**
+ * The general renderer: any text grid, any palette, with the same diagonal
+ * reveal. Extracted when the scene vignettes needed exactly this and a second
+ * copy of the sweep would have been the third place the same twelve lines
+ * lived.
+ */
+export const PixelGrid = memo(function PixelGrid({
+  rows, palette, width, height, scale = 8, reveal = false, duration = 700, className, label,
+}: {
+  rows: string[];
+  palette: Record<string, string>;
+  width: number;
+  height: number;
+  scale?: number;
+  reveal?: boolean;
+  duration?: number;
+  className?: string;
+  label: string;
+}) {
+  const ref = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = ref.current;
+    const ctx = canvas?.getContext("2d");
+    if (!canvas || !ctx) return;
+
+    let raf = 0;
+    const start = performance.now();
+    const maxRank = width + height;
+
+    const paint = (p: number) => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const front = p * maxRank;
+      rows.forEach((row, y) => {
+        if (y >= height) return;
+        for (let x = 0; x < Math.min(row.length, width); x++) {
+          const ch = row[x];
+          if (ch === "." || !palette[ch]) continue;
+          if (x + y > front) continue;
+          ctx.fillStyle = palette[ch];
+          ctx.fillRect(x * scale, y * scale, scale, scale);
+        }
+      });
+    };
+
+    if (!reveal) { paint(1); return; }
+    const tick = (now: number) => {
+      const p = Math.min(1, (now - start) / duration);
+      paint(p);
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [rows, palette, width, height, scale, reveal, duration]);
+
+  return (
+    <canvas
+      ref={ref}
+      width={width * scale}
+      height={height * scale}
+      className={className}
+      style={{ imageRendering: "pixelated" }}
+      role="img"
+      aria-label={label}
+    />
+  );
+});
+
 interface Props {
   face: Face;
   /** Pixel size of one cell. 8 gives a 160px portrait. */

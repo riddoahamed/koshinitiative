@@ -1,16 +1,28 @@
-// ── Eight moments, not eight questions ───────────────────────────────────────
-// "What is your risk tolerance? (a) Low (b) Medium (c) High" is a form, and
-// nobody finishes a form for fun. Nobody knows the answer either — people are
-// terrible at describing their own behaviour and very good at recognising it.
+// ── Eight beats: five scenes and three games ─────────────────────────────────
 //
-// So every card here is a scene from an actual Bangladeshi life: a cousin at a
-// wedding, salary day, a red week, a group chat 20 messages deep. You do not
-// rate yourself. You just say what you would do, and the shape comes out of
-// what you picked.
+// The first version was eight scenes with three buttons each, and the honest
+// report on it was that it felt like an MCQ. It was one — a well-written one,
+// but a person reading three lines and tapping one is doing a comprehension
+// exercise, not playing anything.
 //
-// The options are deliberately all defensible. There is no obviously-correct
-// answer to pick to look good, which is the failure mode of every quiz that
-// scores you on virtue rather than telling you who you are.
+// The fix is not more scenes. It is that the three beats which are ABOUT a
+// behaviour you cannot describe in a sentence are now the behaviour itself:
+//
+//   THE STREAK  — gambler's fallacy. Five red days tick past in front of you.
+//                 Reading "the market has fallen five days" and watching it
+//                 fall five times are different experiences, and only the
+//                 second one produces the itch the question is asking about.
+//   THE CROWD   — herd behaviour. A percentage climbs while you decide. The
+//                 number moving under your eyes IS the pressure; a static
+//                 "83% are buying" is a fact, and a fact is resistible.
+//   THE TICKER  — short-term trading. A live price and a running P&L for ten
+//                 seconds, with Sell available the whole time. What you do
+//                 matters, and WHEN you do it matters more.
+//
+// The five that stayed are scenes because they are about judgement rather than
+// impulse, and no amount of animation improves "where does a bonus go". They
+// carry a drawn vignette instead — see `image` and data/persona/vignettes.ts,
+// which records why the sourced-photograph route was tried and abandoned.
 
 import type { Traits } from "./archetypes";
 
@@ -18,22 +30,47 @@ export interface Choice {
   id: string;
   /** What you would do. Second person, present tense, short. */
   text: string;
-  /** How much each axis moves. Roughly -2 … +2 per axis. */
+  /** How much each axis moves. Roughly -3 … +3 per axis. */
   move: Partial<Traits>;
+  /**
+   * Marks a categorical answer rather than a scored one. Only "insider" today:
+   * buying ahead of an announcement because a relative told you is not a point
+   * in trait space, it is a different thing entirely. See classify().
+   */
+  flag?: "insider";
 }
+
+export type Beat = "scene" | "streak" | "crowd" | "ticker";
 
 export interface Scenario {
   id: string;
+  /** Which renderer this beat uses. "scene" is the illustrated three-option card. */
+  beat: Beat;
   /** The situation. Two sentences at most. */
   scene: string;
   /** The prompt under it — always about behaviour, never about opinion. */
   ask: string;
+  /** Key into public/persona/. Scenes only; the games draw themselves. */
+  image?: string;
   choices: Choice[];
 }
 
 export const SCENARIOS: Scenario[] = [
   {
+    id: "streak",
+    beat: "streak",
+    scene: "A share you own has closed red five days running.",
+    ask: "The sixth day opens in a minute.",
+    choices: [
+      { id: "a", text: "It's due for a green day. Buy more", move: { patience: -3, conviction: -1, risk: 2, homework: -2 } },
+      { id: "b", text: "Buy — but because it's cheaper, not because it's due", move: { patience: 2, conviction: 2, homework: 1 } },
+      { id: "c", text: "Five days tells you nothing. Do nothing", move: { patience: 1, conviction: -1, risk: -2, homework: 1 } },
+    ],
+  },
+  {
     id: "wedding",
+    beat: "scene",
+    image: "wedding",
     scene: "A cousin corners you at a wedding. He has tripled his money in one share and it is still going up.",
     ask: "What do you actually do?",
     choices: [
@@ -43,27 +80,20 @@ export const SCENARIOS: Scenario[] = [
     ],
   },
   {
-    id: "salary",
-    scene: "Your salary lands at nine in the morning.",
-    ask: "Where is it by nine at night?",
+    id: "crowd",
+    beat: "crowd",
+    scene: "Everyone is buying one thing this week.",
+    ask: "The number is still climbing.",
     choices: [
-      { id: "a", text: "Already moved — a standing instruction did it before you woke up", move: { patience: 2, risk: -1, homework: 1 } },
-      { id: "b", text: "Sitting in the account. You'll decide at the end of the month", move: { patience: -1 } },
-      { id: "c", text: "Mostly gone. It was a long month", move: { patience: -1, risk: 1, homework: -1 } },
-    ],
-  },
-  {
-    id: "red-week",
-    scene: "The market falls twelve percent in a week. Everything you hold is red.",
-    ask: "What are you doing on Thursday?",
-    choices: [
-      { id: "a", text: "Checking the price about four times a day", move: { patience: -2, conviction: -1, risk: -1, homework: 1 } },
-      { id: "b", text: "Buying more. Same thing, cheaper", move: { patience: 2, conviction: 2, risk: 2, homework: 1 } },
-      { id: "c", text: "Not opening the app at all", move: { conviction: -1, risk: -1, homework: -2 } },
+      { id: "a", text: "Join them. That many people can't all be wrong", move: { patience: -1, conviction: -3, risk: 2, homework: -1 } },
+      { id: "b", text: "Find out why they're buying first", move: { patience: 1, conviction: 1, homework: 3 } },
+      { id: "c", text: "A crowd is a reason to be careful, not a reason to buy", move: { conviction: 2, risk: -2, homework: -2 } },
     ],
   },
   {
     id: "bonus",
+    beat: "scene",
+    image: "bonus",
     scene: "A two lakh bonus lands. Nobody knows you got it.",
     ask: "Where does it go?",
     choices: [
@@ -73,17 +103,20 @@ export const SCENARIOS: Scenario[] = [
     ],
   },
   {
-    id: "chat",
-    scene: "A group chat you're in is twenty messages deep about one stock. It's up eight percent today.",
-    ask: "What happens next?",
+    id: "ticker",
+    beat: "ticker",
+    scene: "You're up six percent since this morning.",
+    ask: "It's still moving.",
     choices: [
-      { id: "a", text: "You mute it", move: { patience: 2, conviction: 2, risk: -1 } },
-      { id: "b", text: "You read every message and buy nothing", move: { patience: 1, conviction: 1, risk: -1, homework: 2 } },
-      { id: "c", text: "You buy a little before it runs", move: { patience: -3, conviction: -3, risk: 2, homework: -2 } },
+      { id: "a", text: "Sell. Take it", move: { patience: -3, conviction: -1, risk: -1 } },
+      { id: "b", text: "Hold. You had a plan", move: { patience: 3, conviction: 2, risk: 1 } },
+      { id: "c", text: "Sell half", move: { conviction: -1 } },
     ],
   },
   {
     id: "guaranteed",
+    beat: "scene",
+    image: "guaranteed",
     scene: "Someone offers three percent a month, guaranteed, from a business you can't quite picture.",
     ask: "Your first move?",
     choices: [
@@ -93,17 +126,22 @@ export const SCENARIOS: Scenario[] = [
     ],
   },
   {
-    id: "up-forty",
-    scene: "Something you own is up forty percent after three years. You had planned to hold it for ten.",
-    ask: "Do you sell?",
+    id: "tip",
+    beat: "scene",
+    image: "tip",
+    scene: "Your cousin works at a listed company. Results are good, he says, and they're announced on Thursday.",
+    ask: "It's Tuesday.",
     choices: [
-      { id: "a", text: "Yes. Forty percent is forty percent", move: { patience: -2, conviction: -1, risk: -1 } },
-      { id: "b", text: "No. The plan was ten years", move: { patience: 3, conviction: 2, risk: 1 } },
-      { id: "c", text: "Half. Take some off, let the rest run", move: { patience: -1, conviction: -1 } },
+      // Buying here is the offence, not the edge — see ARCHETYPES.insider.
+      { id: "a", text: "Buy tomorrow, before it's public", move: { patience: -2, conviction: -1, risk: 2, homework: -2 }, flag: "insider" },
+      { id: "b", text: "Wait for Thursday like everyone else", move: { patience: 2, conviction: 1, risk: -1, homework: 1 } },
+      { id: "c", text: "Tell him to stop telling you things like that", move: { risk: -1, homework: 1 } },
     ],
   },
   {
     id: "what-you-know",
+    beat: "scene",
+    image: "know",
     scene: "Think about the last thing you put money into.",
     ask: "How much do you know about it?",
     choices: [

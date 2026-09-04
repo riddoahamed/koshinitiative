@@ -5,7 +5,7 @@
 // be shown the four numbers that put them there.
 
 import {
-  ALL_ARCHETYPES, ARCHETYPES, type Archetype, type ArchetypeId, type Traits,
+  ARCHETYPES, SCORABLE_ARCHETYPES, type Archetype, type ArchetypeId, type Traits,
 } from "./archetypes";
 import { MAX_PER_AXIS, SCENARIOS, type Scenario } from "./scenarios";
 
@@ -60,7 +60,14 @@ export interface Result {
 export function classify(answers: Answers, deck: Scenario[] = SCENARIOS): Result {
   const traits = normalise(accumulate(answers, deck));
 
-  const ranked = [...ALL_ARCHETYPES]
+  // ── The categorical answer, checked before the scored one ─────────────────
+  // Buying ahead of an announcement because a relative works there is not a
+  // position on a risk axis. It is a different kind of answer, and averaging it
+  // into four numbers would let it disappear behind seven other picks.
+  const flagged = deck.some((s) =>
+    s.choices.find((c) => c.id === answers[s.id])?.flag === "insider");
+
+  const ranked = [...SCORABLE_ARCHETYPES]
     .map((a) => ({ a, d: distance(traits, a.signature) }))
     .sort((x, y) => x.d - y.d);
 
@@ -75,10 +82,12 @@ export function classify(answers: Answers, deck: Scenario[] = SCENARIOS): Result
   for (const ax of AXES) if (Math.abs(traits[ax]) > Math.abs(traits[defining])) defining = ax;
 
   return {
-    archetype: best.a,
+    archetype: flagged ? ARCHETYPES.insider : best.a,
+    // When the flag fires, the nearest scored type becomes the runner-up — it
+    // is still true, and it is the more useful half of the result.
     traits,
     fitPct,
-    runnerUp: second.a,
+    runnerUp: flagged ? best.a : second.a,
     defining,
     complete: deck.every((s) => answers[s.id] != null),
   };

@@ -1,9 +1,19 @@
 import { useEffect, useState } from "react";
 import { ArrowLeft, ArrowRight, RotateCcw } from "lucide-react";
 import PageShell from "@/v2/PageShell";
-import { PixelPortrait } from "@/v2/PixelPortrait";
+import { lazy, Suspense } from "react";
+import { PixelPortrait, PixelGrid } from "@/v2/PixelPortrait";
+import { CrowdBeat, StreakBeat, TickerBeat, Choices } from "@/v2/Beats";
+import { VIGNETTES, VIG_H, VIG_W } from "@/v2/persona/vignettes";
+
+/* three.js is ~700KB and this is a marketing site whose load time is its SEO.
+   The 3D portrait only exists on the result, so it only downloads there — the
+   homepage and every other page pay nothing for it. Until it arrives (or if
+   WebGL is missing) the flat drawing stands, which is a complete result. */
+const VoxelPortrait = lazy(() =>
+  import("@/v2/VoxelPortrait").then((m) => ({ default: m.VoxelPortrait })));
 import { ARCHETYPES, AXIS_LABEL, type Traits } from "@/v2/persona/archetypes";
-import { SCENARIOS } from "@/v2/persona/scenarios";
+import { SCENARIOS, type Scenario } from "@/v2/persona/scenarios";
 import { AXES, classify, type Answers, type Result } from "@/v2/persona/engine";
 import { KOSH_APP_URL } from "@/lib/links";
 
@@ -95,17 +105,7 @@ const Quiz = () => {
                   {step + 1} of {SCENARIOS.length}
                 </div>
 
-                <h3 className="quiz__q" key={s.id}>{s.scene}</h3>
-                <p className="quiz__note">{s.ask}</p>
-
-                <div className="quiz__choices">
-                  {s.choices.map((c) => (
-                    <button className="qchoice" key={c.id} onClick={() => pick(c.id)}>
-                      <span>{c.text}</span>
-                      <ArrowRight size={16} strokeWidth={2.2} />
-                    </button>
-                  ))}
-                </div>
+                <Beat s={s} onPick={pick} />
 
                 {step > 0 && (
                   <button className="quiz__back" onClick={() => setStep(step - 1)}>
@@ -128,6 +128,42 @@ const Quiz = () => {
   );
 };
 
+/* This site's stylesheet owns the look of an answer — the shared Beats module
+   must not assume the app's Tailwind classes. See Choices in v2/Beats.tsx. */
+const beatProps = (s: Scenario, onPick: (id: string) => void) => ({
+  choices: s.choices,
+  onPick,
+  choiceClass: "qchoice",
+  listClass: "quiz__choices",
+});
+
+/* A scene shows its drawn vignette and three choices; the three impulse beats
+   play instead. Same contract as the app — see data/persona/scenarios.ts. */
+const Beat = ({ s, onPick }: { s: Scenario; onPick: (id: string) => void }) => (
+  <>
+    {s.beat === "scene" && s.image && VIGNETTES[s.image] && (
+      <div className="persona-vignette">
+        <PixelGrid
+          rows={VIGNETTES[s.image].rows}
+          palette={VIGNETTES[s.image].palette}
+          width={VIG_W}
+          height={VIG_H}
+          scale={8}
+          label={s.scene}
+        />
+      </div>
+    )}
+
+    <h3 className="quiz__q" key={s.id}>{s.scene}</h3>
+    <p className="quiz__note">{s.ask}</p>
+
+    {s.beat === "scene" && <Choices {...beatProps(s, onPick)} shown />}
+    {s.beat === "streak" && <StreakBeat {...beatProps(s, onPick)} />}
+    {s.beat === "crowd" && <CrowdBeat {...beatProps(s, onPick)} />}
+    {s.beat === "ticker" && <TickerBeat {...beatProps(s, onPick)} />}
+  </>
+);
+
 const Reveal = ({ r, onRestart }: { r: Result; onRestart: () => void }) => {
   const a = r.archetype;
   return (
@@ -135,7 +171,9 @@ const Reveal = ({ r, onRestart }: { r: Result; onRestart: () => void }) => {
       <p className="eyebrow" data-reveal>you are</p>
 
       <div className="persona-lead" data-reveal="scale">
-        <PixelPortrait face={a.face} scale={8} reveal duration={950} label={a.name} />
+        <Suspense fallback={<PixelPortrait face={a.face} scale={8} reveal duration={950} label={a.name} />}>
+          <VoxelPortrait face={a.face} size={200} label={a.name} />
+        </Suspense>
       </div>
 
       <h2 className="h-display result__name" data-reveal style={{ ["--d" as string]: "60ms" }}>

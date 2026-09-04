@@ -4,6 +4,7 @@ import { resolve } from "node:path";
 import { FACE_W, FACE_H, BASE, PARTS } from "./faces";
 import { ALL_ARCHETYPES, ARCHETYPES } from "./archetypes";
 import { SCENARIOS } from "./scenarios";
+import { VIGNETTES, VIG_W, VIG_H } from "./vignettes";
 import { classify } from "./engine";
 
 // ── Two repos, one deck ──────────────────────────────────────────────────────
@@ -22,6 +23,7 @@ describe("the copies stay identical", () => {
   const pairs: Array<[string, string]> = [
     ["faces.ts", "data/persona/faces.ts"],
     ["scenarios.ts", "data/persona/scenarios.ts"],
+    ["vignettes.ts", "data/persona/vignettes.ts"],
     ["engine.ts", "lib/persona/engine.ts"],
   ];
 
@@ -90,7 +92,7 @@ describe("this site's own wiring", () => {
     for (const a of ALL_ARCHETYPES) expect(a.next.href, a.id).toMatch(/^\//);
   });
 
-  it("keeps all eight reachable", () => {
+  it("keeps all nine reachable", () => {
     const reached = new Set<string>();
     const walk = (i: number, acc: Record<string, string>) => {
       if (i === SCENARIOS.length) { reached.add(classify(acc).archetype.id); return; }
@@ -98,5 +100,12 @@ describe("this site's own wiring", () => {
     };
     walk(0, {});
     expect([...Object.keys(ARCHETYPES)].filter((id) => !reached.has(id))).toEqual([]);
+  });
+
+  it("draws every vignette row exactly 32 wide", () => {
+    for (const [name, v] of Object.entries(VIGNETTES)) {
+      v.rows.forEach((row, i) => expect(row.length, `${name} row ${i}`).toBe(VIG_W));
+      expect(v.rows.length, name).toBeLessThanOrEqual(VIG_H);
+    }
   });
 });

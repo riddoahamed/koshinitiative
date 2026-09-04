@@ -2661,3 +2661,21 @@
 .persona-runner canvas { image-rendering: pixelated; flex: none; }
 .persona-runner span { display: block; font-size: 12px; opacity: 0.45; }
 .persona-runner b { font-size: 15px; }
+
+/* The drawn scene strip above a question. Same grid engine as the portraits, so
+   `pixelated` matters here for exactly the same reason. */
+.persona-vignette {
+  display: flex;
+  justify-content: center;
+  margin: 0 0 18px;
+  padding: 12px 0;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  overflow: hidden;
+}
+.persona-vignette canvas {
+  image-rendering: pixelated;
+  max-width: 100%;
+  height: auto;
+}
