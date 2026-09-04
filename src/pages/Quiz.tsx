@@ -75,13 +75,14 @@ const Quiz = () => {
         <div className="wrap">
           {!result ? (
             <>
-              <p className="eyebrow" data-reveal>8 scenes · about 90 seconds</p>
+              <p className="eyebrow" data-reveal>8 moments · 90 seconds · 9 results</p>
               <h2 className="h-display quiz__h" data-reveal style={{ ["--d" as string]: "70ms" }}>
                 What kind of investor am I?
               </h2>
+              {/* Talks to the reader who already buys shares, or wants to.
+                  The line it replaced explained the method instead. */}
               <p className="h-sub" data-reveal style={{ ["--d" as string]: "130ms" }}>
-                Not questions about yourself — eight moments you have already
-                lived through. Say what you would actually do and you get a face.
+                You already have a trading style. Eight moments, and we&rsquo;ll name it.
               </p>
 
               {step === 0 && (

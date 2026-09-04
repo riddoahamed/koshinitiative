@@ -10,6 +10,21 @@ import { useEffect, useMemo, useRef, useState } from "react";
 // choices the scene cards use. Nothing here scores differently — the movement
 // is doing the persuading, not the arithmetic.
 
+// ── COLOURS CARRY THEIR OWN FALLBACK ────────────────────────────────────────
+// This file is copied into the landing site, and the landing site does not
+// define --kosh-red. `hsl(var(--kosh-red) / 0.65)` with no fallback is not a
+// colour, so the five bars of the gambler's-fallacy chart rendered completely
+// transparent there — the beat ran, the labels showed, and the chart itself was
+// invisible. Nothing errored and nothing in either repo could have caught it.
+//
+// A var() fallback makes the module render correctly wherever it is dropped,
+// and where the token IS defined the token still wins. (These do not trip
+// design-rules §2: the literal lives inside var(), not as a raw hsl() colour.)
+const RED = "var(--kosh-red, 0 84% 60%)";
+const LIME = "var(--kosh-lime, 87 52% 58%)";
+const MUTED = "var(--muted, 240 5% 26%)";
+const BORDER = "var(--border, 240 6% 30%)";
+
 /**
  * Shared: the choices, revealed once the beat has made its point.
  *
@@ -80,7 +95,7 @@ export function StreakBeat({ choices, onPick, choiceClass, listClass }: BeatProp
               <div key={i} className="flex-1 flex flex-col items-center justify-end gap-1.5 h-full">
                 <span
                   className="text-[10px] font-bold tabular-nums transition-opacity duration-300"
-                  style={{ opacity: on ? 1 : 0, color: "hsl(var(--kosh-red))" }}
+                  style={{ opacity: on ? 1 : 0, color: `hsl(${RED})` }}
                 >
                   {f.toFixed(1)}%
                 </span>
@@ -88,7 +103,7 @@ export function StreakBeat({ choices, onPick, choiceClass, listClass }: BeatProp
                   className="w-full rounded-t transition-all duration-500 ease-out"
                   style={{
                     height: on ? `${Math.abs(f) * 22}px` : "0px",
-                    background: "hsl(var(--kosh-red) / 0.65)",
+                    background: `hsl(${RED} / 0.65)`,
                   }}
                 />
                 <span className="text-[10px] text-foreground/30">D{i + 1}</span>
@@ -103,17 +118,17 @@ export function StreakBeat({ choices, onPick, choiceClass, listClass }: BeatProp
               className="w-full rounded-t border border-dashed"
               style={{
                 height: "36px",
-                borderColor: done ? "hsl(var(--kosh-lime) / 0.6)" : "hsl(var(--border))",
+                borderColor: done ? `hsl(${LIME} / 0.6)` : `hsl(${BORDER})`,
                 animation: done ? "pulse 1.6s ease-in-out infinite" : undefined,
               }}
             />
-            <span className="text-[10px] font-bold" style={{ color: done ? "hsl(var(--kosh-lime))" : undefined }}>
+            <span className="text-[10px] font-bold" style={{ color: done ? `hsl(${LIME})` : undefined }}>
               D6
             </span>
           </div>
         </div>
 
-        <p className="mt-3 text-center text-sm font-bold tabular-nums" style={{ color: "hsl(var(--kosh-red))" }}>
+        <p className="mt-3 text-center text-sm font-bold tabular-nums" style={{ color: `hsl(${RED})` }}>
           {total.toFixed(1)}% in five days
         </p>
       </div>
@@ -156,7 +171,7 @@ export function CrowdBeat({ choices, onPick, choiceClass, listClass }: BeatProps
   return (
     <div className="space-y-5">
       <div className="rounded-2xl border border-border bg-card p-5 text-center">
-        <p className="text-5xl font-bold tabular-nums" style={{ color: "hsl(var(--kosh-lime))" }}>
+        <p className="text-5xl font-bold tabular-nums" style={{ color: `hsl(${LIME})` }}>
           {pct.toFixed(0)}%
         </p>
         <p className="mt-1 text-xs text-foreground/45">of buyers went into the same share this week</p>
@@ -167,7 +182,7 @@ export function CrowdBeat({ choices, onPick, choiceClass, listClass }: BeatProps
               key={i}
               className="h-2 w-2 rounded-full transition-colors duration-200"
               style={{
-                background: i < lit ? "hsl(var(--kosh-lime) / 0.85)" : "hsl(var(--muted))",
+                background: i < lit ? `hsl(${LIME} / 0.85)` : `hsl(${MUTED})`,
               }}
             />
           ))}
@@ -228,13 +243,13 @@ export function TickerBeat({ choices, onPick, choiceClass, listClass }: BeatProp
       <div className="rounded-2xl border border-border bg-card p-4">
         <div className="flex items-baseline justify-between">
           <span className="text-xs font-bold uppercase tracking-widest text-foreground/40">Your position</span>
-          <span className="text-2xl font-bold tabular-nums" style={{ color: "hsl(var(--kosh-lime))" }}>
+          <span className="text-2xl font-bold tabular-nums" style={{ color: `hsl(${LIME})` }}>
             +{changePct.toFixed(2)}%
           </span>
         </div>
 
         <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="mt-3 h-28 w-full" aria-hidden="true">
-          <path d={path} fill="none" stroke="hsl(var(--kosh-lime))" strokeWidth={1.6}
+          <path d={path} fill="none" stroke={`hsl(${LIME})`} strokeWidth={1.6}
             vectorEffect="non-scaling-stroke" strokeLinejoin="round" strokeLinecap="round" />
         </svg>
 

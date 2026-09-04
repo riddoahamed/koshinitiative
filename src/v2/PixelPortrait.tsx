@@ -11,6 +11,27 @@ import { BASE, FACE_H, FACE_W, type Face } from "./persona/faces";
 // answer" into a moment worth waiting through, which is the entire reason
 // anyone screenshots one of these.
 
+
+/**
+ * Should this canvas animate, or just be finished?
+ *
+ * Two cases where the sweep must not be the only thing that ever draws:
+ *
+ *   · A HIDDEN TAB. requestAnimationFrame does not fire while a document is
+ *     hidden, so a portrait mounted in a background tab stays completely blank
+ *     until the tab is looked at — and the share-card capture, which is the
+ *     whole point of the result screen, would photograph the blank.
+ *   · REDUCED MOTION. A pixel-by-pixel wipe is exactly the kind of thing that
+ *     setting is for, and the finished portrait is the same information.
+ *
+ * In both, paint the final frame immediately. Nobody loses the picture.
+ */
+function shouldAnimate(reveal: boolean): boolean {
+  if (!reveal) return false;
+  if (typeof document !== "undefined" && document.hidden) return false;
+  return !window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+}
+
 /**
  * The general renderer: any text grid, any palette, with the same diagonal
  * reveal. Extracted when the scene vignettes needed exactly this and a second
@@ -56,7 +77,7 @@ export const PixelGrid = memo(function PixelGrid({
       });
     };
 
-    if (!reveal) { paint(1); return; }
+    if (!shouldAnimate(reveal)) { paint(1); return; }
     const tick = (now: number) => {
       const p = Math.min(1, (now - start) / duration);
       paint(p);
@@ -139,7 +160,7 @@ export const PixelPortrait = memo(function PixelPortrait({
       }
     };
 
-    if (!reveal) { paint(1); return; }
+    if (!shouldAnimate(reveal)) { paint(1); return; }
 
     const tick = (now: number) => {
       const p = Math.min(1, (now - start) / duration);
