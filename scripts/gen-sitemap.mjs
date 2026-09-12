@@ -42,6 +42,10 @@ const ROUTE_HINTS = {
   "/quiz": { changefreq: "monthly", priority: "0.9" },
   "/blog": { changefreq: "weekly", priority: "0.8" },
   "/investkorsi": { changefreq: "weekly", priority: "0.8" },
+  // The rate table genuinely changes every month, and it is the page most
+  // likely to be somebody's first contact with Kosh from a search.
+  "/fdr-rates": { changefreq: "monthly", priority: "0.9" },
+  "/fdr-rates/faq": { changefreq: "monthly", priority: "0.7" },
   "/feedback": { changefreq: "monthly", priority: "0.5" },
   "/blog/submit": { changefreq: "yearly", priority: "0.4" },
 };

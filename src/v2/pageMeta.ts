@@ -47,6 +47,16 @@ export const PAGE_META: Record<string, PageMeta> = {
     description:
       "Submit a lesson, guide, how-to or answer for the Kosh blog. Everything is reviewed by a human before it goes live.",
   },
+  "/fdr-rates": {
+    title: "FDR rates in Bangladesh — every bank, updated monthly",
+    description:
+      "What every scheduled bank in Bangladesh pays on a fixed deposit, from Bangladesh Bank's own monthly filing chart: 61 banks, five tenures, Islamic and conventional, each linked to the bank's own rate page. No sponsored placements.",
+  },
+  "/fdr-rates/faq": {
+    title: "FDR questions — rates, tax, protection and profit rates",
+    description:
+      "Will I get the advertised rate? What is taxed at source? What happens if the bank fails? Why do Islamic banks quote a provisional profit rate? Straight answers about fixed deposits in Bangladesh, with sources.",
+  },
   "/learn": {
     title: "Quick money lessons",
     description:
@@ -66,6 +76,11 @@ export const PAGE_META: Record<string, PageMeta> = {
     title: "InvestKorsi — scams, frauds, and the ones that paid",
     description:
       "A public ledger of what happened to people's money at Bangladeshi platforms, companies and ventures. Anonymous reports on the frauds, the projects that went quiet, and the investments that did exactly what they said. Free to read, no account needed.",
+  },
+  "/for-organizations": {
+    title: "Financial literacy programmes for organizations",
+    description:
+      "Fifteen minutes a week that people actually finish. Kosh runs money programmes for schools, universities, RMG and factory floors, offices, and community groups in Bangladesh — earn, allocate, protect and grow, measured on decisions rather than recall. Try both exercises on the page, no sign-up.",
   },
   "/feedback": {
     title: "What people are telling us",
@@ -88,4 +103,9 @@ export const PAGE_META: Record<string, PageMeta> = {
 export const PATH_ALIASES: Record<string, string> = {
   "/live": "/vote",
   "/investor-type": "/quiz",
+  "/for-schools": "/for-organizations",
+  // Both are what people actually type or search for; the canonical page is
+  // the one with the word a reader would recognise in it.
+  "/fdr": "/fdr-rates",
+  "/bank-rates": "/fdr-rates",
 };

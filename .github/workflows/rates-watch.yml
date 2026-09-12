@@ -1,0 +1,80 @@
+name: FDR rates — refresh from Bangladesh Bank
+
+# The public /fdr-rates page, kept current without anybody opening the repo.
+#
+# The app repo runs the identical job against its own copy. Two crons rather
+# than one shared feed is deliberate: each site then renders a table that is
+# part of its own build, with nothing to fetch at runtime, no CORS to keep
+# working and no blank page on a morning when the other origin is down.
+#
+# ── WHAT THIS REPLACED ──────────────────────────────────────────────────────
+# This workflow used to run a check that failed the build to remind somebody to
+# go and type the rates in by hand, because "there is no free machine-readable
+# source" for per-bank BD deposit rates.
+#
+# There is. Every scheduled bank has to file its announced deposit rates with
+# Bangladesh Bank, and BB republishes all of them as one chart, per month, per
+# bank, split by tenure. So the job is no longer a nag — it reads the chart and
+# commits the result.
+#
+# ── WHY IT IS STILL ALLOWED TO FAIL LOUDLY ──────────────────────────────────
+# A scraper that breaks silently is worse than no scraper, because the page
+# keeps rendering a table that looks exactly as current as it did last month.
+# scripts/fetch-bank-rates.mjs refuses to write a short or backdated table and
+# exits 1 instead, and a failed scheduled workflow is the notification channel
+# that already exists for repo-side facts (there is exactly one notifier for
+# anything in the DATABASE — approvals-digest — and bundled TypeScript is not
+# in the database, so an edge function cannot see it).
+#
+# Meanwhile the page itself carries BB's own month stamp, so if this job stops
+# running the page visibly ages instead of pretending to be current.
+
+on:
+  schedule:
+    # BB posts the new month's chart in the first fortnight. Running on the 5th
+    # and the 20th catches it either way, and a re-run mid-month is harmless:
+    # banks amend filings, and the script rewrites the same month when they do.
+    - cron: "30 4 5,20 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      # ── On the .gov.bd certificate trap ─────────────────────────────────
+      # Two other Bangladeshi government hosts (bbs.gov.bd,
+      # nationalsavings.gov.bd) serve shared certificates that omit their
+      # intermediate CA, which browsers recover from via the cert's AIA
+      # extension and most runtimes do not — so those fetch fine from a laptop
+      # and fail only on CI. bb.org.bd is NOT one of them: it verifies against
+      # Node's own bundled CA store, which is the same store on this runner as
+      # on the machine this was written on.
+      #
+      # If that ever changes, the fix is NODE_EXTRA_CA_CERTS pointing at a
+      # bundle with the missing intermediate — see
+      # the app repo’s supabase/functions/_shared/bdGovCa.ts, which solved it for the edge
+      # functions. Never NODE_TLS_REJECT_UNAUTHORIZED: an unverified read of a
+      # rate table is not a rate table.
+      - name: Read the chart
+        run: node scripts/fetch-bank-rates.mjs
+
+      - name: Commit if it moved
+        run: |
+          if git diff --quiet -- src/v2/fdr/rates.generated.ts; then
+            echo "Chart unchanged — nothing to commit."
+            exit 0
+          fi
+          MONTH=$(grep -o 'RATES_MONTH = "[^"]*"' src/v2/fdr/rates.generated.ts | cut -d'"' -f2)
+          git config user.name "kosh-bot"
+          git config user.email "bot@koshbd.com"
+          git add src/v2/fdr/rates.generated.ts
+          git commit -m "chore(rates): bank deposit rates — $MONTH"
+          git push
