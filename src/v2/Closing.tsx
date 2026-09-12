@@ -59,7 +59,8 @@ export const Orgs = () => (
           institution on disclosed terms, and no verdict is ever purchasable.
         </p>
         <div className="orgs__cta" data-reveal>
-          <a className="btn" href={mailto("Kosh partnership")}>Work with us</a>
+          <a className="btn" href="/for-organizations">See the programmes</a>
+          <a className="btn btn-glass" href={mailto("Kosh partnership")}>Work with us</a>
         </div>
       </div>
     </div>
@@ -219,6 +220,7 @@ export const FootV2 = () => (
           <li><a href="/start">If I started today</a></li>
           <li><a href="/quiz">What kind of investor am I?</a></li>
           <li><a href="/learn">Quick lessons</a></li>
+          <li><a href="/fdr-rates">FDR rates</a></li>
           <li><a href="/blog">Blog</a></li>
           <li><a href="/vote">Kosh Live</a></li>
         </ul>
@@ -230,7 +232,7 @@ export const FootV2 = () => (
           <li><a href={KOSH_DOWNLOAD_URL}>Get the Android app</a></li>
           <li><a href={KOSH_WAITLIST_EMAIL_URL}>Join the waitlist</a></li>
           <li><a href="/#story">Why Kosh</a></li>
-          <li><a href="/#organizations">For organizations</a></li>
+          <li><a href="/for-organizations">For organizations</a></li>
           <li><a href="/feedback">What people are asking for</a></li>
           <li><a href={`mailto:${MAIL}`}>Contact</a></li>
         </ul>
@@ -290,6 +292,10 @@ const NAV_GROUPS: NavGroup[] = [
       // /investkorsi is a real page on this site now, not a redirect to the
       // app, so the nav points at it rather than at the homepage teaser.
       { label: "InvestKorsi", href: "/investkorsi", note: "What happened to people's money" },
+      // A reference table rather than a story, and the page most likely to be
+      // somebody's first arrival from a search, so it needs a way back in from
+      // the nav rather than only from Google.
+      { label: "FDR rates", href: "/fdr-rates", note: "Every bank, updated monthly" },
     ],
   },
   // ── BLOG IS TOP-LEVEL, NOT A MENU ITEM ───────────────────────────────────
@@ -307,7 +313,7 @@ const NAV_GROUPS: NavGroup[] = [
     items: [
       { label: "Why Kosh exists", href: "/#story" },
       { label: "Impact & inclusion", href: "/#inclusion" },
-      { label: "For organizations", href: "/#organizations", note: "Programs & partners" },
+      { label: "For organizations", href: "/for-organizations", note: "Schools, campuses, floors, offices" },
       { label: "Join us", href: "/#join", note: "Careers, campus, research" },
     ],
   },

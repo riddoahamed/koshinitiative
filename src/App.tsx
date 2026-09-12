@@ -14,6 +14,9 @@ import Blog from "./pages/Blog.tsx";
 import Post from "./pages/Post.tsx";
 import Feedback from "./pages/Feedback.tsx";
 import Submit from "./pages/Submit.tsx";
+import ForOrganizations from "./pages/ForOrganizations.tsx";
+import FdrRates from "./pages/FdrRates.tsx";
+import FdrFaq from "./pages/FdrFaq.tsx";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +36,14 @@ const App = () => (
           <Route path="/investkorsi" element={<InvestKorsi />} />
           <Route path="/quiz" element={<Quiz />} />
           <Route path="/investor-type" element={<Quiz />} />
+          {/* programmes for schools, campuses, factory floors and offices */}
+          <Route path="/for-organizations" element={<ForOrganizations />} />
+          <Route path="/for-schools" element={<ForOrganizations />} />
+          {/* the rate table — what every bank pays on a fixed deposit */}
+          <Route path="/fdr-rates" element={<FdrRates />} />
+          <Route path="/fdr-rates/faq" element={<FdrFaq />} />
+          <Route path="/fdr" element={<FdrRates />} />
+          <Route path="/bank-rates" element={<FdrRates />} />
           {/* writing */}
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/submit" element={<Submit />} />

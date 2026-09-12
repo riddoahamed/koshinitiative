@@ -944,7 +944,7 @@
   border-left: 2px solid rgba(23, 38, 106, 0.25);
   font-size: 13.5px; line-height: 1.6; color: var(--ink-soft); max-width: 56ch;
 }
-.orgs__cta { margin-top: 32px; }
+.orgs__cta { margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap; }
 .orgs__cta .btn {
   background: var(--ink-navy); color: #f4f1e8;
   box-shadow: 0 14px 34px -16px rgba(16, 27, 77, 0.55);

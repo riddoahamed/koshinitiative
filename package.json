@@ -8,6 +8,7 @@
     "build": "vite build",
     "sitemap": "node scripts/gen-sitemap.mjs",
     "build:dev": "vite build --mode development",
+    "rates": "node scripts/fetch-bank-rates.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest run",
