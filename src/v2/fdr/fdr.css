@@ -487,3 +487,26 @@
 .fdr-protect__h { margin: 0 0 4px; font-size: 14.5px; font-weight: 800; color: var(--fdr-ink); }
 .fdr-protect__p { margin: 0; font-size: 13.5px; line-height: 1.5; color: var(--fdr-mute); }
 .fdr-protect__p b { color: var(--fdr-ink); font-variant-numeric: tabular-nums; }
+
+/* Other banks, at the foot of a per-bank page. */
+.fdr-others { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 20px; }
+.fdr-other {
+  display: flex; align-items: center; gap: 9px; text-decoration: none;
+  border: 1px solid var(--fdr-rule); border-radius: 999px; padding: 8px 15px 8px 9px;
+  font-size: 13.5px; font-weight: 700; color: var(--fdr-ink); background: var(--fdr-paper);
+}
+.fdr-other:hover { border-color: #c9c9d4; }
+.fdr-other b { color: var(--fdr-navy); font-variant-numeric: tabular-nums; }
+
+/* The one sentence a model is most likely to lift, and a hurried reader is
+   most likely to need. Sized between the headline figure and the body. */
+.fdr-answer {
+  margin: 22px 0 0;
+  max-width: 78ch;
+  font-size: 16.5px;
+  line-height: 1.55;
+  color: var(--fdr-mute);
+  border-left: 3px solid var(--fdr-lime);
+  padding-left: 16px;
+}
+.fdr-bn p { font-size: 15.5px; line-height: 1.75; }

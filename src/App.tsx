@@ -17,6 +17,7 @@ import Submit from "./pages/Submit.tsx";
 import ForOrganizations from "./pages/ForOrganizations.tsx";
 import FdrRates from "./pages/FdrRates.tsx";
 import FdrFaq from "./pages/FdrFaq.tsx";
+import FdrBank from "./pages/FdrBank.tsx";
 
 const queryClient = new QueryClient();
 
@@ -42,6 +43,10 @@ const App = () => (
           {/* the rate table — what every bank pays on a fixed deposit */}
           <Route path="/fdr-rates" element={<FdrRates />} />
           <Route path="/fdr-rates/faq" element={<FdrFaq />} />
+          {/* One page per bank. A model that cites /fdr-rates/brac sends a
+              real person there afterwards; without this route they would land
+              on a 404, which is worse than never being cited. */}
+          <Route path="/fdr-rates/:slug" element={<FdrBank />} />
           <Route path="/fdr" element={<FdrRates />} />
           <Route path="/bank-rates" element={<FdrRates />} />
           {/* writing */}

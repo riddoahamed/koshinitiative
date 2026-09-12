@@ -67,6 +67,63 @@ export const CATEGORY_LABEL = Object.fromEntries(
 ) as Record<Category, string>;
 
 export const LOCAL_POSTS: Post[] = [
+  // ── THE COMPANION TO /fdr-rates ───────────────────────────────────────────
+  // The rate table answers "who pays what". It cannot answer "how do I choose"
+  // without becoming an essay wrapped around a table, and the essay is what
+  // somebody searching "how to choose FDR Bangladesh" or "FDR না DPS" actually
+  // wants. So the two are split: the table stays a table, and the reasoning
+  // lives here and links to it.
+  //
+  // Every number in this post is generated-page-adjacent, NOT copied: figures
+  // that move monthly (the market band, the best rate) are described rather
+  // than quoted, so this post cannot go stale against the table beside it. The
+  // only hard numbers here are the ones set by law or by a bank's own named
+  // product, which change rarely and are sourced when they do.
+  {
+    slug: "how-to-choose-a-fixed-deposit-bangladesh",
+    title: "How to actually choose a fixed deposit in Bangladesh",
+    dek: "The rate is the last thing to compare, not the first. Six things that change what an FDR is worth — and the three that most people find out about afterwards.",
+    date: "2026-09-12",
+    category: "guide",
+    tags: ["FDR", "fixed deposit", "savings", "banks", "tax"],
+    source: "kosh",
+    author: "Kosh",
+    readMins: 7,
+    allowHtml: true,
+    body: [
+      "<p><strong>The short version: pick the tenure first, check that the bank will actually take your amount at that rate, register your TIN, and split anything over ৳2,00,000 across banks. The headline rate matters less than all four.</strong></p>",
+
+      "<h2>1. A published rate is a band, not a quote</h2>",
+      "<p>Every scheduled bank in Bangladesh files its announced deposit rates with Bangladesh Bank each month, and most of them file a <em>range</em> — 8.00–9.25%, say. That is not vagueness. It is the whole price list compressed into two numbers, because a bank prices a fixed deposit by how much you deposit and by whether you are a person or a company.</p>",
+      "<p>Trust Bank publishes the clearest version of this: an individual with under ৳50 lakh gets 8.00% on a one-year deposit, and ৳5 crore and above gets 9.00%, with a separate flat rate for institutions. AB Bank pays an individual 12.00% at one year and an institution 6.50%. So when you see a wide band, assume the bottom is the ordinary retail deposit and the top needs crores or a named scheme — and ring the branch rather than expecting the higher number.</p>",
+
+      "<h2>2. One extra month can be worth more than a bigger deposit</h2>",
+      "<p>Banks run named short-tenor products that sit outside the ordinary ladder, and they are frequently the best rate a normal person can get. Dutch-Bangla's 13-month FDR pays 8.50% against 7.20% for twelve months — one extra month, 1.30 percentage points, and at DBBL the size of your deposit changes nothing at all. Uttara runs 100-day, 200-day and 300-day FDRs that beat its own three- and six-month rates. Padma has Privilege 100, Priority 200 and Comfort 400.</p>",
+      "<p>None of this appears in a central-bank band. If you can leave the money a few weeks longer than you planned, ask what the named products pay.</p>",
+
+      "<h2>3. Tax comes off before you see it</h2>",
+      "<p>Interest is deducted at source: <strong>10% if the bank holds your 12-digit TIN, 15% if it does not</strong>. You do not file anything for it — it is gone when the interest is credited. On a ৳5,00,000 deposit at 10%, that is ৳45,000 a year with a TIN and ৳42,500 without.</p>",
+      "<p>Registering a TIN with your own bank is the cheapest five percentage points of interest available to anybody reading this, and it is the single most common thing people find out about afterwards.</p>",
+      "<p>An FDR does <strong>not</strong> earn you the investment tax rebate, whatever anybody tells you at the counter. That rebate is for approved investments — a DPS, Sanchayapatra, life insurance, listed shares, mutual funds. A fixed deposit is not one of them. If the rebate is what you are after, the deposit product that carries it is the DPS.</p>",
+
+      "<h2>4. Only ৳2,00,000 per bank is protected</h2>",
+      "<p>Under the Deposit Protection Act 2026, if a bank fails you are covered for up to ৳2,00,000 per depositor per bank — up from ৳1 lakh, where it had sat since 2000. That is the whole balance for most people and a fraction of a large FDR.</p>",
+      "<p>Cover is per <em>bank</em>, not per account, so three accounts at one branch share one ceiling. Above it, the bank's own health is your risk rather than the state's — which is exactly why the bank paying several points above everybody else deserves a second look rather than an instant yes. Splitting a large sum across banks costs nothing but paperwork.</p>",
+
+      "<h2>5. Islamic banks announce profit, not interest</h2>",
+      "<p>A Shariah-compliant bank does not pay interest. Your deposit enters a Mudaraba arrangement, is invested, and you take a share of what it earns — so the bank announces a <em>provisional</em> profit rate and settles the final figure once its own income is worked out. In practice the announced rates sit in the same range as conventional ones, but the number is provisional in a way an interest rate is not: it can land either side of what was advertised.</p>",
+
+      "<h2>6. Breaking it early usually costs the whole point</h2>",
+      "<p>Encash before maturity and most banks drop you to the savings rate, or to the rate for the period you actually completed, and some add a charge on top. A high headline rate on a three-year FDR is worth very little if the money is needed in year one. Pick the tenure you can genuinely leave it for, then compare rates within that tenure — not the other way round.</p>",
+
+      "<h2>Something that changed in 2025 and caught people out</h2>",
+      "<p>Five Islamic banks — First Security Islami, Global Islami, Social Islami, EXIM and Union — merged into Sammilito Islami Bank. Their websites still run under the old brands and Bangladesh Bank still files rates under the old names, so a rate you find for \u201cEXIM Bank FDR\u201d is real and the bank you would be dealing with is not the one on the sign. Bank Alfalah's Bangladesh business went to Bank Asia, and HSBC has wound down retail banking here entirely.</p>",
+
+      "<h2>Where to check the actual numbers</h2>",
+      "<p>We publish what every scheduled bank filed with Bangladesh Bank, refreshed monthly from the central bank's own chart, with each bank's own rate page linked beside it: <a href=\"/fdr-rates\">FDR rates at every bank in Bangladesh</a>. Nobody pays to be on it and there are no affiliate links — the order is arithmetic, and the banks paying the least are listed too.</p>",
+      "<p>More questions answered here: <a href=\"/fdr-rates/faq\">FDR questions</a>.</p>",
+    ],
+  },
   // ── THE TWO US-MARKETS GUIDES ─────────────────────────────────────────────
   //
   // Longer and heavier than anything else on this shelf, and deliberately so.

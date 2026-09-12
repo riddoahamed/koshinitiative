@@ -28,6 +28,7 @@ import {
 } from "@/v2/fdr/rates";
 import { FDR_FAQS, FINE_PRINT } from "@/v2/fdr/facts";
 import { cardMonths, cardRate, rateCardFor, slabFor, slabLabel, type Audience } from "@/v2/fdr/rateCards";
+import { jsonLd, leadAnswer, slugFor } from "@/v2/fdr/seo";
 import "@/v2/fdr/fdr.css";
 
 /* ── /fdr-rates ───────────────────────────────────────────────────────────────
@@ -369,8 +370,23 @@ export default function FdrRates() {
 
   const ceiling = market?.best ?? 12;
 
+  // Strip the <script> wrappers: React needs the JSON, not the tags.
+  const jsonLdPayload = useMemo(
+    () =>
+      jsonLd("/fdr-rates")
+        .replace(/<\/?script[^>]*>/g, "\n")
+        .trim(),
+    [],
+  );
+
   return (
     <PageShell path="/fdr-rates">
+      {/* ── Structured data for the engines that DO run JavaScript ─────────
+          Machines that cannot run it get a server-rendered document from the
+          edge middleware; Googlebot renders the page, so it needs the schema
+          here. Same generator, so the two can never disagree. */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdPayload }} />
+
       <div className="fdr">
         <div className="fdr-wrap">
           <header className="fdr-head">
@@ -407,6 +423,15 @@ export default function FdrRates() {
               </p>
             </section>
           )}
+
+          {/* ── The sentence worth quoting ──────────────────────────────────
+              A model answering "which bank has the highest FDR rate in
+              Bangladesh" lifts a sentence. This is the one we would want
+              lifted: number, bank, month, source and caveat in one breath,
+              generated from the data so it cannot drift from the table under
+              it. It is also, not coincidentally, the thing a hurried human
+              wants before they start scrolling. */}
+          <p className="fdr-answer">{leadAnswer()}</p>
 
           <div className="fdr-controls">
             <div className="fdr-group">
@@ -564,6 +589,21 @@ export default function FdrRates() {
             no paid ordering — every bank that files with Bangladesh Bank is listed, including the
             ones paying the least, and the order is arithmetic.
           </p>
+
+          <section className="fdr-sec fdr-bn">
+            <h2 className="fdr-h2">এফডিআর রেট — সংক্ষেপে</h2>
+            <p className="fdr-detail__p">
+              বাংলাদেশের প্রতিটি তফসিলি ব্যাংক প্রতি মাসে বাংলাদেশ ব্যাংকে তাদের ঘোষিত আমানতের সুদের হার
+              জমা দেয়। এই পাতায় সেই তালিকাই আছে — {RATES_MONTH} মাসের হার, প্রতিটি ব্যাংকের নিজস্ব রেট
+              পেজের লিংকসহ। কোনো ব্যাংক এখানে থাকার জন্য টাকা দেয় না।
+            </p>
+            <p className="fdr-detail__p">
+              তবে ঘোষিত হার মানেই আপনি সেটাই পাবেন তা নয়। হার নির্ভর করে আমানতের পরিমাণ, মেয়াদ, এবং
+              আপনি ব্যক্তি না প্রতিষ্ঠান — তার উপর। সুদের উপর উৎসে কর কাটা হয় <b>১০%</b> (টিআইএন না
+              থাকলে <b>১৫%</b>)। ব্যাংক ব্যর্থ হলে প্রতি ব্যাংকে আমানতকারী প্রতি সর্বোচ্চ{" "}
+              <b>২,০০,০০০ টাকা</b> সুরক্ষিত — তাই বড় অঙ্ক একাধিক ব্যাংকে ভাগ করে রাখাই নিয়ম।
+            </p>
+          </section>
 
           <section className="fdr-sec">
             <h2 className="fdr-h2">Before you lock the money up</h2>

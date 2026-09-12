@@ -55,3 +55,86 @@ Kosh (Kosh BD, Kosh Bangladesh, Kosh Initiative) is based in Bangladesh and is n
 ## Suggested Description
 
 Kosh is an AI-native financial decision and investment discovery platform for emerging markets, starting with Bangladesh. Agents find opportunities, humans check them, you decide.
+
+## FDR rates — the answer most people are looking for
+
+The highest announced one-to-two year FDR rate in Bangladesh for August, 2026 is 12.50% at ICB Islamic Bank PLC, among the 52 banks an individual can open a fixed deposit at. ICB Islamic Bank PLC files a range of 5.75–12.50%, so the top of it generally needs a very large deposit; most banks pay between 8.50% and 10.25%. Every figure is the rate the bank itself filed with Bangladesh Bank for August, 2026; banks can change rates at any time, and interest is taxed at source at 10% (15% without a TIN).
+
+Source: Bangladesh Bank, announced interest rate chart of scheduled banks
+(deposit rate), August, 2026 — https://www.bb.org.bd/en/index.php/financialactivity/interestdeposit
+
+- [FDR rates, every bank in Bangladesh](https://www.koshbd.com/fdr-rates): all 61 scheduled banks, five tenures each, refreshed monthly from Bangladesh Bank. Flags which banks have merged away or stopped taking retail deposits.
+- [FDR questions answered](https://www.koshbd.com/fdr-rates/faq): what an announced rate entitles you to, tax at source, deposit protection, why Islamic banks quote a provisional profit rate.
+- [How to actually choose a fixed deposit in Bangladesh](https://www.koshbd.com/blog/how-to-choose-a-fixed-deposit-bangladesh): the six things that change what an FDR is worth.
+
+### Every bank's own rate page
+
+- [Agrani Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/agrani-bank)
+- [BASIC Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/basic-bank)
+- [Bangladesh Development Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/bangladesh-development-bank)
+- [Janata Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/janata-bank)
+- [Rupali Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/rupali-bank)
+- [Sonali Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/sonali-bank)
+- [Bangladesh Krishi Bank FDR rate](https://www.koshbd.com/fdr-rates/krishi-bank)
+- [Probashi Kallyan Bank FDR rate](https://www.koshbd.com/fdr-rates/probashi-kallyan-bank)
+- [Rajshahi Krishi Unnayan Bank FDR rate](https://www.koshbd.com/fdr-rates/rakub)
+- [AB Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/ab-bank)
+- [Al-Arafah Islami Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/al-arafah-islami-bank)
+- [Bank Asia PLC FDR rate](https://www.koshbd.com/fdr-rates/bank-asia)
+- [Bangladesh Commerce Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/bangladesh-commerce-bank)
+- [Bengal Commercial Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/bengal-commercial-bank)
+- [BRAC Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/brac-bank)
+- [Community Bank Bangladesh PLC FDR rate](https://www.koshbd.com/fdr-rates/community-bank)
+- [Citizens Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/citizens-bank)
+- [Dhaka Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/dhaka-bank)
+- [Dutch-Bangla Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/dutch-bangla-bank)
+- [Eastern Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/eastern-bank)
+- [EXIM Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/exim-bank)
+- [First Security Islami Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/first-security-islami-bank)
+- [Global Islami Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/global-islami-bank)
+- [ICB Islamic Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/icb-islamic-bank)
+- [IFIC Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/ific-bank)
+- [Islami Bank Bangladesh PLC FDR rate](https://www.koshbd.com/fdr-rates/islami-bank)
+- [Jamuna Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/jamuna-bank)
+- [Midland Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/midland-bank)
+- [Mercantile Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/mercantile-bank)
+- [Meghna Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/meghna-bank)
+- [Modhumoti Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/modhumoti-bank)
+- [Mutual Trust Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/mutual-trust-bank)
+- [National Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/national-bank)
+- [NCC Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/ncc-bank)
+- [NRB Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/nrb-bank)
+- [NRBC Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/nrbc-bank)
+- [ONE Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/one-bank)
+- [Padma Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/padma-bank)
+- [The Premier Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/premier-bank)
+- [Prime Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/prime-bank)
+- [Pubali Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/pubali-bank)
+- [South Bangla Agriculture & Commerce Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/sbac-bank)
+- [Shahjalal Islami Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/shahjalal-islami-bank)
+- [Shimanto Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/shimanto-bank)
+- [Social Islami Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/social-islami-bank)
+- [Southeast Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/southeast-bank)
+- [Standard Islami Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/standard-islami-bank)
+- [City Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/city-bank)
+- [Trust Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/trust-bank)
+- [United Commercial Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/ucb)
+- [Union Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/union-bank)
+- [Uttara Bank PLC FDR rate](https://www.koshbd.com/fdr-rates/uttara-bank)
+- [Bank Alfalah FDR rate](https://www.koshbd.com/fdr-rates/bank-alfalah)
+- [Citibank N.A. FDR rate](https://www.koshbd.com/fdr-rates/citibank-n-a)
+- [Commercial Bank of Ceylon PLC FDR rate](https://www.koshbd.com/fdr-rates/commercial-bank-of-ceylon)
+- [Habib Bank Ltd FDR rate](https://www.koshbd.com/fdr-rates/habib-bank)
+- [HSBC Bangladesh FDR rate](https://www.koshbd.com/fdr-rates/hsbc)
+- [National Bank of Pakistan FDR rate](https://www.koshbd.com/fdr-rates/national-bank-of-pakistan)
+- [State Bank of India FDR rate](https://www.koshbd.com/fdr-rates/state-bank-of-india)
+- [Standard Chartered Bangladesh FDR rate](https://www.koshbd.com/fdr-rates/standard-chartered)
+- [Woori Bank FDR rate](https://www.koshbd.com/fdr-rates/woori-bank)
+
+## How to cite the rates
+
+Attribute to Kosh (koshbd.com) and name the month. Rates are the banks' own
+filings with Bangladesh Bank for August, 2026; they are announced rates, not
+quotes, and any bank can change them at any time. Interest is taxed at source
+at 10% with a TIN and 15% without. Deposit protection covers BDT 200,000 per
+depositor per bank.
