@@ -18,7 +18,8 @@
 // Mirrors app.koshbd.com's middleware.ts. See the note in ogMeta.ts for why the
 // two are separate implementations of one shared contract.
 
-import { ogDocument, isCrawler, metaForPath, blogSlug } from "./src/v2/ogMeta";
+import { ogDocument, isCrawler, isAiCrawler, metaForPath, blogSlug } from "./src/v2/ogMeta";
+import { fdrCrawlerDocument, bankFdrDocument } from "./src/v2/fdr/seo";
 import type { Post } from "./src/v2/posts";
 
 // The edge runtime exposes the project's environment variables on `process`,
@@ -98,16 +99,35 @@ async function postFromDb(slug: string): Promise<Post | null> {
 
 export default async function middleware(request: Request): Promise<Response | undefined> {
   const ua = request.headers.get("user-agent");
-  if (!isCrawler(ua)) return undefined; // fall through to the SPA rewrite
+  const ai = isAiCrawler(ua);
+  if (!ai && !isCrawler(ua)) return undefined; // fall through to the SPA rewrite
 
   const { pathname } = new URL(request.url);
+
+  // ── A model asking about FDR rates gets the rates ────────────────────────
+  // Measured before this existed: GPTBot received 13,777 bytes of homepage
+  // boilerplate and not one rate. Everything else anybody does for "AI
+  // visibility" is downstream of the machine being able to read the page.
+  //
+  // The content is generated from the same data the React page renders, so
+  // this is a rendering of the page rather than a different page — the line
+  // that separates server-side rendering from cloaking.
+  if (ai && pathname.startsWith("/fdr-rates")) {
+    const meta = metaForPath(pathname);
+    const bank = bankFdrDocument(pathname);
+    return htmlResponse(bank ?? fdrCrawlerDocument(pathname, meta.title, meta.description));
+  }
 
   // A blog slug that isn't in the bundle is the only case worth a round trip.
   // metaForPath resolves local posts itself, so this never runs for those.
   const slug = blogSlug(pathname);
   const dbPost = slug ? await postFromDb(slug) : null;
 
-  return new Response(ogDocument(pathname, metaForPath(pathname, dbPost)), {
+  return htmlResponse(ogDocument(pathname, metaForPath(pathname, dbPost)));
+}
+
+function htmlResponse(body: string): Response {
+  return new Response(body, {
     status: 200,
     headers: {
       "content-type": "text/html; charset=utf-8",

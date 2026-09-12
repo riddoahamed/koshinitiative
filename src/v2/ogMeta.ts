@@ -35,6 +35,7 @@
 
 import { LOCAL_POSTS, CATEGORY_LABEL, type Post } from "./posts";
 import { PAGE_META, PATH_ALIASES } from "./pageMeta";
+import { fdrBankMeta } from "./fdr/seo";
 
 export const SITE = "https://www.koshbd.com";
 
@@ -158,6 +159,14 @@ export function metaForPath(pathname: string, post?: Post | null): RouteMeta {
   const page = PAGE_META[path];
   if (page) return pageCard(path);
 
+  // ── A bank's own rate page ───────────────────────────────────────────────
+  // Sixty-one of these exist and none of them can be listed in PAGE_META by
+  // hand without that list rotting the first time a bank merges. Built from
+  // the same directory the page renders from, so a shared link unfurls as
+  // "BRAC Bank FDR rate" rather than as the site card.
+  const bankMeta = fdrBankMeta(path);
+  if (bankMeta) return { ...DEFAULT_META, ...bankMeta };
+
   return DEFAULT_META;
 }
 
@@ -245,4 +254,29 @@ export const CRAWLERS =
 
 export function isCrawler(userAgent: string | null | undefined): boolean {
   return Boolean(userAgent) && CRAWLERS.test(userAgent as string);
+}
+
+// ── The machines that read to ANSWER, not to unfurl ─────────────────────────
+//
+// An unfurler wants a title, a description and a picture; it never reads the
+// body. These want the body, and they do not run JavaScript — so on a
+// single-page app they currently receive an empty shell and can truthfully
+// report that koshbd.com has nothing to say about FDR rates.
+//
+// They are listed separately from CRAWLERS because they get a DIFFERENT
+// response: the page's real content, rendered server-side, instead of a
+// head-only stub. See src/v2/fdr/seo.ts.
+//
+// Names from the operators' own documentation, Sep 2026. OpenAI runs GPTBot
+// (training), OAI-SearchBot (the index behind ChatGPT search) and ChatGPT-User
+// (a live fetch when somebody asks); Anthropic runs ClaudeBot, Claude-SearchBot
+// and Claude-User; Google-Extended governs Gemini and AI Overviews grounding;
+// Perplexity runs PerplexityBot and Perplexity-User. Applebot-Extended and
+// Amazonbot cover Siri and Alexa. CCBot feeds Common Crawl, which is training
+// data for nearly everyone.
+export const AI_CRAWLERS =
+  /GPTBot|OAI-SearchBot|ChatGPT-User|ClaudeBot|Claude-SearchBot|Claude-User|anthropic-ai|Google-Extended|PerplexityBot|Perplexity-User|Applebot-Extended|Amazonbot|CCBot|Bytespider|Meta-ExternalAgent|cohere-ai|YouBot|Diffbot|omgili/i;
+
+export function isAiCrawler(userAgent: string | null | undefined): boolean {
+  return Boolean(userAgent) && AI_CRAWLERS.test(userAgent as string);
 }

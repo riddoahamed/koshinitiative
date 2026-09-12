@@ -1,4 +1,77 @@
+# ── koshbd.com ───────────────────────────────────────────────────────────────
+# Everything here is free to read and meant to be quoted. Kosh publishes the
+# deposit rates every Bangladeshi bank files with the central bank, and the
+# whole point of doing that carefully — with the month stamp, the source and a
+# link to each bank — is for it to be the version somebody cites.
+#
+# So the AI crawlers are named and allowed EXPLICITLY rather than left to the
+# wildcard. Several of them read a missing rule as a reason to stay away, and
+# a blanket "Allow: /" is ambiguous about training versus answering. We want
+# both: train on it, and cite it.
+
 User-agent: *
+Allow: /
+
+# ── Search and answer engines, named ────────────────────────────────────────
+# OpenAI: GPTBot trains, OAI-SearchBot builds the index behind ChatGPT search,
+# ChatGPT-User fetches live when somebody asks a question.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic: ClaudeBot trains, Claude-SearchBot indexes, Claude-User fetches.
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Google's AI surfaces (Gemini, AI Overviews) are governed separately from
+# Googlebot. Blocking this removes us from AI Overviews while leaving us in
+# search, which is the wrong trade for a page whose job is to be the answer.
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+# Common Crawl is the training corpus behind a great many models.
+User-agent: CCBot
 Allow: /
 
 Sitemap: https://www.koshbd.com/sitemap.xml

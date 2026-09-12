@@ -1,0 +1,68 @@
+<!-- ── The hand-written half of public/llms.txt ──────────────────────────────
+     This file is EDITED BY HAND. scripts/gen-sitemap.mjs concatenates it with a
+     generated section carrying the current FDR figures and writes the result to
+     public/llms.txt, which is therefore a generated file — edit this instead.
+
+     The split exists because the two halves rot differently. Who Kosh is and
+     what it does changes a few times a year and deserves to be written; the
+     highest FDR rate in the country changes every month and must never be
+     typed by a person, or the file starts contradicting the page it points at.
+     An earlier pass generated the WHOLE file and quietly destroyed this prose.
+     ────────────────────────────────────────────────────────────────────── -->
+# Kosh
+
+> Kosh is an AI-native financial decision and investment discovery platform for emerging markets, starting with Bangladesh. AI agents scan the market, humans verify every idea, and opportunities arrive as short, sourced, social-media-style digests — so people can discover, understand, and decide with confidence.
+
+Official website: https://www.koshbd.com/
+App (beta): https://app.koshbd.com/
+Contact: koshinitiative@gmail.com
+Location: Dhaka, Bangladesh — expanding toward Bangladeshi diaspora corridors (UAE, Saudi Arabia, Malaysia, UK, Canada) and other emerging markets.
+Languages: English and Bengali. "Kosh" (কোষ) is Bengali for treasury.
+
+## What Kosh Does
+
+- Investment discovery & analysis: AI agents continuously read funds, gold, Sanchaypatra, and DSE filings; humans supervise; ideas are presented as a digestible feed with the "why" and sources attached.
+- Decision support: guided answers to "what should I do with ৳X?" — learn it, simulate it, then act. Nothing is pushed.
+- Learn · Decide · Save · Invest: short lessons and games built for Bangladesh, budgeting and goals, and paper trading in taka before real steps.
+- Honesty: partner relationships are disclosed; the platform sells nothing to the user.
+
+## Why Kosh Exists (the two problems)
+
+- Investment discovery and analysis is fragmented, overwhelming, and hard to trust — finding a good opportunity is a full-time job.
+- Low capital-market participation: decades of scams and distrust pushed a generation to the sidelines, and fewer than 2 in 100 adults invest. Kosh brings first-timers and new investors in with confidence, not pressure.
+
+## Audience
+
+- First-time money decision-makers and new retail investors: people who watched from the sidelines, set up a DPS years ago and never returned, were burned once, or are waiting until it "feels safe."
+- Students, first-salary professionals, young families, freelancers, women building financial independence.
+- The Bangladeshi diaspora (part of the long-term vision, not live today).
+
+## Business Model
+
+- The consumer app is free for people.
+- Revenue comes from organizations: financial literacy programs for universities, employers, and NGOs; user research, acquisition, and engagement consulting for banks and fintechs; and custom games that teach investing, personal finance, and scam awareness.
+
+## Vision
+
+Kosh is building a financial operating system for emerging markets — starting in Bangladesh, then campus and workplace programs, a white-label decision engine, and eventually regulated investing. The future of finance isn't more information; it's better decisions, made possible for everyone.
+
+## Current Signal
+
+Kosh is part of NSU Startups Next Cohort 4 as of May 2026.
+
+## Disambiguation
+
+Kosh (Kosh BD, Kosh Bangladesh, Kosh Initiative) is based in Bangladesh and is not affiliated with American Corner Beirut, AMIDEAST, or any Beirut-based Financial Literacy Series.
+
+## Important URLs
+
+- Homepage: https://www.koshbd.com/
+- App and money check: https://app.koshbd.com/
+- Sitemap: https://www.koshbd.com/sitemap.xml
+- Instagram: https://www.instagram.com/kosh.initiative/
+- LinkedIn: https://www.linkedin.com/company/kosh-%E0%A6%95%E0%A7%8B%E0%A6%B7/
+- Linktree: https://linktr.ee/KoshFLI
+
+## Suggested Description
+
+Kosh is an AI-native financial decision and investment discovery platform for emerging markets, starting with Bangladesh. Agents find opportunities, humans check them, you decide.

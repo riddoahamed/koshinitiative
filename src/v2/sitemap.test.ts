@@ -3,6 +3,8 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { PAGE_META, PATH_ALIASES } from "./pageMeta";
 import { LOCAL_POSTS } from "./posts";
+import { BANKS } from "./fdr/banks";
+import { slugFor } from "./fdr/seo";
 import { metaForPath } from "./ogMeta";
 
 const ROOT = join(__dirname, "..", "..");
@@ -51,6 +53,10 @@ describe("sitemap", () => {
     const known = new Set([
       ...Object.keys(PAGE_META).map((p) => `${SITE}${p}`),
       ...LOCAL_POSTS.map((p) => `${SITE}/blog/${p.slug}`),
+      // One page per bank, served by /fdr-rates/:slug. Generated from the same
+      // BANKS list the sitemap generator reads, so a bank that leaves the
+      // directory leaves the sitemap and this check together.
+      ...BANKS.map((b) => `${SITE}/fdr-rates/${slugFor(b)}`),
     ]);
     expect(locs.filter((u) => !known.has(u)), "urls in the sitemap that no longer exist").toEqual([]);
   });
