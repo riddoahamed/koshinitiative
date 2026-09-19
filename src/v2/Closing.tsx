@@ -233,8 +233,10 @@ export const FootV2 = () => (
           <li><a href="/fdr-rates/faq">FDR questions</a></li>
           <li><a href="/investkorsi">InvestKorsi ledger</a></li>
           <li><a href="/vote">Kosh Live</a></li>
-          <li><a href="/bn/fdr-rates" lang="bn">এফডিআর রেট (বাংলা)</a></li>
-          <li><a href="/bn/investkorsi" lang="bn">ইনভেস্টকরসি (বাংলা)</a></li>
+          <li className="foot__bn">
+            <a href="/bn/fdr-rates" lang="bn">এফডিআর রেট</a>
+            <a href="/bn/investkorsi" lang="bn">ইনভেস্টকরসি</a>
+          </li>
         </ul>
       </div>
       <div>
@@ -281,7 +283,11 @@ export const FootV2 = () => (
    `pinned` skips the scroll gate: sub-pages have no hero to clear, so their
    nav is visible from the first paint. */
 
-interface NavItem { label: string; href: string; note?: string }
+/** `bn` is the Bangla twin of this destination, shown as a small link on the
+    same row. One row per destination: listing the Bangla page separately made
+    "Free tools" six rows for four things, which is the junk drawer this menu
+    was reorganised to get rid of. */
+interface NavItem { label: string; href: string; note?: string; bn?: string }
 /** A group with `items` opens a menu. A group with a bare `href` and no items
     is a PLAIN TOP-LEVEL LINK — see the Blog entry for why that exists. */
 interface NavGroup { label: string; href?: string; items: NavItem[] }
@@ -316,15 +322,10 @@ const NAV_GROUPS: NavGroup[] = [
   {
     label: "Free tools",
     items: [
-      { label: "FDR rates", href: "/fdr-rates", note: "Every bank, updated monthly" },
+      { label: "FDR rates", href: "/fdr-rates", note: "Every bank, updated monthly", bn: "/bn/fdr-rates" },
       { label: "FDR questions", href: "/fdr-rates/faq", note: "Tax, breaking early, insurance" },
-      { label: "InvestKorsi", href: "/investkorsi", note: "What happened to people's money" },
+      { label: "InvestKorsi", href: "/investkorsi", note: "What happened to people's money", bn: "/bn/investkorsi" },
       { label: "Kosh Live", href: "/vote", note: "Run a live room" },
-      /* Bangla gets a nav entry rather than only a toggle on the page. A
-         reader who thinks in Bangla should not have to land on an English
-         page first and notice a switch. */
-      { label: "বাংলায় এফডিআর রেট", href: "/bn/fdr-rates", note: "FDR rates in Bangla" },
-      { label: "বাংলায় ইনভেস্টকরসি", href: "/bn/investkorsi", note: "InvestKorsi in Bangla" },
     ],
   },
   {
@@ -449,10 +450,26 @@ export const NavV2 = ({ pinned = false }: { pinned?: boolean }) => {
               )}
               <div className="navg__menu">
                 {g.items.map((i) => (
-                  <a key={i.href} href={i.href} onClick={(e) => click(e, i.href)}>
-                    <b>{i.label}</b>
-                    {i.note && <span>{i.note}</span>}
-                  </a>
+                  /* Two sibling anchors, never one nested in the other: an
+                     interactive element inside a link is invalid HTML and a
+                     screen reader reads it as one confused control. */
+                  <div className="navg__row" key={i.href}>
+                    <a href={i.href} onClick={(e) => click(e, i.href)}>
+                      <b>{i.label}</b>
+                      {i.note && <span>{i.note}</span>}
+                    </a>
+                    {i.bn && (
+                      <a
+                        className="navg__bn"
+                        href={i.bn}
+                        lang="bn"
+                        aria-label={`${i.label} in Bangla`}
+                        onClick={(e) => click(e, i.bn as string)}
+                      >
+                        বাংলা
+                      </a>
+                    )}
+                  </div>
                 ))}
               </div>
             </div>
@@ -485,7 +502,24 @@ export const NavV2 = ({ pinned = false }: { pinned?: boolean }) => {
       </nav>
 
       {/* phones: the full map, because the desktop row can't fit */}
-      <div className={`sheet${sheet ? " on" : ""}`} aria-hidden={!sheet}>
+      {/* ── WHY data-lenis-prevent ──────────────────────────────────────
+          The menu scrolled on every page except the homepage, which is the
+          one page that runs Lenis. Lenis attaches to the window and calls
+          preventDefault on wheel and touch so it can drive scrolling itself,
+          and `lenis.stop()` only stops it MOVING the page — the listeners
+          stay on and keep swallowing the gesture, so a scrollable panel above
+          it gets nothing. Native scrolling inside the sheet then looks broken
+          on precisely the page most people arrive on.
+
+          This attribute is Lenis's own opt-out: any gesture whose composed
+          path contains it is left alone. The lenis.stop() in Index.tsx still
+          earns its place — it stops the page moving underneath — but it was
+          never going to fix this on its own. */}
+      <div
+        className={`sheet${sheet ? " on" : ""}`}
+        aria-hidden={!sheet}
+        data-lenis-prevent
+      >
         <div className="sheet__in">
           <a className="sheet__cta btn btn-primary" href="/start" onClick={() => setSheet(false)}>
             Start learning, free
@@ -501,6 +535,11 @@ export const NavV2 = ({ pinned = false }: { pinned?: boolean }) => {
                 <a key={i.href} href={i.href} onClick={(e) => click(e, i.href)}>
                   {i.label}
                   {i.note && <span>{i.note}</span>}
+                </a>
+              ))}
+              {g.items.filter((i) => i.bn).map((i) => (
+                <a key={i.bn} href={i.bn} lang="bn" className="sheet__bn" onClick={(e) => click(e, i.bn as string)}>
+                  {i.label} — বাংলায়
                 </a>
               ))}
             </div>
