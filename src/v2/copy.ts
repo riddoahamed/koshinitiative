@@ -5,12 +5,18 @@
    It is deliberately the answer to the question in the founder story, the
    question everyone froze on: "Okay… but what should I do?"                  */
 
-/** Short form — hero glass, nav, page straplines. */
-export const VP_SHORT = "From “where do I start?” to your first real investment.";
+/** The hook. Same fact as the "<2% invest" stat in the Problem section, read
+ *  from the other side, because the share who are OUT is the arresting half.
+ *  Source: CDBL BO accounts against the adult population. */
+export const STAT_HOOK =
+  "~98% of Bangladeshis don\u2019t have a formal investment account";
 
-/** Full form — hero H1, meta description, page intros. */
+/** Short form: hero, footer, page straplines. */
+export const VP_SHORT = "Learn money and investing, since we were never taught.";
+
+/** Full form: meta description, page intros. */
 export const VP_LONG =
-  "Kosh takes you from “I don’t know where to start” to your first real investment. Free lessons, risk-free practice on real market prices, and honest answers. Starting in Bangladesh.";
+  "Around 98% of Bangladeshis have never opened a formal investment account. Kosh teaches money and investing from the beginning: free lessons, risk-free practice on real market prices, honest answers, and tools you can use without an account.";
 
 /** The three things we always promise, in the order people care about them. */
 export const PROMISE_CHIPS = [

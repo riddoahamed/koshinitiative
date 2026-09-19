@@ -215,13 +215,23 @@ export const FootV2 = () => (
         </div>
       </div>
       <div>
-        <h4>Start here</h4>
+        <h4>Start learning</h4>
         <ul>
           <li><a href="/start">If I started today</a></li>
           <li><a href="/quiz">What kind of investor am I?</a></li>
           <li><a href="/learn">Quick lessons</a></li>
-          <li><a href="/fdr-rates">FDR rates</a></li>
           <li><a href="/blog">Blog</a></li>
+        </ul>
+      </div>
+      <div>
+        {/* The free tools get their own column. They are the pages most likely
+            to be somebody's first arrival, and a footer is where people look
+            for the thing the menu did not surface. */}
+        <h4>Free tools</h4>
+        <ul>
+          <li><a href="/fdr-rates">FDR rates, every bank</a></li>
+          <li><a href="/fdr-rates/faq">FDR questions</a></li>
+          <li><a href="/investkorsi">InvestKorsi ledger</a></li>
           <li><a href="/vote">Kosh Live</a></li>
         </ul>
       </div>
@@ -233,6 +243,7 @@ export const FootV2 = () => (
           <li><a href={KOSH_WAITLIST_EMAIL_URL}>Join the waitlist</a></li>
           <li><a href="/#story">Why Kosh</a></li>
           <li><a href="/for-organizations">For organizations</a></li>
+          <li><a href="/for-schools">For schools</a></li>
           <li><a href="/feedback">What people are asking for</a></li>
           <li><a href={`mailto:${MAIL}`}>Contact</a></li>
         </ul>
@@ -273,6 +284,24 @@ interface NavItem { label: string; href: string; note?: string }
     is a PLAIN TOP-LEVEL LINK — see the Blog entry for why that exists. */
 interface NavGroup { label: string; href?: string; items: NavItem[] }
 
+/* ── THE MENU IS GROUPED BY WHAT A VISITOR WANTS, NOT BY WHAT WE BUILT ──────
+   The old "Product" group was a junk drawer: three homepage anchors, a live
+   room, a public ledger and a 61-bank rate table, six unlike things under one
+   word. Two of those six — FDR rates and InvestKorsi — are the highest-intent
+   pages on the site. They need no account, they answer a question somebody is
+   actively searching for, and they were buried fifth and sixth in a dropdown.
+
+   So the row is now four intents, in the order a stranger has them:
+
+     Start learning   I don't know anything yet
+     Free tools       I have one specific question, right now
+     The app          what is this thing actually
+     Blog             (top-level; a blog nobody can find has no readers)
+     Company          who are you, and can I work with you
+
+   Free tools sits second on purpose. It is the only group where every item is
+   useful before you trust us, which makes it the cheapest thing to say yes to
+   and the best front door the site has. */
 const NAV_GROUPS: NavGroup[] = [
   {
     label: "Start learning",
@@ -283,30 +312,22 @@ const NAV_GROUPS: NavGroup[] = [
     ],
   },
   {
-    label: "Product",
+    label: "Free tools",
+    items: [
+      { label: "FDR rates", href: "/fdr-rates", note: "Every bank, updated monthly" },
+      { label: "FDR questions", href: "/fdr-rates/faq", note: "Tax, breaking early, insurance" },
+      { label: "InvestKorsi", href: "/investkorsi", note: "What happened to people's money" },
+      { label: "Kosh Live", href: "/vote", note: "Run a live room" },
+    ],
+  },
+  {
+    label: "The app",
     items: [
       { label: "Inside the app", href: "/#inside", note: "Real screens" },
       { label: "How it works", href: "/#product", note: "Agents find, humans check" },
       { label: "Games", href: "/#funance", note: "Finance, made playable" },
-      { label: "Kosh Live", href: "/vote", note: "Run a live room" },
-      // /investkorsi is a real page on this site now, not a redirect to the
-      // app, so the nav points at it rather than at the homepage teaser.
-      { label: "InvestKorsi", href: "/investkorsi", note: "What happened to people's money" },
-      // A reference table rather than a story, and the page most likely to be
-      // somebody's first arrival from a search, so it needs a way back in from
-      // the nav rather than only from Google.
-      { label: "FDR rates", href: "/fdr-rates", note: "Every bank, updated monthly" },
     ],
   },
-  // ── BLOG IS TOP-LEVEL, NOT A MENU ITEM ───────────────────────────────────
-  // It was the fourth entry inside the "Start learning" dropdown, which meant
-  // reaching it took a hover, a scan of four labels, and a guess that a group
-  // called "Start learning" is where a blog lives. That is indistinguishable
-  // from not having navigation to it — and a blog nobody can find is a
-  // publishing programme with no readers.
-  //
-  // Every site with a blog puts "Blog" in the top row. This is one of the very
-  // few places to just do the obvious thing.
   { label: "Blog", href: "/blog", items: [] },
   {
     label: "Company",
@@ -314,6 +335,7 @@ const NAV_GROUPS: NavGroup[] = [
       { label: "Why Kosh exists", href: "/#story" },
       { label: "Impact & inclusion", href: "/#inclusion" },
       { label: "For organizations", href: "/for-organizations", note: "Schools, campuses, floors, offices" },
+      { label: "What people ask for", href: "/feedback", note: "Our open request board" },
       { label: "Join us", href: "/#join", note: "Careers, campus, research" },
     ],
   },
@@ -332,8 +354,20 @@ const useAnchorNav = () =>
     window.history.replaceState(null, "", href);
   };
 
+/** Which group owns the page you are on, so the menu can say where you are.
+ *  A menu that looks identical on every page is a menu you have to re-read
+ *  every time; a marked one is the cheapest orientation there is. */
+const groupForPath = (path: string): string | null => {
+  const hit = NAV_GROUPS.find((g) =>
+    (g.href && g.href !== "/" && path.startsWith(g.href)) ||
+    g.items.some((i) => !i.href.startsWith("/#") && i.href !== "/" && path.startsWith(i.href))
+  );
+  return hit?.label ?? null;
+};
+
 export const NavV2 = ({ pinned = false }: { pinned?: boolean }) => {
   const [on, setOn] = useState(pinned);
+  const here = typeof window === "undefined" ? null : groupForPath(window.location.pathname);
   const [open, setOpen] = useState<string | null>(null);
   const [sheet, setSheet] = useState(false);
   const go = useAnchorNav();
@@ -383,12 +417,17 @@ export const NavV2 = ({ pinned = false }: { pinned?: boolean }) => {
         <div className="nav__links">
           {NAV_GROUPS.map((g, i) => (
             <div
-              className={`navg${open === g.label ? " open" : ""}${i === 0 ? " navg--go" : ""}`}
+              className={`navg${open === g.label ? " open" : ""}${i === 0 ? " navg--go" : ""}${here === g.label ? " navg--here" : ""}`}
               key={g.label}
               onMouseEnter={() => setOpen(g.label)}
             >
               {g.items.length === 0 && g.href ? (
-                <a className="navg__btn" href={g.href} onClick={(e) => click(e, g.href as string)}>
+                <a
+                  className="navg__btn"
+                  href={g.href}
+                  aria-current={here === g.label ? "page" : undefined}
+                  onClick={(e) => click(e, g.href as string)}
+                >
                   {g.label}
                 </a>
               ) : (

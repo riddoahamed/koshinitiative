@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { STAT_HOOK } from "./copy";
 import { KOSH_APP_URL } from "@/lib/links";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -172,7 +173,8 @@ const HeroMachine = () => {
     <div ref={wrapRef} className="heroWrap" id="top">
       <header ref={heroRef} className={`hero ${phase}${booted ? " booted" : ""}`}>
         <h1 className="sr">
-          Kosh. Scams, frauds, and the ones that paid.
+          Kosh. Learn money and investing, since we were never taught. Around
+          98% of Bangladeshis have never opened a formal investment account.
         </h1>
 
         <div ref={stageRef} className="hero__stage">
@@ -265,12 +267,15 @@ const HeroMachine = () => {
         {/* The one line. Readable before the machine is even switched on:
             the site should never be a beautiful picture that says nothing. */}
         <div className="hero__strap">
+          {/* The fact first. It is the same number as the "<2% invest" stat
+              further down the page, read from the side that stops a scroll. */}
+          <p className="hero__strap-stat">{STAT_HOOK}</p>
           <p className="hero__strap-vp">
-            Scams, frauds, and <span>the ones that paid.</span>
+            Learn money and investing, <span>since we were never taught.</span>
           </p>
           <p className="hero__strap-sub">
-            Free money lessons · risk-free practice on real prices · we never
-            touch your money
+            Free lessons · risk-free practice on real prices · we never touch
+            your money
           </p>
         </div>
 

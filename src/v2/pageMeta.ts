@@ -34,7 +34,10 @@ export interface PageMeta {
 /** Keyed by pathname, no trailing slash. "/" is the homepage. */
 export const PAGE_META: Record<string, PageMeta> = {
   "/": {
-    title: "From “where do I start?” to your first real investment",
+    /* Leads on the fact rather than the promise: "98% of Bangladeshis have no
+       investment account" is the half of this sentence a stranger stops for,
+       and it is the same CDBL figure the Problem section cites. */
+    title: "Learn money and investing, since we were never taught",
     description: VP_LONG,
   },
   "/blog": {

@@ -7,7 +7,7 @@ import { Pitch, Paths, Problem, Product, Impact } from "@/v2/Sections";
 import { Orgs, Vision, Founder, Join, FootV2, NavV2 } from "@/v2/Closing";
 import { Funance } from "@/v2/Funance";
 import { Inside } from "@/v2/Inside";
-import { InvestKorsi } from "@/v2/InvestKorsi";
+import { Tools } from "@/v2/Tools";
 import { initFx } from "@/v2/fx";
 import { VP_LONG } from "@/v2/copy";
 import { SCROLL_LOCK_EVENT } from "@/v2/scrollLock";
@@ -91,9 +91,9 @@ const Index = () => {
         <Pitch />
         <Paths />
         <Problem />
+        <Tools />
         <Product />
         <Inside />
-        <InvestKorsi />
         <Funance />
         <Impact />
         <Orgs />
