@@ -215,24 +215,17 @@ export const FootV2 = () => (
         </div>
       </div>
       <div>
-        <h4>Start learning</h4>
-        <ul>
-          <li><a href="/start">If I started today</a></li>
-          <li><a href="/quiz">What kind of investor am I?</a></li>
-          <li><a href="/learn">Quick lessons</a></li>
-          <li><a href="/blog">Blog</a></li>
-        </ul>
-      </div>
-      <div>
-        {/* The free tools get their own column. They are the pages most likely
-            to be somebody's first arrival, and a footer is where people look
-            for the thing the menu did not surface. */}
         <h4>Free tools</h4>
         <ul>
+          <li><a href="/start">Start here</a></li>
+          <li><a href="/learn">Quick lessons</a></li>
+          <li><a href="/quiz">What kind of investor am I?</a></li>
           <li><a href="/fdr-rates">FDR rates, every bank</a></li>
           <li><a href="/fdr-rates/faq">FDR questions</a></li>
           <li><a href="/investkorsi">InvestKorsi ledger</a></li>
           <li><a href="/vote">Kosh Live</a></li>
+          {/* The footer is the site index, so the Bangla pages are listed here
+              even though the menu offers them as a toggle on the page. */}
           <li className="foot__bn">
             <a href="/bn/fdr-rates" lang="bn">এফডিআর রেট</a>
             <a href="/bn/investkorsi" lang="bn">ইনভেস্টকরসি</a>
@@ -240,15 +233,24 @@ export const FootV2 = () => (
         </ul>
       </div>
       <div>
+        <h4>Products &amp; services</h4>
+        <ul>
+          <li><a href={KOSH_APP_URL}>The Kosh app</a></li>
+          <li><a href={KOSH_DOWNLOAD_URL}>Get the Android app</a></li>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="/for-organizations#education">Kosh for education</a></li>
+          <li><a href="/for-organizations#workplace">Kosh for employee wellness</a></li>
+          <li><a href="/for-organizations#csr">Kosh for CSR programmes</a></li>
+        </ul>
+      </div>
+      <div>
         <h4>Company</h4>
         <ul>
-          <li><a href={KOSH_APP_URL}>Try Kosh</a></li>
-          <li><a href={KOSH_DOWNLOAD_URL}>Get the Android app</a></li>
-          <li><a href={KOSH_WAITLIST_EMAIL_URL}>Join the waitlist</a></li>
           <li><a href="/#story">Why Kosh</a></li>
-          <li><a href="/for-organizations">For organizations</a></li>
-          <li><a href="/for-schools">For schools</a></li>
+          <li><a href="/#inclusion">Impact &amp; inclusion</a></li>
           <li><a href="/feedback">What people are asking for</a></li>
+          <li><a href="/#join">Join us</a></li>
+          <li><a href={KOSH_WAITLIST_EMAIL_URL}>Join the waitlist</a></li>
           <li><a href={`mailto:${MAIL}`}>Contact</a></li>
         </ul>
       </div>
@@ -292,57 +294,94 @@ interface NavItem { label: string; href: string; note?: string; bn?: string }
     is a PLAIN TOP-LEVEL LINK — see the Blog entry for why that exists. */
 interface NavGroup { label: string; href?: string; items: NavItem[] }
 
-/* ── THE MENU IS GROUPED BY WHAT A VISITOR WANTS, NOT BY WHAT WE BUILT ──────
-   The old "Product" group was a junk drawer: three homepage anchors, a live
-   room, a public ledger and a 61-bank rate table, six unlike things under one
-   word. Two of those six — FDR rates and InvestKorsi — are the highest-intent
-   pages on the site. They need no account, they answer a question somebody is
-   actively searching for, and they were buried fifth and sixth in a dropdown.
+/* ── THE MENU, THIRD PASS ────────────────────────────────────────────────────
 
-   So the row is now four intents, in the order a stranger has them:
+   Three groups and one standalone link, down from five groups. The shape is
+   the question a visitor is actually asking:
 
-     Start learning   I don't know anything yet
-     Free tools       I have one specific question, right now
-     The app          what is this thing actually
-     Blog             (top-level; a blog nobody can find has no readers)
-     Company          who are you, and can I work with you
+     Start here          I want to be told what to do first
+     Free tools          I want to use something right now, for nothing
+     Products & services what does Kosh actually sell, and to whom
+     Company             who are you
 
-   Free tools sits second on purpose. It is the only group where every item is
-   useful before you trust us, which makes it the cheapest thing to say yes to
-   and the best front door the site has. */
+   WHAT MOVED AND WHY
+
+   "The app" is gone as a heading. It described our org chart, not a visitor's
+   need: nobody arrives wanting "the app", they arrive wanting a rate, a
+   lesson or a programme for their school. The app now sits inside Products &
+   services alongside the three things we sell to institutions, which is the
+   honest list of what Kosh offers.
+
+   Lessons, games and the quiz moved OUT of a learning group and INTO Free
+   tools, because that is what they are to a stranger: things you can use
+   today without paying or signing up. The group is the site's best front
+   door and it should hold everything that needs no trust.
+
+   FDR questions is no longer its own row. It is a section of the FDR page and
+   the page links to it; a menu row for a sub-page of a page in the same menu
+   is how a menu doubles in size without gaining a destination.
+
+   The Bangla chips are gone from here too. A reader gets the switch ON the
+   page, which is what a language toggle should be — a menu row per language
+   makes two pages out of one and puts the machinery in front of the reader. */
+interface NavItem { label: string; href: string; note?: string }
+/** A group with `items` opens a menu. A group with a bare `href` and no items
+    is a PLAIN TOP-LEVEL LINK — see the Blog entry for why that exists. */
+/** `columns` splits a panel into labelled halves. A group of seven is a list
+    you read top to bottom; the same seven under two headings is two lists of
+    three you take in at a glance, and the headings do the sorting for you. */
+interface NavCol { label: string; items: NavItem[] }
+interface NavGroup { label: string; href?: string; items: NavItem[]; blurb?: string; columns?: NavCol[] }
+
+const TOOLS_LEARN: NavItem[] = [
+  { label: "Quick lessons", href: "/learn", note: "Two minutes each" },
+  { label: "Games & simulators", href: "/#funance", note: "Practise with money that isn't real" },
+  { label: "What kind of investor am I?", href: "/quiz", note: "Six questions, sixty seconds" },
+];
+const TOOLS_LOOKUP: NavItem[] = [
+  { label: "FDR rates, every bank", href: "/fdr-rates", note: "Updated monthly, with the tax and the fine print" },
+  /* The real thing, not a section about it: the app's Discover feed is
+     browsable as a guest, which is what puts it in this group at all. */
+  { label: "Discover investment options", href: `${KOSH_APP_URL}/invest`, note: "Savings, funds, gold, DSE. Browse as a guest" },
+  { label: "InvestKorsi", href: "/investkorsi", note: "What actually happened to people's money" },
+  { label: "Kosh Live", href: "/vote", note: "Run a live room" },
+];
+const PROD_APP: NavItem[] = [
+  { label: "The Kosh app", href: "/#inside", note: "Real screens, markets, coach and games" },
+  { label: "How it works", href: "/#product", note: "Agents find, humans check, you decide" },
+];
+const PROD_ORGS: NavItem[] = [
+  { label: "Kosh for education", href: "/for-organizations#education", note: "Schools, colleges and campuses" },
+  { label: "Kosh for employee wellness", href: "/for-organizations#workplace", note: "Offices, RMG and factory floors" },
+  { label: "Kosh for CSR programmes", href: "/for-organizations#csr", note: "NGOs, community groups, banks" },
+];
+
 const NAV_GROUPS: NavGroup[] = [
   {
-    label: "Start learning",
-    items: [
-      { label: "If I started today", href: "/start", note: "The five-step path" },
-      { label: "Quick lessons", href: "/learn", note: "Two minutes each" },
-      { label: "What kind of investor am I?", href: "/quiz", note: "60 seconds" },
-    ],
-  },
-  {
     label: "Free tools",
-    items: [
-      { label: "FDR rates", href: "/fdr-rates", note: "Every bank, updated monthly", bn: "/bn/fdr-rates" },
-      { label: "FDR questions", href: "/fdr-rates/faq", note: "Tax, breaking early, insurance" },
-      { label: "InvestKorsi", href: "/investkorsi", note: "What happened to people's money", bn: "/bn/investkorsi" },
-      { label: "Kosh Live", href: "/vote", note: "Run a live room" },
+    blurb: "Everything here works without an account.",
+    items: [...TOOLS_LEARN, ...TOOLS_LOOKUP],
+    columns: [
+      { label: "Learn & practise", items: TOOLS_LEARN },
+      { label: "Look it up", items: TOOLS_LOOKUP },
     ],
   },
   {
-    label: "The app",
-    items: [
-      { label: "Inside the app", href: "/#inside", note: "Real screens" },
-      { label: "How it works", href: "/#product", note: "Agents find, humans check" },
-      { label: "Games", href: "/#funance", note: "Finance, made playable" },
+    label: "Products & services",
+    items: [...PROD_APP, ...PROD_ORGS],
+    columns: [
+      { label: "For everyone", items: PROD_APP },
+      { label: "For organisations", items: PROD_ORGS },
     ],
   },
+  /* Blog stays a top-level link. It was buried in a dropdown once already and
+     a blog nobody can find is a publishing programme with no readers. */
   { label: "Blog", href: "/blog", items: [] },
   {
     label: "Company",
     items: [
       { label: "Why Kosh exists", href: "/#story" },
       { label: "Impact & inclusion", href: "/#inclusion" },
-      { label: "For organizations", href: "/for-organizations", note: "Schools, campuses, floors, offices" },
       { label: "What people ask for", href: "/feedback", note: "Our open request board" },
       { label: "Join us", href: "/#join", note: "Careers, campus, research" },
     ],
@@ -423,6 +462,7 @@ export const NavV2 = ({ pinned = false }: { pinned?: boolean }) => {
         </a>
 
         <div className="nav__links">
+          <a className="nav__start" href="/start">Start here</a>
           {NAV_GROUPS.map((g, i) => (
             <div
               className={`navg${open === g.label ? " open" : ""}${i === 0 ? " navg--go" : ""}${here === g.label ? " navg--here" : ""}`}
@@ -448,29 +488,43 @@ export const NavV2 = ({ pinned = false }: { pinned?: boolean }) => {
                 <svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" /></svg>
               </button>
               )}
-              <div className="navg__menu">
-                {g.items.map((i) => (
+              <div className={`navg__menu${g.columns ? " navg__menu--wide" : ""}`}>
+                {g.blurb && <p className="navg__blurb">{g.blurb}</p>}
+                {g.columns ? (
+                  <div className="navg__cols">
+                    {g.columns.map((c) => (
+                      <div className="navg__col" key={c.label}>
+                        <p className="navg__collabel">{c.label}</p>
+                        {c.items.map((i) => (
+                          <a
+                            key={i.href}
+                            href={i.href}
+                            {...(i.href.startsWith("http") ? { target: "_blank", rel: "noreferrer" } : {})}
+                            onClick={(e) => click(e, i.href)}
+                          >
+                            <b>{i.label}</b>
+                            {i.note && <span>{i.note}</span>}
+                          </a>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  g.items.map((i) => (
                   /* Two sibling anchors, never one nested in the other: an
                      interactive element inside a link is invalid HTML and a
                      screen reader reads it as one confused control. */
-                  <div className="navg__row" key={i.href}>
-                    <a href={i.href} onClick={(e) => click(e, i.href)}>
-                      <b>{i.label}</b>
-                      {i.note && <span>{i.note}</span>}
-                    </a>
-                    {i.bn && (
-                      <a
-                        className="navg__bn"
-                        href={i.bn}
-                        lang="bn"
-                        aria-label={`${i.label} in Bangla`}
-                        onClick={(e) => click(e, i.bn as string)}
-                      >
-                        বাংলা
-                      </a>
-                    )}
-                  </div>
-                ))}
+                  <a
+                    key={i.href}
+                    href={i.href}
+                    {...(i.href.startsWith("http") ? { target: "_blank", rel: "noreferrer" } : {})}
+                    onClick={(e) => click(e, i.href)}
+                  >
+                    <b>{i.label}</b>
+                    {i.note && <span>{i.note}</span>}
+                  </a>
+                  ))
+                )}
               </div>
             </div>
           ))}
@@ -535,11 +589,6 @@ export const NavV2 = ({ pinned = false }: { pinned?: boolean }) => {
                 <a key={i.href} href={i.href} onClick={(e) => click(e, i.href)}>
                   {i.label}
                   {i.note && <span>{i.note}</span>}
-                </a>
-              ))}
-              {g.items.filter((i) => i.bn).map((i) => (
-                <a key={i.bn} href={i.bn} lang="bn" className="sheet__bn" onClick={(e) => click(e, i.bn as string)}>
-                  {i.label} — বাংলায়
                 </a>
               ))}
             </div>

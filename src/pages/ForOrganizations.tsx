@@ -22,6 +22,7 @@ const SEGMENTS = [
     icon: School,
     lead: true,
     tag: "specified below",
+    anchor: "education",
     name: "Schools & school groups",
     who: "Ages 8–18 · KoshTeen and KoshFam",
     does: "Weekly lessons in tutor time, mapped to your scheme of work, with a cohort dashboard for leadership.",
@@ -34,6 +35,7 @@ const SEGMENTS = [
   },
   {
     icon: Building2,
+    anchor: "workplace",
     name: "Offices & employers",
     who: "Salaried staff, first job to first flat",
     does: "Lunch-hour cohorts: the payslip, tax, DPS against a fund, and a first investment that cannot hurt them.",
@@ -46,6 +48,7 @@ const SEGMENTS = [
   },
   {
     icon: Users,
+    anchor: "csr",
     name: "NGOs & community groups",
     who: "Women's groups, cooperatives, youth programmes",
     does: "Facilitator-led sessions with a printed pack, so a session never depends on a phone being in the room.",
@@ -274,7 +277,14 @@ const ForOrganizations = () => {
             </p>
             <div className="fo-segs">
               {SEGMENTS.map((s) => (
-                <div className={`fo-seg ${s.lead ? "fo-seg--lead" : ""}`} key={s.name}>
+                /* The menu offers Education, Employee wellness and CSR as three
+                   propositions; each needs to land on the card that answers it
+                   rather than at the top of a long page. */
+                <div
+                  className={`fo-seg ${s.lead ? "fo-seg--lead" : ""}`}
+                  key={s.name}
+                  id={"anchor" in s ? (s as { anchor?: string }).anchor : undefined}
+                >
                   <s.icon className="fo-seg__icon" size={22} strokeWidth={1.8} />
                   {s.tag && <span className="fo-seg__tag">{s.tag}</span>}
                   <h3 className="fo-h3">{s.name}</h3>

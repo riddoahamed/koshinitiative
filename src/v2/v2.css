@@ -2778,3 +2778,25 @@
 .navg__bn:hover { color: var(--lime); border-color: hsl(85 95% 65% / 0.45); background: hsl(85 95% 65% / 0.08); }
 .sheet__bn { color: var(--muted) !important; font-size: 15px !important; }
 .foot__bn { display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* a one-line promise at the top of a menu panel */
+.navg__blurb {
+  margin: 4px 12px 8px;
+  font-family: var(--font-m); font-size: 10.5px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--mint);
+}
+
+/* ── two-column menu panel ──────────────────────────────────────────────────
+   A group of seven is a list you read; the same seven under two headings is
+   two lists of three you take in at a glance. */
+.navg__menu--wide { min-width: 620px; }
+.navg__cols { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 10px; }
+.navg__col { min-width: 0; }
+.navg__collabel {
+  margin: 2px 12px 6px;
+  font-family: var(--font-m); font-size: 10px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: rgba(242, 242, 247, 0.38);
+}
+.navg__col + .navg__col { border-left: 1px solid var(--stroke); padding-left: 10px; }
+/* a wide panel hangs from the button rather than running off the right edge */
+.navg:nth-last-child(-n+2) .navg__menu--wide { left: auto; right: -14px; }
