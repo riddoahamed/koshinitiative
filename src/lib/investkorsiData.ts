@@ -209,6 +209,17 @@ export async function fetchClasses(): Promise<ClassRow[]> {
 }
 
 /** ৳ figures the way Bangladeshi readers actually say them. */
+/** The same figure written the way it is said in Bangla: Bengali digits and
+ *  লাখ / কোটি rather than lakh / crore. Used only in Bangla prose; the English
+ *  page keeps `taka`. */
+export function takaBn(n: number): string {
+  const d = (x: string) => x.replace(/[0-9]/g, (c) => "০১২৩৪৫৬৭৮৯"[+c]);
+  if (n >= 10_000_000) return `৳${d((n / 10_000_000).toFixed(n % 10_000_000 === 0 ? 0 : 1))} কোটি`;
+  if (n >= 100_000) return `৳${d((n / 100_000).toFixed(n % 100_000 === 0 ? 0 : 1))} লাখ`;
+  if (n >= 1_000) return `৳${d((n / 1_000).toFixed(0))} হাজার`;
+  return `৳${d(String(n))}`;
+}
+
 export function taka(n: number): string {
   if (n >= 10_000_000) return `৳${(n / 10_000_000).toFixed(n % 10_000_000 === 0 ? 0 : 1)} crore`;
   if (n >= 100_000) return `৳${(n / 100_000).toFixed(n % 100_000 === 0 ? 0 : 1)} lakh`;

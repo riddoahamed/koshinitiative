@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useLang, LangToggle, bnNum } from "@/v2/i18n";
+import { ikStrings } from "@/v2/ikStrings";
 import { ArrowRight, PenLine, ShieldCheck, Compass } from "lucide-react";
 import PageShell from "@/v2/PageShell";
 import { KOSH_APP_URL } from "@/lib/links";
@@ -11,6 +13,7 @@ import {
   fetchWall,
   fetchClasses,
   taka,
+  takaBn,
   EMPTY_TOTALS,
   type Totals,
   type Issue,
@@ -60,6 +63,8 @@ function Stat({ figure, label }: { figure: string; label: string }) {
 }
 
 export default function InvestKorsiPage() {
+  const lang = useLang();
+  const T = ikStrings(lang);
   const [totals, setTotals] = useState<Totals>(EMPTY_TOTALS);
   const [issues, setIssues] = useState<Issue[]>([]);
   const [wall, setWall] = useState<PlatformRow[]>([]);
@@ -117,9 +122,10 @@ export default function InvestKorsiPage() {
 
   return (
     <PageShell
-      path="/investkorsi"
+      path={lang === "bn" ? "/bn/investkorsi" : "/investkorsi"}
       // Back to the section that sent them, not to the top of the homepage.
-      backTo="/#investkorsi"
+      backTo="/#tools"
+      className={lang === "bn" ? "lang-bn" : undefined}
     >
       {/* ── 1. SEE ─────────────────────────────────────────────────────── */}
       <section className="sec ikp-hero">
@@ -137,52 +143,49 @@ export default function InvestKorsiPage() {
               live counts are the cheapest possible proof of it. */}
           <p className="ikp__live" data-reveal>
             <i aria-hidden />
-            <span>Live public ledger</span>
+            <span>{T.live}</span>
             {loaded && (
               <>
-                <em>{totals.reports} report{totals.reports === 1 ? "" : "s"}</em>
-                <em>{totals.platforms} platforms</em>
+                <em>{T.report(totals.reports)}</em>
+                <em>{T.platforms(totals.platforms)}</em>
               </>
             )}
           </p>
+          <LangToggle className="ikp__lang" />
           <h2 className="h-display" data-reveal style={{ ["--d" as string]: "70ms" }}>
-            Scams, frauds, and the ones that paid.{" "}
-            <span className="grad-text">Put yours on the record.</span>
+            {T.h2a}{" "}
+            <span className="grad-text">{T.h2b}</span>
           </h2>
           <p className="h-sub" data-reveal style={{ ["--d" as string]: "140ms" }}>
-            Platforms, companies, ventures &mdash; anywhere in Bangladesh money goes in.
-            Read what really happened to other people, then tell them yours. Free, and
-            nothing traces back to whoever wrote it.
+            {T.sub}
           </p>
           <p className="ikp__thesis" data-reveal="fade" style={{ ["--d" as string]: "190ms" }}>
-            One story is one complaint. Enough of them is knowledge a market can be
-            built on.
+            {T.thesis}
           </p>
 
           <div className="ikp__stats" data-stagger="90">
-            <Stat figure={loaded ? String(totals.reports) : "—"} label="reports filed" />
-            <Stat figure={loaded ? String(totals.platforms) : "—"} label="platforms covered" />
+            <Stat figure={loaded ? (lang === "bn" ? bnNum(totals.reports) : String(totals.reports)) : "—"} label={T.statReports} />
+            <Stat figure={loaded ? (lang === "bn" ? bnNum(totals.platforms) : String(totals.platforms)) : "—"} label={T.statPlatforms} />
             <Stat
-              figure={loaded && totals.amountBad > 0 ? taka(totals.amountBad) : "—"}
+              figure={loaded && totals.amountBad > 0 ? (lang === "bn" ? takaBn(totals.amountBad) : taka(totals.amountBad)) : "—"}
               label={
                 totals.amountBadReports > 0
-                  ? `reported stuck, across ${totals.amountBadReports} report${totals.amountBadReports === 1 ? "" : "s"} that named a figure`
-                  : "reported stuck so far"
+                  ? T.statStuck(totals.amountBadReports)
+                  : T.statStuckPlain
               }
             />
           </div>
 
           <div className="ikp__cta" data-reveal>
             <a className="btn btn-primary" href={APP_IK}>
-              <PenLine size={16} strokeWidth={2.2} /> Add your report
+              <PenLine size={16} strokeWidth={2.2} /> {T.ctaAdd}
             </a>
             <a className="btn btn-glass" href={APP_IK}>
-              Read every report <ArrowRight size={16} strokeWidth={2.4} />
+              {T.ctaRead} <ArrowRight size={16} strokeWidth={2.4} />
             </a>
           </div>
           <p className="ikp__note" data-reveal="fade">
-            Fifteen seconds, no account, no email. One report per investment, so nobody can pile
-            on a company and nobody can pad their own.
+            {T.note}
           </p>
         </div>
       </section>
@@ -218,11 +221,11 @@ export default function InvestKorsiPage() {
           <div className="ikp__frogs">
             <div className="ikp__frog" data-reveal="scale">
               <img src="/img/ik/frog-calm.svg" alt="" aria-hidden width={240} height={200} />
-              <p><b>It paid.</b> Money came back, on time, like they said it would.</p>
+              <p><b>{T.paidH}</b> {T.paidP}</p>
             </div>
             <div className="ikp__frog ikp__frog--tilt" data-reveal="scale">
               <img src="/img/ik/frog-panic.svg" alt="" aria-hidden width={240} height={200} />
-              <p><b>It didn&rsquo;t.</b> Went quiet, went late, or went nowhere at all.</p>
+              <p><b>{T.notPaidH}</b> {T.notPaidP}</p>
             </div>
           </div>
           <p className="ikp__frogs-n" data-reveal="fade">
@@ -245,7 +248,7 @@ export default function InvestKorsiPage() {
         <section className="sec ikp-issues">
           <div className="wrap">
             <h3 className="ikp__h" data-reveal>
-              What actually goes wrong
+              {T.wrongH}
             </h3>
             <p className="ikp__lede" data-reveal="fade">
               Counted from the reports themselves, not from anything we assumed.
@@ -276,7 +279,7 @@ export default function InvestKorsiPage() {
         <section className="sec ikp-classes">
           <div className="wrap">
             <h3 className="ikp__h" data-reveal>
-              And what kind of investment it was
+              {T.classH}
             </h3>
             <p className="ikp__lede" data-reveal="fade">
               Counted from the {classified} report{classified === 1 ? "" : "s"} that said
@@ -319,7 +322,7 @@ export default function InvestKorsiPage() {
         <section className="sec ikp-registry">
           <div className="wrap">
             <h3 className="ikp__h" data-reveal>
-              The register
+              {T.registerH}
             </h3>
             <p className="ikp__lede" data-reveal="fade">
               Every platform, company or venture someone has written about, ranked by

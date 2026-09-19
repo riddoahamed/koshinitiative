@@ -178,12 +178,18 @@ const HeroMachine = () => {
         </h1>
 
         <div ref={stageRef} className="hero__stage">
-          <img
+          {/* 442 kB of JPEG on the critical path of every visit, preloaded, on
+              a mostly-mobile Bangladeshi audience. WebP is 145 kB of the same
+              picture; the <source> lets anything too old fall back. */}
+          <picture>
+            <source srcSet="/img/hero-plate-off.webp" type="image/webp" />
+            <img
             className="hero__plate"
             src="/img/hero-plate-off.jpg"
             alt="A vintage KOSH computer resting in a Bangladeshi night landscape, with a tiger, river, bridge and port cranes behind it"
             draggable={false}
-          />
+            />
+          </picture>
 
           {/* the black screen itself: text written straight on the glass */}
           <div className={`crt ${phase === "off" ? "" : "on"} ${phase}`}>

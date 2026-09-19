@@ -80,6 +80,20 @@ export const PAGE_META: Record<string, PageMeta> = {
     description:
       "A public ledger of what happened to people's money at Bangladeshi platforms, companies and ventures. Anonymous reports on the frauds, the projects that went quiet, and the investments that did exactly what they said. Free to read, no account needed.",
   },
+  /* ── The Bangla halves ───────────────────────────────────────────────────
+     Written in Bangla rather than translated at the last moment: a search
+     result is the one line most of this audience reads before deciding, and a
+     machine-flavoured one reads as a machine. */
+  "/bn/fdr-rates": {
+    title: "এফডিআর রেট — বাংলাদেশের সব ব্যাংকের হার, প্রতি মাসে হালনাগাদ",
+    description:
+      "বাংলাদেশের প্রতিটি তফসিলি ব্যাংক স্থায়ী আমানতে কত সুদ দেয়, বাংলাদেশ ব্যাংকের নিজস্ব মাসিক তালিকা থেকে: ৬১টি ব্যাংক, পাঁচটি মেয়াদ, ইসলামি ও প্রচলিত দুই ধরনের, প্রতিটির সঙ্গে ব্যাংকের নিজের রেট পেজের লিংক। কোনো স্পনসর্ড জায়গা নেই।",
+  },
+  "/bn/investkorsi": {
+    title: "ইনভেস্টকরসি — কার টাকা ফেরত এলো, কার এলো না",
+    description:
+      "বাংলাদেশি প্ল্যাটফর্ম, কোম্পানি আর প্রকল্পে মানুষের টাকার কী হয়েছে তার একটি উন্মুক্ত তালিকা। প্রতারণা, চুপ হয়ে যাওয়া প্রকল্প, আর যেগুলো ঠিক যা বলেছিল তাই করেছে — সবই বেনামে জমা দেওয়া অভিজ্ঞতা। পড়তে কোনো অ্যাকাউন্ট লাগে না।",
+  },
   "/for-organizations": {
     title: "Financial literacy programmes for organizations",
     description:

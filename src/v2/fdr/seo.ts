@@ -87,6 +87,29 @@ export function leadAnswer(): string {
   );
 }
 
+/** The same sentence in Bangla, generated from the same rows so the two can
+ *  never disagree. Rates stay in Latin digits: a reader checks them against
+ *  the bank's own chart, which prints them that way. */
+export function leadAnswerBn(): string {
+  const rows = retailRows();
+  const best = rows[0];
+  const band = marketBand(DEFAULT_TENURE, "top", rows);
+  if (!best || !band) return "";
+  const bestBand = bandAt(best, DEFAULT_TENURE)!;
+  const ranged =
+    bestBand.min !== bestBand.max
+      ? ` ${best.bank.name} ${formatBand(bestBand)} সীমা জমা দিয়েছে, তাই এর সর্বোচ্চ হার পেতে সাধারণত অনেক বড় অঙ্কের আমানত লাগে;`
+      : "";
+  return (
+    `${RATES_MONTH} মাসে বাংলাদেশে এক থেকে দুই বছর মেয়াদি এফডিআর-এ সবচেয়ে বেশি ঘোষিত হার ` +
+    `${bestBand.max.toFixed(2)}%, ${best.bank.name}-এ — ব্যক্তি পর্যায়ে যে ${rows.length}টি ব্যাংকে ` +
+    `স্থায়ী আমানত খোলা যায় তাদের মধ্যে।${ranged} বেশিরভাগ ব্যাংক দেয় ${band.typicalLow.toFixed(2)}% ` +
+    `থেকে ${band.typicalHigh.toFixed(2)}%। প্রতিটি সংখ্যা ব্যাংকের নিজের জমা দেওয়া হার, ` +
+    `${RATES_MONTH} মাসের জন্য; ব্যাংক যেকোনো সময় হার বদলাতে পারে, আর সুদের উপর উৎসে কর কাটা হয় ` +
+    `১০% (টিআইএন না থাকলে ১৫%)।`
+  );
+}
+
 /** The full table, as a table, because that is what the question is about. */
 function rateTable(rows: FdrRow[]): string {
   const head = [
@@ -244,8 +267,9 @@ export function fdrCrawlerDocument(pathname: string, title: string, description:
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${SITE}${pathname}">
-<link rel="alternate" hreflang="bn-BD" href="${SITE}${pathname}">
+<link rel="alternate" hreflang="bn-BD" href="${SITE}/bn${pathname}">
 <link rel="alternate" hreflang="en" href="${SITE}${pathname}">
+<link rel="alternate" hreflang="x-default" href="${SITE}${pathname}">
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:url" content="${SITE}${pathname}">

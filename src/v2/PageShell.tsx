@@ -23,6 +23,8 @@ interface PageShellProps {
   path: string;
   /** Where Back should go, when the page knows better than history does. */
   backTo?: string;
+  /** Extra class on the shell, e.g. `lang-bn` for Bangla typography. */
+  className?: string;
   children: ReactNode;
 }
 
@@ -35,7 +37,15 @@ interface PageShellProps {
    So the fixed pages no longer pass them: PAGE_META is keyed by path and is
    read by BOTH this component and ogMeta. One set of words, two consumers,
    nothing to keep in step by hand.                                          */
-const PageShell = ({ title, description, image, path, backTo, children }: PageShellProps) => {
+const PageShell = ({
+  title,
+  description,
+  image,
+  path,
+  backTo,
+  className,
+  children,
+}: PageShellProps) => {
   useEffect(() => {
     const fallback = PAGE_META[normalisePath(path)];
     applySeo({
@@ -76,7 +86,7 @@ const PageShell = ({ title, description, image, path, backTo, children }: PageSh
   };
 
   return (
-    <div className="v2 v2-page">
+    <div className={`v2 v2-page${className ? ` ${className}` : ""}`}>
       <NavV2 pinned />
       <main>
         <div className="wrap">

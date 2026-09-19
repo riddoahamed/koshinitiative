@@ -34,6 +34,9 @@ export const applySeo = ({ title, description, image, path = "/", robots = "inde
   const canonicalPath = path.startsWith("/") ? path : `/${path}`;
   const canonical = `${SITE_URL}${canonicalPath}`;
 
+  /* A Bangla page served with lang="en" tells a screen reader to read Bangla
+     with English phonetics, and tells Google the page is English. */
+  document.documentElement.lang = canonicalPath.startsWith("/bn/") ? "bn" : "en";
   document.title = nextTitle;
   setMeta('meta[name="description"]', "content", nextDescription);
   setMeta('link[rel="canonical"]', "href", canonical);

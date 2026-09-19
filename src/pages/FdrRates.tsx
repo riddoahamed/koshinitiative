@@ -1,4 +1,6 @@
 import { useMemo, useState } from "react";
+import { useLang, pick, LangToggle } from "@/v2/i18n";
+import { fdrStrings } from "@/v2/fdr/strings";
 import { Link } from "react-router-dom";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
 
@@ -28,7 +30,7 @@ import {
 } from "@/v2/fdr/rates";
 import { FDR_FAQS, FINE_PRINT } from "@/v2/fdr/facts";
 import { cardMonths, cardRate, rateCardFor, slabFor, slabLabel, type Audience } from "@/v2/fdr/rateCards";
-import { jsonLd, leadAnswer, slugFor } from "@/v2/fdr/seo";
+import { jsonLd, leadAnswer, leadAnswerBn, slugFor } from "@/v2/fdr/seo";
 import "@/v2/fdr/fdr.css";
 
 /* ── /fdr-rates ───────────────────────────────────────────────────────────────
@@ -60,11 +62,11 @@ const FILTERS: { key: Filter; label: string }[] = [
 
 const taka = (n: number) => `৳${n.toLocaleString("en-IN")}`;
 
-function Stamp() {
+function Stamp({ label }: { label: string }) {
   const state = freshness();
   return (
     <span className={`fdr-stamp fdr-stamp--${state}`}>
-      <i aria-hidden /> Bangladesh Bank · {RATES_MONTH}
+      <i aria-hidden /> {label} · {RATES_MONTH}
     </span>
   );
 }
@@ -334,6 +336,8 @@ function Question({ q, a }: { q: string; a: string[] }) {
 }
 
 export default function FdrRates() {
+  const lang = useLang();
+  const T = fdrStrings(lang);
   const [tenure, setTenure] = useState<TenureIndex>(DEFAULT_TENURE);
   const [filter, setFilter] = useState<Filter>("all");
   const [by, setBy] = useState<SortKey>("top");
@@ -380,32 +384,30 @@ export default function FdrRates() {
   );
 
   return (
-    <PageShell path="/fdr-rates">
+    <PageShell path={lang === "bn" ? "/bn/fdr-rates" : "/fdr-rates"}>
       {/* ── Structured data for the engines that DO run JavaScript ─────────
           Machines that cannot run it get a server-rendered document from the
           edge middleware; Googlebot renders the page, so it needs the schema
           here. Same generator, so the two can never disagree. */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdPayload }} />
 
-      <div className="fdr">
+      <div className={`fdr${lang === "bn" ? " lang-bn" : ""}`}>
         <div className="fdr-wrap">
           <header className="fdr-head">
-            <p className="fdr-eyebrow">
-              Bangladesh · fixed deposits <Stamp />
-            </p>
-            <h1 className="fdr-h1">FDR rates at every bank in Bangladesh</h1>
-            <p className="fdr-lede">
-              Every scheduled bank files the deposit rates it is announcing with Bangladesh Bank, and
-              the central bank publishes all of them together each month. This is that chart —
-              {" "}{rows.length ? spread?.rows.length : 0} banks, five tenures, each one linked to the
-              bank's own rate page so you can check it.
-            </p>
+            <div className="fdr-topbar">
+              <p className="fdr-eyebrow">
+                {T.eyebrow} <Stamp label={T.stamp} />
+              </p>
+              <LangToggle />
+            </div>
+            <h1 className="fdr-h1">{T.h1}</h1>
+            <p className="fdr-lede">{T.lede(rows.length ? spread?.rows.length ?? 0 : 0)}</p>
           </header>
 
           {market && (
             <section className="fdr-band">
               <div>
-                <p className="fdr-band__label">{TENURE_SHORT[tenure]} deposit · most banks pay</p>
+                <p className="fdr-band__label">{T.bandLabel(TENURE_SHORT[tenure])}</p>
                 <p className="fdr-band__fig">
                   {market.typicalLow.toFixed(2)}–{market.typicalHigh.toFixed(2)}%
                 </p>
@@ -415,11 +417,12 @@ export default function FdrRates() {
                   spread quoted off it is dramatic and useless. The middle half
                   is the number a reader can measure their own offer against. */}
               <p className="fdr-band__note">
-                Across {market.count} banks the middle half sit in that band. The best filed{" "}
-                <b>{market.best.toFixed(2)}%</b> and the lowest <b>{market.lowest.toFixed(2)}%</b>.
-                On ৳10,00,000, moving from a middle-of-the-market bank to the best-paying one is
-                worth <b>{taka(Math.round((10_00_000 * (market.best - market.median)) / 100))} a year</b>{" "}
-                before tax.
+                {T.bandNote({
+                  count: market.count,
+                  best: `${market.best.toFixed(2)}%`,
+                  lowest: `${market.lowest.toFixed(2)}%`,
+                  gain: taka(Math.round((10_00_000 * (market.best - market.median)) / 100)),
+                })}
               </p>
             </section>
           )}
@@ -431,11 +434,11 @@ export default function FdrRates() {
               generated from the data so it cannot drift from the table under
               it. It is also, not coincidentally, the thing a hurried human
               wants before they start scrolling. */}
-          <p className="fdr-answer">{leadAnswer()}</p>
+          <p className="fdr-answer">{lang === "bn" ? leadAnswerBn() : leadAnswer()}</p>
 
           <div className="fdr-controls">
             <div className="fdr-group">
-              <span className="fdr-group__label">Tenure</span>
+              <span className="fdr-group__label">{T.controls.tenure}</span>
               {TENURE_SHORT.map((label, i) => (
                 <button
                   key={label}
@@ -448,7 +451,7 @@ export default function FdrRates() {
               ))}
             </div>
             <div className="fdr-group">
-              <span className="fdr-group__label">Banks</span>
+              <span className="fdr-group__label">{T.controls.banks}</span>
               {FILTERS.map((f) => (
                 <button
                   key={f.key}
@@ -456,7 +459,7 @@ export default function FdrRates() {
                   aria-pressed={filter === f.key}
                   onClick={() => setFilter(f.key)}
                 >
-                  {f.label}
+                  {T.filters[f.key] ?? f.label}
                 </button>
               ))}
             </div>
@@ -465,28 +468,28 @@ export default function FdrRates() {
                 win on a number almost nobody in that band will be paid. Both
                 readings are legitimate, so the reader picks which one. */}
             <div className="fdr-group">
-              <span className="fdr-group__label">Open to</span>
+              <span className="fdr-group__label">{T.controls.openTo}</span>
               <button className="fdr-chip" aria-pressed={!showAll} onClick={() => setShowAll(false)}>
-                Individuals
+                {T.openTo.individuals}
               </button>
               <button className="fdr-chip" aria-pressed={showAll} onClick={() => setShowAll(true)}>
-                Everyone incl. merged
+                {T.openTo.everyone}
               </button>
             </div>
             <div className="fdr-group">
-              <span className="fdr-group__label">Rank by</span>
+              <span className="fdr-group__label">{T.controls.rankBy}</span>
               <button className="fdr-chip" aria-pressed={by === "top"} onClick={() => setBy("top")}>
-                Top of range
+                {T.rankBy.top}
               </button>
               <button className="fdr-chip" aria-pressed={by === "floor"} onClick={() => setBy("floor")}>
-                Guaranteed floor
+                {T.rankBy.floor}
               </button>
               <button className="fdr-chip" aria-pressed={by === "oldest"} onClick={() => setBy("oldest")}>
-                Longest running
+                {T.rankBy.oldest}
               </button>
             </div>
             <div className="fdr-group">
-              <span className="fdr-group__label">On</span>
+              <span className="fdr-group__label">{T.controls.on}</span>
               <span className="fdr-amount">
                 ৳
                 <input
@@ -504,7 +507,7 @@ export default function FdrRates() {
               className="fdr-search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Find a bank"
+              placeholder={T.search}
               aria-label="Find a bank"
             />
           </div>
@@ -517,14 +520,13 @@ export default function FdrRates() {
               warning nobody reads. */}
           {amount > 200_000 && (
             <div className="fdr-protect">
-              <p className="fdr-protect__h">Only ৳2,00,000 of this is protected</p>
+              <p className="fdr-protect__h">{T.protectH}</p>
               <p className="fdr-protect__p">
-                Deposit protection covers ৳2,00,000 per depositor per bank. On ৳
-                {amount.toLocaleString("en-IN")} that leaves{" "}
-                <b>৳{(amount - 200_000).toLocaleString("en-IN")}</b> riding on the bank&rsquo;s own
-                health — so the rate is not the only thing to compare. Splitting across{" "}
-                {Math.ceil(amount / 200_000)} banks would cover all of it, and costs nothing but
-                paperwork.
+                {T.protectP({
+                  amount: amount.toLocaleString("en-IN"),
+                  unprotected: (amount - 200_000).toLocaleString("en-IN"),
+                  banks: Math.ceil(amount / 200_000),
+                })}
               </p>
             </div>
           )}
@@ -532,7 +534,7 @@ export default function FdrRates() {
           <table className="fdr-table">
             <thead>
               <tr>
-                <th>Bank</th>
+                <th>{T.colBank}</th>
                 <th>{TENURE_SHORT[tenure]}</th>
                 {FD_TENURES.map((label, i) => i).filter((i) => i !== tenure).map((i) => (
                   <th key={FD_TENURES[i]} className="fdr-hide-sm">
@@ -559,7 +561,7 @@ export default function FdrRates() {
           </table>
 
           {rows.length === 0 && (
-            <p className="fdr-note">No bank here matches that. Try “All”, or check the spelling.</p>
+            <p className="fdr-note">{T.noMatch}</p>
           )}
 
           {!showAll && (
@@ -574,24 +576,18 @@ export default function FdrRates() {
           )}
 
           <p className="fdr-note">
-            {by === "top"
-              ? "Sorted by the top of each bank's published range."
-              : "Sorted by the bottom of each bank's published range — what it filed at worst."}{" "}
-            A range means the bank filed different rates for different products or deposit sizes; the
-            counter decides which one you are offered. A dash means the bank filed nothing for that
-            tenure.
+            {by === "top" ? T.sortedTop : T.sortedFloor} {T.rangeNote}
           </p>
 
           {/* The one non-sponsorship statement on the page. Once, next to the
               claim it qualifies. */}
           <p className="fdr-sponsor">
-            Nobody paid to be on this page. There are no sponsored placements, no affiliate links and
-            no paid ordering — every bank that files with Bangladesh Bank is listed, including the
-            ones paying the least, and the order is arithmetic.
+            {T.sponsor}
           </p>
 
+          {lang === "en" && (
           <section className="fdr-sec fdr-bn">
-            <h2 className="fdr-h2">এফডিআর রেট — সংক্ষেপে</h2>
+            <h2 className="fdr-h2">{T.summaryH}</h2>
             <p className="fdr-detail__p">
               বাংলাদেশের প্রতিটি তফসিলি ব্যাংক প্রতি মাসে বাংলাদেশ ব্যাংকে তাদের ঘোষিত আমানতের সুদের হার
               জমা দেয়। এই পাতায় সেই তালিকাই আছে — {RATES_MONTH} মাসের হার, প্রতিটি ব্যাংকের নিজস্ব রেট
@@ -604,14 +600,16 @@ export default function FdrRates() {
               <b>২,০০,০০০ টাকা</b> সুরক্ষিত — তাই বড় অঙ্ক একাধিক ব্যাংকে ভাগ করে রাখাই নিয়ম।
             </p>
           </section>
+          )}
 
           <section className="fdr-sec">
-            <h2 className="fdr-h2">Before you lock the money up</h2>
+            <h2 className="fdr-h2">{T.faqH}</h2>
+            {T.faqNote && <p className="fdr-note fdr-note--lang">{T.faqNote}</p>}
             {FDR_FAQS.map((f) => (
               <Question key={f.q} q={f.q} a={f.a} />
             ))}
             <Link className="fdr-cta fdr-cta--ghost" to="/fdr-rates/faq">
-              Read the full FAQ
+              {T.faqCta}
             </Link>
           </section>
 

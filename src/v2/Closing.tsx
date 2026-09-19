@@ -150,7 +150,7 @@ export const Founder = () => (
         </div>
         <figure className="founder__poster">
           <img
-            src="/img/poster-v1.jpg"
+            src="/img/poster-v1.webp"
             alt="The original Kosh V1 poster. Learn small. Grow big."
             loading="lazy"
           />
@@ -233,6 +233,8 @@ export const FootV2 = () => (
           <li><a href="/fdr-rates/faq">FDR questions</a></li>
           <li><a href="/investkorsi">InvestKorsi ledger</a></li>
           <li><a href="/vote">Kosh Live</a></li>
+          <li><a href="/bn/fdr-rates" lang="bn">এফডিআর রেট (বাংলা)</a></li>
+          <li><a href="/bn/investkorsi" lang="bn">ইনভেস্টকরসি (বাংলা)</a></li>
         </ul>
       </div>
       <div>
@@ -318,6 +320,11 @@ const NAV_GROUPS: NavGroup[] = [
       { label: "FDR questions", href: "/fdr-rates/faq", note: "Tax, breaking early, insurance" },
       { label: "InvestKorsi", href: "/investkorsi", note: "What happened to people's money" },
       { label: "Kosh Live", href: "/vote", note: "Run a live room" },
+      /* Bangla gets a nav entry rather than only a toggle on the page. A
+         reader who thinks in Bangla should not have to land on an English
+         page first and notice a switch. */
+      { label: "বাংলায় এফডিআর রেট", href: "/bn/fdr-rates", note: "FDR rates in Bangla" },
+      { label: "বাংলায় ইনভেস্টকরসি", href: "/bn/investkorsi", note: "InvestKorsi in Bangla" },
     ],
   },
   {

@@ -831,7 +831,7 @@
    IMPACT — navy engraved collage plate (who it's for + inclusion)
    ============================================================ */
 .who {
-  background: #101b4d url("/img/collage-navy.jpg") no-repeat right center / cover;
+  background: #101b4d image-set(url("/img/collage-navy.webp") type("image/webp"), url("/img/collage-navy.jpg") type("image/jpeg")) no-repeat right center / cover;
 }
 .who::before {
   content: ""; position: absolute; inset: 0;
@@ -936,7 +936,7 @@
    ORGS — paper ink plate (light)
    ============================================================ */
 .orgs {
-  background: #f2efe6 url("/img/paper-ink.jpg") no-repeat left top / cover;
+  background: #f2efe6 image-set(url("/img/paper-ink.webp") type("image/webp"), url("/img/paper-ink.jpg") type("image/jpeg")) no-repeat left top / cover;
   color: var(--ink-navy);
 }
 .orgs::before {
@@ -1056,7 +1056,7 @@
    FOUNDER — paper lime plate
    ============================================================ */
 .founder {
-  background: #efe9dc url("/img/paper-lime.jpg") no-repeat center / cover;
+  background: #efe9dc image-set(url("/img/paper-lime.webp") type("image/webp"), url("/img/paper-lime.jpg") type("image/jpeg")) no-repeat center / cover;
   color: var(--ink-navy);
 }
 .founder::before {
@@ -2739,3 +2739,26 @@
   .tools__grid { grid-template-columns: 1fr; }
   .tool > p { max-width: none; }
 }
+
+/* Lazy-route placeholder: the page background, held for a beat. */
+.route-wait { min-height: 100vh; background: hsl(250 35% 7%); }
+
+/* ── the language switch ─────────────────────────────────────────────────── */
+.langsw {
+  display: inline-flex; gap: 2px; padding: 3px; border-radius: 999px;
+  border: 1px solid var(--stroke); background: rgba(255, 255, 255, 0.04);
+}
+.langsw a {
+  padding: 6px 15px; border-radius: 999px;
+  font-family: var(--font-h); font-weight: 700; font-size: 13px;
+  color: var(--muted); transition: color 0.2s, background 0.2s;
+}
+.langsw a:hover { color: var(--fg); }
+.langsw a.on { color: #0c1206; background: linear-gradient(135deg, hsl(156 85% 58%), hsl(85 92% 60%)); }
+/* Bangla sets a touch larger: the script's x-height runs small next to Inter */
+.lang-bn { font-size: 1.04em; }
+.lang-bn .fdr-lede, .lang-bn .fdr-detail__p { line-height: 1.85; }
+
+.fdr-topbar { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+.fdr-note--lang { border-left: 2px solid hsl(156 85% 62% / 0.45); padding-left: 14px; }
