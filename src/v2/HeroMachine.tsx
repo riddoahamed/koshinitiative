@@ -11,6 +11,9 @@ const PLATE_W = 1672;
 const PLATE_H = 941;
 const MONITOR_CX = 0.665;
 const MONITOR_CY = 0.46;
+/* 50 cells so 2% lands on exactly one of them and the maths is honest */
+const BOOT_CELLS = 50;
+
 /* black-glass quad, as fractions of the stage (matches .crt in CSS) */
 const GLASS_W = 0.246;
 const GLASS_H = 0.376;
@@ -195,10 +198,53 @@ const HeroMachine = () => {
           <div className={`crt ${phase === "off" ? "" : "on"} ${phase}`}>
             <div className="crt__beam" />
 
+            {/* ── THE BOOT SCREEN ─────────────────────────────────────────
+                A loading bar that never gets anywhere. It reads as the retro
+                machine booting for about a second, and then you notice it is
+                stopped at 2% and the number being shouted is the 98% that has
+                not loaded — which is the share of Bangladeshi adults with no
+                formal investment account.
+
+                The emphasis is inverted on purpose: a progress bar normally
+                celebrates the filled part, and the whole point here is the
+                empty one. So the 2% is one dim cell and a small label, and
+                the 98% is the large lime number with the live cells.
+
+                The whole screen is the button, so a tap anywhere powers on. */}
             {phase === "off" && (
               <button className="crt__hint" onClick={() => powerOn()} aria-label="Power on Kosh">
-                <span className="crt__hint-in">
-                  power on<em>tap the screen</em>
+                <span className="boot">
+                  <span className="boot__top">
+                    KOSH OS 1.0<i />
+                  </span>
+
+                  <span
+                    className="boot__bar"
+                    role="img"
+                    aria-label="Loading bar stopped at 2 percent, 98 percent remaining"
+                  >
+                    {Array.from({ length: BOOT_CELLS }, (_, i) => (
+                      <i
+                        key={i}
+                        className={i === 0 ? "on" : ""}
+                        style={i === 0 ? undefined : { animationDelay: `${(BOOT_CELLS - i) * 42}ms` }}
+                      />
+                    ))}
+                  </span>
+
+                  <span className="boot__legend">
+                    <span className="boot__small">2% loaded</span>
+                    <b className="boot__big">98% remaining</b>
+                  </span>
+
+                  <span className="boot__stat">
+                    ~98% of Bangladeshis don&rsquo;t invest formally
+                  </span>
+                  <span className="boot__line">
+                    Since you were never taught about money, <em>let us.</em>
+                  </span>
+
+                  <span className="boot__press">press start<i /></span>
                 </span>
               </button>
             )}

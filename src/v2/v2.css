@@ -416,6 +416,7 @@
   left: 54.28%; top: 26.9%; width: 24.6%; height: 37.6%;
   z-index: 3;
   overflow: hidden;
+  container-type: inline-size;
 }
 .crt__beam {
   position: absolute; left: 6%; right: 6%; top: 50%; height: 2px;
@@ -425,27 +426,112 @@
 }
 .crt.boot .crt__beam { animation: beamOn 0.5s ease-out forwards; }
 
-/* off-state: the whole black screen is tappable to power on.
-   desktop shows the badge annotation instead of on-screen text. */
+/* ── the boot screen ────────────────────────────────────────────────────────
+   Everything here is sized in cqw, container units on .crt, so the whole
+   screen scales with the glass instead of with the viewport. The glass is
+   401px wide on a 1440 laptop and 234px on a 390 phone; a vw-based clamp
+   cannot serve both, because the glass does not grow at the same rate the
+   viewport does. 1cqw is 1% of the glass, so one set of numbers fits every
+   screen and the layout can never outgrow the bezel.                       */
 .crt__hint {
   position: absolute; inset: 0; z-index: 5;
   display: flex; align-items: center; justify-content: center;
   background: transparent; cursor: pointer; pointer-events: auto;
+  padding: 7% 8%;
+  font-family: var(--font-px);
 }
-.crt__hint-in {
-  display: flex; flex-direction: column; align-items: center; gap: 6px;
-  font-family: var(--font-px); color: var(--lime);
-  opacity: 0; animation: calloutIn 1s ease 1s forwards;
+.boot {
+  display: flex; flex-direction: column; align-items: center;
+  width: 100%; gap: 3.4cqw; text-align: center;
+  opacity: 0; animation: calloutIn 0.9s ease 0.5s forwards;
 }
-.crt__hint-in {
-  font-size: clamp(15px, 4vw, 21px); letter-spacing: 0.08em;
-  text-shadow: 0 0 12px rgba(190, 247, 89, 0.5);
+.boot__top {
+  display: flex; align-items: center; gap: 1.6cqw;
+  font-size: 3.1cqw; letter-spacing: 0.22em; text-transform: uppercase;
+  color: rgba(190, 247, 89, 0.45);
 }
-.crt__hint-in em {
-  font-style: normal; font-size: 11px; letter-spacing: 0.2em;
-  text-transform: uppercase; color: rgba(242, 242, 247, 0.6); text-shadow: none;
+/* the cursor that makes it read as a machine still working on it */
+.boot__top i {
+  width: 1.7cqw; height: 3.1cqw; background: var(--lime);
+  animation: bootCaret 1.05s steps(1) infinite;
 }
-@media (min-width: 641px) { .crt__hint-in { display: none; } }
+@keyframes bootCaret { 0%, 55% { opacity: 1; } 56%, 100% { opacity: 0; } }
+
+/* The bar. 50 cells; the first one is the 2%. */
+.boot__bar {
+  display: flex; width: 100%; gap: 0.5cqw; height: 7.2cqw;
+  padding: 0.9cqw; border: 0.28cqw solid rgba(190, 247, 89, 0.34);
+  box-sizing: border-box;
+}
+.boot__bar i { flex: 1; }
+/* the 2%: done, grey, unremarkable — it is not the story */
+.boot__bar i.on {
+  background: rgba(242, 242, 247, 0.55);
+  box-shadow: 0 0 1.4cqw rgba(242, 242, 247, 0.4);
+}
+/* the 98%: lime, and a wave runs across it so the empty part is the part
+   that moves. A progress bar normally draws the eye to what is filled;
+   this one has to draw it to what is not. */
+.boot__bar i:not(.on) {
+  background: rgba(190, 247, 89, 0.14);
+  animation: bootWave 2.6s ease-in-out infinite;
+}
+@keyframes bootWave {
+  0%, 52%, 100% { background: rgba(190, 247, 89, 0.13); }
+  12% { background: rgba(190, 247, 89, 0.85); }
+}
+
+.boot__legend {
+  display: flex; align-items: baseline; justify-content: space-between;
+  width: 100%; margin-top: -1.2cqw;
+}
+.boot__small {
+  font-size: 2.9cqw; letter-spacing: 0.14em; text-transform: uppercase;
+  white-space: nowrap; color: rgba(242, 242, 247, 0.55);
+}
+.boot__big {
+  white-space: nowrap; font-weight: 400; font-size: 7.6cqw; line-height: 1;
+  letter-spacing: 0.02em; color: var(--lime);
+  text-shadow: 0 0 3.5cqw rgba(190, 247, 89, 0.5);
+}
+
+.boot__stat {
+  font-family: var(--font-d); font-weight: 700;
+  font-size: 5.4cqw; line-height: 1.24; letter-spacing: -0.01em;
+  color: rgba(246, 246, 250, 0.95);
+}
+.boot__line {
+  font-family: var(--font-m); font-size: 3.5cqw; line-height: 1.45;
+  color: rgba(242, 242, 247, 0.55); margin-top: -1.6cqw;
+}
+.boot__line em { font-style: normal; color: var(--lime); }
+
+.boot__press {
+  display: flex; align-items: center; gap: 1.4cqw;
+  font-size: 2.9cqw; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(190, 247, 89, 0.7);
+}
+.boot__press i {
+  width: 1.5cqw; height: 1.5cqw; border-radius: 50%; background: var(--lime);
+  animation: bootCaret 1.05s steps(1) infinite;
+}
+
+/* On a phone the glass is 234px across, and the two copy lines land at ~8px
+   and ~13px there — technically drawn, not actually readable. They already
+   exist underneath the machine at a proper size, so the small screen keeps
+   the bar (which reads fine at any size) and lets the strapline carry the
+   words. See .hero__strap below for the other half of this handoff. */
+@media (max-width: 640px) {
+  .boot__stat, .boot__line { display: none; }
+  .boot { gap: 4.6cqw; }
+  .boot__top, .boot__small, .boot__press { font-size: 4.3cqw; }
+  /* 197px will not hold "2% loaded" and "98% remaining" on one line, and
+     letting them wrap put a two-line label beside a two-line number. */
+  .boot__legend {
+    flex-direction: column; align-items: center; gap: 1.6cqw; margin-top: 0;
+  }
+  .boot__big { font-size: 11cqw; }
+}
 @keyframes beamOn {
   0% { opacity: 1; transform: scaleX(0.04); }
   55% { opacity: 1; transform: scaleX(1); }
@@ -656,6 +742,22 @@
   white-space: nowrap;
   color: rgba(242, 242, 247, 0.55);
   text-shadow: 0 2px 16px rgba(2, 5, 11, 0.95);
+}
+/* The message lives in exactly one place at a time. Before power-on the boot
+   screen is holding it, so these two are out of the way; the moment the
+   screen turns into the menu they take it over. The transition is the point:
+   the words move down off the glass rather than being said twice at once.
+   Below 640px the boot screen drops them instead, so they stay here. */
+.hero:not(.booted) .hero__strap-stat,
+.hero:not(.booted) .hero__strap-vp {
+  opacity: 0; transform: translateY(6px);
+}
+.hero__strap-stat, .hero__strap-vp {
+  transition: opacity 0.55s ease 0.15s, transform 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.15s;
+}
+@media (max-width: 640px) {
+  .hero:not(.booted) .hero__strap-stat,
+  .hero:not(.booted) .hero__strap-vp { opacity: 1; transform: none; }
 }
 .hero.dive .hero__strap { opacity: 0 !important; }
 
@@ -1214,6 +1316,13 @@
 @media (prefers-reduced-motion: reduce) {
   .v2 *, .v2 *::before, .v2 *::after { animation: none !important; transition-duration: 0.01ms !important; }
   .v2 [data-reveal] { opacity: 1; transform: none; }
+  /* Everything in the hero arrives on a fade-in ANIMATION rather than a
+     transition, so blanket `animation: none` pinned all of it at opacity 0
+     and served reduced-motion visitors an empty hero. */
+  .hero__strap, .hero__callout, .boot { opacity: 1 !important; }
+  /* the empty cells normally sit dark and are lit by the passing wave; with
+     the wave gone they need a resting level you can actually see */
+  .boot__bar i:not(.on) { background: rgba(190, 247, 89, 0.32) !important; }
 }
 
 /* deterministic still render (?still=1) for QA and captures */
@@ -1222,7 +1331,8 @@
 }
 .kosh-still .v2 [data-reveal] { opacity: 1 !important; transform: none !important; }
 /* these fade in via animation, so killing animations would leave them at 0 */
-.kosh-still .hero__strap, .kosh-still .hero__callout { opacity: 1 !important; }
+.kosh-still .hero__strap, .kosh-still .hero__callout, .kosh-still .boot { opacity: 1 !important; }
+.kosh-still .boot__bar i:not(.on) { background: rgba(190, 247, 89, 0.32) !important; }
 
 /* ── Games — playable teasers, poster-led ─────────────────────────────────── */
 .games__lede {
