@@ -199,17 +199,9 @@ const HeroMachine = () => {
             <div className="crt__beam" />
 
             {/* ── THE BOOT SCREEN ─────────────────────────────────────────
-                A loading bar that never gets anywhere. It reads as the retro
-                machine booting for about a second, and then you notice it is
-                stopped at 2% and the number being shouted is the 98% that has
-                not loaded — which is the share of Bangladeshi adults with no
-                formal investment account.
-
-                The emphasis is inverted on purpose: a progress bar normally
-                celebrates the filled part, and the whole point here is the
-                empty one. So the 2% is one dim cell and a small label, and
-                the 98% is the large lime number with the live cells.
-
+                A concise machine readout, not a centred marketing card. The
+                display stops at 2%; the copy names the gap without repeating
+                the number, so it remains legible inside the actual CRT glass.
                 The whole screen is the button, so a tap anywhere powers on. */}
             {phase === "off" && (
               <button className="crt__hint" onClick={() => powerOn()} aria-label="Power on Kosh">
@@ -238,13 +230,12 @@ const HeroMachine = () => {
                   </span>
 
                   <span className="boot__stat">
-                    ~98% of Bangladeshis don&rsquo;t invest formally
+                    of Bangladeshis don&rsquo;t invest formally
                   </span>
                   <span className="boot__line">
-                    Since you were never taught about money, <em>let us.</em>
+                    <span>Since you were never taught about</span>
+                    <span>money, let us</span>
                   </span>
-
-                  <span className="boot__press">press start<i /></span>
                 </span>
               </button>
             )}

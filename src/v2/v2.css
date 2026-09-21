@@ -413,10 +413,16 @@
 /* --- the black screen: text written straight on the glass, no overlays --- */
 .crt {
   position: absolute;
-  left: 54.28%; top: 26.9%; width: 24.6%; height: 37.6%;
+  /* The painted glass is a subtly receding quadrilateral, not the rectangle
+     that bounds it. Clip to its four edges and give the layer the same gentle
+     rightward recession and counter-clockwise tilt as the monitor face. */
+  left: 54.08%; top: 26.75%; width: 25.05%; height: 36.85%;
   z-index: 3;
   overflow: hidden;
   container-type: inline-size;
+  clip-path: polygon(1.4% 2.8%, 98.2% 0, 100% 96.8%, 3.2% 94.1%);
+  transform: perspective(1500px) rotateY(-2.2deg) rotateZ(-1.55deg);
+  transform-origin: center;
 }
 .crt__beam {
   position: absolute; left: 6%; right: 6%; top: 50%; height: 2px;
@@ -441,13 +447,13 @@
   font-family: var(--font-px);
 }
 .boot {
-  display: flex; flex-direction: column; align-items: center;
-  width: 100%; gap: 3.4cqw; text-align: center;
+  display: flex; flex-direction: column; align-items: flex-start;
+  width: 100%; gap: 3.05cqw; text-align: left;
   opacity: 0; animation: calloutIn 0.9s ease 0.5s forwards;
 }
 .boot__top {
   display: flex; align-items: center; gap: 1.6cqw;
-  font-size: 3.1cqw; letter-spacing: 0.22em; text-transform: uppercase;
+  font-size: 2.9cqw; letter-spacing: 0.18em; text-transform: uppercase;
   color: rgba(190, 247, 89, 0.45);
 }
 /* the cursor that makes it read as a machine still working on it */
@@ -496,41 +502,30 @@
 }
 
 .boot__stat {
-  font-family: var(--font-d); font-weight: 700;
-  font-size: 5.4cqw; line-height: 1.24; letter-spacing: -0.01em;
+  font-family: var(--font-m); font-weight: 500;
+  font-size: 3.25cqw; line-height: 1.35; letter-spacing: 0.02em;
   color: rgba(246, 246, 250, 0.95);
 }
 .boot__line {
-  font-family: var(--font-m); font-size: 3.5cqw; line-height: 1.45;
-  color: rgba(242, 242, 247, 0.55); margin-top: -1.6cqw;
+  font-family: var(--font-m); font-size: 3.05cqw; line-height: 1.45;
+  color: rgba(242, 242, 247, 0.64); margin-top: -0.8cqw;
 }
-.boot__line em { font-style: normal; color: var(--lime); }
+.boot__line > span { display: block; }
 
-.boot__press {
-  display: flex; align-items: center; gap: 1.4cqw;
-  font-size: 2.9cqw; letter-spacing: 0.2em; text-transform: uppercase;
-  color: rgba(190, 247, 89, 0.7);
-}
-.boot__press i {
-  width: 1.5cqw; height: 1.5cqw; border-radius: 50%; background: var(--lime);
-  animation: bootCaret 1.05s steps(1) infinite;
-}
-
-/* On a phone the glass is 234px across, and the two copy lines land at ~8px
-   and ~13px there — technically drawn, not actually readable. They already
-   exist underneath the machine at a proper size, so the small screen keeps
-   the bar (which reads fine at any size) and lets the strapline carry the
-   words. See .hero__strap below for the other half of this handoff. */
+/* The copy stays on the physical screen at phone sizes as well. It is compact
+   and left aligned, so it reads as a real boot message rather than a second
+   hero headline below the monitor. */
 @media (max-width: 640px) {
-  .boot__stat, .boot__line { display: none; }
-  .boot { gap: 4.6cqw; }
-  .boot__top, .boot__small, .boot__press { font-size: 4.3cqw; }
+  .boot { gap: 3.5cqw; }
+  .boot__top, .boot__small { font-size: 3.8cqw; }
   /* 197px will not hold "2% loaded" and "98% remaining" on one line, and
      letting them wrap put a two-line label beside a two-line number. */
   .boot__legend {
-    flex-direction: column; align-items: center; gap: 1.6cqw; margin-top: 0;
+    flex-direction: column; align-items: flex-start; gap: 1.2cqw; margin-top: 0;
   }
   .boot__big { font-size: 11cqw; }
+  .boot__stat { font-size: 3.6cqw; }
+  .boot__line { font-size: 3.45cqw; }
 }
 @keyframes beamOn {
   0% { opacity: 1; transform: scaleX(0.04); }
