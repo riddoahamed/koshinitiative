@@ -202,8 +202,8 @@ const HeroMachine = () => {
 
             {/* ── THE BOOT SCREEN ─────────────────────────────────────────
                 A concise machine readout, not a centred marketing card. The
-                display stops at 2%; the copy names the gap without repeating
-                the number, so it remains legible inside the actual CRT glass.
+                display stops at 2%; the statistic below is one complete,
+                readable sentence inside the actual CRT glass.
                 The whole screen is the button, so a tap anywhere powers on. */}
             {phase === "off" && (
               <button className="crt__hint" onClick={() => powerOn()} aria-label="Power on Kosh">
@@ -215,7 +215,7 @@ const HeroMachine = () => {
                   <span
                     className="boot__bar"
                     role="img"
-                    aria-label="Loading bar stopped at 2 percent, 98 percent remaining"
+                    aria-label="Loading bar stopped at 2 percent"
                   >
                     {Array.from({ length: BOOT_CELLS }, (_, i) => (
                       <i
@@ -228,11 +228,10 @@ const HeroMachine = () => {
 
                   <span className="boot__legend">
                     <span className="boot__small">2% loaded</span>
-                    <b className="boot__big">98% remaining</b>
                   </span>
 
                   <span className="boot__stat">
-                    of Bangladeshis don&rsquo;t invest formally
+                    <b>98% of</b> Bangladeshis don&rsquo;t invest formally
                   </span>
                   <span className="boot__line">
                     <span>Since you were never taught about</span>

@@ -522,24 +522,19 @@
 }
 
 .boot__legend {
-  display: flex; align-items: baseline; justify-content: space-between;
+  display: flex; align-items: baseline; justify-content: flex-start;
   width: 100%; margin-top: -1.2cqw;
 }
 .boot__small {
   font-size: 2.9cqw; letter-spacing: 0.14em; text-transform: uppercase;
   white-space: nowrap; color: rgba(242, 242, 247, 0.55);
 }
-.boot__big {
-  white-space: nowrap; font-weight: 400; font-size: 7.6cqw; line-height: 1;
-  letter-spacing: 0.02em; color: var(--lime);
-  text-shadow: 0 0 3.5cqw rgba(190, 247, 89, 0.5);
-}
-
 .boot__stat {
   font-family: var(--font-m); font-weight: 500;
   font-size: 3.25cqw; line-height: 1.35; letter-spacing: 0.02em;
   color: rgba(246, 246, 250, 0.95);
 }
+.boot__stat b { color: var(--lime); font-weight: 600; }
 .boot__line {
   font-family: var(--font-m); font-size: 3.05cqw; line-height: 1.45;
   color: rgba(242, 242, 247, 0.64); margin-top: -0.8cqw;
@@ -552,12 +547,7 @@
 @media (max-width: 640px) {
   .boot { gap: 3.5cqw; }
   .boot__top, .boot__small { font-size: 3.8cqw; }
-  /* 197px will not hold "2% loaded" and "98% remaining" on one line, and
-     letting them wrap put a two-line label beside a two-line number. */
-  .boot__legend {
-    flex-direction: column; align-items: flex-start; gap: 1.2cqw; margin-top: 0;
-  }
-  .boot__big { font-size: 11cqw; }
+  .boot__legend { margin-top: 0; }
   .boot__stat { font-size: 3.6cqw; }
   .boot__line { font-size: 3.45cqw; }
 }
