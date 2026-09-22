@@ -14,9 +14,11 @@ const MONITOR_CY = 0.46;
 /* 50 cells so 2% lands on exactly one of them and the maths is honest */
 const BOOT_CELLS = 50;
 
-/* black-glass quad, as fractions of the stage (matches .crt in CSS) */
-const GLASS_W = 0.246;
-const GLASS_H = 0.376;
+/* black-glass bounds, as fractions of the stage (matches .crt in CSS) */
+const GLASS_X = 0.5472;
+const GLASS_Y = 0.2672;
+const GLASS_W = 0.2428;
+const GLASS_H = 0.3568;
 
 /* off → (click) boot flash → ui (menu written on the black screen)
    → dive (scroll zooms into the black screen; it takes over the viewport) */
@@ -92,7 +94,7 @@ const HeroMachine = () => {
       stage.style.left = `${left}px`;
       stage.style.top = `${top}px`;
       /* zoom origin = the black-glass centre (so the dive goes *into* the screen) */
-      stage.style.transformOrigin = `${(GLASS_W / 2 + 0.5428) * 100}% ${(GLASS_H / 2 + 0.269) * 100}%`;
+      stage.style.transformOrigin = `${(GLASS_W / 2 + GLASS_X) * 100}% ${(GLASS_H / 2 + GLASS_Y) * 100}%`;
     };
     layout();
     const ro = new ResizeObserver(layout);
@@ -241,30 +243,12 @@ const HeroMachine = () => {
             )}
             <nav className="crt__ui" aria-label="Kosh menu">
               <div className="crt__top">
-                <a className="crt__home" href="#vision">
-                  <svg className="crt__binoc" viewBox="0 0 16 9" shapeRendering="crispEdges" aria-hidden="true">
-                    <g fill="currentColor">
-                      {/* left lens ring */}
-                      <rect x="1" y="0" width="5" height="1" />
-                      <rect x="1" y="8" width="5" height="1" />
-                      <rect x="0" y="1" width="1" height="7" />
-                      <rect x="6" y="1" width="1" height="7" />
-                      {/* right lens ring */}
-                      <rect x="10" y="0" width="5" height="1" />
-                      <rect x="10" y="8" width="5" height="1" />
-                      <rect x="9" y="1" width="1" height="7" />
-                      <rect x="15" y="1" width="1" height="7" />
-                      {/* bridge */}
-                      <rect x="6" y="3" width="4" height="2" />
-                    </g>
-                  </svg>
-                  <span>Vision</span>
-                </a>
                 <div className="crt__nav">
-                  <a href="#problem">The Problem</a>
-                  <a href="#product">The Product</a>
                   <a href="#story">About Us</a>
-                  <a className="crt__fun" href="#funance">Funance</a>
+                  <a href="#product">Product</a>
+                  <a href="/for-organizations">Services</a>
+                  <a href="/learn">Learn</a>
+                  <a href="/blog">Blog</a>
                 </div>
               </div>
               <div className="crt__mid">

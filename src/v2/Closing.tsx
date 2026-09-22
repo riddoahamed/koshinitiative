@@ -388,6 +388,17 @@ const NAV_GROUPS: NavGroup[] = [
   },
 ];
 
+/* The landing hero gets a quieter navigation treatment than the application
+   pages. These are direct section links: no dropdown chrome, no filled CTA,
+   and no decorative effects competing with the machine below. */
+const HERO_LINKS: NavItem[] = [
+  { label: "About us", href: "/#story" },
+  { label: "Product", href: "/#product" },
+  { label: "Services", href: "/for-organizations" },
+  { label: "Learn", href: "/learn" },
+  { label: "Blog", href: "/blog" },
+];
+
 /** A `/#section` link should scroll, not reload, when we're already there. */
 const useAnchorNav = () =>
   (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -448,6 +459,24 @@ export const NavV2 = ({ pinned = false }: { pinned?: boolean }) => {
     setOpen(null);
     setSheet(false);
   };
+
+  if (!pinned) {
+    return (
+      <nav className="nav nav--hero on" aria-label="Main">
+        <a className="nav__brand" href="/">
+          <img src="/img/kosh-logo.png" alt="" />
+          KOSH
+        </a>
+        <div className="nav__simple">
+          {HERO_LINKS.map((item) => (
+            <a key={item.href} href={item.href} onClick={(e) => click(e, item.href)}>
+              {item.label}
+            </a>
+          ))}
+        </div>
+      </nav>
+    );
+  }
 
   return (
     <>
