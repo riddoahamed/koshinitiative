@@ -3,6 +3,7 @@ import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HeroMachine from "@/v2/HeroMachine";
+import NSUSessions from "@/v2/NSUSessions";
 import { Pitch, Paths, Problem, Product, Impact } from "@/v2/Sections";
 import { Orgs, Vision, Founder, Join, FootV2, NavV2 } from "@/v2/Closing";
 import { Funance } from "@/v2/Funance";
@@ -90,6 +91,7 @@ const Index = () => {
         <HeroMachine />
         <Pitch />
         <Paths />
+        <NSUSessions />
         <Problem />
         <Tools />
         <Product />

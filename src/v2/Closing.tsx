@@ -224,6 +224,7 @@ export const FootV2 = () => (
           <li><a href="/fdr-rates/faq">FDR questions</a></li>
           <li><a href="/investkorsi">InvestKorsi ledger</a></li>
           <li><a href="/vote">Kosh Live</a></li>
+          <li><a href="/rsvp">NSU sessions · free</a></li>
           {/* The footer is the site index, so the Bangla pages are listed here
               even though the menu offers them as a toggle on the page. */}
           <li className="foot__bn">
@@ -347,6 +348,7 @@ const TOOLS_LOOKUP: NavItem[] = [
   { label: "Kosh Live", href: "/vote", note: "Run a live room" },
 ];
 const PROD_APP: NavItem[] = [
+  { label: "NSU sessions · free", href: "/rsvp", note: "Personal finance, investing and live Q&A" },
   { label: "The Kosh app", href: "/#inside", note: "Real screens, markets, coach and games" },
   { label: "How it works", href: "/#product", note: "Agents find, humans check, you decide" },
 ];
@@ -395,6 +397,7 @@ const HERO_LINKS: NavItem[] = [
   { label: "About us", href: "/#story" },
   { label: "Product", href: "/#product" },
   { label: "Services", href: "/for-organizations" },
+  { label: "Live sessions", href: "/rsvp" },
   { label: "Learn", href: "/learn" },
   { label: "Blog", href: "/blog" },
 ];
