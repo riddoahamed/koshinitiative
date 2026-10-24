@@ -35,7 +35,7 @@ export const config = {
   // Skip assets and anything with an extension. The negative lookahead keeps
   // this off the hot path for every .js, .css, image and font — the middleware
   // should run on document requests only.
-  matcher: ["/((?!api/|assets/|_vercel|.*\\.[a-zA-Z0-9]+$).*)"],
+  matcher: ["/((?!tv(?:/|$)|api/|assets/|_vercel|.*\\.[a-zA-Z0-9]+$).*)"],
 };
 
 // ── Posts that are not in the bundle ────────────────────────────────────────

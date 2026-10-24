@@ -223,7 +223,8 @@ export const FootV2 = () => (
           <li><a href="/fdr-rates">FDR rates, every bank</a></li>
           <li><a href="/fdr-rates/faq">FDR questions</a></li>
           <li><a href="/investkorsi">InvestKorsi ledger</a></li>
-          <li><a href="/vote">Kosh Live</a></li>
+          <li><a href="/vote">Kosh Live games</a></li>
+          <li><a href="/tv/">Kosh Live TV</a></li>
           <li><a href="/rsvp">NSU sessions · free</a></li>
           {/* The footer is the site index, so the Bangla pages are listed here
               even though the menu offers them as a toggle on the page. */}
@@ -234,10 +235,12 @@ export const FootV2 = () => (
         </ul>
       </div>
       <div>
-        <h4>Products &amp; services</h4>
+        <h4>Offerings</h4>
         <ul>
           <li><a href={KOSH_APP_URL}>The Kosh app</a></li>
           <li><a href={KOSH_DOWNLOAD_URL}>Get the Android app</a></li>
+          <li><a href="/offerings/courses">Kosh Courses</a></li>
+          <li><a href="/offerings/live">Kosh Live Rooms</a></li>
           <li><a href="/blog">Blog</a></li>
           <li><a href="/for-organizations#education">Kosh for education</a></li>
           <li><a href="/for-organizations#workplace">Kosh for employee wellness</a></li>
@@ -340,6 +343,7 @@ const TOOLS_LEARN: NavItem[] = [
   { label: "What kind of investor am I?", href: "/quiz", note: "Six questions, sixty seconds" },
 ];
 const TOOLS_LOOKUP: NavItem[] = [
+  { label: "Kosh Live TV", href: "/tv/", note: "Bangladesh & world news, broken down" },
   { label: "FDR rates, every bank", href: "/fdr-rates", note: "Updated monthly, with the tax and the fine print" },
   /* The real thing, not a section about it: the app's Discover feed is
      browsable as a guest, which is what puts it in this group at all. */
@@ -348,6 +352,8 @@ const TOOLS_LOOKUP: NavItem[] = [
   { label: "Kosh Live", href: "/vote", note: "Run a live room" },
 ];
 const PROD_APP: NavItem[] = [
+  { label: "Kosh Courses", href: "/offerings/courses", note: "Self-paced courses and live webinar cohorts" },
+  { label: "Kosh Live Rooms", href: "/offerings/live", note: "A practical money conversation every two weeks" },
   { label: "NSU sessions · free", href: "/rsvp", note: "Personal finance, investing and live Q&A" },
   { label: "The Kosh app", href: "/#inside", note: "Real screens, markets, coach and games" },
   { label: "How it works", href: "/#product", note: "Agents find, humans check, you decide" },
@@ -369,7 +375,7 @@ const NAV_GROUPS: NavGroup[] = [
     ],
   },
   {
-    label: "Products & services",
+    label: "Offerings",
     items: [...PROD_APP, ...PROD_ORGS],
     columns: [
       { label: "For everyone", items: PROD_APP },
@@ -394,6 +400,8 @@ const NAV_GROUPS: NavGroup[] = [
    pages. These are direct section links: no dropdown chrome, no filled CTA,
    and no decorative effects competing with the machine below. */
 const HERO_LINKS: NavItem[] = [
+  { label: "Offerings", href: "/offerings" },
+  { label: "Kosh Live TV", href: "/tv/" },
   { label: "About us", href: "/#story" },
   { label: "Product", href: "/#product" },
   { label: "Services", href: "/for-organizations" },

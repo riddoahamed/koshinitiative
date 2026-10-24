@@ -4,7 +4,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HeroMachine from "@/v2/HeroMachine";
 import NSUSessions from "@/v2/NSUSessions";
-import { Pitch, Paths, Problem, Product, Impact } from "@/v2/Sections";
+import { Pitch, Paths, KoshLearnTeaser, Problem, Product, Impact } from "@/v2/Sections";
 import { Orgs, Vision, Founder, Join, FootV2, NavV2 } from "@/v2/Closing";
 import { Funance } from "@/v2/Funance";
 import { Inside } from "@/v2/Inside";
@@ -15,6 +15,7 @@ import { SCROLL_LOCK_EVENT } from "@/v2/scrollLock";
 import { applySeo } from "@/lib/seo";
 import { PAGE_META } from "@/v2/pageMeta";
 import "@/v2/v2.css";
+import "./offerings.css";
 
 const Index = () => {
   useEffect(() => {
@@ -92,6 +93,7 @@ const Index = () => {
         <Pitch />
         <Paths />
         <NSUSessions />
+        <KoshLearnTeaser />
         <Problem />
         <Tools />
         <Product />

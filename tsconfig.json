@@ -10,7 +10,9 @@
       ]
     },
     "skipLibCheck": true,
-    "strictNullChecks": false
+    "strictNullChecks": false,
+    "module": "ESNext",
+    "moduleResolution": "Bundler"
   },
   "files": [],
   "references": [

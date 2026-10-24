@@ -65,6 +65,35 @@ export const PAGE_META: Record<string, PageMeta> = {
     description:
       "Six two-minute lessons for first-time investors in Bangladesh: what investing actually is, the emergency fund, Sanchaypatra vs DPS vs FDR, mutual funds, how to spot a scam, and your first ৳1,000. Free, no account needed.",
   },
+  "/tv/": {
+    title: "Kosh Live — Bangladesh and world financial news",
+    description: "Original animated conversations breaking down dated company and market news, with clear sources and replay labels. Demo price charts are fictional.",
+  },
+  "/offerings": {
+    title: "Kosh Learn — courses, live webinars and money programmes",
+    description:
+      "Go deeper with Kosh: self-paced money courses, live investing webinar cohorts, biweekly Kosh Live Rooms, a parent-led kids money club, and practical workplace sessions.",
+  },
+  "/offerings/courses": {
+    title: "Kosh courses and live investing cohorts",
+    description:
+      "Self-paced money foundations plus live, small-group webinars on investing, markets and risk — explained simply for people starting in Bangladesh.",
+  },
+  "/offerings/live": {
+    title: "Kosh Live Rooms — biweekly money webinars",
+    description:
+      "A practical Kosh money conversation every two weeks. Join a live room, bring your questions, and leave with a clearer next step.",
+  },
+  "/offerings/kids": {
+    title: "Kosh Money Club — money learning for kids",
+    description:
+      "A parent-led money programme for children: how to earn, save, grow, protect and build ideas early, through simple real-life activities.",
+  },
+  "/offerings/workplace": {
+    title: "Kosh at work — workplace money sessions",
+    description:
+      "Practical, judgment-free money learning for teams: spending, saving, debt, fraud awareness and starting to invest with care.",
+  },
   "/start": {
     title: "If I were to start investing today",
     description:

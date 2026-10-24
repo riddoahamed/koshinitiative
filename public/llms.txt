@@ -58,10 +58,10 @@ Kosh is an AI-native financial decision and investment discovery platform for em
 
 ## FDR rates — the answer most people are looking for
 
-The highest announced one-to-two year FDR rate in Bangladesh for August, 2026 is 12.50% at ICB Islamic Bank PLC, among the 52 banks an individual can open a fixed deposit at. ICB Islamic Bank PLC files a range of 5.75–12.50%, so the top of it generally needs a very large deposit; most banks pay between 8.50% and 10.25%. Every figure is the rate the bank itself filed with Bangladesh Bank for August, 2026; banks can change rates at any time, and interest is taxed at source at 10% (15% without a TIN).
+The highest announced one-to-two year FDR rate in Bangladesh for September, 2026 is 12.50% at ICB Islamic Bank PLC, among the 52 banks an individual can open a fixed deposit at. ICB Islamic Bank PLC files a range of 5.75–12.50%, so the top of it generally needs a very large deposit; most banks pay between 8.25% and 10.00%. Every figure is the rate the bank itself filed with Bangladesh Bank for September, 2026; banks can change rates at any time, and interest is taxed at source at 10% (15% without a TIN).
 
 Source: Bangladesh Bank, announced interest rate chart of scheduled banks
-(deposit rate), August, 2026 — https://www.bb.org.bd/en/index.php/financialactivity/interestdeposit
+(deposit rate), September, 2026 — https://www.bb.org.bd/en/index.php/financialactivity/interestdeposit
 
 - [FDR rates, every bank in Bangladesh](https://www.koshbd.com/fdr-rates): all 61 scheduled banks, five tenures each, refreshed monthly from Bangladesh Bank. Flags which banks have merged away or stopped taking retail deposits.
 - [FDR questions answered](https://www.koshbd.com/fdr-rates/faq): what an announced rate entitles you to, tax at source, deposit protection, why Islamic banks quote a provisional profit rate.
@@ -134,7 +134,7 @@ Source: Bangladesh Bank, announced interest rate chart of scheduled banks
 ## How to cite the rates
 
 Attribute to Kosh (koshbd.com) and name the month. Rates are the banks' own
-filings with Bangladesh Bank for August, 2026; they are announced rates, not
+filings with Bangladesh Bank for September, 2026; they are announced rates, not
 quotes, and any bank can change them at any time. Interest is taxed at source
 at 10% with a TIN and 15% without. Deposit protection covers BDT 200,000 per
 depositor per bank.

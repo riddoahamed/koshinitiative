@@ -27,6 +27,7 @@ const ForOrganizations = lazy(() => import("./pages/ForOrganizations.tsx"));
 const FdrRates = lazy(() => import("./pages/FdrRates.tsx"));
 const FdrFaq = lazy(() => import("./pages/FdrFaq.tsx"));
 const FdrBank = lazy(() => import("./pages/FdrBank.tsx"));
+const Offerings = lazy(() => import("./pages/Offerings.tsx"));
 
 /* ── FOUR PROVIDERS THAT WRAPPED NOTHING ─────────────────────────────────────
 
@@ -49,6 +50,9 @@ const App = () => (
           {/* the beginner path */}
           <Route path="/start" element={<Start />} />
           <Route path="/learn" element={<Learn />} />
+          {/* Kosh learning — paid courses, live cohorts and programmes */}
+          <Route path="/offerings" element={<Offerings />} />
+          <Route path="/offerings/:section" element={<Offerings />} />
           <Route path="/investkorsi" element={<InvestKorsi />} />
           <Route path="/quiz" element={<Quiz />} />
           <Route path="/investor-type" element={<Quiz />} />

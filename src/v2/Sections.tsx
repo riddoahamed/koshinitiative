@@ -107,6 +107,50 @@ export const Paths = () => (
   </section>
 );
 
+/* ---------------- KOSH LEARN — the paid, deeper path ----------------
+   The homepage still leads with free learning. This is the next door for
+   someone who wants a guided programme, a live room, or a programme for a
+   child or team — without making the main promise feel like an upsell. */
+export const KoshLearnTeaser = () => (
+  <section className="sec learn-teaser" id="offerings">
+    <div className="blob p" style={{ width: 360, height: 360, left: "-10%", top: "12%" }} />
+    <div className="wrap">
+      <div className="learn-teaser__head" data-stagger="100">
+        <div>
+          <p className="eyebrow" data-reveal>kosh learn</p>
+          <h2 className="h-display" data-reveal>
+            Learn alone. Learn live. <span className="grad-text">Bring the people you care about.</span>
+          </h2>
+        </div>
+        <p className="h-sub" data-reveal>
+          Structured courses, live webinar cohorts, money lessons for children,
+          and practical sessions for workplaces — all in the plain language Kosh is known for.
+        </p>
+      </div>
+      <div className="learn-teaser__grid" data-stagger="90">
+        <a href="/offerings/courses" className="learn-teaser__card glass" data-reveal="scale">
+          <BookOpen size={21} strokeWidth={1.8} />
+          <b>Courses + cohorts</b>
+          <span>Self-paced foundations and live guided programmes.</span>
+        </a>
+        <a href="/offerings/kids" className="learn-teaser__card glass" data-reveal="scale">
+          <MoonStar size={21} strokeWidth={1.8} />
+          <b>Money for kids</b>
+          <span>Earn, save, grow and protect — with a parent nearby.</span>
+        </a>
+        <a href="/offerings/workplace" className="learn-teaser__card glass" data-reveal="scale">
+          <ShieldAlert size={21} strokeWidth={1.8} />
+          <b>Kosh at work</b>
+          <span>Useful money education for real working lives.</span>
+        </a>
+      </div>
+      <a className="learn-teaser__link" href="/offerings" data-reveal>
+        See everything Kosh Learn offers <ArrowRight size={16} strokeWidth={2.2} />
+      </a>
+    </div>
+  </section>
+);
+
 /* ---------------- PROBLEM — two broken things, with the numbers folded in ---------------- */
 const STATS = [
   {

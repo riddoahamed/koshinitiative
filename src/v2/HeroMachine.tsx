@@ -245,9 +245,11 @@ const HeroMachine = () => {
                 <div className="crt__nav">
                   <a href="#story">About Us</a>
                   <a href="#product">Product</a>
+                  <a href="/offerings/courses">Kosh Courses</a>
                   <a href="/for-organizations">Services</a>
                   <a href="/learn">Learn</a>
                   <a href="/blog">Blog</a>
+                  <a href="/tv/">Watch TV</a>
                 </div>
               </div>
               <div className="crt__mid">
