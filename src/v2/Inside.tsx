@@ -73,7 +73,7 @@ export const Inside = () => (
         Tap anything. It <span className="grad-text">explains itself.</span>
       </h2>
       <p className="h-sub" data-reveal style={{ ["--d" as string]: "150ms" }}>
-        Every listed company, fund and gold rate in Bangladesh, with the numbers
+        Listed companies, funds and the gold rate in Bangladesh, with the numbers
         that actually decide it and a plain answer to &ldquo;so what does this
         one do?&rdquo;
       </p>
@@ -126,7 +126,7 @@ export const Inside = () => (
           <h3>Gold at the BAJUS rate, per bhori.</h3>
           <p>
             The world spot price is not the one you pay in Dhaka, so Kosh shows
-            the live 22K rate beside it, six months of history in taka or
+            the latest BAJUS 22K rate beside it, six months of history in taka or
             dollars, and a written read on <b>why it moved this week.</b>
           </p>
         </div>

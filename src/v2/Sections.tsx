@@ -27,8 +27,8 @@ export const Pitch = () => (
       </h2>
       <p className="h-sub" data-reveal>
         Free lessons in plain language. Practice on real market prices with
-        money that isn&rsquo;t real. Then one honest answer to the question
-        every app dodges. <strong>What should I actually do?</strong>
+        money that isn&rsquo;t real. Then your real options side by side,
+        with the fees and the catch, so <strong>you can decide for yourself.</strong>
       </p>
       <div className="about__ctas" data-reveal="scale">
         <a className="btn btn-primary" href="/start">Learn something free</a>
@@ -247,11 +247,11 @@ export const Product = () => (
 
       <ol className="loop" data-stagger="90">
         {[
-          ["01", "Discover", "AI agents scan funds, gold, Sanchaypatra, and DSE filings around the clock, and surface what's actually worth your attention."],
-          ["02", "Verify", "Every idea is checked against real sources and screened for scams. Humans supervise before anything reaches your feed."],
+          ["01", "Discover", "AI agents read funds, gold, Sanchaypatra and DSE filings every day, and surface what's worth your attention."],
+          ["02", "Verify", "Every number is computed from its source, not written by the AI. Cards that score low wait for a human before they publish."],
           ["03", "Understand", "Explainable AI tells you why it surfaced, in plain language, with the numbers shown. No jargon, no hype."],
           ["04", "Practise", "Paper-invest with real market data and zero risk, until the decision feels obvious instead of scary."],
-          ["05", "Invest", "Act when you're ready, through disclosed partners. We never touch your money."],
+          ["05", "Invest", "When you're ready, we show where and how to open the real thing. We never touch your money."],
         ].map(([n, h, p]) => (
           <li className="loop__step" key={n} data-reveal="fade">
             <span className="loop__n">{n}</span>
@@ -267,7 +267,7 @@ export const Product = () => (
         ))}
       </div>
       <p className="product__note" data-reveal="fade">
-        <span className="dot" /> free to start · every partner disclosed · we never hold your funds
+        <span className="dot" /> free to start · nothing pays to appear · we never hold your funds
       </p>
     </div>
   </section>
