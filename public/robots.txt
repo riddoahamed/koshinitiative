@@ -1,4 +1,4 @@
-# ── koshbd.com ───────────────────────────────────────────────────────────────
+# ── koshfinance.com ───────────────────────────────────────────────────────────────
 # Everything here is free to read and meant to be quoted. Kosh publishes the
 # deposit rates every Bangladeshi bank files with the central bank, and the
 # whole point of doing that carefully — with the month stamp, the source and a
@@ -74,4 +74,4 @@ Allow: /
 User-agent: CCBot
 Allow: /
 
-Sitemap: https://www.koshbd.com/sitemap.xml
+Sitemap: https://koshfinance.com/sitemap.xml

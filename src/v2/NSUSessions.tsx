@@ -91,7 +91,7 @@ export default function NSUSessions() {
                 </form>}
               </>}
               {error && <p className="nsu-sessions__error" role="alert">{error}</p>}
-              <a className="nsu-sessions__details" href="/rsvp">Full session details <ArrowRight size={14} aria-hidden="true" /></a>
+              <a className="nsu-sessions__details" href="/bd/rsvp">Full session details <ArrowRight size={14} aria-hidden="true" /></a>
             </div>
           </div>
         </div>

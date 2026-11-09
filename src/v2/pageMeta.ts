@@ -34,6 +34,14 @@ export interface PageMeta {
 /** Keyed by pathname, no trailing slash. "/" is the homepage. */
 export const PAGE_META: Record<string, PageMeta> = {
   "/": {
+    title: "Kosh Finance — money learning, with local context",
+    description: "Learn money and investing with Kosh Finance. Choose Bangladesh or explore Global education, with one shared learning library and clear market context.",
+  },
+  "/global": {
+    title: "Kosh Global — money learning for life abroad",
+    description: "An education preview for Bangladeshis abroad: ETFs, shares, cross-border money and credit. Country-specific guides are in development; no trading or remittance services are offered.",
+  },
+  "/bd": {
     /* Leads on the fact rather than the promise: "98% of Bangladeshis have no
        investment account" is the half of this sentence a stranger stops for,
        and it is the same CDBL figure the Problem section cites. */
@@ -50,12 +58,12 @@ export const PAGE_META: Record<string, PageMeta> = {
     description:
       "Submit a lesson, guide, how-to or answer for the Kosh blog. Everything is reviewed by a human before it goes live.",
   },
-  "/fdr-rates": {
+  "/bd/fdr-rates": {
     title: "FDR rates in Bangladesh — every bank, updated monthly",
     description:
       "What every scheduled bank in Bangladesh pays on a fixed deposit, from Bangladesh Bank's own monthly filing chart: 61 banks, five tenures, Islamic and conventional, each linked to the bank's own rate page. No sponsored placements.",
   },
-  "/fdr-rates/faq": {
+  "/bd/fdr-rates/faq": {
     title: "FDR questions — rates, tax, protection and profit rates",
     description:
       "Will I get the advertised rate? What is taxed at source? What happens if the bank fails? Why do Islamic banks quote a provisional profit rate? Straight answers about fixed deposits in Bangladesh, with sources.",
@@ -65,46 +73,46 @@ export const PAGE_META: Record<string, PageMeta> = {
     description:
       "Six two-minute lessons for first-time investors in Bangladesh: what investing actually is, the emergency fund, Sanchaypatra vs DPS vs FDR, mutual funds, how to spot a scam, and your first ৳1,000. Free, no account needed.",
   },
-  "/tv/": {
+  "/bd/tv/": {
     title: "Kosh Live — Bangladesh and world financial news",
     description: "Original animated conversations breaking down dated company and market news, with clear sources and replay labels. Demo price charts are fictional.",
   },
-  "/offerings": {
+  "/bd/offerings": {
     title: "Kosh Learn — courses, live webinars and money programmes",
     description:
       "Go deeper with Kosh: self-paced money courses, live investing webinar cohorts, biweekly Kosh Live Rooms, a parent-led kids money club, and practical workplace sessions.",
   },
-  "/offerings/courses": {
+  "/bd/offerings/courses": {
     title: "Kosh courses and live investing cohorts",
     description:
       "Self-paced money foundations plus live, small-group webinars on investing, markets and risk — explained simply for people starting in Bangladesh.",
   },
-  "/offerings/live": {
+  "/bd/offerings/live": {
     title: "Kosh Live Rooms — biweekly money webinars",
     description:
       "A practical Kosh money conversation every two weeks. Join a live room, bring your questions, and leave with a clearer next step.",
   },
-  "/offerings/kids": {
+  "/bd/offerings/kids": {
     title: "Kosh Money Club — money learning for kids",
     description:
       "A parent-led money programme for children: how to earn, save, grow, protect and build ideas early, through simple real-life activities.",
   },
-  "/offerings/workplace": {
+  "/bd/offerings/workplace": {
     title: "Kosh at work — workplace money sessions",
     description:
       "Practical, judgment-free money learning for teams: spending, saving, debt, fraud awareness and starting to invest with care.",
   },
-  "/start": {
+  "/bd/start": {
     title: "If I were to start investing today",
     description:
       "The honest starting order for a first-time investor in Bangladesh — where you stand, the buffer that comes first, what you're actually being offered, risk-free practice, and a first real move that can't hurt you.",
   },
-  "/quiz": {
+  "/bd/quiz": {
     title: "What kind of investor am I?",
     description:
       "Eight moments every Bangladeshi saver has lived through — a cousin at a wedding, salary day, a red week — and one of eight investor types at the end of it. About 90 seconds. Free, no account, no advice pitch.",
   },
-  "/investkorsi": {
+  "/bd/investkorsi": {
     title: "InvestKorsi — scams, frauds, and the ones that paid",
     description:
       "A public ledger of what happened to people's money at Bangladeshi platforms, companies and ventures. Anonymous reports on the frauds, the projects that went quiet, and the investments that did exactly what they said. Free to read, no account needed.",
@@ -113,27 +121,27 @@ export const PAGE_META: Record<string, PageMeta> = {
      Written in Bangla rather than translated at the last moment: a search
      result is the one line most of this audience reads before deciding, and a
      machine-flavoured one reads as a machine. */
-  "/bn/fdr-rates": {
+  "/bd/bn/fdr-rates": {
     title: "এফডিআর রেট — বাংলাদেশের সব ব্যাংকের হার, প্রতি মাসে হালনাগাদ",
     description:
       "বাংলাদেশের প্রতিটি তফসিলি ব্যাংক স্থায়ী আমানতে কত সুদ দেয়, বাংলাদেশ ব্যাংকের নিজস্ব মাসিক তালিকা থেকে: ৬১টি ব্যাংক, পাঁচটি মেয়াদ, ইসলামি ও প্রচলিত দুই ধরনের, প্রতিটির সঙ্গে ব্যাংকের নিজের রেট পেজের লিংক। কোনো স্পনসর্ড জায়গা নেই।",
   },
-  "/bn/investkorsi": {
+  "/bd/bn/investkorsi": {
     title: "ইনভেস্টকরসি — কার টাকা ফেরত এলো, কার এলো না",
     description:
       "বাংলাদেশি প্ল্যাটফর্ম, কোম্পানি আর প্রকল্পে মানুষের টাকার কী হয়েছে তার একটি উন্মুক্ত তালিকা। প্রতারণা, চুপ হয়ে যাওয়া প্রকল্প, আর যেগুলো ঠিক যা বলেছিল তাই করেছে — সবই বেনামে জমা দেওয়া অভিজ্ঞতা। পড়তে কোনো অ্যাকাউন্ট লাগে না।",
   },
-  "/for-organizations": {
+  "/bd/for-organizations": {
     title: "Financial literacy programmes for organizations",
     description:
       "Fifteen minutes a week that people actually finish. Kosh runs money programmes for schools, universities, RMG and factory floors, offices, and community groups in Bangladesh — earn, allocate, protect and grow, measured on decisions rather than recall. Try both exercises on the page, no sign-up.",
   },
-  "/feedback": {
+  "/bd/feedback": {
     title: "What people are telling us",
     description:
       "Real feedback from Kosh users, grouped into themes by AI — anonymous, paraphrased, and never the raw text. See what people are asking us to fix or build next.",
   },
-  "/vote": {
+  "/bd/vote": {
     title: "Kosh Live, vote, reveal, decide",
     description:
       "A live session tool from Kosh: vote on what you'd do with ৳10 lakh, see the room's answer, then walk through how the decision actually gets made.",
@@ -147,11 +155,11 @@ export const PAGE_META: Record<string, PageMeta> = {
    as the thing it actually shows, not as the site default — /investor-type is
    the URL people share, and it was previewing as the homepage. */
 export const PATH_ALIASES: Record<string, string> = {
-  "/live": "/vote",
-  "/investor-type": "/quiz",
-  "/for-schools": "/for-organizations",
+  "/bd/live": "/bd/vote",
+  "/bd/investor-type": "/bd/quiz",
+  "/bd/for-schools": "/bd/for-organizations",
   // Both are what people actually type or search for; the canonical page is
   // the one with the word a reader would recognise in it.
-  "/fdr": "/fdr-rates",
-  "/bank-rates": "/fdr-rates",
+  "/bd/fdr": "/bd/fdr-rates",
+  "/bd/bank-rates": "/bd/fdr-rates",
 };

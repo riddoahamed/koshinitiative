@@ -1,6 +1,8 @@
 import { Suspense, lazy } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Index from "./pages/Index.tsx";
+import MarketHome from "./pages/MarketHome";
+import MarketSuggestion from "./v2/MarketSuggestion";
 
 /* ── ONE ROUTE SHOULD NOT PAY FOR ALL OF THEM ────────────────────────────────
 
@@ -39,44 +41,47 @@ const Offerings = lazy(() => import("./pages/Offerings.tsx"));
    the point of use rather than around the whole app. */
 const App = () => (
   <BrowserRouter>
+        <MarketSuggestion />
         {/* The fallback is deliberately the page background and nothing else.
             A spinner that flashes for 80ms on a fast connection is worse than
             a beat of the colour the page is about to be. */}
         <Suspense fallback={<div className="route-wait" aria-hidden="true" />}>
         <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/vote" element={<Vote />} />
-          <Route path="/live" element={<Vote />} />
+          <Route path="/" element={<MarketHome />} />
+          <Route path="/global" element={<MarketHome global />} />
+          <Route path="/bd" element={<Index />} />
+          <Route path="/bd/vote" element={<Vote />} />
+          <Route path="/bd/live" element={<Vote />} />
           {/* the beginner path */}
-          <Route path="/start" element={<Start />} />
+          <Route path="/bd/start" element={<Start />} />
           <Route path="/learn" element={<Learn />} />
           {/* Kosh learning — paid courses, live cohorts and programmes */}
-          <Route path="/offerings" element={<Offerings />} />
-          <Route path="/offerings/:section" element={<Offerings />} />
-          <Route path="/investkorsi" element={<InvestKorsi />} />
-          <Route path="/quiz" element={<Quiz />} />
-          <Route path="/investor-type" element={<Quiz />} />
+          <Route path="/bd/offerings" element={<Offerings />} />
+          <Route path="/bd/offerings/:section" element={<Offerings />} />
+          <Route path="/bd/investkorsi" element={<InvestKorsi />} />
+          <Route path="/bd/quiz" element={<Quiz />} />
+          <Route path="/bd/investor-type" element={<Quiz />} />
           {/* programmes for schools, campuses, factory floors and offices */}
-          <Route path="/for-organizations" element={<ForOrganizations />} />
-          <Route path="/for-schools" element={<ForOrganizations />} />
+          <Route path="/bd/for-organizations" element={<ForOrganizations />} />
+          <Route path="/bd/for-schools" element={<ForOrganizations />} />
           {/* the rate table — what every bank pays on a fixed deposit */}
-          <Route path="/fdr-rates" element={<FdrRates />} />
+          <Route path="/bd/fdr-rates" element={<FdrRates />} />
           {/* Bangla lives at its own URL so it can be linked, shared and
               indexed. Same component, same data, different dictionary. */}
-          <Route path="/bn/fdr-rates" element={<FdrRates />} />
-          <Route path="/bn/investkorsi" element={<InvestKorsi />} />
-          <Route path="/fdr-rates/faq" element={<FdrFaq />} />
+          <Route path="/bd/bn/fdr-rates" element={<FdrRates />} />
+          <Route path="/bd/bn/investkorsi" element={<InvestKorsi />} />
+          <Route path="/bd/fdr-rates/faq" element={<FdrFaq />} />
           {/* One page per bank. A model that cites /fdr-rates/brac sends a
               real person there afterwards; without this route they would land
               on a 404, which is worse than never being cited. */}
-          <Route path="/fdr-rates/:slug" element={<FdrBank />} />
-          <Route path="/fdr" element={<FdrRates />} />
-          <Route path="/bank-rates" element={<FdrRates />} />
+          <Route path="/bd/fdr-rates/:slug" element={<FdrBank />} />
+          <Route path="/bd/fdr" element={<FdrRates />} />
+          <Route path="/bd/bank-rates" element={<FdrRates />} />
           {/* writing */}
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/submit" element={<Submit />} />
           <Route path="/blog/:slug" element={<Post />} />
-          <Route path="/feedback" element={<Feedback />} />
+          <Route path="/bd/feedback" element={<Feedback />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

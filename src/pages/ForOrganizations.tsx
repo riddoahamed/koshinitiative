@@ -221,7 +221,7 @@ const ForOrganizations = () => {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <PageShell path="/for-organizations" backTo="/">
+    <PageShell path="/bd/for-organizations" backTo="/bd">
       <div className="fo">
         {/* ── 01 hero ─────────────────────────────────────────────────── */}
         <div className="fo-wrap">

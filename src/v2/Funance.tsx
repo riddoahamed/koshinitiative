@@ -106,7 +106,7 @@ export const Funance = () => {
           {/* the live room: same family, so it lives in the same grid */}
           <a
             className={`gcard gcard--live${active === GAMES.length ? " is-active" : ""}`}
-            href="/vote"
+            href="/bd/vote"
             data-reveal="fade"
             onMouseEnter={hover(GAMES.length)}
             onFocus={() => setActive(GAMES.length)}

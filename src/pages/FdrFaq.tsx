@@ -16,7 +16,7 @@ import "@/v2/fdr/fdr.css";
 
 export default function FdrFaq() {
   return (
-    <PageShell path="/fdr-rates/faq" backTo="/fdr-rates">
+    <PageShell path="/bd/fdr-rates/faq" backTo="/bd/fdr-rates">
       <div className="fdr">
         <div className="fdr-wrap">
           <header className="fdr-head">
@@ -76,7 +76,7 @@ export default function FdrFaq() {
             here is a recommendation to deposit anywhere.
           </p>
 
-          <Link className="fdr-cta" to="/fdr-rates">
+          <Link className="fdr-cta" to="/bd/fdr-rates">
             See the rate table
           </Link>
         </div>

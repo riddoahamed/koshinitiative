@@ -135,6 +135,7 @@ const Post = () => {
           {found && (
             <>
               <span className="article__meta">
+                <em>Market: Bangladesh</em>
                 <b className={`cat cat--${found.category}`}>{CATEGORY_LABEL[found.category]}</b>
                 <em>{fmt(found.date)}</em>
                 <em>{found.readMins} min read</em>
@@ -230,7 +231,7 @@ const Post = () => {
                   <a className="btn btn-primary" href={KOSH_APP_URL} target="_blank" rel="noreferrer">
                     Try Kosh <ArrowRight size={16} strokeWidth={2.4} />
                   </a>
-                  <a className="btn btn-glass" href="/start">See the starting path</a>
+                  <a className="btn btn-glass" href="/bd/start">See the starting path</a>
                 </div>
               </div>
 

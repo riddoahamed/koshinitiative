@@ -14,7 +14,7 @@ const STEPS = [
     when: "today · 60 seconds",
     t: "Find out where you actually stand",
     p: "Not what you should buy, but where you are. Six questions about your buffer, your income and how you'd really react to a bad month. You get a straight read and a starting point.",
-    href: "/quiz",
+    href: "/bd/quiz",
     cta: "Take the quiz",
   },
   {
@@ -66,7 +66,7 @@ const RULES = [
 
 const Start = () => (
   <PageShell
-    path="/start"
+    path="/bd/start"
   >
     <section className="sec page-hero">
       <div className="blob m" style={{ width: 460, height: 460, right: "-10%", top: "-6%" }} />
@@ -135,7 +135,7 @@ const Start = () => (
             <a className="btn btn-primary" href={KOSH_APP_URL} target="_blank" rel="noreferrer">
               Try Kosh <ArrowRight size={16} strokeWidth={2.4} />
             </a>
-            <a className="btn btn-glass" href="/quiz">Not sure? Take the 60-second check</a>
+            <a className="btn btn-glass" href="/bd/quiz">Not sure? Take the 60-second check</a>
           </div>
         </div>
 

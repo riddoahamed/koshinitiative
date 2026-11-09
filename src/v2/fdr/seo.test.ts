@@ -12,7 +12,7 @@ import { bankBySlug, bankFdrDocument, fdrCrawlerDocument, jsonLd, leadAnswer, sl
 // That failure is silent and it is invisible in a browser, which is exactly
 // why it lasted. These tests fail loudly instead.
 
-const doc = fdrCrawlerDocument("/fdr-rates", "FDR rates", "Every bank in Bangladesh");
+const doc = fdrCrawlerDocument("/bd/fdr-rates", "FDR rates", "Every bank in Bangladesh");
 
 describe("what a machine gets for /fdr-rates", () => {
   it("contains actual rates, not just meta tags", () => {
@@ -56,7 +56,7 @@ describe("what a machine gets for /fdr-rates", () => {
 });
 
 describe("structured data", () => {
-  const ld = jsonLd("/fdr-rates");
+  const ld = jsonLd("/bd/fdr-rates");
   const blocks = [...ld.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map(
     (m) => JSON.parse(m[1]),
   );
@@ -96,7 +96,7 @@ describe("one page per bank", () => {
 
   it("renders that bank's own rates, not the whole table", () => {
     const brac = BANKS.find((b) => b.code === "BRAC")!;
-    const page = bankFdrDocument(`/fdr-rates/${slugFor(brac)}`)!;
+    const page = bankFdrDocument(`/bd/fdr-rates/${slugFor(brac)}`)!;
     expect(page).toContain("BRAC Bank");
     const band = bandAt(FDR_ROWS.find((r) => r.bank.code === "BRAC")!, 2)!;
     expect(page).toContain(band.max.toFixed(2));
@@ -105,13 +105,13 @@ describe("one page per bank", () => {
 
   it("flags a bank that has been merged away", () => {
     const exim = BANKS.find((b) => b.code === "EXIM")!;
-    const page = bankFdrDocument(`/fdr-rates/${slugFor(exim)}`)!;
+    const page = bankFdrDocument(`/bd/fdr-rates/${slugFor(exim)}`)!;
     expect(page).toContain("Sammilito Islami Bank PLC");
   });
 
   it("returns null for the table itself and for the FAQ", () => {
-    expect(bankFdrDocument("/fdr-rates")).toBeNull();
-    expect(bankFdrDocument("/fdr-rates/faq")).toBeNull();
-    expect(bankFdrDocument("/fdr-rates/not-a-bank")).toBeNull();
+    expect(bankFdrDocument("/bd/fdr-rates")).toBeNull();
+    expect(bankFdrDocument("/bd/fdr-rates/faq")).toBeNull();
+    expect(bankFdrDocument("/bd/fdr-rates/not-a-bank")).toBeNull();
   });
 });

@@ -64,7 +64,7 @@ export const Tools = () => {
         </p>
 
         <div className="tools__grid" data-stagger="130">
-          <a className="tool" href="/fdr-rates" data-reveal="scale">
+          <a className="tool" href="/bd/fdr-rates" data-reveal="scale">
             <span className="tool__icon"><Landmark size={22} strokeWidth={1.9} /></span>
             <h3>FDR rates, every bank</h3>
             <p>
@@ -82,7 +82,7 @@ export const Tools = () => {
             </span>
           </a>
 
-          <a className="tool" href="/investkorsi" data-reveal="scale">
+          <a className="tool" href="/bd/investkorsi" data-reveal="scale">
             <span className="tool__icon tool__icon--b"><ScrollText size={22} strokeWidth={1.9} /></span>
             <h3>InvestKorsi, the public ledger</h3>
             <p>

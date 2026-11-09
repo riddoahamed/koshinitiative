@@ -377,14 +377,14 @@ export default function FdrRates() {
   // Strip the <script> wrappers: React needs the JSON, not the tags.
   const jsonLdPayload = useMemo(
     () =>
-      jsonLd("/fdr-rates")
+      jsonLd("/bd/fdr-rates")
         .replace(/<\/?script[^>]*>/g, "\n")
         .trim(),
     [],
   );
 
   return (
-    <PageShell path={lang === "bn" ? "/bn/fdr-rates" : "/fdr-rates"}>
+    <PageShell path={lang === "bn" ? "/bd/bn/fdr-rates" : "/bd/fdr-rates"}>
       {/* ── Structured data for the engines that DO run JavaScript ─────────
           Machines that cannot run it get a server-rendered document from the
           edge middleware; Googlebot renders the page, so it needs the schema
@@ -608,7 +608,7 @@ export default function FdrRates() {
             {FDR_FAQS.map((f) => (
               <Question key={f.q} q={f.q} a={f.a} />
             ))}
-            <Link className="fdr-cta fdr-cta--ghost" to="/fdr-rates/faq">
+            <Link className="fdr-cta fdr-cta--ghost" to="/bd/fdr-rates/faq">
               {T.faqCta}
             </Link>
           </section>

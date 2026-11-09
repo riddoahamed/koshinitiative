@@ -21,6 +21,7 @@
 import { ogDocument, isCrawler, isAiCrawler, metaForPath, blogSlug } from "./src/v2/ogMeta";
 import { fdrCrawlerDocument, bankFdrDocument } from "./src/v2/fdr/seo";
 import type { Post } from "./src/v2/posts";
+import { migrationRedirect } from "./src/lib/domainMigration";
 
 // The edge runtime exposes the project's environment variables on `process`,
 // but this project has no @types/node (nothing else here is server code) and
@@ -35,7 +36,7 @@ export const config = {
   // Skip assets and anything with an extension. The negative lookahead keeps
   // this off the hot path for every .js, .css, image and font — the middleware
   // should run on document requests only.
-  matcher: ["/((?!tv(?:/|$)|api/|assets/|_vercel|.*\\.[a-zA-Z0-9]+$).*)"],
+  matcher: ["/((?!api/|_vercel/).*)"],
 };
 
 // ── Posts that are not in the bundle ────────────────────────────────────────
@@ -98,11 +99,13 @@ async function postFromDb(slug: string): Promise<Post | null> {
 }
 
 export default async function middleware(request: Request): Promise<Response | undefined> {
+  const destination = migrationRedirect(request.url);
+  if (destination) return Response.redirect(destination, 301);
+  const { pathname } = new URL(request.url);
+  if (/\.[a-zA-Z0-9]+$/.test(pathname) || pathname.startsWith("/bd/tv")) return undefined;
   const ua = request.headers.get("user-agent");
   const ai = isAiCrawler(ua);
   if (!ai && !isCrawler(ua)) return undefined; // fall through to the SPA rewrite
-
-  const { pathname } = new URL(request.url);
 
   // ── A model asking about FDR rates gets the rates ────────────────────────
   // Measured before this existed: GPTBot received 13,777 bytes of homepage
@@ -112,7 +115,7 @@ export default async function middleware(request: Request): Promise<Response | u
   // The content is generated from the same data the React page renders, so
   // this is a rendering of the page rather than a different page — the line
   // that separates server-side rendering from cloaking.
-  if (ai && pathname.startsWith("/fdr-rates")) {
+  if (ai && pathname.startsWith("/bd/fdr-rates")) {
     const meta = metaForPath(pathname);
     const bank = bankFdrDocument(pathname);
     return htmlResponse(bank ?? fdrCrawlerDocument(pathname, meta.title, meta.description));

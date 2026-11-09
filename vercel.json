@@ -1,38 +1,27 @@
 {
   "redirects": [
     {
-      "source": "/:path*",
-      "has": [
-        {
-          "type": "host",
-          "value": "koshbd.com"
-        }
-      ],
-      "destination": "https://www.koshbd.com/:path*",
-      "permanent": true
-    },
-    {
-      "source": "/investkorsi/:path+",
+      "source": "/bd/investkorsi/:path+",
       "destination": "https://app.koshbd.com/investkorsi/:path*",
       "permanent": false
     },
     {
-      "source": "/tv",
-      "destination": "/tv/",
+      "source": "/bd/tv",
+      "destination": "/bd/tv/",
       "permanent": false
     }
   ],
   "rewrites": [
     {
-      "source": "/tv/",
+      "source": "/bd/tv/",
       "destination": "https://kosh-live-tv.vercel.app/tv/"
     },
     {
-      "source": "/tv/:path*",
+      "source": "/bd/tv/:path*",
       "destination": "https://kosh-live-tv.vercel.app/tv/:path*"
     },
     {
-      "source": "/rsvp",
+      "source": "/bd/rsvp",
       "destination": "https://kosh-rsvp.vercel.app/"
     },
     {
@@ -42,7 +31,7 @@
   ],
   "headers": [
     {
-      "source": "/tv/",
+      "source": "/bd/tv/",
       "headers": [
         {
           "key": "Cache-Control",

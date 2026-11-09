@@ -31,9 +31,9 @@ describe("path resolution", () => {
   });
 
   it("resolves the alias routes to what they actually render", () => {
-    expect(normalisePath("/live")).toBe("/vote");
-    expect(normalisePath("/investor-type")).toBe("/quiz");
-    expect(metaForPath("/investor-type").title).toBe(metaForPath("/quiz").title);
+    expect(normalisePath("/bd/live")).toBe("/bd/vote");
+    expect(normalisePath("/bd/investor-type")).toBe("/bd/quiz");
+    expect(metaForPath("/bd/investor-type").title).toBe(metaForPath("/bd/quiz").title);
   });
 
   it("does not treat /blog/submit as a post slug", () => {
@@ -189,13 +189,13 @@ describe("robots", () => {
     // Vote.tsx has always sent robots: noindex. Before pageMeta carried that
     // decision, the middleware would have handed crawlers an indexable card
     // for it — the page and its preview disagreeing about the same URL.
-    expect(metaForPath("/vote").noindex).toBe(true);
-    expect(metaForPath("/live").noindex).toBe(true);
-    expect(ogDocument("/vote")).toContain('name="robots" content="noindex"');
+    expect(metaForPath("/bd/vote").noindex).toBe(true);
+    expect(metaForPath("/bd/live").noindex).toBe(true);
+    expect(ogDocument("/bd/vote")).toContain('name="robots" content="noindex"');
   });
 
   it("leaves the pages that should be found alone", () => {
-    for (const p of ["/", "/blog", "/learn", "/start", "/quiz", "/investkorsi"]) {
+    for (const p of ["/", "/blog", "/learn", "/bd/start", "/bd/quiz", "/bd/investkorsi"]) {
       expect(metaForPath(p).noindex, p).toBeUndefined();
     }
   });

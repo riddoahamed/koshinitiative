@@ -44,15 +44,15 @@ export default function FdrBank() {
 
   // An unknown slug goes to the table rather than to a 404: whoever followed
   // that link was looking for a bank's rate, and the table has all of them.
-  if (!bank || !row) return <Navigate to="/fdr-rates" replace />;
+  if (!bank || !row) return <Navigate to="/bd/fdr-rates" replace />;
 
   const card = rateCardFor(bank.code);
   const note = accessNote(bank);
 
   return (
     <PageShell
-      path={`/fdr-rates/${slugFor(bank)}`}
-      backTo="/fdr-rates"
+      path={`/bd/fdr-rates/${slugFor(bank)}`}
+      backTo="/bd/fdr-rates"
       title={`${bank.name} FDR rate ${RATES_MONTH.replace(",", "")} — every tenure`}
       description={`${bank.name} fixed deposit rates for ${RATES_MONTH}: ${FD_TENURES.map(
         (_, i) => `${TENURE_SHORT[i]} ${formatBand(bandAt(row, i as 0))}`,
@@ -183,7 +183,7 @@ export default function FdrBank() {
                 .sort((a, b) => (bandAt(b, 2)?.max ?? 0) - (bandAt(a, 2)?.max ?? 0))
                 .slice(0, 8)
                 .map((r) => (
-                  <Link key={r.bank.code} className="fdr-other" to={`/fdr-rates/${slugFor(r.bank)}`}>
+                  <Link key={r.bank.code} className="fdr-other" to={`/bd/fdr-rates/${slugFor(r.bank)}`}>
                     {BANK_LOGOS[r.bank.domain] && (
                       <img className="fdr-logo" src={BANK_LOGOS[r.bank.domain]} alt="" width={24} height={24} />
                     )}
@@ -192,7 +192,7 @@ export default function FdrBank() {
                   </Link>
                 ))}
             </div>
-            <Link className="fdr-cta fdr-cta--ghost" to="/fdr-rates">
+            <Link className="fdr-cta fdr-cta--ghost" to="/bd/fdr-rates">
               All 61 banks, side by side
             </Link>
           </section>

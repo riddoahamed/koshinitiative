@@ -19,7 +19,7 @@ import "./offerings.css";
 
 const Index = () => {
   useEffect(() => {
-    applySeo({ ...PAGE_META["/"], path: "/" });
+    applySeo({ ...PAGE_META["/bd"], path: "/bd" });
 
     window.history.scrollRestoration = "manual";
 

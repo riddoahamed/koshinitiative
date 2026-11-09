@@ -59,7 +59,7 @@ export const Orgs = () => (
           institution on disclosed terms, and no verdict is ever purchasable.
         </p>
         <div className="orgs__cta" data-reveal>
-          <a className="btn" href="/for-organizations">See the programmes</a>
+          <a className="btn" href="/bd/for-organizations">See the programmes</a>
           <a className="btn btn-glass" href={mailto("Kosh partnership")}>Work with us</a>
         </div>
       </div>
@@ -217,20 +217,20 @@ export const FootV2 = () => (
       <div>
         <h4>Free tools</h4>
         <ul>
-          <li><a href="/start">Start here</a></li>
+          <li><a href="/bd/start">Start here</a></li>
           <li><a href="/learn">Quick lessons</a></li>
-          <li><a href="/quiz">What kind of investor am I?</a></li>
-          <li><a href="/fdr-rates">FDR rates, every bank</a></li>
-          <li><a href="/fdr-rates/faq">FDR questions</a></li>
-          <li><a href="/investkorsi">InvestKorsi ledger</a></li>
-          <li><a href="/vote">Kosh Live games</a></li>
-          <li><a href="/tv/">Kosh Live TV</a></li>
-          <li><a href="/rsvp">NSU sessions · free</a></li>
+          <li><a href="/bd/quiz">What kind of investor am I?</a></li>
+          <li><a href="/bd/fdr-rates">FDR rates, every bank</a></li>
+          <li><a href="/bd/fdr-rates/faq">FDR questions</a></li>
+          <li><a href="/bd/investkorsi">InvestKorsi ledger</a></li>
+          <li><a href="/bd/vote">Kosh Live games</a></li>
+          <li><a href="/bd/tv/">Kosh Live TV</a></li>
+          <li><a href="/bd/rsvp">NSU sessions · free</a></li>
           {/* The footer is the site index, so the Bangla pages are listed here
               even though the menu offers them as a toggle on the page. */}
           <li className="foot__bn">
-            <a href="/bn/fdr-rates" lang="bn">এফডিআর রেট</a>
-            <a href="/bn/investkorsi" lang="bn">ইনভেস্টকরসি</a>
+            <a href="/bd/bn/fdr-rates" lang="bn">এফডিআর রেট</a>
+            <a href="/bd/bn/investkorsi" lang="bn">ইনভেস্টকরসি</a>
           </li>
         </ul>
       </div>
@@ -239,21 +239,21 @@ export const FootV2 = () => (
         <ul>
           <li><a href={KOSH_APP_URL}>The Kosh app</a></li>
           <li><a href={KOSH_DOWNLOAD_URL}>Get the Android app</a></li>
-          <li><a href="/offerings/courses">Kosh Courses</a></li>
-          <li><a href="/offerings/live">Kosh Live Rooms</a></li>
+          <li><a href="/bd/offerings/courses">Kosh Courses</a></li>
+          <li><a href="/bd/offerings/live">Kosh Live Rooms</a></li>
           <li><a href="/blog">Blog</a></li>
-          <li><a href="/for-organizations#education">Kosh for education</a></li>
-          <li><a href="/for-organizations#workplace">Kosh for employee wellness</a></li>
-          <li><a href="/for-organizations#csr">Kosh for CSR programmes</a></li>
+          <li><a href="/bd/for-organizations#education">Kosh for education</a></li>
+          <li><a href="/bd/for-organizations#workplace">Kosh for employee wellness</a></li>
+          <li><a href="/bd/for-organizations#csr">Kosh for CSR programmes</a></li>
         </ul>
       </div>
       <div>
         <h4>Company</h4>
         <ul>
-          <li><a href="/#story">Why Kosh</a></li>
-          <li><a href="/#inclusion">Impact &amp; inclusion</a></li>
-          <li><a href="/feedback">What people are asking for</a></li>
-          <li><a href="/#join">Join us</a></li>
+          <li><a href="/bd#story">Why Kosh</a></li>
+          <li><a href="/bd#inclusion">Impact &amp; inclusion</a></li>
+          <li><a href="/bd/feedback">What people are asking for</a></li>
+          <li><a href="/bd#join">Join us</a></li>
           <li><a href={KOSH_WAITLIST_EMAIL_URL}>Join the waitlist</a></li>
           <li><a href={`mailto:${MAIL}`}>Contact</a></li>
         </ul>
@@ -339,32 +339,37 @@ interface NavGroup { label: string; href?: string; items: NavItem[]; blurb?: str
 
 const TOOLS_LEARN: NavItem[] = [
   { label: "Quick lessons", href: "/learn", note: "Two minutes each" },
-  { label: "Games & simulators", href: "/#funance", note: "Practise with money that isn't real" },
-  { label: "What kind of investor am I?", href: "/quiz", note: "Six questions, sixty seconds" },
+  { label: "Games & simulators", href: "/bd#funance", note: "Practise with money that isn't real" },
+  { label: "What kind of investor am I?", href: "/bd/quiz", note: "Six questions, sixty seconds" },
 ];
 const TOOLS_LOOKUP: NavItem[] = [
-  { label: "Kosh Live TV", href: "/tv/", note: "Bangladesh & world news, broken down" },
-  { label: "FDR rates, every bank", href: "/fdr-rates", note: "Updated monthly, with the tax and the fine print" },
+  { label: "Kosh Live TV", href: "/bd/tv/", note: "Bangladesh & world news, broken down" },
+  { label: "FDR rates, every bank", href: "/bd/fdr-rates", note: "Updated monthly, with the tax and the fine print" },
   /* The real thing, not a section about it: the app's Discover feed is
      browsable as a guest, which is what puts it in this group at all. */
   { label: "Discover investment options", href: `${KOSH_APP_URL}/invest`, note: "Savings, funds, gold, DSE. Browse as a guest" },
-  { label: "InvestKorsi", href: "/investkorsi", note: "What actually happened to people's money" },
-  { label: "Kosh Live", href: "/vote", note: "Run a live room" },
+  { label: "InvestKorsi", href: "/bd/investkorsi", note: "What actually happened to people's money" },
+  { label: "Kosh Live", href: "/bd/vote", note: "Run a live room" },
 ];
 const PROD_APP: NavItem[] = [
-  { label: "Kosh Courses", href: "/offerings/courses", note: "Self-paced courses and live webinar cohorts" },
-  { label: "Kosh Live Rooms", href: "/offerings/live", note: "A practical money conversation every two weeks" },
-  { label: "NSU sessions · free", href: "/rsvp", note: "Personal finance, investing and live Q&A" },
-  { label: "The Kosh app", href: "/#inside", note: "Real screens, markets, coach and games" },
-  { label: "How it works", href: "/#product", note: "Agents find, humans check, you decide" },
+  { label: "Kosh Courses", href: "/bd/offerings/courses", note: "Self-paced courses and live webinar cohorts" },
+  { label: "Kosh Live Rooms", href: "/bd/offerings/live", note: "A practical money conversation every two weeks" },
+  { label: "NSU sessions · free", href: "/bd/rsvp", note: "Personal finance, investing and live Q&A" },
+  { label: "The Kosh app", href: "/bd#inside", note: "Real screens, markets, coach and games" },
+  { label: "How it works", href: "/bd#product", note: "Agents find, humans check, you decide" },
 ];
 const PROD_ORGS: NavItem[] = [
-  { label: "Kosh for education", href: "/for-organizations#education", note: "Schools, colleges and campuses" },
-  { label: "Kosh for employee wellness", href: "/for-organizations#workplace", note: "Offices, RMG and factory floors" },
-  { label: "Kosh for CSR programmes", href: "/for-organizations#csr", note: "NGOs, community groups, banks" },
+  { label: "Kosh for education", href: "/bd/for-organizations#education", note: "Schools, colleges and campuses" },
+  { label: "Kosh for employee wellness", href: "/bd/for-organizations#workplace", note: "Offices, RMG and factory floors" },
+  { label: "Kosh for CSR programmes", href: "/bd/for-organizations#csr", note: "NGOs, community groups, banks" },
 ];
 
 const NAV_GROUPS: NavGroup[] = [
+  { label: "Markets", items: [
+    { label: "Kosh Finance", href: "/", note: "Choose your market" },
+    { label: "Bangladesh", href: "/bd", note: "Bangladesh tools and learning" },
+    { label: "Global", href: "/global", note: "Education preview for life abroad" },
+  ] },
   {
     label: "Free tools",
     blurb: "Everything here works without an account.",
@@ -388,10 +393,10 @@ const NAV_GROUPS: NavGroup[] = [
   {
     label: "Company",
     items: [
-      { label: "Why Kosh exists", href: "/#story" },
-      { label: "Impact & inclusion", href: "/#inclusion" },
-      { label: "What people ask for", href: "/feedback", note: "Our open request board" },
-      { label: "Join us", href: "/#join", note: "Careers, campus, research" },
+      { label: "Why Kosh exists", href: "/bd#story" },
+      { label: "Impact & inclusion", href: "/bd#inclusion" },
+      { label: "What people ask for", href: "/bd/feedback", note: "Our open request board" },
+      { label: "Join us", href: "/bd#join", note: "Careers, campus, research" },
     ],
   },
 ];
@@ -400,12 +405,13 @@ const NAV_GROUPS: NavGroup[] = [
    pages. These are direct section links: no dropdown chrome, no filled CTA,
    and no decorative effects competing with the machine below. */
 const HERO_LINKS: NavItem[] = [
-  { label: "Offerings", href: "/offerings" },
-  { label: "Kosh Live TV", href: "/tv/" },
-  { label: "About us", href: "/#story" },
-  { label: "Product", href: "/#product" },
-  { label: "Services", href: "/for-organizations" },
-  { label: "Live sessions", href: "/rsvp" },
+  { label: "Markets", href: "/" },
+  { label: "Offerings", href: "/bd/offerings" },
+  { label: "Kosh Live TV", href: "/bd/tv/" },
+  { label: "About us", href: "/bd#story" },
+  { label: "Product", href: "/bd#product" },
+  { label: "Services", href: "/bd/for-organizations" },
+  { label: "Live sessions", href: "/bd/rsvp" },
   { label: "Learn", href: "/learn" },
   { label: "Blog", href: "/blog" },
 ];
@@ -413,9 +419,9 @@ const HERO_LINKS: NavItem[] = [
 /** A `/#section` link should scroll, not reload, when we're already there. */
 const useAnchorNav = () =>
   (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (!href.startsWith("/#")) return;
+    if (!href.startsWith("/bd#")) return;
     const id = href.slice(2);
-    if (window.location.pathname !== "/") return;
+    if (window.location.pathname !== "/bd") return;
     const el = document.getElementById(id);
     if (!el) return;
     e.preventDefault();
@@ -429,7 +435,7 @@ const useAnchorNav = () =>
 const groupForPath = (path: string): string | null => {
   const hit = NAV_GROUPS.find((g) =>
     (g.href && g.href !== "/" && path.startsWith(g.href)) ||
-    g.items.some((i) => !i.href.startsWith("/#") && i.href !== "/" && path.startsWith(i.href))
+    g.items.some((i) => !i.href.startsWith("/bd#") && i.href !== "/" && path.startsWith(i.href))
   );
   return hit?.label ?? null;
 };
@@ -474,7 +480,7 @@ export const NavV2 = ({ pinned = false }: { pinned?: boolean }) => {
   if (!pinned) {
     return (
       <nav className="nav nav--hero on" aria-label="Main">
-        <a className="nav__brand" href="/">
+        <a className="nav__brand" href="/bd">
           <img src="/img/kosh-logo.png" alt="" />
           KOSH
         </a>
@@ -496,13 +502,13 @@ export const NavV2 = ({ pinned = false }: { pinned?: boolean }) => {
         aria-label="Main"
         onMouseLeave={() => setOpen(null)}
       >
-        <a className="nav__brand" href="/">
+        <a className="nav__brand" href="/bd">
           <img src="/img/kosh-logo.png" alt="" />
           KOSH
         </a>
 
         <div className="nav__links">
-          <a className="nav__start" href="/start">Start here</a>
+          <a className="nav__start" href="/bd/start">Start here</a>
           {NAV_GROUPS.map((g, i) => (
             <div
               className={`navg${open === g.label ? " open" : ""}${i === 0 ? " navg--go" : ""}${here === g.label ? " navg--here" : ""}`}
@@ -615,7 +621,7 @@ export const NavV2 = ({ pinned = false }: { pinned?: boolean }) => {
         data-lenis-prevent
       >
         <div className="sheet__in">
-          <a className="sheet__cta btn btn-primary" href="/start" onClick={() => setSheet(false)}>
+          <a className="sheet__cta btn btn-primary" href="/bd/start" onClick={() => setSheet(false)}>
             Start learning, free
           </a>
           {NAV_GROUPS.map((g) => (

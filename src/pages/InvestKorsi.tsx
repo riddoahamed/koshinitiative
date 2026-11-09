@@ -122,9 +122,9 @@ export default function InvestKorsiPage() {
 
   return (
     <PageShell
-      path={lang === "bn" ? "/bn/investkorsi" : "/investkorsi"}
+      path={lang === "bn" ? "/bd/bn/investkorsi" : "/bd/investkorsi"}
       // Back to the section that sent them, not to the top of the homepage.
-      backTo="/#tools"
+      backTo="/bd#tools"
       className={lang === "bn" ? "lang-bn" : undefined}
     >
       {/* ── 1. SEE ─────────────────────────────────────────────────────── */}

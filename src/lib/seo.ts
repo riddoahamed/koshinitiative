@@ -1,4 +1,5 @@
-const SITE_URL = "https://www.koshbd.com";
+import { SITE_ORIGIN, marketAlternates } from "./marketSeo";
+const SITE_URL = SITE_ORIGIN;
 const DEFAULT_TITLE = "Kosh — AI-powered investment discovery & trust platform | Bangladesh";
 const DEFAULT_DESCRIPTION =
   "Kosh is an AI-powered investment discovery and trust platform — a better way to learn, understand, and take action with money. Verified data, explainable AI, scam detection, paper investing and Shariah screening. Starting in Bangladesh.";
@@ -36,10 +37,18 @@ export const applySeo = ({ title, description, image, path = "/", robots = "inde
 
   /* A Bangla page served with lang="en" tells a screen reader to read Bangla
      with English phonetics, and tells Google the page is English. */
-  document.documentElement.lang = canonicalPath.startsWith("/bn/") ? "bn" : "en";
+  document.documentElement.lang = canonicalPath.startsWith("/bd/bn/") ? "bn" : "en";
   document.title = nextTitle;
   setMeta('meta[name="description"]', "content", nextDescription);
   setMeta('link[rel="canonical"]', "href", canonical);
+  document.head.querySelectorAll('link[rel="alternate"][hreflang]').forEach(el => el.remove());
+  for (const [lang, url] of marketAlternates(canonicalPath)) {
+    const el = document.createElement("link");
+    el.rel = "alternate";
+    el.hreflang = lang;
+    el.href = `${SITE_URL}${url}`;
+    document.head.appendChild(el);
+  }
   setMeta('meta[property="og:title"]', "content", nextTitle);
   setMeta('meta[property="og:description"]', "content", nextDescription);
   setMeta('meta[property="og:url"]', "content", canonical);

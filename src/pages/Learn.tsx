@@ -44,6 +44,7 @@ const Learn = () => {
         <div className="blob p" style={{ width: 440, height: 440, left: "-10%", top: "-4%" }} />
         <div className="wrap">
           <p className="eyebrow" data-reveal>quick lessons</p>
+          <p className="market-label">Market context: Bangladesh · Product examples and rules are local.</p>
           <h2 className="h-display" data-reveal style={{ ["--d" as string]: "70ms" }}>
             Learn one thing. It takes two minutes.
           </h2>
@@ -130,7 +131,7 @@ const Learn = () => {
               <a className="btn btn-primary" href={KOSH_APP_URL} target="_blank" rel="noreferrer">
                 Try Kosh <ArrowRight size={16} strokeWidth={2.4} />
               </a>
-              <a className="btn btn-glass" href="/quiz">What kind of investor am I?</a>
+              <a className="btn btn-glass" href="/bd/quiz">What kind of investor am I?</a>
             </div>
           </div>
 
