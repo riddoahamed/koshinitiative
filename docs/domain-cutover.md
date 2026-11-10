@@ -18,6 +18,12 @@ The domain list still shows ALERT with only Contact Support, and a fresh registr
 check still reports `client hold`. Risk Management must review and release it.
 No DNS or production routing was changed during these checks.
 
+The owner then confirmed the missing final phone digit. The agent corrected
+the phone field, saved it, and verified Namecheap's success confirmation and
+the complete formatted number on the profile summary. Profile correction is
+now saved; Risk Management review and release of the domain remain pending.
+Confirmation screenshot: `/tmp/kosh-namecheap-profile-updated.png`.
+
 ## Current blocker
 
 The registry reports `client hold` for koshfinance.com. Public DNS returns
