@@ -1,6 +1,14 @@
 # koshfinance.com cutover — prepared, not activated
 
-Checked 10 November 2026 (Asia/Dhaka).
+Checked 11 November 2026 (Asia/Dhaka).
+
+Update: Namecheap support has temporarily unlocked the account and requires
+accurate legal-name and address details in the account profile within 24 hours
+of its email. The owner supplied that support reply in chat. A fresh registry
+check still reports `client hold`. Edge is at Namecheap sign-in; the existing
+prefilled login did not open the account. Waiting for the owner to sign in and
+confirm the exact profile details, or enter those private details directly.
+No profile information or DNS has been changed.
 
 ## Current blocker
 
