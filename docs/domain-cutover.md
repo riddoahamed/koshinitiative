@@ -10,6 +10,14 @@ prefilled login did not open the account. Waiting for the owner to sign in and
 confirm the exact profile details, or enter those private details directly.
 No profile information or DNS has been changed.
 
+Later on 11 November, the owner signed in and updated the profile directly.
+Namecheap displays “Success! Your Primary Address has been updated.” The saved
+legal name and street/apartment fields are present. The phone still appears
+incomplete; the owner has been asked to correct or confirm the complete number.
+The domain list still shows ALERT with only Contact Support, and a fresh registry
+check still reports `client hold`. Risk Management must review and release it.
+No DNS or production routing was changed during these checks.
+
 ## Current blocker
 
 The registry reports `client hold` for koshfinance.com. Public DNS returns
