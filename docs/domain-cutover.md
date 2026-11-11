@@ -5,16 +5,31 @@ Checked 11 November 2026 (Asia/Dhaka).
 ## Latest resumed work on 11 November
 
 Namecheap's 3:47 AM support email confirms the profile issue was resolved.
-Nevertheless, a fresh registry query still reports `client hold`, and the
-authoritative .com nameserver returns NXDOMAIN. This is live delegation state,
-not just a local DNS-cache result. Inspect the domain's current account notice
-after sign-in before assuming the profile confirmation released the domain.
+Nevertheless, the signed-in domain dashboard still says “Blocked / Please
+contact Risk Management.” A registry query reports `client hold`, and the
+authoritative .com nameserver returns NXDOMAIN. Account access has returned,
+but the domain-level restriction has not been released.
 
-Edge's native control connection failed. The owner authorised Chrome instead.
-Chrome is connected, but Namecheap rejected its saved login; manual sign-in is
-pending. Supabase and Resend are also waiting on their existing GitHub sign-ins.
-All three tabs are marked for handoff. No DNS, Auth URL, sender or live redirect
-change has been made.
+Edge's native control connection failed. The owner authorised Chrome instead
+and completed sign-in to Namecheap, Supabase and Resend. All three accounts are
+accessible. The remaining Namecheap domain-contact Edit controls are disabled.
+A test Google TXT save in Advanced DNS did not persist: reloading still shows
+only the original parking CNAME and root URL redirect. No DNS change is applied.
+The support reply requesting release of the remaining domain block is awaiting
+the owner's explicit email-sending authorization; it has not been sent.
+
+Supabase now has eight redirect allow-list entries. Existing entries were kept,
+and these exact HTTPS callbacks were added for both app.koshfinance.com and
+app.koshbd.com: `/auth`, `/auth?reset=1`, and `/auth?reset=1&next=/ops`.
+Site URL remains `https://app.koshbd.com` until the new DNS and TLS work.
+Proof: `/tmp/kosh-auth-redirects-added.png`.
+
+Resend now contains the new koshfinance.com domain, ID
+`490030b2-f605-4adb-9f16-38051a09ef4b`, region Tokyo. Its actual generated DKIM,
+SPF-related CNAME and DMARC records are saved in `resend-dns-records.json`.
+DNS verification is “not started”; Forge is disabled. No new from-address was
+enabled in the application, and the existing verified sender remains active.
+Proof: `/tmp/koshfinance-resend-dns-pending.png`.
 
 The migration now incorporates the exact deployed website source at `be32133`,
 including October rates. Its 93 public pages get correct initial HTML metadata,
@@ -27,7 +42,7 @@ https://koshinitiative-landing-aqd9qgmc6-riddoahamed-5267s-projects.vercel.app
 
 The app migration is isolated at `/Users/riddo/Desktop/kosh-app-domain-cutover`,
 branch `codex/app-domain-cutover`, based on the exact deployed app commit
-`a1e773e1`. It updates public app/share/website URLs and prepares RSVP/team-admin
+`a1e773e1`. It updates public app/share/website URLs and RSVP/team-admin
 origin allowlists. It does not change ops account identifiers or existing
 mailboxes. The app build and 17 preview tests pass, and its staged auth page,
 web manifest and Android asset associations return HTTP 200:
@@ -51,9 +66,12 @@ host. The public app's canonical URLs move to app.koshfinance.com; do not silent
 redirect the installed shell to an origin absent from its trusted-origin list.
 An Android binary update is a separate release task.
 
-Backend deployment must retain existing gateway settings: `event-rsvp` has
-`verify_jwt=false`, `team-admin` has `verify_jwt=true`. These source changes are
-prepared, not yet deployed. Google sign-in is enabled, Apple is disabled. The
+The backend origin additions have been deployed: `event-rsvp` version 6 has
+`verify_jwt=false`, and `team-admin` version 3 has `verify_jwt=true`, preserving
+the previous gateway settings. OPTIONS requests from koshfinance.com,
+app.koshfinance.com and www.koshbd.com return 204 with the correct allowed
+origin. An unrelated origin returns 403. No RSVP submission or email was sent.
+Google sign-in is enabled, Apple is disabled. The
 Google provider still calls the same Supabase callback host; do not replace that
 provider callback with an app URL.
 
@@ -85,10 +103,13 @@ Confirmation screenshot: `/tmp/kosh-namecheap-profile-updated.png`.
 ## Current blocker
 
 The registry reports `client hold` for koshfinance.com. Public DNS returns
-NXDOMAIN. Namecheap's account notice confirms an account lock and service
-suspension after a contact-information deadline. The owner has emailed the
-Namecheap Risk Management team. Namecheap must restore the account and release
-the hold before DNS can serve the new domain.
+NXDOMAIN. The signed-in Namecheap domain page still says to contact Risk
+Management even after its profile-resolution email. Namecheap must release the
+remaining domain block and enable its contact/DNS controls. The current domain
+contacts still contain the former placeholders, and their Edit links are
+disabled; they must be corrected once enabled. Domain privacy is on, expiration
+is 18 October 2027, and renewal controls are also disabled while blocked.
+Proof: `/tmp/koshfinance-namecheap-still-blocked.png`.
 
 Both koshfinance.com and www.koshfinance.com have been added to the existing
 Vercel project `koshinitiative-landing`. DNS verification is pending. No live
@@ -116,24 +137,23 @@ The learner app still uses app.koshbd.com, and the email sender has not changed.
 
 ## Required before promotion
 
-1. After Namecheap restores access, inspect account notices, registrant contact
-   status, expiration, privacy and renewal state for both domains. Preserve the
-   existing mail records. koshfinance.com expires 18 October 2027 per registry.
+1. Have Namecheap Risk Management release the remaining domain-level hold.
+   Correct the domain's registrant contacts using the owner's verified profile
+   once Edit is enabled. Confirm renewal state; keep both domains renewed.
+   The current Namecheap account contains only koshfinance.com; koshbd.com is
+   registered in a different account. Preserve existing mail records.
 2. Replace the new domain's parking records with the exact current Vercel domain
-   recommendations. The CLI currently requests apex A `76.76.21.21`. Confirm
-   www's record from the project dashboard. Verify DNS and HTTPS before any old
-   domain redirects are made live.
-3. Decide and prepare the app's destination, preferably app.koshfinance.com.
-   Attach it to Vercel project `kosh`, update app canonical/share/PWA/Android
-   associations, and verify Supabase email reset, confirmation and OAuth flows.
-   Preserve existing callback URLs while old links can still be in flight.
-   Changing only the Site URL is insufficient; inspect the full current auth
-   configuration and exact provider callbacks before editing them.
-4. Verify koshfinance.com in Resend with its generated SPF, DKIM and return-path
-   records. Check DMARC and the actual mailbox/reply-to route. Change sender and
-   email links only after verification. Do not replace working old mail DNS.
-5. Reconcile this branch with the current production source and any concurrent
-   website work; the source started from landing main at `dae2dfe`.
+   recommendations from `domain-dns-records.json`: apex rank-1 A records are
+   `216.198.79.1` and `64.29.17.1`; www and app use their saved project CNAMEs.
+   Verify DNS and HTTPS before any old-domain redirects are made live.
+3. The app destination and exact callback allow-list entries are prepared.
+   When DNS/TLS works, switch Supabase Site URL to https://app.koshfinance.com,
+   update the backend APP_URL/SITE_URL values, and verify login, confirmation,
+   recovery and Google OAuth. Keep old callbacks for existing installations.
+4. Apply the saved actual Resend DNS records, verify the new sender and confirm
+   the receiving/reply-to route. Change email from-addresses only afterward.
+5. Compare the current production source again before promotion in case other
+   work shipped after the checked website `be32133` / app `a1e773e1` baselines.
 6. Verify apex/www permanent redirects, deep paths, UTM queries, Bangla pages,
    external RSVP/TV rewrites, downloads, login and recovery in a staged build.
    Review initial HTML metadata as well as client-rendered metadata.
@@ -147,9 +167,10 @@ The learner app still uses app.koshbd.com, and the email sender has not changed.
 
 ## Validation so far
 
-- Production Vite build and TypeScript check pass.
-- 45 focused migration, preview, FDR and sitemap tests pass.
-- Full suite: 55 passed, 2 failed. Both failures are existing cross-repository
+- Website production Vite build and TypeScript check pass; app build passes.
+- 55 focused website migration, metadata, rehosting and sitemap checks pass;
+  17 app preview checks pass (72 focused checks total).
+- Earlier full website suite: 55 passed, 2 failed. Both failures are existing cross-repository
   persona-game copy drift; reproduced unchanged in the original landing repo.
 - Main market-selection and Global pages render in Edge locally.
 

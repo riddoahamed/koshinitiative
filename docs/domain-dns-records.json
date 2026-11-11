@@ -37,6 +37,6 @@
   "notes": [
     "Keep Namecheap nameservers and existing mail records.",
     "Replace parking A and www CNAME records, retaining MX and existing SPF.",
-    "Resend verification records must be obtained from the actual Resend account."
+    "Actual Resend verification records are saved separately in resend-dns-records.json; DNS is not applied."
   ]
 }

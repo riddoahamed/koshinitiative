@@ -1,0 +1,27 @@
+{
+  "domain": "koshfinance.com",
+  "domainId": "490030b2-f605-4adb-9f16-38051a09ef4b",
+  "status": "DNS not applied; Namecheap domain remains blocked",
+  "records": [
+    {
+      "type": "TXT",
+      "host": "resend._domainkey",
+      "value": "p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDNClobb8ZgZ294qYSL2gjp/xkk+c1PJh6J95cB9RhZVZoMog1cozjdzGZ0YeGKwFtzw4lyVfbXAMGj/QfbgnAlJf/2s1M+xiT0qsIlIoLlYS3OhfFxFfknsSQhncPPowYDh/8PAcbiIgj8Nuw37yES2+u6KnlFcF7dO/OaAhHBDwIDAQAB"
+    },
+    {
+      "type": "CNAME",
+      "host": "rsend",
+      "value": "rsend-apne1.forge.rmta.net"
+    },
+    {
+      "type": "CNAME",
+      "host": "send",
+      "value": "send.forge.rmta.net"
+    },
+    {
+      "type": "TXT",
+      "host": "_dmarc",
+      "value": "v=DMARC1; p=none;"
+    }
+  ]
+}
