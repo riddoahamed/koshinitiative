@@ -1,6 +1,7 @@
 # koshfinance.com cutover — prepared, not activated
 
-Checked 11 November 2026 (Asia/Dhaka).
+Checked 11 November 2026 (Asia/Dhaka); registry and authoritative DNS rechecked
+at 15:26 after the owner reported the hold had been released.
 
 ## Latest resumed work on 11 November
 
@@ -8,11 +9,16 @@ Namecheap's 3:47 AM support email confirms the profile issue was resolved.
 Nevertheless, the signed-in domain dashboard still says “Blocked / Please
 contact Risk Management.” A registry query reports `client hold`, and the
 authoritative .com nameserver returns NXDOMAIN. Account access has returned,
-but the domain-level restriction has not been released.
+but release of the domain-level restriction has not taken effect in the live
+registry. The latest Risk Management message in the Kosh mailbox remains the
+03:47 profile-resolution message. Refreshing Namecheap now requires another
+sign-in, which the owner has been asked to complete before its current controls
+can be inspected.
 
 Edge's native control connection failed. The owner authorised Chrome instead
-and completed sign-in to Namecheap, Supabase and Resend. All three accounts are
-accessible. The remaining Namecheap domain-contact Edit controls are disabled.
+and completed sign-in to Namecheap, Supabase and Resend. Namecheap's session has
+since expired. At the last authenticated inspection, domain-contact Edit
+controls were disabled.
 A test Google TXT save in Advanced DNS did not persist: reloading still shows
 only the original parking CNAME and root URL redirect. No DNS change is applied.
 The support reply requesting release of the remaining domain block is awaiting
@@ -41,13 +47,19 @@ latest staged deployment:
 https://koshinitiative-landing-aqd9qgmc6-riddoahamed-5267s-projects.vercel.app
 
 The app migration is isolated at `/Users/riddo/Desktop/kosh-app-domain-cutover`,
-branch `codex/app-domain-cutover`, based on the exact deployed app commit
-`a1e773e1`. It updates public app/share/website URLs and RSVP/team-admin
+branch `codex/app-domain-cutover`, originally based on deployed app `a1e773e1`.
+At 15:27 it incorporated the now-live `da511e11` source, including today's data
+ingestion, without conflicts. It updates public app/share/website URLs and RSVP/team-admin
 origin allowlists. It does not change ops account identifiers or existing
 mailboxes. The app build and 17 preview tests pass, and its staged auth page,
-web manifest and Android asset associations return HTTP 200:
+web manifest, Android asset associations and PNG link-preview endpoint return
+HTTP 200 on the replacement stage:
 
-https://kosh-6uzjddcxm-riddoahamed-5267s-projects.vercel.app
+https://kosh-h84n4xl7x-riddoahamed-5267s-projects.vercel.app
+
+The previous app stage is superseded. Vercel reports this deployment READY;
+its serverless bundler emits NodeNext import diagnostics, while the local
+production build passes and `/api/og` serves a PNG successfully.
 
 Website: 55 focused migration/metadata/sitemap checks pass. App: 17 pass. Both
 production builds pass. Both stages were deployed with `--skip-domain`; neither
@@ -153,7 +165,7 @@ The learner app still uses app.koshbd.com, and the email sender has not changed.
 4. Apply the saved actual Resend DNS records, verify the new sender and confirm
    the receiving/reply-to route. Change email from-addresses only afterward.
 5. Compare the current production source again before promotion in case other
-   work shipped after the checked website `be32133` / app `a1e773e1` baselines.
+   work shipped after the checked website `be32133` / app `da511e11` baselines.
 6. Verify apex/www permanent redirects, deep paths, UTM queries, Bangla pages,
    external RSVP/TV rewrites, downloads, login and recovery in a staged build.
    Review initial HTML metadata as well as client-rendered metadata.
