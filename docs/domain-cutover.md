@@ -2,6 +2,64 @@
 
 Checked 11 November 2026 (Asia/Dhaka).
 
+## Latest resumed work on 11 November
+
+Namecheap's 3:47 AM support email confirms the profile issue was resolved.
+Nevertheless, a fresh registry query still reports `client hold`, and the
+authoritative .com nameserver returns NXDOMAIN. This is live delegation state,
+not just a local DNS-cache result. Inspect the domain's current account notice
+after sign-in before assuming the profile confirmation released the domain.
+
+Edge's native control connection failed. The owner authorised Chrome instead.
+Chrome is connected, but Namecheap rejected its saved login; manual sign-in is
+pending. Supabase and Resend are also waiting on their existing GitHub sign-ins.
+All three tabs are marked for handoff. No DNS, Auth URL, sender or live redirect
+change has been made.
+
+The migration now incorporates the exact deployed website source at `be32133`,
+including October rates. Its 93 public pages get correct initial HTML metadata,
+not only metadata applied after JavaScript loads. RSVP and TV keep their current
+upstream services, with public canonical and app links translated to the new
+addresses. Their documents and TV stylesheet were checked successfully on the
+latest staged deployment:
+
+https://koshinitiative-landing-aqd9qgmc6-riddoahamed-5267s-projects.vercel.app
+
+The app migration is isolated at `/Users/riddo/Desktop/kosh-app-domain-cutover`,
+branch `codex/app-domain-cutover`, based on the exact deployed app commit
+`a1e773e1`. It updates public app/share/website URLs and prepares RSVP/team-admin
+origin allowlists. It does not change ops account identifiers or existing
+mailboxes. The app build and 17 preview tests pass, and its staged auth page,
+web manifest and Android asset associations return HTTP 200:
+
+https://kosh-6uzjddcxm-riddoahamed-5267s-projects.vercel.app
+
+Website: 55 focused migration/metadata/sitemap checks pass. App: 17 pass. Both
+production builds pass. Both stages were deployed with `--skip-domain`; neither
+has replaced the existing live deployment. app.koshfinance.com is now attached
+to Vercel project `kosh`, with DNS pending.
+
+Search Console already verifies koshbd.com and app.koshbd.com in the Kosh Google
+account. Verification for koshfinance.com is prepared but not completed. The
+current Vercel and Google DNS records are saved in `domain-dns-records.json`.
+Do not file Change of Address or submit the new sitemap until DNS/HTTPS and the
+actual old-domain 301s have passed live checks.
+
+Preserve the installed Android app's old launch host as a compatibility alias
+to the same application during this website cutover. Existing APKs trust that
+host. The public app's canonical URLs move to app.koshfinance.com; do not silently
+redirect the installed shell to an origin absent from its trusted-origin list.
+An Android binary update is a separate release task.
+
+Backend deployment must retain existing gateway settings: `event-rsvp` has
+`verify_jwt=false`, `team-admin` has `verify_jwt=true`. These source changes are
+prepared, not yet deployed. Google sign-in is enabled, Apple is disabled. The
+Google provider still calls the same Supabase callback host; do not replace that
+provider callback with an app URL.
+
+The historical entries below record earlier observations; the summary above is
+the latest status.
+
 Update: Namecheap support has temporarily unlocked the account and requires
 accurate legal-name and address details in the account profile within 24 hours
 of its email. The owner supplied that support reply in chat. A fresh registry
