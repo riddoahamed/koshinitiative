@@ -22,6 +22,7 @@ import { ogDocument, isCrawler, isAiCrawler, metaForPath, blogSlug } from "./src
 import { fdrCrawlerDocument, bankFdrDocument } from "./src/v2/fdr/seo";
 import type { Post } from "./src/v2/posts";
 import { migrationRedirect } from "./src/lib/domainMigration";
+import { rehostHtml, upstreamPage } from "./src/lib/rehostHtml";
 
 // The edge runtime exposes the project's environment variables on `process`,
 // but this project has no @types/node (nothing else here is server code) and
@@ -102,6 +103,18 @@ export default async function middleware(request: Request): Promise<Response | u
   const destination = migrationRedirect(request.url);
   if (destination) return Response.redirect(destination, 301);
   const { pathname } = new URL(request.url);
+  const upstream = upstreamPage(pathname);
+  if (upstream) {
+    try {
+      const target = new URL(upstream);
+      target.search = new URL(request.url).search;
+      const response = await fetch(target, { signal: AbortSignal.timeout(8000) });
+      return new Response(rehostHtml(await response.text()), {
+        status: response.status,
+        headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "private, no-store" },
+      });
+    } catch { return undefined; } // Preserve the existing platform rewrite as fallback.
+  }
   if (/\.[a-zA-Z0-9]+$/.test(pathname) || pathname.startsWith("/bd/tv")) return undefined;
   const ua = request.headers.get("user-agent");
   const ai = isAiCrawler(ua);
