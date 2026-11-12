@@ -1,9 +1,35 @@
 # koshfinance.com cutover — prepared, not activated
 
-Checked 11 November 2026 (Asia/Dhaka); registry and authoritative DNS rechecked
-at 15:26 after the owner reported the hold had been released.
+Checked 12 November 2026 (Asia/Dhaka).
 
-## Latest resumed work on 11 November
+## Latest resumed work on 12 November
+
+The owner signed in to Namecheap again. A refreshed, authenticated inspection
+still shows “Please contact Risk Management,” and all four domain-contact Edit
+links retain their disabled class. The registrant data still contains the old
+placeholders. The account is accessible; its domain controls remain restricted.
+
+At 11:00, a fresh Verisign RDAP query reports `client hold` and `client transfer
+prohibited`. Direct, non-recursive NS lookup against a.gtld-servers.net returns
+authoritative NXDOMAIN. The domain release has not taken effect. No DNS or live
+website/app routing change was made.
+
+The owner explicitly approved sending the prepared support reply. Gmail
+confirmed “Message sent” at 11:02 to `tos@namecheap.com` from
+`koshinitiative@gmail.com`, in existing ticket `NC-QSR-2595`. It asks Namecheap
+to remove the remaining domain-level hold, restore DNS and domain-contact
+editing, and specify any further verification needed. No private identity
+documents or profile details were included.
+
+Proof: `/tmp/kosh-namecheap-support-sent-2026-11-12.png`.
+Current restriction: `/tmp/kosh-namecheap-hold-2026-11-12.png`.
+
+Provider release remains necessary before applying the prepared DNS, verifying
+HTTPS and email, and promoting both checked migration deployments together.
+The records and staged deployments below remain prepared, not live. Compare
+production source again immediately before promotion to preserve later updates.
+
+## Preparation and observations from 11 November
 
 Namecheap's 3:47 AM support email confirms the profile issue was resolved.
 Nevertheless, the signed-in domain dashboard still says “Blocked / Please
