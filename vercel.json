@@ -1,8 +1,18 @@
 {
   "redirects": [
     {
+      "source": "/rsvp",
+      "destination": "https://koshfinance.com/bd/rsvp",
+      "statusCode": 301
+    },
+    {
+      "source": "/tv/:path*",
+      "destination": "https://koshfinance.com/bd/tv/:path*",
+      "statusCode": 301
+    },
+    {
       "source": "/bd/investkorsi/:path+",
-      "destination": "https://app.koshbd.com/investkorsi/:path*",
+      "destination": "https://app.koshfinance.com/investkorsi/:path*",
       "permanent": false
     },
     {

@@ -1,7 +1,8 @@
 {
   "domain": "koshfinance.com",
   "domainId": "490030b2-f605-4adb-9f16-38051a09ef4b",
-  "status": "DNS not applied; Namecheap domain remains blocked",
+  "status": "DNS applied; Resend domain verified and Forge ready; new sender enabled",
+  "checked": "2026-11-13",
   "records": [
     {
       "type": "TXT",

@@ -74,7 +74,7 @@ export default function NSUSessions() {
                 <p>{result.already_listed ? "We’ve kept your existing registration for this email." : result.status === "interested" ? "We’ll email you when the schedule is confirmed. This isn’t a confirmed seat yet." : result.status === "waitlisted" ? "We’ll contact you if a place becomes available." : "Save your reference and the session details."}</p>
                 {result.receipt && <p className="nsu-sessions__reference">{result.receipt}</p>}
                 <p>{result.email_sent ? "Check your inbox and spam folder for the Kosh email." : "Your details are saved. Keep your reference for later."}</p>
-                <a href="https://app.koshbd.com/auth?signup=1">Explore Kosh while you wait <ArrowRight size={16} aria-hidden="true" /></a>
+                <a href="https://app.koshfinance.com/auth?signup=1">Explore Kosh while you wait <ArrowRight size={16} aria-hidden="true" /></a>
               </div> : <>
                 <h3>{mode === "open" ? "Register for the sessions" : mode === "closed" ? "This session list is closed" : "Join the interest list"}</h3>
                 <p className="nsu-sessions__schedule">{dates.length ? dates.join(" · ") : "Dates, time and room to be announced. Joining the list doesn’t reserve a seat."}</p>

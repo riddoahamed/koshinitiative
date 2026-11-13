@@ -157,7 +157,7 @@ export const LOCAL_POSTS: Post[] = [
     readMins: 12,
     allowHtml: true,
     lesson: {
-      href: "https://app.koshbd.com/module/z6-7",
+      href: "https://app.koshfinance.com/module/z6-7",
       label: "Your first share doesn't have to be a Dhaka one",
       note: "The same ladder as a 14-minute lesson, with the checks, the ordering game and a quiz that will catch you out on the W-8BEN.",
     },
@@ -235,7 +235,7 @@ export const LOCAL_POSTS: Post[] = [
     readMins: 16,
     allowHtml: true,
     lesson: {
-      href: "https://app.koshbd.com/module/z6-8",
+      href: "https://app.koshfinance.com/module/z6-8",
       label: "Reading an American company: signal, noise and what the numbers mean",
       note: "The research method as a 16-minute lesson, with a signal-or-noise game and a quiz on the numbers that trip people up.",
     },

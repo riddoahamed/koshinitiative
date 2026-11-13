@@ -1,7 +1,7 @@
 {
   "domain": "koshfinance.com",
-  "status": "prepared, not applied",
-  "checked": "2026-11-11",
+  "status": "applied; authoritative DNS and public resolvers verified; HTTPS valid",
+  "checked": "2026-11-13",
   "records": [
     {
       "type": "A",
@@ -36,7 +36,7 @@
   ],
   "notes": [
     "Keep Namecheap nameservers and existing mail records.",
-    "Replace parking A and www CNAME records, retaining MX and existing SPF.",
-    "Actual Resend verification records are saved separately in resend-dns-records.json; DNS is not applied."
+    "Parking records were replaced; MX and existing SPF were retained.",
+    "Actual Resend records in resend-dns-records.json are applied; Resend reports verified and ready."
   ]
 }

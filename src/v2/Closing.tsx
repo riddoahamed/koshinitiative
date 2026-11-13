@@ -210,7 +210,7 @@ export const FootV2 = () => (
           <QrCode value={KOSH_APP_URL} size={104} />
           <div>
             <b>Scan to open the beta</b>
-            <span>app.koshbd.com</span>
+            <span>app.koshfinance.com</span>
           </div>
         </div>
       </div>
@@ -261,8 +261,8 @@ export const FootV2 = () => (
       <div>
         <h4>Elsewhere</h4>
         <ul>
-          <li><a href="https://instagram.com/kosh.initiative" target="_blank" rel="noreferrer">Instagram</a></li>
-          <li><a href="https://facebook.com/KoshInitiative" target="_blank" rel="noreferrer">Facebook</a></li>
+          <li><a href="https://instagram.com/kosh.finance" target="_blank" rel="noreferrer">Instagram</a></li>
+          <li><a href="https://www.facebook.com/profile.php?id=61582151648664" target="_blank" rel="noreferrer">Facebook</a></li>
           <li><a href="https://www.linkedin.com/company/kosh-%E0%A6%95%E0%A7%8B%E0%A6%B7/" target="_blank" rel="noreferrer">LinkedIn</a></li>
           <li><a href="https://wa.me/8801607966000" target="_blank" rel="noreferrer">WhatsApp</a></li>
         </ul>

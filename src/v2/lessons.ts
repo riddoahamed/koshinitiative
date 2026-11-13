@@ -19,7 +19,7 @@ export interface Lesson {
   zone: { href: string; label: string; blurb: string };
 }
 
-const APP = "https://app.koshbd.com";
+const APP = "https://app.koshfinance.com";
 
 export const LESSONS: Lesson[] = [
   {

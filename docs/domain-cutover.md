@@ -12,11 +12,15 @@ The parking redirect was removed. Public Cloudflare and both Google resolvers
 return the new Vercel A records. Vercel issued a valid certificate for all three
 new public hosts; HTTPS succeeds without bypassing certificate validation.
 
-Both checked releases are promoted:
+Both checked releases are promoted, and their migration branches are merged:
 
-- Website: `dpl_Dt8qgqooDR3qLfibrWRw1XR1XnAX`, stage aqd9qgmc6.
+- Website: [PR 6](https://github.com/riddoahamed/koshinitiative/pull/6),
+  merge `b54b02e2ef25796fe062ed73eb60659e16154dda`. Follow-up route fixes were
+  promoted as `dpl_GTWE4ZCxFtQ4MiYF43PNKUWSpCvk` before their source follow-up.
 - App: `dpl_GhcSWJFySbosJXWz1ggtFPyAqbRc`, stage 4ezq1fesz. It incorporates
   current production data at `aa5b7dfb`; build and 17 app tests pass again.
+  [PR 53](https://github.com/riddoahamed/kosh-web/pull/53) is merged, with
+  Vercel and Netlify checks passing; merge `ef8c13fa75a9861e1c32bd88efb357fe22a30d8a`.
 
 Live checks confirm the new root, /bd and app /auth return 200; koshbd.com root
 returns 301 to https://koshfinance.com/bd; an old www FDR link returns 301 to
@@ -30,11 +34,51 @@ https://app.koshfinance.com and https://koshfinance.com respectively. Resend
 reports the new domain verified and ready. Only after this verification,
 RESEND_FROM was set to `Kosh <hello@koshfinance.com>`. A receiving forwarder
 hello@koshfinance.com -> koshinitiative@gmail.com is saved in Namecheap.
-Google Search Console verified the new domain through its DNS record.
+Google Search Console verified the new domain through its DNS record. The
+new sitemap reports Success and 93 discovered URLs. Change of Address is filed
+for both https://koshbd.com/ and https://www.koshbd.com/; both show a move to
+koshfinance.com starting 13 November 2026.
 
-Remaining completion work: persist the changes in both production Git branches,
-finish Search Console move/sitemap submissions, verify registrar contact-save
-results, update authorised social links, and establish the requested monitoring.
+All four Namecheap domain-contact roles were saved using the already approved
+Primary Address; the dashboard confirmed "Domain contacts updated." Private
+profile details are intentionally omitted here. The new domain expires
+18 October 2027; auto-renew is currently off. koshbd.com expires 11 May 2027,
+belongs to another registrar login, and must continue to be renewed indefinitely.
+
+### Legacy QR routing override
+
+The project-level Vercel route `Kosh session RSVP`
+(`b717c0b2-7451-4e76-b3ff-09a10772a676`, pattern `^/rsvp/?$`) intercepted
+requests before deployment middleware and rewrote them directly to the old
+service with HTTP 200. It is now disabled and that change is published. Keep
+it disabled. Explicit /rsvp and /tv redirects in vercel.json retain HTTP 301
+and query strings. The old QR event URL now reaches
+https://koshfinance.com/bd/rsvp?event=nsu-learn-investing.
+
+### Verification and monitoring
+
+Run `python3 scripts/check-domain-cutover.py` for 24 read-only live assertions,
+including TLS validation, old/new host redirects, query preservation, initial
+HTML canonicals, sitemap hosts, app auth/assets, RSVP/TV and RSVP CORS. All 24
+passed on 13 November. Both builds and 72 focused migration/metadata/app tests
+passed. Two historical full-suite persona-copy failures predate this migration.
+
+The active local heartbeat `monitor-kosh-domain-cutover` checks every six hours
+through 27 November 2026 at 12:00 Asia/Dhaka. It stays quiet when healthy and
+reports meaningful regressions, required action or completion. Codex and the
+computer must be running for local monitoring. It performs read-only checks;
+no signups, RSVP submissions or test emails are created.
+
+Instagram's website editor is mobile-only. The owner explicitly deferred that
+bio-link edit; its old domain link remains functional through the permanent
+redirect. Website footer and rehosted event/TV social links now use the verified
+@kosh.finance Instagram account and the owned Kosh Finance Facebook page
+(profile ID 61582151648664), replacing the dead KoshInitiative Facebook URL.
+Facebook's page website is saved as https://koshfinance.com, and its existing
+bio now uses app.koshfinance.com. Other bio wording and links are preserved.
+Public website app buttons, new QR generation, lesson/game deep links, app
+structured data and llms references use app.koshfinance.com. The old app host
+remains an installed-Android compatibility alias to the same deployment.
 
 Earlier entries below are historical checkpoints, not current blockers.
 

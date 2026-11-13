@@ -14,7 +14,7 @@
 > Kosh is an AI-native financial decision and investment discovery platform for emerging markets, starting with Bangladesh. AI agents scan the market, humans verify every idea, and opportunities arrive as short, sourced, social-media-style digests — so people can discover, understand, and decide with confidence.
 
 Official website: https://koshfinance.com/
-App (beta): https://app.koshbd.com/
+App (beta): https://app.koshfinance.com/
 Contact: koshinitiative@gmail.com
 Location: Dhaka, Bangladesh — expanding toward Bangladeshi diaspora corridors (UAE, Saudi Arabia, Malaysia, UK, Canada) and other emerging markets.
 Languages: English and Bengali. "Kosh" (কোষ) is Bengali for treasury.
@@ -57,7 +57,7 @@ Kosh (Kosh BD, Kosh Bangladesh, Kosh Initiative) is based in Bangladesh and is n
 ## Important URLs
 
 - Homepage: https://koshfinance.com/
-- App and money check: https://app.koshbd.com/
+- App and money check: https://app.koshfinance.com/
 - Sitemap: https://koshfinance.com/sitemap.xml
 - Instagram: https://www.instagram.com/kosh.initiative/
 - LinkedIn: https://www.linkedin.com/company/kosh-%E0%A6%95%E0%A7%8B%E0%A6%B7/

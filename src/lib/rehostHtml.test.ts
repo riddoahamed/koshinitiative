@@ -3,11 +3,13 @@ import { rehostHtml, upstreamPage } from "./rehostHtml";
 
 describe("public RSVP and TV addresses", () => {
   it("updates canonicals, event queries and app links without changing mailboxes or assets", () => {
-    const html = `<link rel="canonical" href="https://www.koshbd.com/rsvp"><a href="https://koshbd.com/rsvp?event=nsu">event</a><a href="https://app.koshbd.com/auth?signup=1">app</a><a href="mailto:hello@koshbd.com">mail</a><script src="newsroom.js"></script>`;
+    const html = `<link rel="canonical" href="https://www.koshbd.com/rsvp"><a href="https://koshbd.com/rsvp?event=nsu">event</a><a href="https://app.koshbd.com/auth?signup=1">app</a><a href="https://instagram.com/kosh.initiative">Instagram</a><a href="https://facebook.com/KoshInitiative">Facebook</a><a href="mailto:hello@koshbd.com">mail</a><script src="newsroom.js"></script>`;
     const result = rehostHtml(html);
     expect(result).toContain('href="https://koshfinance.com/bd/rsvp"');
     expect(result).toContain('href="https://koshfinance.com/bd/rsvp?event=nsu"');
     expect(result).toContain('href="https://app.koshfinance.com/auth?signup=1"');
+    expect(result).toContain('href="https://instagram.com/kosh.finance"');
+    expect(result).toContain('href="https://www.facebook.com/profile.php?id=61582151648664"');
     expect(result).toContain('mailto:hello@koshbd.com');
     expect(result).toContain('src="newsroom.js"');
     expect(rehostHtml('<link href="https://www.koshbd.com/tv/">')).toContain('https://koshfinance.com/bd/tv/');
