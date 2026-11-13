@@ -1,6 +1,42 @@
-# koshfinance.com cutover — prepared, not activated
+# koshfinance.com website/app cutover — live
 
-Checked 12 November 2026 (Asia/Dhaka).
+Checked 13 November 2026 (Asia/Dhaka).
+
+## Live cutover on 13 November
+
+Namecheap confirmed services unlocked at 08:19. Verisign no longer reports
+clientHold, and authoritative .com delegation is restored. Nine prepared DNS
+records are saved: two apex A records, www/app CNAMEs, Google verification TXT,
+and Resend's DKIM, return-path CNAMEs and DMARC. Existing mail MX/SPF remain.
+The parking redirect was removed. Public Cloudflare and both Google resolvers
+return the new Vercel A records. Vercel issued a valid certificate for all three
+new public hosts; HTTPS succeeds without bypassing certificate validation.
+
+Both checked releases are promoted:
+
+- Website: `dpl_Dt8qgqooDR3qLfibrWRw1XR1XnAX`, stage aqd9qgmc6.
+- App: `dpl_GhcSWJFySbosJXWz1ggtFPyAqbRc`, stage 4ezq1fesz. It incorporates
+  current production data at `aa5b7dfb`; build and 17 app tests pass again.
+
+Live checks confirm the new root, /bd and app /auth return 200; koshbd.com root
+returns 301 to https://koshfinance.com/bd; an old www FDR link returns 301 to
+the matching /bd path with its query preserved. App manifest, assetlinks and
+PNG preview endpoint passed on the promoted stage. Existing Android launch
+origins remain compatible through the same app deployment.
+
+Supabase Site URL is now https://app.koshfinance.com; eight existing/new exact
+callback entries are retained. Backend APP_URL and SITE_URL are switched to
+https://app.koshfinance.com and https://koshfinance.com respectively. Resend
+reports the new domain verified and ready. Only after this verification,
+RESEND_FROM was set to `Kosh <hello@koshfinance.com>`. A receiving forwarder
+hello@koshfinance.com -> koshinitiative@gmail.com is saved in Namecheap.
+Google Search Console verified the new domain through its DNS record.
+
+Remaining completion work: persist the changes in both production Git branches,
+finish Search Console move/sitemap submissions, verify registrar contact-save
+results, update authorised social links, and establish the requested monitoring.
+
+Earlier entries below are historical checkpoints, not current blockers.
 
 ## Latest resumed work on 12 November
 
