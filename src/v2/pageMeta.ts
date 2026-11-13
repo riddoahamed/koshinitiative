@@ -34,8 +34,8 @@ export interface PageMeta {
 /** Keyed by pathname, no trailing slash. "/" is the homepage. */
 export const PAGE_META: Record<string, PageMeta> = {
   "/": {
-    title: "Kosh Finance — money learning, with local context",
-    description: "Learn money and investing with Kosh Finance. Choose Bangladesh or explore Global education, with one shared learning library and clear market context.",
+    title: "Learn money and investing, since we were never taught",
+    description: VP_LONG,
   },
   "/global": {
     title: "Kosh Global — money learning for life abroad",

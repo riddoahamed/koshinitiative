@@ -17,9 +17,9 @@ import { PAGE_META } from "@/v2/pageMeta";
 import "@/v2/v2.css";
 import "./offerings.css";
 
-const Index = () => {
+const Index = ({ path = "/" }: { path?: "/" | "/bd" }) => {
   useEffect(() => {
-    applySeo({ ...PAGE_META["/bd"], path: "/bd" });
+    applySeo({ ...PAGE_META[path], path });
 
     window.history.scrollRestoration = "manual";
 
@@ -83,7 +83,7 @@ const Index = () => {
     }
 
     return cleanup;
-  }, []);
+  }, [path]);
 
   return (
     <div className="v2">

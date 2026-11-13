@@ -366,7 +366,7 @@ const PROD_ORGS: NavItem[] = [
 
 const NAV_GROUPS: NavGroup[] = [
   { label: "Markets", items: [
-    { label: "Kosh Finance", href: "/", note: "Choose your market" },
+    { label: "Kosh Finance", href: "/", note: "Home" },
     { label: "Bangladesh", href: "/bd", note: "Bangladesh tools and learning" },
     { label: "Global", href: "/global", note: "Education preview for life abroad" },
   ] },
@@ -405,7 +405,8 @@ const NAV_GROUPS: NavGroup[] = [
    pages. These are direct section links: no dropdown chrome, no filled CTA,
    and no decorative effects competing with the machine below. */
 const HERO_LINKS: NavItem[] = [
-  { label: "Markets", href: "/" },
+  { label: "Bangladesh", href: "/bd" },
+  { label: "Global", href: "/global" },
   { label: "Offerings", href: "/bd/offerings" },
   { label: "Kosh Live TV", href: "/bd/tv/" },
   { label: "About us", href: "/bd#story" },
@@ -420,13 +421,13 @@ const HERO_LINKS: NavItem[] = [
 const useAnchorNav = () =>
   (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (!href.startsWith("/bd#")) return;
-    const id = href.slice(2);
-    if (window.location.pathname !== "/bd") return;
+    const id = href.split("#")[1];
+    if (!["/", "/bd"].includes(window.location.pathname)) return;
     const el = document.getElementById(id);
     if (!el) return;
     e.preventDefault();
     el.scrollIntoView({ behavior: "smooth" });
-    window.history.replaceState(null, "", href);
+    window.history.replaceState(null, "", `${window.location.pathname}#${id}`);
   };
 
 /** Which group owns the page you are on, so the menu can say where you are.
@@ -480,7 +481,7 @@ export const NavV2 = ({ pinned = false }: { pinned?: boolean }) => {
   if (!pinned) {
     return (
       <nav className="nav nav--hero on" aria-label="Main">
-        <a className="nav__brand" href="/bd">
+        <a className="nav__brand" href="/">
           <img src="/img/kosh-logo.png" alt="" />
           KOSH
         </a>
@@ -502,7 +503,7 @@ export const NavV2 = ({ pinned = false }: { pinned?: boolean }) => {
         aria-label="Main"
         onMouseLeave={() => setOpen(null)}
       >
-        <a className="nav__brand" href="/bd">
+        <a className="nav__brand" href="/">
           <img src="/img/kosh-logo.png" alt="" />
           KOSH
         </a>

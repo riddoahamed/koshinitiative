@@ -47,9 +47,9 @@ const App = () => (
             a beat of the colour the page is about to be. */}
         <Suspense fallback={<div className="route-wait" aria-hidden="true" />}>
         <Routes>
-          <Route path="/" element={<MarketHome />} />
+          <Route path="/" element={<Index />} />
           <Route path="/global" element={<MarketHome global />} />
-          <Route path="/bd" element={<Index />} />
+          <Route path="/bd" element={<Index path="/bd" />} />
           <Route path="/bd/vote" element={<Vote />} />
           <Route path="/bd/live" element={<Vote />} />
           {/* the beginner path */}
