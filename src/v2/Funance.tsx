@@ -9,7 +9,7 @@ import { ArrowRight } from "lucide-react";
 //
 // Posters are the same ones the app uses: one visual identity across both.
 
-const APP = "https://app.koshbd.com";
+const APP = "https://app.koshfinance.com";
 
 interface Game {
   title: string;

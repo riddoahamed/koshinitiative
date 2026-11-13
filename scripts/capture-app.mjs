@@ -3,7 +3,7 @@
  *
  *   npm run shots
  *
- * Drives app.koshbd.com in guest mode (no login, no real user data), dismisses
+ * Drives app.koshfinance.com in guest mode (no login, no real user data), dismisses
  * the onboarding coach-marks so screens aren't dimmed, and writes webp into
  * public/img/app/. Re-run whenever the app's UI moves on — stale product
  * screenshots are worse than none.
@@ -17,7 +17,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 
 const OUT = "public/img/app";
-const APP = "https://app.koshbd.com";
+const APP = "https://app.koshfinance.com";
 const tmp = mkdtempSync(join(tmpdir(), "kosh-shots-"));
 
 async function prep(page) {

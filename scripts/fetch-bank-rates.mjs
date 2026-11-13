@@ -105,7 +105,7 @@ async function fetchChart() {
   // NODE_TLS_REJECT_UNAUTHORIZED, which turns a verified read of a rate table
   // into an unverified one.
   const res = await fetch(CHART, {
-    headers: { "user-agent": "Mozilla/5.0 (compatible; KoshRates/1.0; +https://koshbd.com)" },
+    headers: { "user-agent": "Mozilla/5.0 (compatible; KoshRates/1.0; +https://koshfinance.com)" },
     signal: AbortSignal.timeout(60_000),
   });
   if (!res.ok) throw new Error(`Bangladesh Bank returned HTTP ${res.status}`);
