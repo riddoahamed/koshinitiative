@@ -68,7 +68,7 @@ const Quiz = () => {
   };
 
   return (
-    <PageShell path="/quiz">
+    <PageShell path="/bd/quiz">
       <section className="sec page-hero quizsec">
         <div className="blob p" style={{ width: 480, height: 480, right: "-12%", top: "-8%" }} />
         <div className="blob m" style={{ width: 380, height: 380, left: "-8%", bottom: "0%", animationDelay: "-7s" }} />

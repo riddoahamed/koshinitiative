@@ -31,7 +31,7 @@ export const Pitch = () => (
         with the fees and the catch, so <strong>you can decide for yourself.</strong>
       </p>
       <div className="about__ctas" data-reveal="scale">
-        <a className="btn btn-primary" href="/start">Learn something free</a>
+        <a className="btn btn-primary" href="/bd/start">Learn something free</a>
         <a className="btn btn-glass" href={KOSH_APP_URL}>Try Kosh</a>
       </div>
       <div className="about__chips" data-reveal="fade">
@@ -50,7 +50,7 @@ const DOORS = [
     kicker: "60 seconds",
     t: "What kind of investor am I?",
     p: "Six honest questions. You get a straight read on where you actually stand, and what to do about it.",
-    href: "/quiz",
+    href: "/bd/quiz",
     cta: "Take the quiz",
     accent: "a",
   },
@@ -128,23 +128,23 @@ export const KoshLearnTeaser = () => (
         </p>
       </div>
       <div className="learn-teaser__grid" data-stagger="90">
-        <a href="/offerings/courses" className="learn-teaser__card glass" data-reveal="scale">
+        <a href="/bd/offerings/courses" className="learn-teaser__card glass" data-reveal="scale">
           <BookOpen size={21} strokeWidth={1.8} />
           <b>Courses + cohorts</b>
           <span>Self-paced foundations and live guided programmes.</span>
         </a>
-        <a href="/offerings/kids" className="learn-teaser__card glass" data-reveal="scale">
+        <a href="/bd/offerings/kids" className="learn-teaser__card glass" data-reveal="scale">
           <MoonStar size={21} strokeWidth={1.8} />
           <b>Money for kids</b>
           <span>Earn, save, grow and protect — with a parent nearby.</span>
         </a>
-        <a href="/offerings/workplace" className="learn-teaser__card glass" data-reveal="scale">
+        <a href="/bd/offerings/workplace" className="learn-teaser__card glass" data-reveal="scale">
           <ShieldAlert size={21} strokeWidth={1.8} />
           <b>Kosh at work</b>
           <span>Useful money education for real working lives.</span>
         </a>
       </div>
-      <a className="learn-teaser__link" href="/offerings" data-reveal>
+      <a className="learn-teaser__link" href="/bd/offerings" data-reveal>
         See everything Kosh Learn offers <ArrowRight size={16} strokeWidth={2.2} />
       </a>
     </div>

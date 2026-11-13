@@ -45,8 +45,9 @@ import {
 } from "./rates";
 import { FDR_FAQS, FINE_PRINT } from "./facts";
 import { rateCardFor } from "./rateCards";
+import { alternateTags } from "../../lib/marketSeo";
 
-const SITE = "https://www.koshbd.com";
+const SITE = "https://koshfinance.com";
 
 const esc = (s: string) =>
   s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -121,7 +122,7 @@ function rateTable(rows: FdrRow[]): string {
     .map((r) => {
       const cells = FD_TENURES.map((_, i) => `<td>${esc(formatBand(bandAt(r, i as 0)))}</td>`).join("");
       const kind = r.bank.islamic ? "Islamic" : r.group === "state" ? "State-owned" : "Private";
-      return `<tr><td><a href="${SITE}/fdr-rates/${slugFor(r.bank)}">${esc(r.bank.name)}</a></td><td>${kind}</td>${cells}</tr>`;
+      return `<tr><td><a href="${SITE}/bd/fdr-rates/${slugFor(r.bank)}">${esc(r.bank.name)}</a></td><td>${kind}</td>${cells}</tr>`;
     })
     .join("\n");
   return `<table><caption>Announced fixed deposit rates, ${esc(RATES_MONTH)} — % per year</caption><thead>${head}</thead><tbody>\n${body}\n</tbody></table>`;
@@ -167,7 +168,7 @@ export function jsonLd(pathname: string): string {
       "@type": "Dataset",
       name: `Fixed deposit (FDR) rates of every scheduled bank in Bangladesh — ${RATES_MONTH}`,
       description: leadAnswer(),
-      url: `${SITE}/fdr-rates`,
+      url: `${SITE}/bd/fdr-rates`,
       dateModified: updated,
       temporalCoverage: RATES_MONTH_STAMP,
       isAccessibleForFree: true,
@@ -209,7 +210,7 @@ export function jsonLd(pathname: string): string {
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Kosh", item: SITE },
-        { "@type": "ListItem", position: 2, name: "FDR rates", item: `${SITE}/fdr-rates` },
+        { "@type": "ListItem", position: 2, name: "FDR rates", item: `${SITE}/bd/fdr-rates` },
       ],
     },
   ];
@@ -226,7 +227,7 @@ export function jsonLd(pathname: string): string {
       "@type": "ListItem",
       position: i + 1,
       name: `${r.bank.name} — ${formatBand(bandAt(r, DEFAULT_TENURE))}`,
-      url: `${SITE}/fdr-rates/${slugFor(r.bank)}`,
+      url: `${SITE}/bd/fdr-rates/${slugFor(r.bank)}`,
     })),
   });
 
@@ -267,9 +268,7 @@ export function fdrCrawlerDocument(pathname: string, title: string, description:
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${SITE}${pathname}">
-<link rel="alternate" hreflang="bn-BD" href="${SITE}/bn${pathname}">
-<link rel="alternate" hreflang="en" href="${SITE}${pathname}">
-<link rel="alternate" hreflang="x-default" href="${SITE}${pathname}">
+${alternateTags(pathname)}
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:url" content="${SITE}${pathname}">
@@ -327,11 +326,11 @@ ${BANGLA}
 
 <h2>Each bank's own page</h2>
 <ul>
-${rows.map((r) => `<li><a href="${SITE}/fdr-rates/${slugFor(r.bank)}">${esc(r.bank.name)} FDR rate</a></li>`).join("\n")}
+${rows.map((r) => `<li><a href="${SITE}/bd/fdr-rates/${slugFor(r.bank)}">${esc(r.bank.name)} FDR rate</a></li>`).join("\n")}
 </ul>
 
-<p><a href="${SITE}/fdr-rates">Open the interactive FDR rate table</a> ·
-<a href="${SITE}/fdr-rates/faq">FDR questions answered</a></p>
+<p><a href="${SITE}/bd/fdr-rates">Open the interactive FDR rate table</a> ·
+<a href="${SITE}/bd/fdr-rates/faq">FDR questions answered</a></p>
 </body>
 </html>`;
 }
@@ -343,7 +342,7 @@ ${rows.map((r) => `<li><a href="${SITE}/fdr-rates/${slugFor(r.bank)}">${esc(r.ba
  * page, so a link to a bank's page says the same thing wherever it surfaces.
  */
 export function fdrBankMeta(pathname: string): { title: string; description: string } | null {
-  const slug = pathname.replace(/^\/fdr-rates\/?/, "").replace(/\/$/, "");
+  const slug = pathname.replace(/^\/bd\/fdr-rates\/?/, "").replace(/\/$/, "");
   if (!slug || slug === "faq") return null;
   const bank = bankBySlug(slug);
   const row = bank ? FDR_ROWS.find((r) => r.bank.code === bank.code) : undefined;
@@ -369,7 +368,7 @@ export function fdrBankMeta(pathname: string): { title: string; description: str
 // Returns null for a path that is not a bank, so the caller can fall back.
 
 export function bankFdrDocument(pathname: string): string | null {
-  const slug = pathname.replace(/^\/fdr-rates\/?/, "").replace(/\/$/, "");
+  const slug = pathname.replace(/^\/bd\/fdr-rates\/?/, "").replace(/\/$/, "");
   if (!slug || slug === "faq") return null;
   const bank = bankBySlug(slug);
   if (!bank) return null;
@@ -416,7 +415,7 @@ export function bankFdrDocument(pathname: string): string | null {
     category: "Fixed deposit",
     provider: { "@type": "BankOrCreditUnion", name: bank.name, url: `https://${bank.domain}` },
     areaServed: { "@type": "Country", name: "Bangladesh" },
-    url: `${SITE}/fdr-rates/${slug}`,
+    url: `${SITE}/bd/fdr-rates/${slug}`,
     ...(headline
       ? {
           interestRate: {
@@ -433,8 +432,8 @@ export function bankFdrDocument(pathname: string): string | null {
     "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Kosh", item: SITE },
-      { "@type": "ListItem", position: 2, name: "FDR rates", item: `${SITE}/fdr-rates` },
-      { "@type": "ListItem", position: 3, name: bank.name, item: `${SITE}/fdr-rates/${slug}` },
+      { "@type": "ListItem", position: 2, name: "FDR rates", item: `${SITE}/bd/fdr-rates` },
+      { "@type": "ListItem", position: 3, name: bank.name, item: `${SITE}/bd/fdr-rates/${slug}` },
     ],
   };
 
@@ -444,10 +443,10 @@ export function bankFdrDocument(pathname: string): string | null {
 <meta charset="utf-8">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
-<link rel="canonical" href="${SITE}/fdr-rates/${slug}">
+<link rel="canonical" href="${SITE}/bd/fdr-rates/${slug}">
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
-<meta property="og:url" content="${SITE}/fdr-rates/${slug}">
+<meta property="og:url" content="${SITE}/bd/fdr-rates/${slug}">
 <meta property="og:image" content="${SITE}/og-image.jpg">
 <script type="application/ld+json">${JSON.stringify(ld)}</script>
 <script type="application/ld+json">${JSON.stringify(crumbs)}</script>
@@ -467,7 +466,7 @@ usually needs crores or a named scheme. Interest is taxed at source at 10% if th
 if it does not, and deposit protection covers ৳2,00,000 per depositor per bank.</p>
 <p>Check ${esc(bank.name)}'s own page before acting:
 <a href="${esc(bank.rates ?? `https://${bank.domain}/`)}">${esc(bank.rates ? "their rate card" : "their website")}</a>.</p>
-<p><a href="${SITE}/fdr-rates">Compare ${esc(bank.name)} against every other bank in Bangladesh</a></p>
+<p><a href="${SITE}/bd/fdr-rates">Compare ${esc(bank.name)} against every other bank in Bangladesh</a></p>
 </body>
 </html>`;
 }

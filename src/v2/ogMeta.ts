@@ -36,8 +36,9 @@
 import { LOCAL_POSTS, CATEGORY_LABEL, type Post } from "./posts";
 import { PAGE_META, PATH_ALIASES } from "./pageMeta";
 import { fdrBankMeta } from "./fdr/seo";
+import { alternateTags } from "../lib/marketSeo";
 
-export const SITE = "https://www.koshbd.com";
+export const SITE = "https://koshfinance.com";
 
 /** The site card. Also the fallback for anything without a picture of its own.
     We made it, so we know its size — which is why it is the only image here
@@ -223,6 +224,7 @@ export function ogDocument(pathname: string, meta: RouteMeta = metaForPath(pathn
 <title>${t}</title>
 <meta name="description" content="${d}">
 ${meta.noindex ? '<meta name="robots" content="noindex">\n' : ""}<link rel="canonical" href="${u}">
+${alternateTags(pathname)}
 <meta property="og:type" content="${meta.type}">
 <meta property="og:site_name" content="Kosh">
 <meta property="og:url" content="${u}">

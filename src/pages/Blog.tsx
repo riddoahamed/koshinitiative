@@ -52,6 +52,7 @@ const Row = ({ p }: { p: Post }) => {
       <span className="prow__main">
         <h3>{p.title}</h3>
         <span className="prow__meta">
+          <span>Market: Bangladesh</span>
           <span>{CATEGORY_LABEL[p.category]}</span>
           <span>{p.readMins} min</span>
           <span>{fmt(p.date)}</span>

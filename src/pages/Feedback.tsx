@@ -52,7 +52,7 @@ const Feedback = () => {
 
   return (
     <PageShell
-      path="/feedback"
+      path="/bd/feedback"
     >
       <section className="sec page-hero">
         <div className="blob p" style={{ width: 440, height: 440, left: "-10%", top: "-4%" }} />

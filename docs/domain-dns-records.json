@@ -1,0 +1,42 @@
+{
+  "domain": "koshfinance.com",
+  "status": "prepared, not applied",
+  "checked": "2026-11-11",
+  "records": [
+    {
+      "type": "A",
+      "host": "@",
+      "value": "216.198.79.1",
+      "purpose": "Vercel primary website; rank-1 recommendation"
+    },
+    {
+      "type": "A",
+      "host": "@",
+      "value": "64.29.17.1",
+      "purpose": "Vercel primary website; rank-1 recommendation"
+    },
+    {
+      "type": "CNAME",
+      "host": "www",
+      "value": "0a4fcd6e864e6d60.vercel-dns-017.com",
+      "purpose": "Vercel website project"
+    },
+    {
+      "type": "CNAME",
+      "host": "app",
+      "value": "258337117942def9.vercel-dns-017.com",
+      "purpose": "Vercel learner app project"
+    },
+    {
+      "type": "TXT",
+      "host": "@",
+      "value": "google-site-verification=6dat7EIcu4uxHTjvvJ2QOFljtYUFFr20YZmNYOrmhe8",
+      "purpose": "Kosh Google account Search Console ownership"
+    }
+  ],
+  "notes": [
+    "Keep Namecheap nameservers and existing mail records.",
+    "Replace parking A and www CNAME records, retaining MX and existing SPF.",
+    "Actual Resend verification records are saved separately in resend-dns-records.json; DNS is not applied."
+  ]
+}

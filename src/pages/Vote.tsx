@@ -64,14 +64,14 @@ const Vote = () => {
   }, []);
 
   const shareUrl = useMemo(() => {
-    if (typeof window === "undefined") return "https://www.koshbd.com/vote";
+    if (typeof window === "undefined") return "https://koshfinance.com/vote";
     const u = new URL(window.location.href);
     u.hash = "";
     return u.toString();
   }, []);
 
   useEffect(() => {
-    applySeo({ ...PAGE_META["/vote"], path: "/vote", robots: "noindex, follow" });
+    applySeo({ ...PAGE_META["/bd/vote"], path: "/bd/vote", robots: "noindex, follow" });
     setChoice(localStorage.getItem(CHOICE_KEY));
   }, []);
 
@@ -144,7 +144,7 @@ const Vote = () => {
   return (
     <div className="v2 live">
       <header className="live__bar">
-        <a className="live__brand" href="/">
+        <a className="live__brand" href="/bd">
           <img src="/img/kosh-logo.png" alt="" />
           <span>KOSH <b>LIVE</b></span>
         </a>
@@ -509,7 +509,7 @@ const Vote = () => {
         <span>
           Kosh Live · paper money only · starting balance {taka(START_BALANCE)}
         </span>
-        <a href="/">← back to koshbd.com</a>
+        <a href="/bd">← back to Kosh Bangladesh</a>
       </footer>
     </div>
   );

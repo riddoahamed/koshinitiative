@@ -18,10 +18,10 @@ import "./offerings.css";
 type Section = "courses" | "live" | "kids" | "workplace";
 
 const SECTIONS: Array<{ key: Section; label: string; href: string }> = [
-  { key: "courses", label: "Courses + cohorts", href: "/offerings/courses" },
-  { key: "live", label: "Live rooms", href: "/offerings/live" },
-  { key: "kids", label: "For kids", href: "/offerings/kids" },
-  { key: "workplace", label: "For workplaces", href: "/offerings/workplace" },
+  { key: "courses", label: "Courses + cohorts", href: "/bd/offerings/courses" },
+  { key: "live", label: "Live rooms", href: "/bd/offerings/live" },
+  { key: "kids", label: "For kids", href: "/bd/offerings/kids" },
+  { key: "workplace", label: "For workplaces", href: "/bd/offerings/workplace" },
 ];
 
 const enrol = (name: string) => mailto(`Kosh Learn — ${name}`);
@@ -83,7 +83,7 @@ function Hero({ active }: { active?: Section }) {
 function Subnav({ active }: { active?: Section }) {
   return (
     <nav className="learn-subnav wrap" aria-label="Kosh Learn sections">
-      <a href="/offerings" className={!active ? "is-active" : ""}>All offerings</a>
+      <a href="/bd/offerings" className={!active ? "is-active" : ""}>All offerings</a>
       {SECTIONS.map((section) => (
         <a href={section.href} className={active === section.key ? "is-active" : ""} key={section.key}>{section.label}</a>
       ))}
@@ -182,7 +182,7 @@ export default function Offerings() {
   const active = SECTIONS.some((item) => item.key === rawSection) ? rawSection as Section : undefined;
 
   return (
-    <PageShell path={active ? `/offerings/${active}` : "/offerings"} backTo="/#offerings" className="learn-page">
+    <PageShell path={active ? `/bd/offerings/${active}` : "/bd/offerings"} backTo="/bd#offerings" className="learn-page">
       <Hero active={active} />
       <Subnav active={active} />
       {!active && <Overview />}

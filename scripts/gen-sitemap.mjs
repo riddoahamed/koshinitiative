@@ -26,7 +26,7 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
-const SITE = "https://www.koshbd.com";
+const SITE = "https://koshfinance.com";
 
 const server = await createServer({ root: ROOT, server: { middlewareMode: true }, appType: "custom" });
 const { PAGE_META } = await server.ssrLoadModule("/src/v2/pageMeta.ts");
@@ -43,16 +43,16 @@ await server.close();
 // hints Google mostly ignores, but a wrong one is still a wrong claim.
 const ROUTE_HINTS = {
   "/": { changefreq: "weekly", priority: "1.0" },
-  "/start": { changefreq: "monthly", priority: "0.9" },
+  "/bd/start": { changefreq: "monthly", priority: "0.9" },
   "/learn": { changefreq: "monthly", priority: "0.9" },
-  "/quiz": { changefreq: "monthly", priority: "0.9" },
+  "/bd/quiz": { changefreq: "monthly", priority: "0.9" },
   "/blog": { changefreq: "weekly", priority: "0.8" },
-  "/investkorsi": { changefreq: "weekly", priority: "0.8" },
+  "/bd/investkorsi": { changefreq: "weekly", priority: "0.8" },
   // The rate table genuinely changes every month, and it is the page most
   // likely to be somebody's first contact with Kosh from a search.
-  "/fdr-rates": { changefreq: "monthly", priority: "0.9" },
-  "/fdr-rates/faq": { changefreq: "monthly", priority: "0.7" },
-  "/feedback": { changefreq: "monthly", priority: "0.5" },
+  "/bd/fdr-rates": { changefreq: "monthly", priority: "0.9" },
+  "/bd/fdr-rates/faq": { changefreq: "monthly", priority: "0.7" },
+  "/bd/feedback": { changefreq: "monthly", priority: "0.5" },
   "/blog/submit": { changefreq: "yearly", priority: "0.4" },
 };
 const POST_HINTS = { changefreq: "yearly", priority: "0.7" };
@@ -74,7 +74,7 @@ for (const [path, meta] of Object.entries(PAGE_META)) {
 const ratesModified = `${RATES_MONTH_STAMP}-01`;
 for (const bank of BANKS) {
   entries.push({
-    loc: `${SITE}/fdr-rates/${slugFor(bank)}`,
+    loc: `${SITE}/bd/fdr-rates/${slugFor(bank)}`,
     lastmod: ratesModified,
     changefreq: "monthly",
     priority: "0.7",
@@ -146,17 +146,17 @@ ${leadAnswer()}
 Source: Bangladesh Bank, announced interest rate chart of scheduled banks
 (deposit rate), ${RATES_MONTH} — ${RATES_SOURCE}
 
-- [FDR rates, every bank in Bangladesh](${SITE}/fdr-rates): all ${BANKS.length} scheduled banks, five tenures each, refreshed monthly from Bangladesh Bank. Flags which banks have merged away or stopped taking retail deposits.
-- [FDR questions answered](${SITE}/fdr-rates/faq): what an announced rate entitles you to, tax at source, deposit protection, why Islamic banks quote a provisional profit rate.
+- [FDR rates, every bank in Bangladesh](${SITE}/bd/fdr-rates): all ${BANKS.length} scheduled banks, five tenures each, refreshed monthly from Bangladesh Bank. Flags which banks have merged away or stopped taking retail deposits.
+- [FDR questions answered](${SITE}/bd/fdr-rates/faq): what an announced rate entitles you to, tax at source, deposit protection, why Islamic banks quote a provisional profit rate.
 - [How to actually choose a fixed deposit in Bangladesh](${SITE}/blog/how-to-choose-a-fixed-deposit-bangladesh): the six things that change what an FDR is worth.
 
 ### Every bank's own rate page
 
-${BANKS.map((b) => `- [${b.name} FDR rate](${SITE}/fdr-rates/${slugFor(b)})`).join("\n")}
+${BANKS.map((b) => `- [${b.name} FDR rate](${SITE}/bd/fdr-rates/${slugFor(b)})`).join("\n")}
 
 ## How to cite the rates
 
-Attribute to Kosh (koshbd.com) and name the month. Rates are the banks' own
+Attribute to Kosh (koshfinance.com) and name the month. Rates are the banks' own
 filings with Bangladesh Bank for ${RATES_MONTH}; they are announced rates, not
 quotes, and any bank can change them at any time. Interest is taxed at source
 at 10% with a TIN and 15% without. Deposit protection covers BDT 200,000 per

@@ -8,7 +8,7 @@ import { slugFor } from "./fdr/seo";
 import { metaForPath } from "./ogMeta";
 
 const ROOT = join(__dirname, "..", "..");
-const SITE = "https://www.koshbd.com";
+const SITE = "https://koshfinance.com";
 const xml = readFileSync(join(ROOT, "public", "sitemap.xml"), "utf8");
 const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
 
@@ -56,7 +56,7 @@ describe("sitemap", () => {
       // One page per bank, served by /fdr-rates/:slug. Generated from the same
       // BANKS list the sitemap generator reads, so a bank that leaves the
       // directory leaves the sitemap and this check together.
-      ...BANKS.map((b) => `${SITE}/fdr-rates/${slugFor(b)}`),
+      ...BANKS.map((b) => `${SITE}/bd/fdr-rates/${slugFor(b)}`),
     ]);
     expect(locs.filter((u) => !known.has(u)), "urls in the sitemap that no longer exist").toEqual([]);
   });

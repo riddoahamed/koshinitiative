@@ -120,8 +120,8 @@ export const LOCAL_POSTS: Post[] = [
       "<p>Five Islamic banks — First Security Islami, Global Islami, Social Islami, EXIM and Union — merged into Sammilito Islami Bank. Their websites still run under the old brands and Bangladesh Bank still files rates under the old names, so a rate you find for \u201cEXIM Bank FDR\u201d is real and the bank you would be dealing with is not the one on the sign. Bank Alfalah's Bangladesh business went to Bank Asia, and HSBC has wound down retail banking here entirely.</p>",
 
       "<h2>Where to check the actual numbers</h2>",
-      "<p>We publish what every scheduled bank filed with Bangladesh Bank, refreshed monthly from the central bank's own chart, with each bank's own rate page linked beside it: <a href=\"/fdr-rates\">FDR rates at every bank in Bangladesh</a>. Nobody pays to be on it and there are no affiliate links — the order is arithmetic, and the banks paying the least are listed too.</p>",
-      "<p>More questions answered here: <a href=\"/fdr-rates/faq\">FDR questions</a>.</p>",
+      "<p>We publish what every scheduled bank filed with Bangladesh Bank, refreshed monthly from the central bank's own chart, with each bank's own rate page linked beside it: <a href=\"/bd/fdr-rates\">FDR rates at every bank in Bangladesh</a>. Nobody pays to be on it and there are no affiliate links — the order is arithmetic, and the banks paying the least are listed too.</p>",
+      "<p>More questions answered here: <a href=\"/bd/fdr-rates/faq\">FDR questions</a>.</p>",
     ],
   },
   // ── THE TWO US-MARKETS GUIDES ─────────────────────────────────────────────

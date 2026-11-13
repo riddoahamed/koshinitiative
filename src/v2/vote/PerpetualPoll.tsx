@@ -130,7 +130,7 @@ export default function PerpetualPoll() {
 
           {revealed && (
             <p className="poll__n">
-              <a href="/vote">Run this in your own room &rarr;</a>
+              <a href="/bd/vote">Run this in your own room &rarr;</a>
             </p>
           )}
         </div>
