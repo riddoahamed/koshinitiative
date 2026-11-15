@@ -162,6 +162,8 @@ export const PAGE_META: Record<string, PageMeta> = {
    as the thing it actually shows, not as the site default — /investor-type is
    the URL people share, and it was previewing as the homepage. */
 export const PATH_ALIASES: Record<string, string> = {
+  // koshbd.com/* redirects to koshfinance.com/bd/*, so old links land here.
+  "/bd/investors": "/investors",
   "/bd/live": "/bd/vote",
   "/bd/investor-type": "/bd/quiz",
   "/bd/for-schools": "/bd/for-organizations",
