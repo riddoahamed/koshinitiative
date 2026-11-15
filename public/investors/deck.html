@@ -126,7 +126,9 @@ html.still .a,html.still .pop{opacity:1;transform:rotate(var(--r,0deg));animatio
 .row .t em{font-style:normal;font-family:var(--head);font-weight:700;font-size:25px;color:var(--lime);white-space:nowrap}
 .row small{display:block;font-size:19px;color:var(--g3);margin-top:5px;line-height:1.3}
 
-.rg{display:inline-flex;align-items:center;height:40px;padding:0 15px;border-radius:30px;background:#1F2129;border:1px solid #3A3D46;font-weight:600;font-size:18px;color:#fff}
+.fl{width:26px;height:19.5px;border-radius:3px;margin-right:9px;object-fit:cover;box-shadow:0 0 0 1px rgba(255,255,255,.18)}
+.fls{display:inline-flex;margin-right:9px}.fls .fl{margin-right:-9px;box-shadow:0 0 0 2px #1F2129}.fls .fl:last-child{margin-right:0}
+.rg{display:inline-flex;align-items:center;height:40px;padding:0 15px 0 11px;border-radius:30px;background:#1F2129;border:1px solid #3A3D46;font-weight:600;font-size:18px;color:#fff}
 /* slide 8 */
 .tbl{border-collapse:collapse;font-size:18px;color:var(--g2)}
 .tbl td,.tbl th{padding:6px 12px;text-align:right;border-bottom:1px solid rgba(13,15,20,.12)}
@@ -361,8 +363,8 @@ html.still .a,html.still .pop{opacity:1;transform:rotate(var(--r,0deg));animatio
     <div class="label" style="color:var(--lime);font-size:17px">Next, once Bangladesh runs fully</div>
     <div style="font-family:var(--head);font-weight:800;font-size:28px;line-height:1.15;margin-top:8px;width:1140px">Bangladeshis abroad: a NerdWallet-style guide for students, migrants and workers.</div>
     <p style="font-size:20px;color:var(--g4);margin-top:8px;width:1140px">Teach first, then show the ways to invest where they live, and earn referral (CAC) fees from local partners.</p>
-    <div style="position:absolute;right:30px;top:58px;display:flex;gap:8px">
-      <span class="rg">US</span><span class="rg">UK</span><span class="rg">Canada</span><span class="rg">Australia</span><span class="rg">EU</span><span class="rg">Gulf</span></div>
+    <div style="position:absolute;right:30px;top:36px;width:410px;display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end">
+      <span class="rg"><img class="fl" src="assets/flag-us.svg" alt="">US</span><span class="rg"><img class="fl" src="assets/flag-gb.svg" alt="">UK</span><span class="rg"><img class="fl" src="assets/flag-ca.svg" alt="">Canada</span><span class="rg"><img class="fl" src="assets/flag-au.svg" alt="">Australia</span><span class="rg"><img class="fl" src="assets/flag-eu.svg" alt="">EU</span><span class="rg"><span class="fls"><img class="fl" src="assets/flag-ae.svg" alt=""><img class="fl" src="assets/flag-sa.svg" alt=""><img class="fl" src="assets/flag-qa.svg" alt=""></span>Gulf</span></div>
   </div>
 </section>
 
