@@ -24,6 +24,7 @@ const Quiz = lazy(() => import("./pages/Quiz.tsx"));
 const Blog = lazy(() => import("./pages/Blog.tsx"));
 const Post = lazy(() => import("./pages/Post.tsx"));
 const Feedback = lazy(() => import("./pages/Feedback.tsx"));
+const Investors = lazy(() => import("./pages/Investors.tsx"));
 const Submit = lazy(() => import("./pages/Submit.tsx"));
 const ForOrganizations = lazy(() => import("./pages/ForOrganizations.tsx"));
 const FdrRates = lazy(() => import("./pages/FdrRates.tsx"));
@@ -82,6 +83,7 @@ const App = () => (
           <Route path="/blog/submit" element={<Submit />} />
           <Route path="/blog/:slug" element={<Post />} />
           <Route path="/bd/feedback" element={<Feedback />} />
+          <Route path="/investors" element={<Investors />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

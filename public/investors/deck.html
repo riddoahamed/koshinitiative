@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kosh Pre-Seed Deck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Caveat:wght@500;700&family=Hind+Siliguri:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0D0F14; --paper:#F4F2EA; --lime:#B6F04A; --orange:#FF8A3D; --blue:#2F5BEA;
+  --g1:#6B6A63; --g2:#45453F; --g3:#8A8B85; --g4:#C9CBC4; --card-d:#171920; --line-d:#2A2C34;
+  --head:'Bricolage Grotesque','Hind Siliguri',system-ui,sans-serif;
+  --body:'Inter','Hind Siliguri',system-ui,sans-serif;
+  --hand:'Caveat','Hind Siliguri',cursive;
+  --bn:'Hind Siliguri',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#050608;overflow:hidden}
+body{font-family:var(--body);-webkit-font-smoothing:antialiased}
+#stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:0 0}
+.slide{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;opacity:0;visibility:hidden;transition:opacity .45s ease,visibility .45s}
+.slide.active{opacity:1;visibility:visible}
+.dark{background:var(--ink);color:#fff}
+.paper{background:var(--paper) url(assets/paper-1920.jpg) center/cover;color:var(--ink)}
+.limebg{background:var(--lime);color:var(--ink)}
+.abs{position:absolute}
+.h1{position:absolute;left:104px;top:74px;font-family:var(--head);font-weight:800;font-size:72px;line-height:1.08;letter-spacing:-.015em;width:1500px}
+.label{font-family:var(--head);font-weight:700;font-size:20px;letter-spacing:.07em;text-transform:uppercase}
+.src{position:absolute;left:104px;top:1010px;width:1712px;font-size:17px;line-height:1.4}
+.dark .src{color:var(--g3)} .paper .src{color:var(--g1)}
+.stk{position:absolute;display:block;pointer-events:none;filter:drop-shadow(0 6px 10px rgba(0,0,0,.18))}
+.dark .stk{filter:drop-shadow(0 8px 16px rgba(0,0,0,.45))}
+.hand{font-family:var(--hand);font-weight:700}
+.ph{border:2px dashed currentColor;border-radius:8px;padding:0 8px;opacity:.75;font-style:normal;white-space:nowrap}
+/* entrance */
+.a{opacity:0;transform:translateY(18px)}
+.slide.active .a{animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:calc(var(--d,0) * 90ms + 150ms)}
+@keyframes rise{to{opacity:1;transform:none}}
+.pop{opacity:0;transform:scale(.6) rotate(var(--r,0deg))}
+.slide.active .pop{animation:pop .6s cubic-bezier(.3,1.6,.5,1) forwards;animation-delay:calc(var(--d,0) * 90ms + 300ms)}
+@keyframes pop{to{opacity:1;transform:scale(1) rotate(var(--r,0deg))}}
+.rot{transform:rotate(var(--r,0deg))}
+/* UI */
+#ui{position:fixed;left:0;right:0;bottom:0;height:4px;background:rgba(255,255,255,.08);z-index:9}
+#bar{height:100%;width:0;background:var(--lime);transition:width .4s}
+#count{position:fixed;right:18px;bottom:14px;color:rgba(255,255,255,.45);font:500 13px var(--body);z-index:9}
+#notes{position:fixed;left:0;right:0;bottom:4px;max-height:34vh;overflow:auto;background:rgba(10,11,14,.94);color:#e8e8e2;font:400 18px/1.5 var(--body);padding:18px 28px;display:none;z-index:10;border-top:1px solid #333}
+#notes b{color:var(--lime)}
+#hint{position:fixed;left:18px;bottom:14px;color:rgba(255,255,255,.35);font:500 13px var(--body);z-index:9}
+.nav-zone{position:fixed;top:0;bottom:0;width:18%;z-index:8;cursor:pointer}
+#prevZ{left:0}#nextZ{right:0}
+/* print */
+html.print,html.print body{overflow:visible;height:auto;background:none}
+html.print #stage{position:static;transform:none!important;width:1920px;height:auto}
+html.print .slide{position:relative;opacity:1;visibility:visible;page-break-after:always;break-after:page}
+html.print .a,html.print .pop{opacity:1;transform:rotate(var(--r,0deg));animation:none!important}
+html.print #ui,html.print #count,html.print #notes,html.print #hint,html.print .nav-zone{display:none}
+html.print video{display:none} html.print .poster{display:block}
+html.still video{display:none} html.still .poster{display:block} html.still #ui,html.still #count,html.still #hint{display:none}
+html.still .a,html.still .pop{opacity:1;transform:rotate(var(--r,0deg));animation:none!important} html.still .grow,html.still .seg{transform:none!important;opacity:1!important;animation:none!important}
+.poster{display:none}
+@page{size:1920px 1080px;margin:0}
+
+/* devices */
+.mac{position:absolute}
+.mac .lid{background:#1B1C21;border-radius:26px 26px 6px 6px;padding:16px 16px 22px;box-shadow:0 0 0 2px #34353B inset,0 40px 70px -20px rgba(0,0,0,.45)}
+.mac .bar{height:30px;background:#202127;border-radius:8px 8px 0 0;display:flex;align-items:center;gap:7px;padding:0 12px}
+.mac .bar i{width:10px;height:10px;border-radius:50%;background:#45464d}
+.mac .bar i:nth-child(1){background:#ff5f57}.mac .bar i:nth-child(2){background:#febc2e}.mac .bar i:nth-child(3){background:#28c840}
+.mac .url{margin-left:14px;flex:1;height:18px;border-radius:5px;background:#2b2c33;color:#9a9ba2;font:500 11px var(--body);display:flex;align-items:center;padding-left:10px}
+.mac .scr{position:relative;overflow:hidden;background:#0d0e12;border-radius:0 0 4px 4px}
+.mac video,.mac .poster,.phone video,.phone .poster{width:100%;height:100%;object-fit:cover;object-position:top}
+.mac .base{height:22px;margin:0 -70px;background:linear-gradient(#e4e5e8,#b5b7bd 60%,#8f9197);border-radius:0 0 26px 26px;position:relative}
+.mac .base:before{content:"";position:absolute;left:50%;top:0;width:150px;height:9px;margin-left:-75px;background:#a4a6ac;border-radius:0 0 10px 10px}
+.phone{position:absolute;background:#0E0F12;border-radius:58px;padding:12px;box-shadow:0 0 0 2px #2c2d33 inset,0 0 0 5px #1a1b20,0 50px 80px -20px rgba(0,0,0,.5)}
+.phone .scr{position:relative;width:100%;height:100%;border-radius:46px;overflow:hidden;background:#000}
+.phone .island{position:absolute;left:50%;top:22px;width:104px;height:30px;margin-left:-52px;background:#000;border-radius:20px;z-index:2}
+
+/* slide 2 cards */
+.card{position:absolute;background:#fff;border-radius:18px;box-shadow:0 1px 0 rgba(0,0,0,.04),0 14px 30px -18px rgba(40,30,10,.35)}
+.stat{font-family:var(--head);font-weight:800;font-size:58px;line-height:1.15}
+.body25{font-size:25px;line-height:1.3;color:var(--g2)}
+
+/* slide 3 bubbles */
+.bub{position:absolute;background:#1F2129;color:#fff;font-size:27px;font-weight:500;padding:16px 24px;border-radius:24px;white-space:nowrap}
+.bub.l{border-bottom-left-radius:6px}.bub.r{border-bottom-right-radius:6px;background:#2A2D38}
+.tape{position:absolute;display:flex;align-items:center;justify-content:center;background-size:100% 100%;font-family:var(--hand);font-weight:700;color:var(--ink)}
+
+/* slide 4 steps */
+.step{position:absolute;left:104px;width:640px;height:112px}
+.step img{position:absolute;left:0;top:4px;width:96px;height:96px;object-fit:contain}
+.step .n{position:absolute;left:122px;top:8px;font-family:var(--head);font-weight:800;font-size:34px}
+.step .n span{display:inline-block;width:36px;color:var(--blue)}
+.step .d{position:absolute;left:158px;top:54px;width:500px;font-size:23px;line-height:1.3;color:var(--g2)}
+.pill{display:inline-flex;align-items:center;height:46px;padding:0 22px;border-radius:30px;font-weight:600;font-size:21px;margin-right:12px}
+.paper .pill{background:var(--ink);color:#fff}
+.pill.lime{background:var(--lime)!important;color:var(--ink)!important}
+
+/* slide 5 */
+.ring{position:absolute;border-radius:50%;display:flex;flex-direction:column;align-items:center;text-align:center}
+.nowc{position:absolute;width:448px;height:300px;background:var(--card-d);border:1px solid var(--line-d);border-radius:22px;padding:32px 34px}
+.nowc .big{font-family:var(--head);font-weight:800;font-size:54px;color:var(--lime);line-height:1.05}
+.nowc p{font-size:26px;line-height:1.35;color:var(--g4);margin-top:16px}
+.nowc p b{color:#fff;font-weight:600}
+
+/* slide 6 */
+.hero{position:absolute;top:250px;width:520px}
+.hero .num{font-family:var(--head);font-weight:800;font-size:112px;line-height:1;letter-spacing:-.02em;position:relative;display:inline-block}
+.hero .num img{position:absolute;left:-6px;bottom:-34px;width:96%;height:58px;z-index:-1;opacity:.95}
+.hero p{margin-top:40px;font-size:25px;line-height:1.35;color:var(--g2);width:470px}
+.mini{position:absolute;top:600px;height:84px;width:395px;background:#fff;border-radius:16px;display:flex;align-items:center;padding:0 26px;gap:16px;box-shadow:0 12px 26px -18px rgba(40,30,10,.4)}
+.mini b{font-family:var(--head);font-weight:800;font-size:40px}
+.mini span{font-size:21px;color:var(--g2);line-height:1.2}
+.note{position:absolute;top:735px;width:380px;height:205px;padding:44px 26px 18px;font-family:var(--hand);font-weight:700;font-size:34px;line-height:1.08;box-shadow:0 18px 26px -16px rgba(40,30,10,.45)}
+.note .tp{position:absolute;top:-22px;left:50%;width:150px;height:46px;margin-left:-75px}
+
+/* slide 7 */
+.grp{position:absolute;top:250px;width:550px;height:590px;background:var(--card-d);border:1px solid var(--line-d);border-radius:26px;padding:34px 34px}
+.grp h3{font-family:var(--head);font-weight:800;font-size:34px;margin:0 0 6px 0;padding-left:96px;line-height:1.1;min-height:80px;display:flex;align-items:center}
+.grp .ic{position:absolute;left:24px;top:22px;width:92px;height:92px;object-fit:contain}
+.row{border-top:1px solid var(--line-d);padding:13px 0}
+.row .t{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+.row .t b{font-size:25px;font-weight:600}
+.row .t em{font-style:normal;font-family:var(--head);font-weight:700;font-size:25px;color:var(--lime);white-space:nowrap}
+.row small{display:block;font-size:19px;color:var(--g3);margin-top:5px;line-height:1.3}
+
+.rg{display:inline-flex;align-items:center;height:40px;padding:0 15px;border-radius:30px;background:#1F2129;border:1px solid #3A3D46;font-weight:600;font-size:18px;color:#fff}
+/* slide 8 */
+.tbl{border-collapse:collapse;font-size:18px;color:var(--g2)}
+.tbl td,.tbl th{padding:6px 12px;text-align:right;border-bottom:1px solid rgba(13,15,20,.12)}
+.tbl th{font-weight:700;color:var(--ink)}
+.tbl td:first-child,.tbl th:first-child{text-align:left;padding-left:0}
+
+/* slide 9 */
+.chip{position:absolute;background:#1F2129;border:1px solid #33363F;border-radius:16px;padding:12px 18px;color:#fff;font-weight:600;font-size:22px;line-height:1.2;white-space:nowrap}
+.chip small{display:block;font-weight:400;font-size:17px;color:var(--g3);margin-top:3px}
+.lg{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.lg img{height:26px;background:#fff;border-radius:7px;padding:4px 6px;box-sizing:content-box;object-fit:contain}
+.win{position:absolute;left:1130px;width:690px}
+.win .k{font-family:var(--head);font-weight:800;font-size:64px;color:var(--lime);position:absolute;left:0;top:-10px}
+.win h4{margin-left:84px;font-family:var(--head);font-weight:800;font-size:34px;line-height:1.15}
+.win p{margin-left:84px;font-size:23px;color:var(--g4);margin-top:8px;line-height:1.35}
+
+/* slide 10 */
+.tm{position:absolute;width:290px;height:222px;background:#fff;border-radius:18px;padding:24px 24px;box-shadow:0 12px 26px -18px rgba(40,30,10,.4)}
+.mono{width:62px;height:62px;border-radius:50%;background:var(--ink);color:var(--lime);font-family:var(--head);font-weight:800;font-size:23px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 4px var(--lime)}
+.tm h5{font-family:var(--head);font-weight:800;font-size:21px;line-height:1.15;margin-top:14px}
+.tm .r{font-size:18px;color:var(--blue);font-weight:600;margin-top:4px}
+.tm p{font-size:17px;color:var(--g2);margin-top:6px;line-height:1.3}
+
+.face{border-radius:50%;object-fit:cover;box-shadow:0 0 0 5px var(--lime),0 10px 20px -10px rgba(0,0,0,.4)}
+.bl{list-style:none;font-size:22px;line-height:1.36;color:var(--g2)}
+.bl li{position:relative;padding-left:28px;margin-bottom:12px}
+.bl li:before{content:"";position:absolute;left:0;top:11px;width:10px;height:10px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 2px var(--ink)}
+.tn{font-family:var(--head);font-weight:800;font-size:26px;line-height:1.12}
+.tr{font-size:19px;color:var(--blue);font-weight:600;margin-top:5px}
+.tp2{font-size:19px;color:var(--g2);margin-top:8px;line-height:1.32}
+.nw{padding:12px 0;border-bottom:1.5px solid rgba(13,15,20,.14)}
+/* slide 11 */
+.uf{position:absolute;left:104px;top:318px;width:1070px;border-collapse:collapse}
+.uf td:nth-child(3){white-space:nowrap;padding-right:26px}
+.uf td{padding:11px 0;border-bottom:1.5px solid rgba(13,15,20,.18);font-size:23px;vertical-align:middle}
+.uf td.n{font-family:var(--head);font-weight:800;font-size:28px;width:110px}
+.uf td.s{width:80px;font-weight:600;color:rgba(13,15,20,.6)}
+.uf td.w{color:rgba(13,15,20,.72);font-size:20px}
+.uf i.sw{display:inline-block;width:20px;height:20px;border-radius:5px;margin-right:14px;vertical-align:-3px}
+.lst{position:absolute;top:720px;font-size:22px;line-height:1.5}
+.lst h6{font-family:var(--head);font-weight:800;font-size:22px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px}
+.lst li{list-style:none;padding-left:30px;position:relative}
+.lst li:before{content:"";position:absolute;left:0;top:11px;width:16px;height:9px;border-left:3px solid var(--ink);border-bottom:3px solid var(--ink);transform:rotate(-45deg)}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <filter id="rough"><feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="5"/></filter>
+    <pattern id="hatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="10" height="10" fill="#F4F2EA"/><rect width="4" height="10" fill="#0D0F14"/></pattern>
+  </defs>
+</svg>
+<div id="stage">
+
+<!-- 1 COVER -->
+<section class="slide dark" data-notes="&quot;Nobody taught us money growing up, so we built the app we wish we'd had.&quot;" style="background:radial-gradient(circle at 76% 50%,rgba(182,240,74,.09),transparent 38%),var(--ink)">
+  <div class="abs a" style="left:104px;top:78px;display:flex;align-items:center;gap:14px">
+    <img src="assets/kosh-mark.png" style="width:52px;height:52px;border-radius:12px" alt="Kosh">
+    <span style="font-family:var(--head);font-weight:800;font-size:30px;letter-spacing:.02em">Kosh</span>
+  </div>
+  <img class="stk pop" src="assets/underline.png" style="left:92px;top:486px;width:540px;height:120px;--r:-2deg;--d:4;opacity:.95;z-index:0" alt="">
+  <h1 class="abs a" style="z-index:1;left:104px;top:300px;width:1150px;font-family:var(--head);font-weight:800;font-size:92px;line-height:1.04;letter-spacing:-.02em;--d:1">Nobody taught us money.<br>Let’s fix that.</h1>
+  <p class="abs a" style="left:104px;top:612px;width:880px;font-size:32px;line-height:1.38;color:var(--g4);--d:2">Kosh is the money app for young Bangladesh. Learn it, compare it, practise it, then invest for real.</p>
+  <p class="abs a" style="left:104px;top:736px;font-family:var(--bn);font-weight:600;font-size:38px;color:var(--lime);--d:3">টাকা বুঝুন, তারপর বিনিয়োগ করুন।</p>
+  <p class="abs a" style="left:104px;top:968px;font-size:18px;font-weight:600;letter-spacing:.14em;color:var(--g3);--d:5">NSU STARTUPS NEXT · COHORT 4 · PRE-SEED · APP.KOSHBD.COM</p>
+  <img class="stk pop" src="assets/pot.png" style="left:1340px;top:236px;width:450px;--r:-6deg;--d:2" alt="Clay savings pot">
+  <img class="stk pop" src="assets/sprout.png" style="left:1190px;top:560px;width:290px;--r:5deg;--d:4" alt="Coins with a sprout">
+  <img class="stk pop" src="assets/spark.png" style="left:1296px;top:196px;width:78px;--r:-8deg;--d:6" alt="">
+  <img class="stk pop" src="assets/spark.png" style="left:1772px;top:700px;width:56px;--r:12deg;--d:7" alt="">
+</section>
+
+<!-- 2 PROBLEM -->
+<section class="slide paper" data-notes="Three users we build for sit behind these cards: the first-jobber with savings in an FDR, the student who's curious but scared, and the diaspora earner sending money home. &quot;Savings lose to prices, nobody teaches the basics, and almost nobody invests.&quot;">
+  <h2 class="h1 a">Young people are earning.<br>Nobody teaches them what to do with it.</h2>
+  <img class="stk pop" src="assets/doggesh-surprised.webp" style="left:1640px;top:110px;width:210px;filter:none;--d:6" alt="Doggesh, surprised">
+  <div class="card a" style="left:104px;top:300px;width:520px;height:600px;--d:2"></div>
+  <div class="card a" style="left:674px;top:300px;width:520px;height:600px;--d:3"></div>
+  <div class="card a" style="left:1244px;top:300px;width:520px;height:600px;--d:4"></div>
+  <div class="a" style="--d:2">
+    <div class="abs label" style="left:138px;top:334px;color:var(--blue)">Savings lose to prices</div>
+    <svg class="abs" style="left:134px;top:384px" width="470" height="270" viewBox="0 0 470 270" role="img" aria-label="Median bank FDR 8.5%, 7.65% after tax; inflation 8.34%; 5-year Sanchayapatra 11.83%">
+      <g filter="url(#rough)">
+        <rect x="14" y="98.6" width="116" height="122.4" fill="#A7A69E"/>
+        <rect x="172" y="100.9" width="116" height="120.1" fill="#FF8A3D"/>
+        <rect x="330" y="50.6" width="116" height="170.4" fill="#2F5BEA"/>
+        <path d="M0 221 L 470 222" stroke="#0D0F14" stroke-width="4" fill="none"/>
+      </g>
+      <path d="M14 110.8 H130" stroke="#0D0F14" stroke-width="2.5" stroke-dasharray="7 5"/>
+      <text x="72" y="140" text-anchor="middle" font-family="Inter" font-weight="800" font-size="21" fill="#0D0F14">7.65%</text><text x="72" y="161" text-anchor="middle" font-family="Inter" font-weight="600" font-size="15" fill="#0D0F14">after tax</text>
+      <g font-family="Inter" font-weight="800" font-size="30" fill="#0D0F14" text-anchor="middle">
+        <text x="72" y="84">8.5%</text><text x="230" y="86">8.34%</text><text x="388" y="36">11.83%</text></g>
+      <g font-family="Inter" font-size="16" fill="#45453F" text-anchor="middle">
+        <text x="72" y="250">Median bank FDR</text><text x="230" y="250">Inflation</text><text x="388" y="250">5-yr Sanchayapatra</text></g>
+    </svg>
+    <div class="abs stat" style="left:138px;top:672px;color:var(--orange)">−৳640 a year</div>
+    <p class="abs body25" style="left:138px;top:758px;width:460px">What ৳1 lakh in a median 8.5% FDR loses in buying power, after 10% tax, while prices rise 8.34%.</p>
+  </div>
+  <img class="stk pop" src="assets/circle-orange.png" style="left:288px;top:418px;width:154px;height:84px;filter:none;--d:7" alt="">
+  <div class="a" style="--d:3">
+    <div class="abs label" style="left:708px;top:334px;color:var(--blue)">Money skills</div>
+    <img class="abs" src="assets/people.png" style="left:704px;top:440px;width:460px" alt="Ten people, three highlighted">
+    <div class="abs stat" style="left:708px;top:672px">7 in 10</div>
+    <p class="abs body25" style="left:708px;top:758px;width:450px">adults can’t answer basic questions on inflation, interest and risk.</p>
+  </div>
+  <div class="a" style="--d:4">
+    <div class="abs label" style="left:1278px;top:334px;color:var(--blue)">Investing</div>
+    <img class="abs" src="assets/dots.png" style="left:1274px;top:390px;width:460px" alt="One hundred dots, one highlighted">
+    <div class="abs stat" style="left:1278px;top:672px">1 in 100</div>
+    <p class="abs body25" style="left:1278px;top:758px;width:450px">Bangladeshis has a stock market (BO) account.</p>
+  </div>
+  <img class="stk pop" src="assets/circle-orange.png" style="left:1622px;top:456px;width:84px;height:76px;filter:none;--d:8" alt="">
+  <p class="src a" style="top:960px;--d:6">Sources: BBS inflation, Sep 2026 · Bangladesh Bank deposit-rate chart, 61 banks (median) · 10% tax on FDR interest · National Savings Directorate · FinClusion (S&amp;P FinLit method, 2017) · CDBL</p>
+</section>
+
+<!-- 3 TRUST -->
+<section class="slide dark" data-notes="&quot;Bangladeshis want to grow money. A generation got burned, and the scammers were louder than the teachers.&quot;">
+  <h2 class="h1 a">Trust was broken, again and again.</h2>
+  <!-- col 1 -->
+  <div class="abs label a" style="left:104px;top:236px;color:var(--lime);--d:1">Crashes our parents remember</div>
+  <div class="abs a" style="left:104px;top:290px;width:520px;height:390px;border-radius:20px;background:var(--card-d);border:1px solid var(--line-d);--d:1"></div>
+  <img class="abs a" src="assets/dse-sketch.png" style="left:124px;top:388px;width:480px;--d:2" alt="DSE index sketch with crashes in 1996 and 2010">
+  <div class="abs hand a" style="left:134px;top:318px;font-size:38px;color:var(--orange);--d:3">1996 · −70%</div>
+  <div class="abs hand a" style="left:330px;top:318px;font-size:34px;color:var(--orange);width:270px;text-align:right;line-height:.95;--d:4">2010 · 30 lakh<br>investors hit</div>
+  <img class="stk pop" src="assets/crash.png" style="left:494px;top:580px;width:150px;--r:8deg;--d:6" alt="">
+  <p class="abs a" style="left:104px;top:712px;width:500px;font-size:28px;line-height:1.3;color:var(--g4);--d:5">The lesson passed down: <b style="color:#fff">never touch shares.</b></p>
+  <!-- col 2 -->
+  <div class="abs label a" style="left:674px;top:236px;color:var(--lime);--d:2">Scams filled the gap</div>
+  <div class="abs a" style="left:674px;top:296px;font-family:var(--head);font-weight:800;font-size:70px;color:var(--orange);letter-spacing:-.02em;--d:3">৳7,700 crore+</div>
+  <p class="abs a" style="left:674px;top:404px;width:500px;font-size:27px;line-height:1.35;color:var(--g4);--d:4">taken by just three schemes: <b style="color:#fff">Destiny, Jubok, Evaly.</b></p>
+  <div class="tape pop" style="left:670px;top:540px;width:390px;height:108px;background-image:url(assets/tape-cream.png);font-size:38px;--r:-4deg;--d:5">“Guaranteed 30% a month”</div>
+  <div class="tape pop" style="left:690px;top:668px;width:200px;height:90px;background-image:url(assets/tape-orange.png);font-size:38px;--r:3deg;--d:6">MLM</div>
+  <div class="tape pop" style="left:870px;top:770px;width:290px;height:94px;background-image:url(assets/tape-lime.png);font-size:38px;--r:-3deg;--d:7">Betting apps</div>
+  <img class="stk pop" src="assets/megaphone.png" style="left:960px;top:590px;width:200px;--r:6deg;--d:8" alt="Megaphone with a fish hook">
+  <!-- col 3 -->
+  <div class="abs label a" style="left:1244px;top:236px;color:var(--lime);--d:3">Myths, not skills, get passed down</div>
+  <div class="bub l a" style="left:1244px;top:300px;--d:4">“Shares are just jua.”</div>
+  <div class="bub r a" style="left:1440px;top:396px;--d:5">“Stocks are haram.”</div>
+  <div class="bub l a" style="left:1244px;top:492px;--d:6">“Investing is for the rich.”</div>
+  <div class="bub r a" style="left:1400px;top:588px;--d:7">“Just buy gold or land.”</div>
+  <img class="stk pop" src="assets/goldland.png" style="left:1250px;top:610px;width:150px;--r:-6deg;--d:9" alt="">
+  <p class="abs a" style="left:1244px;top:712px;width:560px;font-size:28px;line-height:1.3;color:var(--g4);--d:8">Money isn’t talked about at home, so <b style="color:#fff">fear fills in.</b></p>
+  <p class="src a" style="--d:9">DSE General Index peaks, Nov 1996 and Dec 2010 (Financial Express) · scheme totals are estimates from ACC, court and press reports.</p>
+</section>
+
+<!-- 4 SOLUTION -->
+<section class="slide paper" data-notes="&quot;One path, at your level. And everything you see is live at app.koshbd.com.&quot; The phone is the For You feed; the laptop is the live Markets page with today's DSE prices.">
+  <h2 class="h1 a" style="width:1500px">From “what can I invest in?”<br>to your first investment.</h2>
+  <svg class="abs a" style="left:140px;top:300px;--d:1" width="40" height="560"><path d="M20 10 C 4 120, 34 200, 18 300 S 6 470, 22 550" fill="none" stroke="#0D0F14" stroke-width="3.5" stroke-dasharray="2 13" stroke-linecap="round" opacity=".55"/></svg>
+  <div class="step a" style="top:290px;--d:2"><img src="assets/bulb.png" alt=""><div class="n"><span>1</span>Learn</div><div class="d">63 two-minute lessons.</div></div>
+  <div class="step a" style="top:410px;--d:3"><img src="assets/gamepad.png" alt=""><div class="n"><span>2</span>Play</div><div class="d">10 money games, incl. Candle Quest and Scam Spotter.</div></div>
+  <div class="step a" style="top:530px;--d:4"><img src="assets/goldland.png" alt=""><div class="n"><span>3</span>Compare</div><div class="d">52 banks’ FDR rates, plus funds, bonds and Sanchayapatra, all sourced.</div></div>
+  <div class="step a" style="top:650px;--d:5"><img src="assets/sprout.png" alt=""><div class="n"><span>4</span>Practise</div><div class="d">Real DSE prices, practice money, zero risk.</div></div>
+  <div class="step a" style="top:770px;--d:6"><img src="assets/rocket.png" alt=""><div class="n"><span>5</span>Invest</div><div class="d">Hand-off to licensed brokers and fund managers.</div></div>
+  <div class="mac a" style="left:790px;top:296px;width:880px;--d:3">
+    <div class="lid"><div class="bar"><i></i><i></i><i></i><div class="url">app.koshbd.com/markets</div></div>
+      <div class="scr" style="height:530px"><video src="assets/mac-markets.mp4" autoplay muted loop playsinline preload="auto"></video><img class="poster" src="assets/mac-markets.jpg" alt="Kosh Markets page on desktop"></div></div>
+    <div class="base"></div>
+  </div>
+  <div class="phone a" style="left:1560px;top:356px;width:296px;height:630px;--d:5"><div class="island"></div><div class="scr"><video src="assets/phone-feed.mp4" autoplay muted loop playsinline preload="auto"></video><img class="poster" src="assets/phone-feed.jpg" alt="Kosh For You feed on a phone"></div></div>
+  <img class="stk pop" src="assets/tape-lime.png" style="left:1700px;top:330px;width:170px;height:54px;--r:28deg;--d:8" alt="">
+  <div class="abs hand a" style="left:1240px;top:236px;font-size:36px;color:var(--blue);--d:7">real screens, live today ↓</div>
+  <img class="stk pop" src="assets/doggesh-point.webp" style="left:1700px;top:72px;width:170px;filter:none;--d:6" alt="Doggesh pointing">
+  <div class="abs a" style="left:104px;top:930px;--d:8"><span class="pill lime">Live on the web</span><span class="pill">Play Store and App Store next</span><span class="pill">English and <span style="font-family:var(--bn);margin-left:7px">বাংলা</span></span><span class="pill">Kosh never holds your money</span></div>
+  <p class="src a" style="top:1012px;--d:9">Screens recorded from app.koshbd.com on 15 Nov 2026.</p>
+</section>
+
+<!-- 5 MARKET -->
+<section class="slide dark" data-notes="&quot;Money already lives on the phone, and the rules are opening up for apps to distribute funds. Nobody has built the trusted front door yet.&quot;">
+  <h2 class="h1 a">A whole generation is going digital at once.</h2>
+  <svg class="abs a" style="left:104px;top:262px;--d:1" width="760" height="640" viewBox="0 0 760 640" role="img" aria-label="TAM 91.5 million, SAM about 32 million, SOM 100 thousand users in 3 years">
+    <polygon points="0,0 760,0 704,200 56,200" fill="rgba(255,255,255,.05)" stroke="#3A3C45" stroke-width="2" stroke-linejoin="round"/>
+    <polygon points="68,216 692,216 636,416 124,416" fill="rgba(47,91,234,.28)" stroke="#2F5BEA" stroke-width="2" stroke-linejoin="round"/>
+    <polygon points="136,432 624,432 568,632 192,632" fill="#B6F04A"/>
+    <g text-anchor="middle" font-family="Bricolage Grotesque, sans-serif" font-weight="700" letter-spacing="1.6" font-size="19">
+      <text x="380" y="48" fill="#8A8B85">TAM</text><text x="380" y="264" fill="#8FA8FF">SAM</text><text x="380" y="480" fill="#0D0F14">SOM</text></g>
+    <g text-anchor="middle" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="66">
+      <text x="380" y="116" fill="#fff">91.5m</text><text x="380" y="332" fill="#fff">≈32m</text><text x="380" y="548" fill="#0D0F14">100k</text></g>
+    <g text-anchor="middle" font-family="Inter, sans-serif" font-size="22">
+      <text x="380" y="160" fill="#C9CBC4">Bangladeshis online, at home and abroad</text>
+      <text x="380" y="376" fill="#C9CBC4">aged 18–34 and reachable on a phone</text>
+      <text x="380" y="592" fill="#0D0F14" font-weight="600">users in 3 years</text></g>
+  </svg>
+  <div class="abs hand a" style="left:104px;top:924px;width:760px;text-align:center;font-size:38px;color:var(--lime);--d:5">we only need 0.3% of the 32m</div>
+  <div class="abs label a" style="left:920px;top:250px;color:var(--lime);--d:3">Why now</div>
+  <div class="nowc a" style="left:920px;top:296px;--d:4"><div class="big">240m</div><p><b>mobile-money accounts.</b> Money already lives on the phone.</p></div>
+  <div class="nowc a" style="left:1388px;top:296px;--d:5"><div class="big">Oct 2026</div><p><b>UCB Asset Management sells funds inside bKash.</b> Apps can distribute funds.</p></div>
+  <div class="nowc a" style="left:920px;top:616px;--d:6"><div class="big">BSEC</div><p><b>plans licensed, BICM-certified</b> mutual-fund agents.</p></div>
+  <div class="nowc a" style="left:1388px;top:616px;--d:7"><div class="big">Culture shift</div><p><b>Investing is a habit for few, not yet a culture.</b> Rising costs and money talk on social media are changing that.</p></div>
+  <img class="stk pop" src="assets/sprout.png" style="left:1730px;top:150px;width:126px;--r:10deg;--d:9" alt="">
+</section>
+
+<!-- 6 TRACTION -->
+<section class="slide paper" data-notes="&quot;With zero ad spend, Kosh has suggested ৳96 lakh of portfolios to people once they understood their options.&quot;">
+  <h2 class="h1 a">Growing, with <span style="position:relative;display:inline-block">৳0<img class="stk pop" src="assets/circle-orange.png" style="left:-34px;top:-16px;width:156px;height:122px;filter:none;z-index:-1;--d:5" alt=""></span> spent on ads.</h2>
+  <div class="hero a" style="left:104px;--d:1"><div class="num" data-count>৳96 lakh+<img src="assets/underline.png" alt=""></div><p>in portfolios Kosh has suggested to users.</p></div>
+  <div class="hero a" style="left:704px;--d:2"><div class="num" data-count>10,000+<img src="assets/underline.png" alt=""></div><p>people reached through our socials, website, app, games, campus sessions and word of mouth.</p></div>
+  <div class="hero a" style="left:1304px;--d:3"><div class="num" data-count>50k+<img src="assets/underline.png" alt=""></div><p>social views since launch.</p></div>
+  <div class="mini a" style="left:104px;--d:4"><b>120</b><span>accounts</span></div>
+  <div class="mini a" style="left:543px;--d:5"><b>24</b><span>money tools<br>+ an AI MCP</span></div>
+  <div class="mini a" style="left:982px;--d:6"><b>170+</b><span>lessons started<br>and climbing</span></div>
+  <div class="mini a" style="left:1421px;--d:7"><b>882</b><span>stocks and assets tracked</span></div>
+  <div class="abs hand a" style="left:104px;top:700px;font-size:30px;color:var(--g1);--d:7">in motion now →</div>
+  <div class="note pop" style="left:120px;top:760px;background:var(--lime);--r:-2.5deg;--d:8"><img class="tp" src="assets/tape-cream.png" alt="">Letters ready for 8 fund managers</div>
+  <div class="note pop" style="left:540px;top:760px;background:#FBF6E4;--r:1.8deg;--d:9"><img class="tp" src="assets/tape-lime.png" alt="">App-store launch on the way</div>
+  <div class="note pop" style="left:960px;top:760px;background:var(--lime);--r:-1.2deg;--d:10"><img class="tp" src="assets/tape-cream.png" alt="">Our own trading engine in build</div>
+  <div class="note pop" style="left:1380px;top:760px;background:#FBF6E4;font-size:30px;--r:2.4deg;--d:11"><img class="tp" src="assets/tape-lime.png" alt="">Money 101 + Global Tea series live on YouTube, IG, FB</div>
+  <p class="src a" style="--d:11">Accounts, lessons: Kosh database, 14 Nov 2026 · tools: live app · reach, views, suggested portfolios: Kosh team records.</p>
+</section>
+
+<!-- 7 BUSINESS MODEL -->
+<section class="slide dark" data-notes="&quot;Users never pay to learn the basics. We earn from depth, from partners when users act, and from helping the industry go digital.&quot; Once Bangladesh runs fully, the same model goes abroad: Bangladeshi students, migrants and workers in the US, UK, Canada, Australia, the EU and the Gulf learn, see local ways to invest, and partners pay us a referral (CAC) fee.">
+  <h2 class="h1 a">Free to learn. Seven ways we earn.</h2>
+  <div class="abs hand a" style="left:104px;top:178px;font-size:32px;color:var(--lime);--d:1">planned and being tested · prices will change as we launch</div>
+  <div class="grp a" style="left:104px;--d:2"><img class="ic" src="assets/bulb.png" alt=""><h3>Education</h3>
+    <div class="row"><div class="t"><b>Premium learning</b><em>৳99 / month</em></div><small>Individuals · kept as low as possible</small></div>
+    <div class="row"><div class="t"><b>Live cohorts</b><em>৳2,500 / learner</em></div><small>Individuals · 4-week cohort</small></div>
+    <div class="row"><div class="t"><b>Employer programmes</b><em>৳1,200 / seat</em></div><small>Companies · per cohort, 25-seat minimum</small></div>
+    <div class="row"><div class="t"><b>CSR programmes</b><em>৳500 / learner</em></div><small>Banks and corporates funding students or garment workers</small></div>
+  </div>
+  <div class="grp a" style="left:685px;--d:3"><img class="ic" src="assets/sprout.png" alt=""><h3>Investing partners</h3>
+    <div class="row"><div class="t"><b>Broker: new users</b><em>৳400 / account</em></div><small>Per funded BO account</small></div>
+    <div class="row"><div class="t"><b>Broker: trades</b><em>20%</em></div><small>Of the broker’s commission on trades placed via Kosh</small></div>
+    <div class="row"><div class="t"><b>Fund managers (AMCs)</b><em>৳300 / investor</em></div><small>Per new investor; selling-agent commission once licensed</small></div>
+  </div>
+  <div class="grp a" style="left:1266px;--d:4"><img class="ic" src="assets/rocket.png" alt=""><h3>Platform and B2B</h3>
+    <div class="row"><div class="t"><b>Sponsored slots</b><em>৳25,000 / month</em></div><small>Per partner, only products that pass our checks, always labelled “Sponsored”</small></div>
+    <div class="row"><div class="t"><b>Tech and consultancy</b><em>৳5–15 lakh</em></div><small>Per project for brokerages and fintechs going digital; later, our trading engine licensed as their OMS</small></div>
+  </div>
+  <img class="stk pop" src="assets/shield.png" style="left:1290px;top:690px;width:110px;--r:-6deg;--d:7" alt="">
+  <p class="abs a" style="left:1420px;top:690px;width:380px;font-size:22px;line-height:1.35;color:var(--g4);--d:6"><b style="color:#fff">Every partner pays the same fee</b>, and sponsored slots are labelled, so our rankings can’t be bought.</p>
+  <div class="abs a" style="left:104px;top:864px;width:1712px;height:164px;border-radius:24px;background:linear-gradient(90deg,rgba(182,240,74,.14),rgba(182,240,74,.04));border:1.5px dashed rgba(182,240,74,.55);padding:22px 34px;--d:8">
+    <div class="label" style="color:var(--lime);font-size:17px">Next, once Bangladesh runs fully</div>
+    <div style="font-family:var(--head);font-weight:800;font-size:28px;line-height:1.15;margin-top:8px;width:1140px">Bangladeshis abroad: a NerdWallet-style guide for students, migrants and workers.</div>
+    <p style="font-size:20px;color:var(--g4);margin-top:8px;width:1140px">Teach first, then show the ways to invest where they live, and earn referral (CAC) fees from local partners.</p>
+    <div style="position:absolute;right:30px;top:58px;display:flex;gap:8px">
+      <span class="rg">US</span><span class="rg">UK</span><span class="rg">Canada</span><span class="rg">Australia</span><span class="rg">EU</span><span class="rg">Gulf</span></div>
+  </div>
+</section>
+
+<!-- 8 PROJECTIONS -->
+<section class="slide paper" data-notes="&quot;Year one is carried by consultancy and education, which fund the runway. The investing streams grow with users, and by year three the biggest stream is only about a fifth of revenue.&quot;">
+  <h2 class="h1 a">৳27 lakh → ৳1.1 crore → ৳2.9 crore.</h2>
+  <div class="abs hand a" style="left:104px;top:176px;font-size:32px;color:var(--blue);--d:1">illustrative · planned prices · assumptions on the right</div>
+  <svg class="abs a" id="bars8" style="left:104px;top:250px;--d:2" width="900" height="720" viewBox="0 0 900 720"></svg>
+  <img class="stk pop" src="assets/rocket.png" style="left:930px;top:420px;width:116px;--r:12deg;--d:8" alt="">
+  <div class="abs a" style="left:1060px;top:262px;display:flex;gap:28px;font-size:20px;font-weight:600;--d:3">
+    <span><i style="display:inline-block;width:16px;height:16px;border-radius:4px;background:var(--ink);margin-right:8px;vertical-align:-2px"></i>Platform and B2B</span>
+    <span><i style="display:inline-block;width:16px;height:16px;border-radius:4px;background:var(--blue);margin-right:8px;vertical-align:-2px"></i>Education</span>
+    <span><i style="display:inline-block;width:16px;height:16px;border-radius:4px;background:var(--lime);box-shadow:0 0 0 1.5px var(--ink) inset;margin-right:8px;vertical-align:-2px"></i>Investing partners</span>
+  </div>
+  <table class="tbl abs a" style="left:1060px;top:320px;width:756px;--d:4">
+    <tr><th>৳ lakh</th><th>2027</th><th>2028</th><th>2029</th></tr>
+    <tr><td>Education</td><td>9.9</td><td>48.4</td><td>136.6</td></tr>
+    <tr><td>Investing partners</td><td>2.5</td><td>17.2</td><td>54.0</td></tr>
+    <tr><td>Platform and B2B</td><td>15.0</td><td>47.0</td><td>96.0</td></tr>
+    <tr><th>Total</th><th>27.4</th><th>112.6</th><th>286.6</th></tr>
+  </table>
+  <div class="abs label a" style="left:1060px;top:556px;color:var(--blue);font-size:17px;--d:5">Assumptions</div>
+  <table class="tbl abs a" style="left:1060px;top:586px;width:756px;font-size:16px;--d:5">
+    <tr><td>Users at year end</td><td>10,000</td><td>40,000</td><td>100,000</td></tr>
+    <tr><td>Premium payers (share of users)</td><td>2%</td><td>2.5%</td><td>3%</td></tr>
+    <tr><td>Cohort learners · CSR learners</td><td>200 · 500</td><td>800 · 3,000</td><td>2,000 · 8,000</td></tr>
+    <tr><td>Employers × seats</td><td>2 × 50</td><td>10 × 50</td><td>30 × 60</td></tr>
+    <tr><td>Funded broker accounts = AMC investors</td><td>300</td><td>2,000</td><td>6,000</td></tr>
+    <tr><td>Traders × ৳ traded a year (0.4% fee)</td><td>150 × 3L</td><td>1,000 × 4L</td><td>3,000 × 5L</td></tr>
+    <tr><td>Sponsors × months</td><td>2 × 6</td><td>5 × 12</td><td>10 × 12*</td></tr>
+    <tr><td>Consultancy projects</td><td>2 × 6L</td><td>4 × 8L</td><td>6 × 10L</td></tr>
+  </table>
+  <p class="abs a" style="left:1060px;top:930px;width:756px;font-size:15px;color:var(--g1);--d:6">* sponsored slots rise to ৳30,000 a month in 2029</p>
+  <p class="src a" style="--d:7"><b style="color:var(--ink)">Costs stay low:</b> infrastructure is ~$110 a month at 10,000 users (measured), so revenue goes into the team, not servers.</p>
+</section>
+
+<!-- 9 COMPETITION -->
+<section class="slide dark" data-notes="&quot;Everyone else is selling one thing. Brokers push trading, Bini and Briddhi aggregate mutual funds without teaching, fund houses and deal platforms sell their own products, and AI has no Bangladesh context. We teach first, show every option with Bangladesh data, then let you act.&quot;">
+  <h2 class="h1 a">Others sell. Kosh helps you choose.</h2>
+  <svg class="abs a" style="left:104px;top:236px;--d:1" width="900" height="780" viewBox="0 0 900 780">
+    <g filter="url(#rough)" stroke="#C9CBC4" stroke-width="3" fill="none" stroke-linecap="round">
+      <path d="M60 390 L 860 392"/><path d="M842 378 L 862 392 L 842 406"/><path d="M78 376 L 58 390 L 78 404"/>
+      <path d="M460 740 L 458 40"/><path d="M446 58 L 458 38 L 472 58"/><path d="M446 722 L 460 742 L 474 722"/>
+    </g>
+    <text x="64" y="428" fill="#8A8B85" font-family="Inter" font-size="20" font-weight="600">SELLS FIRST</text>
+    <text x="856" y="428" fill="#8A8B85" font-family="Inter" font-size="20" font-weight="600" text-anchor="end">TEACHES FIRST</text>
+    <text x="440" y="44" fill="#8A8B85" font-family="Inter" font-size="20" font-weight="600" text-anchor="end">EVERY OPTION</text>
+    <text x="478" y="744" fill="#8A8B85" font-family="Inter" font-size="20" font-weight="600">ONE PRODUCT</text>
+  </svg>
+  <div class="chip a" style="left:124px;top:262px;--d:3">Bini, Briddhi<small>mutual fund aggregators</small><div class="lg"><img src="assets/logo-bini.png" alt="Bini"><img src="assets/logo-briddhi.png" alt="Briddhi"></div></div>
+  <div class="chip a" style="left:136px;top:420px;--d:4">iFarmer, WeGro, Biniyog<small>sell their own deals</small><div class="lg"><img src="assets/logo-ifarmer.png" alt="iFarmer"><img src="assets/logo-wegro.png" alt="WeGro"><img src="assets/logo-biniyog.png" alt="Biniyog"></div></div>
+  <div class="chip a" style="left:150px;top:694px;--d:5">Fund-house (AMC) apps<small>sell only their own funds</small></div>
+  <div class="chip a" style="left:104px;top:800px;width:456px;white-space:normal;--d:6">Brokerages<small>technical, intimidating apps that push trading</small><div class="lg"><img src="assets/logo-shanta.png" alt="Shanta Securities"><img src="assets/logo-midway.png" alt="Midway Securities"><img src="assets/logo-mika.png" alt="MIKA Securities"><img src="assets/logo-lankabangla.png" alt="LankaBangla Securities"><img src="assets/logo-idlc.png" alt="IDLC Securities"></div></div>
+  <div class="chip a" style="left:640px;top:764px;--d:7">Finfluencers<small>teach, unverified</small></div>
+  <div class="chip a" style="left:606px;top:488px;--d:7">ChatGPT and other AI<small>no Bangladesh context, can’t act on it</small></div>
+  <div class="abs pop" style="left:706px;top:296px;width:262px;height:84px;--d:8">
+    <div style="position:absolute;inset:0;background:var(--lime);color:var(--ink);border-radius:18px;font-family:var(--head);font-weight:800;font-size:29px;display:flex;align-items:center;justify-content:center;gap:10px"><img src="assets/kosh-mark.png" style="width:46px;height:46px;border-radius:10px;background:var(--ink);padding:4px" alt="Kosh logo">Kosh Finance</div>
+  </div>
+  <img class="stk pop" src="assets/circle-lime.png" style="left:612px;top:214px;width:450px;height:250px;--r:-3deg;--d:9" alt="">
+  <div class="abs label a" style="left:1130px;top:300px;color:var(--lime);--d:5">Why we win</div>
+  <div class="win a" style="top:370px;--d:6"><div class="k">1</div><h4>Bangladesh data, sourced and dated.</h4><p>52 banks’ rates, DSE prices, funds and bonds, each with its source and date.</p></div>
+  <div class="win a" style="top:570px;--d:7"><div class="k">2</div><h4>Neutral: the same fee from every partner.</h4><p>Rankings can’t be bought, and sponsored slots are labelled.</p></div>
+  <div class="win a" style="top:770px;--d:8"><div class="k">3</div><h4>Learning that sticks.</h4><p>Lessons, streaks and games that bring people back.</p></div>
+</section>
+
+<!-- 10 TEAM -->
+<section class="slide paper" data-notes="&quot;We've invested, sold financial products and built software ourselves. With this round we add a CTO and an engineer.&quot; Shams and Mueen now join as interns, funded from the intern line on the next slide.">
+  <h2 class="h1 a">A small team that already ships.</h2>
+  <div class="card a" style="left:104px;top:236px;width:700px;height:730px;padding:40px 44px;--d:1">
+    <div style="display:flex;align-items:center;gap:30px">
+      <img class="face" src="assets/team-sheikh.jpg" style="width:150px;height:150px" alt="Sheikh Sajid Ahamed Riddo">
+      <div><h5 style="font-family:var(--head);font-weight:800;font-size:36px;line-height:1.1">Sheikh Sajid<br>Ahamed Riddo</h5>
+      <div style="font-size:23px;color:var(--blue);font-weight:600;margin-top:8px">Founder and CEO</div></div>
+    </div>
+    <ul class="bl" style="margin-top:26px">
+      <li>Investing on his own since 2017: US and global markets, and crypto.</li>
+      <li>Independent equity analyst since 2022; Equity Analyst at The Fund, Memorial University’s student-managed investment fund.</li>
+      <li>Investing professional since 2023; licensed mutual fund representative in Canada.</li>
+      <li>Retail banking at two of Canada’s Big Five banks, BMO and Scotiabank.</li>
+      <li>Sales Lead at Clover (Fiserv), payments for US and Canadian businesses.</li>
+      <li>BBA Finance, Memorial University of Newfoundland.</li>
+      <li>Built and coded Kosh with Claude, Cursor and Codex.</li>
+    </ul>
+  </div>
+  <img class="stk pop" src="assets/clip.png" style="left:722px;top:200px;width:70px;--r:8deg;--d:4" alt="">
+  <div class="card a" style="left:850px;top:236px;width:540px;height:226px;padding:30px 30px;display:flex;gap:26px;--d:2">
+    <img class="face" src="assets/team-alfi.jpg" style="width:120px;height:120px;flex:none" alt="SM Morshedul Haque Alfi">
+    <div><h5 class="tn">SM Morshedul Haque Alfi</h5><div class="tr">Co-founder</div>
+    <p class="tp2">Trading and investing since 2021, from age 18.</p><p class="tp2" style="color:var(--g1)">BBA Finance, NSU</p></div>
+  </div>
+  <div class="card a" style="left:850px;top:488px;width:540px;height:226px;padding:30px 30px;display:flex;gap:26px;--d:3">
+    <img class="face" src="assets/team-amia.jpg" style="width:120px;height:120px;flex:none" alt="Anindita Aman Amia">
+    <div><h5 class="tn">Anindita Aman Amia</h5><div class="tr">Co-founder and CMO</div>
+    <p class="tp2">Runs our marketing and CSR. Relationship Manager at JAAGO Foundation.</p><p class="tp2" style="color:var(--g1)">BBA, NSU</p></div>
+  </div>
+  <div class="abs a" style="left:850px;top:740px;width:540px;height:226px;background:var(--ink);color:#fff;border-radius:18px;padding:30px 32px;--d:5">
+    <div class="label" style="color:var(--lime);font-size:17px">Hiring with this round</div>
+    <div style="font-family:var(--head);font-weight:800;font-size:38px;margin-top:14px;line-height:1.12">A CTO, with equity,<br>and a software engineer.</div>
+    <div style="font-size:19px;color:var(--g4);margin-top:12px">plus interns in marketing, growth and research</div>
+  </div>
+  <div class="abs a" style="left:1436px;top:236px;width:384px;height:340px;background:url(assets/notepaper.png) center/100% 100%;padding:44px 30px 0 62px;--d:5">
+    <div class="label" style="font-size:17px;color:var(--blue)">Advisor</div>
+    <div style="display:flex;align-items:center;gap:18px;margin-top:14px"><img class="face" src="assets/advisor-seeam.jpg" style="width:92px;height:92px;flex:none;box-shadow:0 0 0 4px var(--lime)" alt="Seeam Shahid Noor">
+    <div style="font-family:var(--head);font-weight:800;font-size:27px;line-height:1.1">Seeam<br>Shahid Noor</div></div>
+    <div class="hand" style="font-size:30px;line-height:1.08;margin-top:12px;color:var(--g2)">a16z speedrun · ex-Scale AI<br>Harvard alum</div>
+  </div>
+  <div class="abs a" style="left:1436px;top:620px;width:384px;--d:7">
+    <div class="label" style="font-size:17px;color:var(--blue)">Network</div>
+    <ul style="list-style:none;font-size:22px;line-height:1.3;margin-top:12px;color:var(--ink);font-weight:600">
+      <li class="nw">NSU Startups Next, Cohort 4</li>
+      <li class="nw">Ekush Wealth Management</li>
+      <li class="nw">EDGE Asset Management</li>
+      <li class="nw">Prime Bank Securities Limited</li>
+    </ul>
+  </div>
+  <div class="abs a" style="left:1436px;top:896px;width:384px;font-size:18px;line-height:1.35;color:var(--g2);--d:8"><b style="display:inline-block;background:var(--ink);color:var(--lime);border-radius:6px;padding:2px 9px;margin-bottom:6px;font-size:16px;letter-spacing:.04em">DELAWARE C-CORP</b><br>Kosh is being incorporated in Delaware, the standard structure for venture-backed startups.</div>
+</section>
+
+<!-- 11 ASK -->
+<section class="slide limebg" data-notes="&quot;Let's raise Bangladesh's first confident generation of investors.&quot; Marketing is the biggest line, ad spend included. Team: CTO (equity + ৳15k) and an engineer at ৳25k a month together, an analyst at ৳25k, interns at ৳21k. ৳2.5 lakh is set aside for an outside review and fix of the app. 12 months of runway.">
+  <h2 class="h1 a" style="font-size:66px;width:1200px">Raising ৳25 lakh pre-seed to finish Kosh and grow it for 12 months.</h2>
+  <table class="uf a" style="--d:2">
+    <tr><td class="n">10.7</td><td class="s">43%</td><td><i class="sw" style="background:var(--blue)"></i><b>Marketing and growth</b></td><td class="w">Ad spend, campus, ambassadors, content, launch</td></tr>
+    <tr><td class="n">8.5</td><td class="s">34%</td><td><i class="sw" style="background:var(--ink)"></i><b>Tech and core team</b></td><td class="w">CTO + engineer ৳25k, analyst ৳25k, interns ৳21k / month</td></tr>
+    <tr><td class="n">2.5</td><td class="s">10%</td><td><i class="sw" style="background:#6B6A63"></i><b>App refinement</b></td><td class="w">Third-party review and fixes for heavy tech work</td></tr>
+    <tr><td class="n">1.8</td><td class="s">7%</td><td><i class="sw" style="background:#fff"></i><b>Office</b></td><td class="w">৳15k a month, running costs included</td></tr>
+    <tr><td class="n">1.5</td><td class="s">6%</td><td><i class="sw" style="background-image:repeating-linear-gradient(45deg,#0D0F14 0 4px,#F4F2EA 4px 10px)"></i><b>AI and tools</b></td><td class="w">AI to run the app, coding tools, hosting</td></tr>
+  </table>
+  <div class="abs a" style="left:104px;top:668px;font-size:19px;font-weight:600;color:rgba(13,15,20,.65);--d:3">৳ lakh over 12 months · bare-minimum salaries; the CTO also takes equity</div>
+  <div class="lst a" style="left:104px;--d:4"><h6>In 12 months</h6><ul>
+    <li>Play Store and App Store live</li><li>First fund-manager and broker partners signed</li><li>First employer and CSR cohorts</li><li>10,000 users · first revenue</li></ul></div>
+  <div class="lst a" style="left:700px;width:500px;--d:5"><h6>Beyond money, we want</h6><ul>
+    <li>Mentors who have built fintech</li><li>Intros to fund managers, brokers, banks</li><li>Guidance on BSEC licensing</li><li>Campus reach for our cohorts</li></ul></div>
+  <svg class="abs a" id="donut" style="left:1230px;top:300px;--d:2" width="560" height="560" viewBox="0 0 560 560"></svg>
+  <img class="stk pop" src="assets/doggesh-cheer.webp" style="left:1660px;top:150px;width:200px;filter:none;--d:8" alt="Doggesh celebrating">
+  <p class="abs a" style="left:1230px;top:880px;width:600px;font-family:var(--head);font-weight:800;font-size:34px;line-height:1.15;--d:7">Let’s raise Bangladesh’s first confident generation of investors.</p>
+</section>
+
+</div>
+<div class="nav-zone" id="prevZ"></div><div class="nav-zone" id="nextZ"></div>
+<div id="ui"><div id="bar"></div></div><div id="count"></div>
+<div id="hint">← → to move · N notes · F fullscreen</div>
+<div id="notes"></div>
+<script>
+(function(){
+  const print = /[?&]print/.test(location.search);
+  if (print) document.documentElement.classList.add('print');
+  if (/[?&]still/.test(location.search)) document.documentElement.classList.add('still');
+  const stage = document.getElementById('stage');
+  const slides = [...document.querySelectorAll('.slide')];
+  // charts
+  const NS='http://www.w3.org/2000/svg';
+  const el=(t,a,p)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e};
+  // stacked bars
+  (function(){
+    const s=document.getElementById('bars8'); const H=600, base=640, max=300, bw=170;
+    const data=[['2027','10k users',[15.0,9.9,2.5],'27.4'],['2028','40k users',[47.0,48.4,17.2],'112.6'],['2029','100k users',[96.0,136.6,54.0],'286.6']];
+    const cols=['#0D0F14','#2F5BEA','#B6F04A'];
+    for(let g=0;g<=300;g+=100){const y=base-g/max*H;el('line',{x1:40,x2:880,y1:y,y2:y,stroke:'rgba(13,15,20,.12)','stroke-width':1.5},s);const t=el('text',{x:0,y:y+6,fill:'#6B6A63','font-family':'Inter','font-size':17},s);t.textContent=g;}
+    data.forEach((d,i)=>{const x=120+i*270;let y=base;
+      d[2].forEach((v,j)=>{const h=v/max*H;y-=h;const r=el('rect',{x,y,width:bw,height:Math.max(h,1),fill:cols[j],stroke:j==2?'#0D0F14':'none','stroke-width':j==2?2:0},s);r.style.transformOrigin=`0px ${base}px`;r.classList.add('grow');r.style.animationDelay=(400+i*180)+'ms';});
+      const t=el('text',{x:x+bw/2,y:y-18,'text-anchor':'middle',fill:'#0D0F14','font-family':'Bricolage Grotesque','font-weight':800,'font-size':40},s);t.textContent='৳'+d[3]+'L';
+      const yr=el('text',{x:x+bw/2,y:base+40,'text-anchor':'middle',fill:'#0D0F14','font-family':'Bricolage Grotesque','font-weight':800,'font-size':28},s);yr.textContent=d[0];
+      const u=el('text',{x:x+bw/2,y:base+70,'text-anchor':'middle',fill:'#6B6A63','font-family':'Inter','font-size':19},s);u.textContent=d[1];});
+  })();
+  // donut
+  (function(){
+    const s=document.getElementById('donut'); const cx=280,cy=280,r=210,w=92;
+    const parts=[[10.7,'#2F5BEA'],[8.5,'#0D0F14'],[2.5,'#6B6A63'],[1.8,'#FFFFFF'],[1.5,'url(#hatch)']];
+    let a0=-Math.PI/2; const tot=25;
+    parts.forEach(([v,c],i)=>{const a1=a0+v/tot*Math.PI*2;const gap=0.012;
+      const p=(a,rr)=>[cx+rr*Math.cos(a),cy+rr*Math.sin(a)];
+      const [x1,y1]=p(a0+gap,r),[x2,y2]=p(a1-gap,r),[x3,y3]=p(a1-gap,r-w),[x4,y4]=p(a0+gap,r-w);const L=(a1-a0)>Math.PI?1:0;
+      const path=el('path',{d:`M${x1} ${y1} A${r} ${r} 0 ${L} 1 ${x2} ${y2} L${x3} ${y3} A${r-w} ${r-w} 0 ${L} 0 ${x4} ${y4}Z`,fill:c},s);
+      path.classList.add('seg');path.style.animationDelay=(500+i*140)+'ms';a0=a1;});
+    const t=el('text',{x:cx,y:cy+8,'text-anchor':'middle',fill:'#0D0F14','font-family':'Bricolage Grotesque','font-weight':800,'font-size':74},s);t.textContent='৳25L';
+    const t2=el('text',{x:cx,y:cy+50,'text-anchor':'middle',fill:'rgba(13,15,20,.65)','font-family':'Inter','font-weight':600,'font-size':22},s);t2.textContent='pre-seed';
+  })();
+  const st=document.createElement('style');st.textContent=`.grow{transform:scaleY(0)}.slide.active .grow{animation:gy .9s cubic-bezier(.2,.7,.2,1) forwards}@keyframes gy{to{transform:scaleY(1)}}
+  .seg{opacity:0;transform-origin:280px 280px;transform:scale(.85)}.slide.active .seg{animation:sg .6s cubic-bezier(.3,1.4,.5,1) forwards}@keyframes sg{to{opacity:1;transform:none}}
+  html.print .grow,html.print .seg{transform:none!important;opacity:1!important;animation:none!important}`;document.head.appendChild(st);
+  if (print) return;
+  let i = Math.max(0, Math.min(slides.length-1, (parseInt(location.hash.slice(1))||1)-1));
+  const notes=document.getElementById('notes');
+  function fit(){const s=Math.min(innerWidth/1920,innerHeight/1080);stage.style.transform=`scale(${s}) translate(-50%,-50%)`;stage.style.transformOrigin='0 0';stage.style.left='50%';stage.style.top='50%';stage.style.transform=`translate(-50%,-50%) scale(${s})`;stage.style.transformOrigin='center center';}
+  function count(sl){sl.querySelectorAll('[data-count]').forEach(n=>{const node=n.firstChild;const full=n.dataset.full||(n.dataset.full=node.textContent);const m=full.match(/[\d,]+/);if(!m)return;const target=+m[0].replace(/,/g,'');const t0=performance.now();const dur=1100;const fmt=v=>full.replace(m[0],m[0].includes(',')?Math.round(v).toLocaleString('en-US'):String(Math.round(v)));(function tick(t){const p=Math.min(1,(t-t0)/dur);const e=1-Math.pow(1-p,3);node.textContent=fmt(target*e);if(p<1)requestAnimationFrame(tick)})(t0);});}
+  function show(n){i=(n+slides.length)%slides.length;slides.forEach((s,k)=>{const on=k===i;s.classList.toggle('active',on);s.querySelectorAll('video').forEach(v=>{if(on){v.currentTime=0;v.play().catch(()=>{})}else v.pause()})});
+    document.getElementById('bar').style.width=((i+1)/slides.length*100)+'%';document.getElementById('count').textContent=(i+1)+' / '+slides.length;
+    notes.innerHTML='<b>Slide '+(i+1)+'</b> · '+(slides[i].dataset.notes||'');history.replaceState(null,'','#'+(i+1));if(!document.documentElement.classList.contains('still'))count(slides[i]);}
+  addEventListener('resize',fit);fit();show(i);
+  addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' ','Enter'].includes(e.key)){e.preventDefault();show(i+1)}else if(['ArrowLeft','PageUp','Backspace'].includes(e.key)){e.preventDefault();show(i-1)}else if(e.key==='Home')show(0);else if(e.key==='End')show(slides.length-1);else if(e.key==='n'||e.key==='N')notes.style.display=notes.style.display==='block'?'none':'block';else if(e.key==='f'||e.key==='F'){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}});
+  document.getElementById('prevZ').onclick=()=>show(i-1);document.getElementById('nextZ').onclick=()=>show(i+1);
+  let tx=null;addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});addEventListener('touchend',e=>{if(tx==null)return;const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)show(i+(dx<0?1:-1));tx=null});
+  setTimeout(()=>document.getElementById('hint').style.opacity=0,6000);
+})();
+</script>
+</body>
+</html>

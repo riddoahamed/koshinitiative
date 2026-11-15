@@ -245,6 +245,7 @@ export const FootV2 = () => (
           <li><a href="/bd/for-organizations#education">Kosh for education</a></li>
           <li><a href="/bd/for-organizations#workplace">Kosh for employee wellness</a></li>
           <li><a href="/bd/for-organizations#csr">Kosh for CSR programmes</a></li>
+          <li><a href="/investors">Investors</a></li>
         </ul>
       </div>
       <div>

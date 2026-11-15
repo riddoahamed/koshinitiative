@@ -141,6 +141,13 @@ export const PAGE_META: Record<string, PageMeta> = {
     description:
       "Real feedback from Kosh users, grouped into themes by AI — anonymous, paraphrased, and never the raw text. See what people are asking us to fix or build next.",
   },
+  "/investors": {
+    title: "Investors — Kosh pre-seed deck",
+    description:
+      "Kosh is raising ৳25 lakh pre-seed. Present the live deck, or download it as a PDF or PowerPoint.",
+    // A page we send to investors, not one to be found in search.
+    noindex: true,
+  },
   "/bd/vote": {
     title: "Kosh Live, vote, reveal, decide",
     description:
