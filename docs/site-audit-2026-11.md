@@ -63,12 +63,12 @@ app**, with the source for the 98% figure. The phone nav is now **Start here** a
 
 | Fact | On the live site | After this branch |
 |---|---|---|
-| Free Money basics, 12 lessons | missing | Offer section + Inside |
+| Money basics: free learning journey in the app, paid course on the website | missing | Offer section + Inside |
 | Courses ৳999 / ৳499 founding (account + full-app waitlist with licensed broker) | missing | Offer section |
 | Kosh Plus ৳99/mo, ৳594/6 mo, ৳1,188/12 mo, bKash/Nagad/bank, contact us | missing | Offer section (mailto "Kosh Plus") |
 | Money Lab: Compare, Asset Battle, Time Machine presets free; Time Machine any stock/date + Money X-ray in Plus (decided 25 Nov) | missing | Offer section, split free / Plus |
 | Kosh Classroom: free for educators, up to 30 students/class | missing | Offer section |
-| Verified investors | missing | Offer section |
+| Verified investors | missing | Offer section, "Coming soon" while onboarding |
 | No Season 1 ৳500 reward | none found (`৳500` only appears in a fake scam SMS in a game, and in "what ৳500 a month becomes") | unchanged |
 | Banned words (guaranteed / best / AI-powered / master) | "masterclasses" | removed |
 

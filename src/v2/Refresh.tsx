@@ -10,7 +10,7 @@ import { KOSH_APP_URL } from "@/lib/links";
 
 const NUMBERS = [
   { n: "৳0", t: "to start learning" },
-  { n: "12", t: "free lessons in Money basics" },
+  { n: "৳499", t: "founding price per course" },
   { n: "৳10,00,000", t: "practice money, real prices" },
   { n: "10", t: "money games, zero real money" },
 ];

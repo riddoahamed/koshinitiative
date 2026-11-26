@@ -186,8 +186,8 @@ export const Inside = () => (
           <h3>A path, not a library you&rsquo;ll never finish.</h3>
           <p>
             Short lessons in order, with XP, streaks and mini-games along the
-            way, tuned to where you live and earn. <b>Start with Money basics:
-            12 lessons, free.</b>
+            way, tuned to where you live and earn. <b>Start with Money basics, free
+            in the app.</b>
           </p>
         </div>
         <div className="claim__shot">

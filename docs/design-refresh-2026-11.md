@@ -212,7 +212,9 @@ collage art in place of the removed icons (rec. 3), trust strip (rec. 10).
 - **Games:** now "The Kosh arcade: Ten games. Zero real money." It lists the arcade as it
   stands in the app (Candle Quest, Kalo Taka, Hot or Catfish, Which Investor Are You?, The
   Ledger Trail, IPO Launch, Scam Spotter, plus MonerPoly, Kosh Quest and Grand Trade Auto).
-- **Not live in the app yet** (checked 26 Nov as a guest): `/course/money-basics` and a
-  Money Lab route both return 404. The site's "Money basics: 12 lessons" and Money Lab lines
-  describe the offer the app is about to ship. Hold the deploy until those are live, or
-  soften the lines.
+- **Money basics** (Riddo, 26 Nov): free in the app as a learning journey, paid on the website
+  as a course. The site no longer says "12 free lessons". The numbers bar shows the ৳499
+  founding price instead.
+- **Verified investors:** marked "Coming soon" while the first ones are onboarded.
+- **Money Lab** still returns 404 in the app (checked 26 Nov). Hold the Offer's Money Lab
+  lines until it's live, or soften them.

@@ -27,7 +27,7 @@ export const Offer = () => (
         <div className="offer__card glass" data-reveal="scale">
           <span className="offer__tag">Free</span>
           <ul>
-            <li><b>Money basics</b> · a 12-lesson course</li>
+            <li><b>Money basics</b> · a learning journey in the app</li>
             <li><b>Practice money</b> on real market prices</li>
             <li><b>Compare and Asset Battle</b> · Money Lab tools</li>
             <li><b>Time Machine presets</b> · Money Lab</li>
@@ -38,12 +38,12 @@ export const Offer = () => (
         </div>
 
         <div className="offer__card glass" data-reveal="scale">
-          <span className="offer__tag">In the app</span>
+          <span className="offer__tag">Coming soon</span>
           <ul>
-            <li><b>Verified investors</b> · real people, portfolios we check</li>
+            <li><b>Verified investors</b> · real people, portfolios we check. We&rsquo;re onboarding the first ones now.</li>
           </ul>
-          <a className="offer__cta" href="/bd#inside">
-            See the app <ArrowRight size={15} strokeWidth={2.2} />
+          <a className="offer__cta" href={KOSH_WAITLIST_EMAIL_URL}>
+            Join the waitlist <ArrowRight size={15} strokeWidth={2.2} />
           </a>
         </div>
 
@@ -51,7 +51,7 @@ export const Offer = () => (
           <span className="offer__tag offer__tag--paid">Paid</span>
           <ul>
             <li>
-              <b>Courses</b> · {COURSE_LIST} each, or {COURSE_FOUNDING} if you
+              <b>Courses</b> on this website, Money basics included · {COURSE_LIST} each, or {COURSE_FOUNDING} if you
               have a Kosh account and{" "}
               <a href={KOSH_WAITLIST_EMAIL_URL}>joined the waitlist</a> for the
               full app with a licensed broker
