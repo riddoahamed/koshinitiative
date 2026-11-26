@@ -18,7 +18,7 @@ import "./offerings.css";
 type Section = "courses" | "live" | "kids" | "workplace";
 
 const SECTIONS: Array<{ key: Section; label: string; href: string }> = [
-  { key: "courses", label: "Courses + cohorts", href: "/bd/offerings/courses" },
+  { key: "courses", label: "Courses", href: "/bd/offerings/courses" },
   { key: "live", label: "Live rooms", href: "/bd/offerings/live" },
   { key: "kids", label: "For kids", href: "/bd/offerings/kids" },
   { key: "workplace", label: "For workplaces", href: "/bd/offerings/workplace" },
@@ -26,30 +26,35 @@ const SECTIONS: Array<{ key: Section; label: string; href: string }> = [
 
 const enrol = (name: string) => mailto(`Kosh Learn — ${name}`);
 
+/* The three paid courses, as the app sells them (26 Nov 2026). Names,
+   summaries and outcomes come from the app's course content; prices from its
+   price table: ৳999 list, ৳499 founding for an account on the full-app
+   waitlist. Payment: the person requests access, Kosh emails the payment
+   details, then calls. No payment numbers on the site. */
+const COURSE_LIST = "৳999";
+const COURSE_FOUNDING = "৳499";
+
 const courses = [
   {
-    eyebrow: "Self-paced · 3 weeks",
+    eyebrow: "Self-paced · a weekend, 2 weeks or 4 weeks",
     title: "Money, on purpose",
-    price: "৳790 launch price",
     icon: BookOpen,
-    note: "For the person who wants their money to feel less mysterious before they think about investing.",
-    points: ["Spend without guesswork", "Build a buffer that actually sticks", "Understand the choices money can make"],
+    note: "Personal finance in Bangladesh: tax, rent vs buy, home loans, debt, insurance, retirement, zakat and family money.",
+    points: ["File your tax return", "Plan rent vs buy and compare home loans", "Plan retirement, PF and pension; work out zakat"],
   },
   {
-    eyebrow: "Live cohort · 4 webinars + replays",
+    eyebrow: "Self-paced · 2 or 4 weeks",
     title: "Investing, clearly",
-    price: "৳1,490 launch price",
     icon: GraduationCap,
-    note: "A guided first pass through getting started, investing in US markets, crypto as a risk topic, and prediction markets.",
-    points: ["Four live sessions with room for questions", "Replay access for the cohort", "A framework, not a hot-tip feed"],
+    note: "Build a portfolio and avoid the traps: funds, SIPs, risk you can live with, rebalancing, and checking any platform.",
+    points: ["Design a portfolio for your horizon", "Choose and compare funds, and set up a SIP", "Check any platform in ten minutes"],
   },
   {
-    eyebrow: "Live series · 6 webinars + replays",
+    eyebrow: "Self-paced · 2 or 4 weeks",
     title: "Market sense",
-    price: "৳2,490 launch price",
     icon: Landmark,
-    note: "For people ready to examine charts, market narratives, technical analysis and smart-money concepts with a critical eye.",
-    points: ["Six live, structured sessions", "Theory, context and risk — not signals", "Replays to revisit the hard parts"],
+    note: "The DSE, from first share to a held portfolio: reading a company, dividends and IPOs, position size, rebalancing and tax.",
+    points: ["Read a DSE company page and its financials", "Handle dividends, bonus shares, record dates and IPOs", "Size positions and rebalance a practice portfolio"],
   },
 ];
 
@@ -95,9 +100,15 @@ function CourseCards() {
   return (
     <section className="learn-section" id="courses">
       <div className="wrap">
-        <p className="eyebrow" data-reveal>Courses + cohorts</p>
-        <h2 className="learn-title" data-reveal>Choose the depth that fits today.</h2>
-        <p className="learn-intro" data-reveal>Start with your own money habits, then move into a live learning room when you want context and conversation.</p>
+        <p className="eyebrow" data-reveal>Courses</p>
+        <h2 className="learn-title" data-reveal>Go deeper, at your own pace.</h2>
+        <p className="learn-intro" data-reveal>
+          Learning in the Kosh app is free, starting with Money basics. These three
+          courses go further. {COURSE_LIST} each, or {COURSE_FOUNDING} founding price if
+          you have a Kosh account and have joined the waitlist for the full app
+          with a licensed broker. Request access and we&rsquo;ll email you the
+          payment details.
+        </p>
         <div className="course-grid" data-stagger="100">
           {courses.map((course) => {
             const Icon = course.icon;
@@ -107,7 +118,7 @@ function CourseCards() {
                 <h3>{course.title}</h3>
                 <p>{course.note}</p>
                 <ul>{course.points.map((point) => <li key={point}><Check size={15} />{point}</li>)}</ul>
-                <footer><b>{course.price}</b><a href={enrol(course.title)}>Ask to join <ArrowRight size={15} /></a></footer>
+                <footer><b>{COURSE_LIST} · {COURSE_FOUNDING} founding</b><a href={enrol(course.title)}>Request access <ArrowRight size={15} /></a></footer>
               </article>
             );
           })}

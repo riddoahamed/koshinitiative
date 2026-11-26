@@ -80,12 +80,12 @@ export const PAGE_META: Record<string, PageMeta> = {
   "/bd/offerings": {
     title: "Kosh Learn — courses, live webinars and money programmes",
     description:
-      "Go deeper with Kosh: self-paced money courses, live investing webinar cohorts, biweekly Kosh Live Rooms, a parent-led kids money club, and practical workplace sessions.",
+      "Go deeper with Kosh: three self-paced money courses, biweekly Kosh Live Rooms, a parent-led kids money club, and practical workplace sessions.",
   },
   "/bd/offerings/courses": {
-    title: "Kosh courses and live investing cohorts",
+    title: "Kosh courses: Money, on purpose · Investing, clearly · Market sense",
     description:
-      "Self-paced money foundations plus live, small-group webinars on investing, markets and risk — explained simply for people starting in Bangladesh.",
+      "Three self-paced courses that go deeper than the free learning path in the Kosh app: personal finance in Bangladesh, building a portfolio, and the DSE. ৳999 each, ৳499 founding price.",
   },
   "/bd/offerings/live": {
     title: "Kosh Live Rooms — biweekly money webinars",

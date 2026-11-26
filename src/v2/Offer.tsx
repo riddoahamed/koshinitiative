@@ -59,13 +59,13 @@ export const Offer = () => (
               <a href={COURSES_URL}>See courses</a>
             </li>
             <li>
-              <b>Kosh Plus</b> · ৳99 a month, ৳594 for 6 months or ৳1,188 for
-              12 months. Pay by bKash, Nagad or bank.
+              <b>Kosh Plus</b> · ৳99 a month, ৳499 for 6 months or ৳899 for
+              12 months. Request it and we&rsquo;ll email you the payment details.
             </li>
             <li><b>Coming to Plus:</b> Money X-ray and the Time Machine on any stock or date</li>
           </ul>
-          <a className="offer__cta" href={mailto("Kosh Plus")}>
-            Contact us to join Plus <ArrowRight size={15} strokeWidth={2.2} />
+          <a className="offer__cta" href={mailto("Kosh Plus request")}>
+            Request Kosh Plus <ArrowRight size={15} strokeWidth={2.2} />
           </a>
         </div>
       </div>
