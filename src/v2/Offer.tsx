@@ -29,8 +29,8 @@ export const Offer = () => (
           <ul>
             <li><b>Money basics</b> · a learning journey in the app</li>
             <li><b>Practice money</b> on real market prices</li>
-            <li><b>Compare and Asset Battle</b> · Money Lab tools</li>
-            <li><b>Time Machine presets</b> · Money Lab</li>
+            <li><b>Tools</b> · fund screener, FDR and SIP calculators</li>
+            <li><b>Money Lab</b> · Compare, Asset Battle and Time Machine presets, coming soon</li>
           </ul>
           <a className="offer__cta" href={KOSH_DOWNLOAD_URL}>
             Get the app <ArrowRight size={15} strokeWidth={2.2} />
@@ -60,7 +60,7 @@ export const Offer = () => (
               <b>Kosh Plus</b> · ৳99 a month, ৳594 for 6 months or ৳1,188 for
               12 months. Pay by bKash, Nagad or bank.
             </li>
-            <li><b>Plus adds Money X-ray</b> and the Time Machine on any stock or date</li>
+            <li><b>Coming to Plus:</b> Money X-ray and the Time Machine on any stock or date</li>
           </ul>
           <a className="offer__cta" href={mailto("Kosh Plus")}>
             Contact us to join Plus <ArrowRight size={15} strokeWidth={2.2} />

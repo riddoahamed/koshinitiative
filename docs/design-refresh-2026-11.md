@@ -216,5 +216,7 @@ collage art in place of the removed icons (rec. 3), trust strip (rec. 10).
   as a course. The site no longer says "12 free lessons". The numbers bar shows the ৳499
   founding price instead.
 - **Verified investors:** marked "Coming soon" while the first ones are onboarded.
-- **Money Lab** still returns 404 in the app (checked 26 Nov). Hold the Offer's Money Lab
-  lines until it's live, or soften them.
+- **Money Lab** isn't in the app yet (checked 26 Nov: no Time Machine, Asset Battle or Money
+  X-ray under Tools). The Offer card now says "coming soon" for Money Lab and the Plus extras,
+  and lists the live free tools (fund screener, FDR and SIP calculators) instead. Drop "coming
+  soon" when it ships.
