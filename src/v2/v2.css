@@ -744,10 +744,8 @@
    screen turns into the menu they take it over. The transition is the point:
    the words move down off the glass rather than being said twice at once.
    Below 640px the boot screen drops them instead, so they stay here. */
-.hero:not(.booted) .hero__strap-stat,
-.hero:not(.booted) .hero__strap-vp {
-  opacity: 0; transform: translateY(6px);
-}
+/* The boot screen now says "Don't invest blindly" and the strap says the
+   mission, so nothing is said twice: the strap shows from the first frame. */
 .hero__strap-stat, .hero__strap-vp {
   transition: opacity 0.55s ease 0.15s, transform 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.15s;
 }
@@ -3204,3 +3202,7 @@
 .browser__view img { display: block; width: 100%; height: auto; }
 @media (max-width: 640px) { .browser__dots i { width: 9px; height: 9px; } .browser__url { font-size: 11px; } }
 .games__more { flex-basis: 100%; margin: 0; color: var(--muted); font-size: 14.5px; line-height: 1.6; max-width: 70ch; }
+
+/* the market note takes the top line on phones; the fact moves under it */
+@media (max-width: 640px) { .has-market .hero__fact { top: 112px; } }
+@media (min-width: 641px) and (max-width: 900px) { .has-market .hero__fact { top: 146px; } }
