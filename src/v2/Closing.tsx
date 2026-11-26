@@ -4,8 +4,6 @@ import { KOSH_APP_URL, KOSH_DOWNLOAD_URL, KOSH_WAITLIST_EMAIL_URL } from "@/lib/
 import { AndroidGlyph } from "./AndroidGlyph";
 import { MAIL, mailto, VP_SHORT } from "./copy";
 import { setScrollLock } from "./scrollLock";
-import ShaderBg from "./ShaderBg";
-import Starfield from "./Starfield";
 import QrCode from "./QrCode";
 
 /* ---------------- ORGS — institutions + financial partners ---------------- */
@@ -18,8 +16,8 @@ export const Orgs = () => (
           Bring Kosh to the people you serve.
         </h2>
         <p className="h-sub" data-reveal style={{ ["--d" as string]: "150ms" }}>
-          Learning stays free for everyone. Institutions run Kosh as a program, and
-          financial partners meet people who arrive already informed.
+          Learning stays free for everyone. Schools and companies run Kosh as a
+          programme. Financial partners meet people who already understand.
         </p>
         <div className="orows" data-stagger="130">
           <div className="orow" data-reveal="left">
@@ -37,9 +35,9 @@ export const Orgs = () => (
             <div>
               <h3>Financial partners</h3>
               <p>
-                Brokers, asset managers, and banks reach people who arrive ready,
-                with a pre-filled application. One flat fee per funded account,
-                identical for every partner, disclosed on the card.
+                Brokers, fund managers and banks meet people who are ready, with
+                the form already filled. Every partner pays the same flat fee per
+                account, and we show it.
               </p>
             </div>
           </div>
@@ -48,8 +46,8 @@ export const Orgs = () => (
             <div>
               <h3>Outcomes you can audit</h3>
               <p>
-                Every cohort is instrumented. See what people learned, practised,
-                and actually did with their money. Not an attendance sheet.
+                See what people learned, practised and did with their money, not
+                just who showed up.
               </p>
             </div>
           </div>
@@ -70,17 +68,15 @@ export const Orgs = () => (
 /* ---------------- VISION ---------------- */
 export const Vision = () => (
   <section className="sec vision" id="vision">
-    <ShaderBg intensity={0.7} />
-    <div className="veil" aria-hidden="true" />
     <div className="wrap">
       <p className="eyebrow" data-reveal>the long game</p>
       <h2 className="h-display" data-reveal style={{ ["--d" as string]: "80ms" }}>
         The trusted decision layer for emerging markets.
       </h2>
       <p className="h-sub" data-reveal style={{ ["--d" as string]: "150ms" }}>
-        Starting in Bangladesh, Kosh connects financial uncertainty with real
-        opportunity, helping people move safely from curiosity to confident
-        action. The same gap exists across every emerging market we know.
+        We&rsquo;re starting in Bangladesh, helping people go from &ldquo;I&rsquo;m
+        curious&rdquo; to &ldquo;I know what I&rsquo;m doing&rdquo;. The same gap
+        exists in every emerging market we know.
       </p>
 
       <div className="vision__cols">
@@ -95,7 +91,7 @@ export const Vision = () => (
           <span className="vcol__tag">next</span>
           <ul>
             <li>Campus &amp; workplace programs</li>
-            <li>White-label decision engine</li>
+            <li>Kosh inside banks and apps</li>
           </ul>
         </div>
         <div className="vcol" data-reveal style={{ ["--d" as string]: "240ms" }}>
@@ -172,7 +168,6 @@ const TRACKS = [
 
 export const Join = () => (
   <section className="sec join" id="join">
-    <Starfield density={0.8} />
     <div className="wrap">
       <p className="eyebrow" data-reveal>join us</p>
       <h2 className="h-display" data-reveal style={{ ["--d" as string]: "80ms" }}>
@@ -251,11 +246,12 @@ export const FootV2 = () => (
       <div>
         <h4>Company</h4>
         <ul>
-          <li><a href="/bd#story">Why Kosh</a></li>
-          <li><a href="/bd#inclusion">Impact &amp; inclusion</a></li>
+          <li><a href="/about#story">Why Kosh</a></li>
+          <li><a href="/about#inclusion">Impact &amp; inclusion</a></li>
           <li><a href="/bd/feedback">What people are asking for</a></li>
-          <li><a href="/bd#join">Join us</a></li>
+          <li><a href="/about#join">Join us</a></li>
           <li><a href={KOSH_WAITLIST_EMAIL_URL}>Join the waitlist</a></li>
+          <li><a href="/global">Kosh Global</a></li>
           <li><a href={`mailto:${MAIL}`}>Contact</a></li>
         </ul>
       </div>
@@ -366,11 +362,6 @@ const PROD_ORGS: NavItem[] = [
 ];
 
 const NAV_GROUPS: NavGroup[] = [
-  { label: "Markets", items: [
-    { label: "Kosh Finance", href: "/", note: "Home" },
-    { label: "Bangladesh", href: "/bd", note: "Bangladesh tools and learning" },
-    { label: "Global", href: "/global", note: "Education preview for life abroad" },
-  ] },
   {
     label: "Free tools",
     blurb: "Everything here works without an account.",
@@ -394,10 +385,10 @@ const NAV_GROUPS: NavGroup[] = [
   {
     label: "Company",
     items: [
-      { label: "Why Kosh exists", href: "/bd#story" },
-      { label: "Impact & inclusion", href: "/bd#inclusion" },
+      { label: "Why Kosh exists", href: "/about#story" },
+      { label: "Impact & inclusion", href: "/about#inclusion" },
       { label: "What people ask for", href: "/bd/feedback", note: "Our open request board" },
-      { label: "Join us", href: "/bd#join", note: "Careers, campus, research" },
+      { label: "Join us", href: "/about#join", note: "Careers, campus, research" },
     ],
   },
 ];
@@ -405,17 +396,15 @@ const NAV_GROUPS: NavGroup[] = [
 /* The landing hero gets a quieter navigation treatment than the application
    pages. These are direct section links: no dropdown chrome, no filled CTA,
    and no decorative effects competing with the machine below. */
+/* Five, one word each where possible. "Offerings", "Product" and "Services"
+   were three names for overlapping things; TV, live sessions, blog and the
+   market switch live in the footer (and the geo banner offers the switch). */
 const HERO_LINKS: NavItem[] = [
-  { label: "Bangladesh", href: "/bd" },
-  { label: "Global", href: "/global" },
-  { label: "Offerings", href: "/bd/offerings" },
-  { label: "Kosh Live TV", href: "/bd/tv/" },
-  { label: "About us", href: "/bd#story" },
-  { label: "Product", href: "/bd#product" },
-  { label: "Services", href: "/bd/for-organizations" },
-  { label: "Live sessions", href: "/bd/rsvp" },
+  { label: "Start here", href: "/bd/start" },
   { label: "Learn", href: "/learn" },
-  { label: "Blog", href: "/blog" },
+  { label: "Courses", href: "/bd/offerings/courses" },
+  { label: "For organisations", href: "/bd/for-organizations" },
+  { label: "About", href: "/about" },
 ];
 
 /** A `/#section` link should scroll, not reload, when we're already there. */
@@ -447,6 +436,7 @@ export const NavV2 = ({ pinned = false }: { pinned?: boolean }) => {
   const here = typeof window === "undefined" ? null : groupForPath(window.location.pathname);
   const [open, setOpen] = useState<string | null>(null);
   const [sheet, setSheet] = useState(false);
+  const [heroMenu, setHeroMenu] = useState(false);
   const go = useAnchorNav();
 
   useEffect(() => {
@@ -486,7 +476,21 @@ export const NavV2 = ({ pinned = false }: { pinned?: boolean }) => {
           <img src="/img/kosh-logo.png" alt="" />
           KOSH
         </a>
-        <div className="nav__simple">
+        {/* Phones: ten links in two rows took a fifth of the first screen.
+            They now sit behind Menu, with the one beginner link kept out. */}
+        <div className="nav__hero-mobile">
+          <a className="nav__hero-start" href="/bd/start">Start here</a>
+          <button
+            type="button"
+            className="nav__hero-menu"
+            aria-expanded={heroMenu}
+            aria-controls="hero-links"
+            onClick={() => setHeroMenu((v) => !v)}
+          >
+            {heroMenu ? "Close" : "Menu"}
+          </button>
+        </div>
+        <div id="hero-links" className={`nav__simple${heroMenu ? " open" : ""}`}>
           {HERO_LINKS.map((item) => (
             <a key={item.href} href={item.href} onClick={(e) => click(e, item.href)}>
               {item.label}

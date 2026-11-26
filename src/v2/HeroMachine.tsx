@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { STAT_HOOK } from "./copy";
 import { KOSH_APP_URL } from "@/lib/links";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -231,11 +230,11 @@ const HeroMachine = () => {
                   </span>
 
                   <span className="boot__stat">
-                    <b>98% of</b> Bangladeshis don&rsquo;t invest formally
+                    <b>Don&rsquo;t invest blindly.</b>
                   </span>
                   <span className="boot__line">
-                    <span>Since you were never taught about</span>
-                    <span>money, let us</span>
+                    <span>We break it down till you get it.</span>
+                    <span>Then you invest.</span>
                   </span>
                 </span>
               </button>
@@ -243,13 +242,11 @@ const HeroMachine = () => {
             <nav className="crt__ui" aria-label="Kosh menu">
               <div className="crt__top">
                 <div className="crt__nav">
-                  <a href="#story">About Us</a>
-                  <a href="#product">Product</a>
-                  <a href="/bd/offerings/courses">Kosh Courses</a>
-                  <a href="/bd/for-organizations">Services</a>
+                  {/* Four, so the menu never crowds Try Kosh off the glass. */}
+                  <a href="/about">About</a>
+                  <a href="/bd/offerings/courses">Courses</a>
                   <a href="/learn">Learn</a>
                   <a href="/blog">Blog</a>
-                  <a href="/bd/tv/">Watch TV</a>
                 </div>
               </div>
               <div className="crt__mid">
@@ -295,17 +292,33 @@ const HeroMachine = () => {
         {/* The one line. Readable before the machine is even switched on:
             the site should never be a beautiful picture that says nothing. */}
         <div className="hero__strap">
-          {/* The fact first. It is the same number as the "<2% invest" stat
-              further down the page, read from the side that stops a scroll. */}
-          <p className="hero__strap-stat">{STAT_HOOK}</p>
           <p className="hero__strap-vp">
-            Learn money and investing, <span>since we were never taught.</span>
+            Building Bangladesh&rsquo;s first generation of{" "}
+            <span>confident investors.</span>
           </p>
           <p className="hero__strap-sub">
             Free lessons · risk-free practice on real prices · we never touch
             your money
           </p>
+          {/* The next step has to be on the first screen, not behind the
+              power button: most visitors never press it. */}
+          <div className="hero__strap-ctas">
+            {/* The app opens in guest mode: look around before any sign-up.
+                The quiz is the softer door: one minute, then it points you on. */}
+            <a className="btn btn-primary" href={KOSH_APP_URL}>Explore the app free</a>
+            <a className="btn btn-glass" href="/bd/quiz">Take the 1-min quiz</a>
+          </div>
         </div>
+
+        {/* The fact arrives like a message on your phone, not a banner. */}
+        <aside className="hero__fact" aria-label="Did you know">
+          <img src="/img/kosh-logo.png" alt="" width={30} height={30} />
+          <p>
+            <span className="hero__fact-from">Kosh <i>· did you know</i></span>
+            <b>98%</b> of Bangladeshis don&rsquo;t have a formal investment account.
+            <small>Source: CDBL</small>
+          </p>
+        </aside>
 
         <div className="hero__scrollcue" aria-hidden="true">
           <span>scroll</span>

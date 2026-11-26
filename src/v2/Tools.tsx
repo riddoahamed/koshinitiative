@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { ArrowRight, Landmark, ScrollText } from "lucide-react";
-import Starfield from "./Starfield";
 import { fetchTotals, taka, EMPTY_TOTALS, type Totals } from "@/lib/investkorsiData";
 import { FDR_ROWS, RATES_MONTH, DEFAULT_TENURE, topRate } from "./fdr/rates";
 
@@ -49,18 +48,15 @@ export const Tools = () => {
 
   return (
     <section className="sec tools" id="tools">
-      <Starfield density={1.2} />
 
       <div className="wrap">
         <p className="eyebrow" data-reveal>free tools</p>
         <h2 className="h-display" data-reveal style={{ ["--d" as string]: "80ms" }}>
-          Two things you can use right now,{" "}
-          <span className="grad-text">without an account.</span>
+          Check before you put <span className="grad-text">money anywhere.</span>
         </h2>
         <p className="h-sub" data-reveal style={{ ["--d" as string]: "150ms" }}>
-          No signup, no download, nothing sold to you. Both are built from
-          public filings and what people told us, and both stay free whether or
-          not you ever open the app.
+          What every bank pays on an FDR, and what really happened to
+          people&rsquo;s money on other platforms.
         </p>
 
         <div className="tools__grid" data-stagger="130">
@@ -68,9 +64,8 @@ export const Tools = () => {
             <span className="tool__icon"><Landmark size={22} strokeWidth={1.9} /></span>
             <h3>FDR rates, every bank</h3>
             <p>
-              What each scheduled bank announced to Bangladesh Bank for a fixed
-              deposit, in one sortable table, with the tax and the early-break
-              penalty spelled out.
+              Every bank&rsquo;s FDR rate in one table, with the tax and the
+              penalty for breaking it early.
             </p>
             <span className="tool__stats">
               <b>{BANK_COUNT} banks</b>
@@ -86,9 +81,8 @@ export const Tools = () => {
             <span className="tool__icon tool__icon--b"><ScrollText size={22} strokeWidth={1.9} /></span>
             <h3>InvestKorsi, the public ledger</h3>
             <p>
-              What actually happened to people&rsquo;s money at Bangladeshi
-              platforms: who got paid, who is still waiting, and what went
-              wrong. Anonymous, and yours takes two minutes to add.
+              Real stories from Bangladeshi investment platforms: who got paid
+              and who is still waiting. Add yours anonymously in two minutes.
             </p>
             <span className="tool__stats">
               {t.reports > 0 ? (

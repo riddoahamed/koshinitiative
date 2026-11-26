@@ -507,6 +507,7 @@ html.still .a,html.still .pop{opacity:1;transform:rotate(var(--r,0deg));animatio
 <div class="nav-zone" id="prevZ"></div><div class="nav-zone" id="nextZ"></div>
 <div id="ui"><div id="bar"></div></div><div id="count"></div>
 <div id="hint">← → to move · N notes · F fullscreen</div>
+<script>/* phones have no keys: say what works there */if(matchMedia("(hover: none)").matches||innerWidth<640)document.getElementById("hint").textContent="Swipe to move";</script>
 <div id="notes"></div>
 <script>
 (function(){

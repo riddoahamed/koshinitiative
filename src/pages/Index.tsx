@@ -3,12 +3,13 @@ import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HeroMachine from "@/v2/HeroMachine";
-import NSUSessions from "@/v2/NSUSessions";
-import { Pitch, Paths, KoshLearnTeaser, Problem, Product, Impact } from "@/v2/Sections";
-import { Orgs, Vision, Founder, Join, FootV2, NavV2 } from "@/v2/Closing";
+import { Paths } from "@/v2/Sections";
+import { FootV2, NavV2 } from "@/v2/Closing";
+import { NumbersBar, Mission, StickyCta } from "@/v2/Refresh";
 import { Funance } from "@/v2/Funance";
 import { Inside } from "@/v2/Inside";
 import { Tools } from "@/v2/Tools";
+import { Offer } from "@/v2/Offer";
 import { initFx } from "@/v2/fx";
 import { VP_LONG } from "@/v2/copy";
 import { SCROLL_LOCK_EVENT } from "@/v2/scrollLock";
@@ -90,22 +91,16 @@ const Index = ({ path = "/" }: { path?: "/" | "/bd" }) => {
       <NavV2 />
       <main>
         <HeroMachine />
-        <Pitch />
+        <NumbersBar />
         <Paths />
-        <NSUSessions />
-        <KoshLearnTeaser />
-        <Problem />
-        <Tools />
-        <Product />
         <Inside />
+        <Offer />
+        <Tools />
         <Funance />
-        <Impact />
-        <Orgs />
-        <Vision />
-        <Founder />
-        <Join />
+        <Mission />
       </main>
       <FootV2 />
+      <StickyCta />
     </div>
   );
 };

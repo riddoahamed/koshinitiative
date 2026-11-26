@@ -16,7 +16,10 @@ export default function MarketSuggestion() {
   }, []);
   if (!country || dismissed || sessionStorage.getItem("kosh-market-dismissed")) return null;
   const bd = country === "BD";
-  if ((bd && pathname.startsWith("/bd")) || (!bd && pathname === "/global") || pathname.startsWith("/blog") || pathname === "/learn") return null;
+  // Only the two market homes offer a market switch. On /investors, /learn,
+  // /blog and the rest, the banner covered content and offered a page that
+  // was not the one the visitor came for.
+  if (!(pathname === "/" || pathname === "/global") || (!bd && pathname === "/global")) return null;
   const names: Record<string, string> = { AU: "Australia", AE: "the UAE", GB: "the UK", US: "the US", CA: "Canada", BD: "Bangladesh" };
   return <aside className="market-suggestion" aria-label="Suggested market">
     <span>Looks like you’re {names[country] ? `in ${names[country]}` : "outside Bangladesh"}. Choose the context that fits you.</span>

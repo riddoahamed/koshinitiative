@@ -35,14 +35,15 @@ const useInView = <T extends HTMLElement>() => {
 interface PhoneProps {
   src: string;
   alt: string;
-  cap: string;
+  /** Not shown: the picture says it. Kept as a note for whoever edits. */
+  cap?: string;
   /** tall capture that scrolls inside the frame */
   reel?: boolean;
   /** stagger, so two reels never move in lockstep */
   speed?: number;
 }
 
-const Phone = ({ src, alt, cap, reel, speed = 34 }: PhoneProps) => {
+const Phone = ({ src, alt, reel, speed = 34 }: PhoneProps) => {
   const { ref, live } = useInView<HTMLElement>();
   return (
     <figure
@@ -59,34 +60,37 @@ const Phone = ({ src, alt, cap, reel, speed = 34 }: PhoneProps) => {
           style={reel ? { animationDuration: `${speed}s` } : undefined}
         />
       </div>
-      <figcaption>{cap}</figcaption>
     </figure>
   );
 };
 
 export const Inside = () => (
   <section className="sec inside" id="inside">
-    <div className="blob m" style={{ width: 520, height: 520, left: "-14%", top: "3%" }} />
     <div className="wrap">
       <p className="eyebrow" data-reveal>inside kosh</p>
       <h2 className="h-display" data-reveal style={{ ["--d" as string]: "80ms" }}>
         Tap anything. It <span className="grad-text">explains itself.</span>
       </h2>
       <p className="h-sub" data-reveal style={{ ["--d" as string]: "150ms" }}>
-        Listed companies, funds and the gold rate in Bangladesh, with the numbers
-        that actually decide it and a plain answer to &ldquo;so what does this
-        one do?&rdquo;
+        Companies, funds and gold in Bangladesh, with the key numbers and a
+        simple answer to &ldquo;what does this one do?&rdquo;
       </p>
 
       <div className="claim" data-reveal>
         <div className="claim__text">
-          <p className="claim__kicker">one feed</p>
-          <h3>Everything you could put money into, in one place.</h3>
+          <p className="claim__kicker">your for-you feed</p>
+          <h3>Our AI finds it. People check it. You decide.</h3>
           <p>
-            Savings, government-backed schemes, halal assets, gold, mutual funds,
-            DSE and global stocks. Filter it to what fits you, or answer two
-            questions and let it build the feed. <b>Nothing pays to appear.</b>
+            Savings, Sanchaypatra, halal options, gold, funds, DSE and global
+            stocks, in one feed. <b>Nobody pays to be listed.</b>
           </p>
+          <ol className="claim__steps">
+            <li><b>Discover</b> Every day our AI reads the filings and news, and picks out what matters.</li>
+            <li><b>Verify</b> Numbers come straight from the source. If something looks off, a person checks it.</li>
+            <li><b>Understand</b> Each card tells you, in simple words, why it&rsquo;s there.</li>
+            <li><b>Practise</b> Try it with pretend money on real prices first.</li>
+            <li><b>Invest</b> When you&rsquo;re ready, we show you where. We never touch your money.</li>
+          </ol>
         </div>
         <div className="claim__shot">
           <Phone
@@ -104,9 +108,9 @@ export const Inside = () => (
           <p className="claim__kicker">what it actually returned</p>
           <h3>&#2547;10,000 in 2023 would be &#2547;14,223 today.</h3>
           <p>
-            Not a headline rate. What the money would have become after the
-            fund&rsquo;s own fees, with the yearly figure over five years, three
-            years and one. <b>Then the fee that gets taken either way.</b>
+            Not the advertised rate. What your money would be now, after the
+            fund&rsquo;s fees, over five years, three and one. <b>Plus the fee
+            you pay either way.</b>
           </p>
         </div>
         <div className="claim__shot">
@@ -125,9 +129,9 @@ export const Inside = () => (
           <p className="claim__kicker">priced how bangladesh buys it</p>
           <h3>Gold at the BAJUS rate, per bhori.</h3>
           <p>
-            The world spot price is not the one you pay in Dhaka, so Kosh shows
-            the latest BAJUS 22K rate beside it, six months of history in taka or
-            dollars, and a written read on <b>why it moved this week.</b>
+            The world gold price isn&rsquo;t what you pay in Dhaka. Kosh shows the
+            BAJUS 22K rate next to it, six months of history, and <b>why it
+            moved this week.</b>
           </p>
         </div>
         <div className="claim__shot">
@@ -139,9 +143,13 @@ export const Inside = () => (
         </div>
       </div>
 
-      <figure className="dev dev--mac inside__hero" data-reveal="scale">
-        <div className="dev__lid">
-          <div className="dev__screen">
+      <figure className="browser inside__hero" data-reveal="scale">
+        <div className="browser__bar" aria-hidden="true">
+          <span className="browser__dots"><i /><i /><i /></span>
+          <span className="browser__url">app.koshfinance.com/markets/dse/GP</span>
+        </div>
+        <div className="browser__view">
+          <div>
             <img
               src="/img/app/stock-desktop.webp"
               alt="Grameenphone's page in Kosh on a laptop: the share price, a one-month chart, how long it has been listed, eight years of cash dividends, and a plain-language note on what the company does"
@@ -152,11 +160,6 @@ export const Inside = () => (
             />
           </div>
         </div>
-        <div className="dev__base" aria-hidden="true" />
-        <figcaption>
-          Grameenphone on the desktop. Eight years of dividends, what the company
-          actually does, and a Buy button that spends practice money.
-        </figcaption>
       </figure>
 
       <div className="claim claim--flip" data-reveal>
@@ -164,15 +167,14 @@ export const Inside = () => (
           <p className="claim__kicker">before any of it is real</p>
           <h3>Lose money safely first.</h3>
           <p>
-            &#2547;10,00,000 and $10,000 of practice money at real market prices,
-            so you find out what you do on a red week before it costs you
-            anything.
+            Get &#2547;10,00,000 and $10,000 in pretend money to trade at real
+            prices. See how you handle a bad week before it costs you anything.
           </p>
         </div>
         <div className="claim__shot">
           <Phone
             src="/img/app/practise.webp"
-            alt="The Kosh Practise screen: a ৳10,00,000 and $10,000 practice account, a pact for deciding what you'll actually do, calculators, and the Hot or Not game"
+            alt="The Kosh practice portfolio: practice money at market prices, a practice path to place your first order, and the account total in taka"
             cap="Real prices. Fake money. No damage."
           />
         </div>
@@ -183,15 +185,17 @@ export const Inside = () => (
           <p className="claim__kicker">and the part that sticks</p>
           <h3>A path, not a library you&rsquo;ll never finish.</h3>
           <p>
-            Short lessons in an order, tuned to where you actually live and earn,
-            with a season you can race your friends through. <b>Nobody finishes
-            a course they downloaded.</b>
+            Short lessons in order, with XP, streaks and mini-games along the
+            way, tuned to where you live and earn. <b>Start with Money basics:
+            12 lessons, free.</b>
           </p>
         </div>
         <div className="claim__shot">
           <Phone
-            src="/img/app/learn.webp"
-            alt="The Kosh Learn screen: a prompt to answer a couple of questions and be pointed at the right zone, a Spender to Investor season, and lessons grouped by where you live"
+            src="/img/app/learn-path.webp"
+            reel
+            speed={36}
+            alt="The Kosh learning path scrolling: level and streak, Unit 1 Understand how money works, lessons like Why your FDR is quietly losing, and the Scam Spotter and IPO Launch games along the path"
             cap="Bangladesh, Gulf, UK, US, SE Asia. The lessons move with you."
           />
         </div>

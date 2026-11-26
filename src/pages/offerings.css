@@ -21,3 +21,11 @@
 @keyframes learn-spin { to { transform: rotate(360deg); } } @keyframes learn-drift { to { transform: translate(-22px, 30px) scale(1.06); } } @keyframes learn-pulse { 70% { box-shadow: 0 0 0 12px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
 @media (max-width: 780px) { .learn-page .pageback { top: 76px; }.learn-hero { min-height: 520px; padding-top: 138px; }.learn-hero__halo--one { right: -280px; }.learn-hero__orbital { right: 3%; }.course-grid, .learn-teaser__grid, .learn-teaser__head, .split-layout { grid-template-columns: 1fr; }.course-card { min-height: unset; }.course-card h3 { margin-top: 20px; }.learn-subnav { margin-inline: 24px; padding-bottom: 10px; }.learn-section { padding-inline: 24px; }.learn-teaser__head { gap: 12px; } }
 @media (prefers-reduced-motion: reduce) { .learn-hero__halo, .learn-hero__orbital, .live-card__pulse { animation: none; } }
+
+/* Phones: Back sits in the flow right under the nav and the hero starts right
+   after it. Before, ~190px of empty screen came first and Back overlapped
+   the label. */
+@media (max-width: 640px) {
+  .learn-page .pageback { position: static; }
+  .learn-hero { padding-top: 26px; min-height: 0; }
+}

@@ -44,7 +44,6 @@ const Learn = () => {
         <div className="blob p" style={{ width: 440, height: 440, left: "-10%", top: "-4%" }} />
         <div className="wrap">
           <p className="eyebrow" data-reveal>quick lessons</p>
-          <p className="market-label">Market context: Bangladesh · Product examples and rules are local.</p>
           <h2 className="h-display" data-reveal style={{ ["--d" as string]: "70ms" }}>
             Learn one thing. It takes two minutes.
           </h2>

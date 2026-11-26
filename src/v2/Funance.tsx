@@ -64,16 +64,15 @@ export const Funance = () => {
 
   return (
     <section className="sec games" id="funance">
-      <div className="blob p" style={{ width: 420, height: 420, left: "-8%", top: "12%" }} />
       <div className="wrap">
-        <p className="eyebrow" data-reveal>funance</p>
+        <p className="eyebrow" data-reveal>the kosh arcade</p>
         <h2 className="h-display" data-reveal style={{ ["--d" as string]: "80ms" }}>
-          The fastest way to learn money is to <span className="grad-text">play with it.</span>
+          Ten games. <span className="grad-text">Zero real money.</span>
         </h2>
         <p className="games__lede" data-reveal style={{ ["--d" as string]: "140ms" }}>
-          Nobody learns investing from a PDF. Three games and one live room,
-          free, in your browser, with no signup to start. Sign in with Google
-          only when you want to keep your progress.
+          Small games, better instincts. Fly Doggesh through a candle chart,
+          play the scammer and see the receipts, swipe on too-good pitches, or
+          run a whole trading city.
         </p>
 
         <div className="games__grid" data-stagger="120">
@@ -129,8 +128,12 @@ export const Funance = () => {
         </div>
 
         <div className="games__cta" data-reveal="fade">
+          <p className="games__more">
+            Also in the arcade: Candle Quest · Kalo Taka · Hot or Catfish ·
+            Which Investor Are You? · The Ledger Trail · IPO Launch · Scam Spotter
+          </p>
           <a href={`${APP}/play`} target="_blank" rel="noopener noreferrer" className="games__btn">
-            See all the games <ArrowRight size={16} strokeWidth={2.4} />
+            Open the arcade <ArrowRight size={16} strokeWidth={2.4} />
           </a>
           <p className="games__note">
             <span className="dot" /> free · plays in your browser · progress saves when you sign in

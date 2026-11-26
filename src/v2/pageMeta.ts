@@ -141,6 +141,11 @@ export const PAGE_META: Record<string, PageMeta> = {
     description:
       "Real feedback from Kosh users, grouped into themes by AI — anonymous, paraphrased, and never the raw text. See what people are asking us to fix or build next.",
   },
+  "/about": {
+    title: "About Kosh",
+    description:
+      "Why Kosh exists: building Bangladesh's first generation of confident investors. The problem, who it's for, how organisations use Kosh, where it's going, and how to join.",
+  },
   "/investors": {
     title: "Investors — Kosh pre-seed deck",
     description:
@@ -164,6 +169,7 @@ export const PAGE_META: Record<string, PageMeta> = {
 export const PATH_ALIASES: Record<string, string> = {
   // koshbd.com/* redirects to koshfinance.com/bd/*, so old links land here.
   "/bd/investors": "/investors",
+  "/bd/about": "/about",
   "/bd/live": "/bd/vote",
   "/bd/investor-type": "/bd/quiz",
   "/bd/for-schools": "/bd/for-organizations",

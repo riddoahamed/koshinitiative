@@ -29,6 +29,20 @@ async function prep(page) {
     } else break;
   }
   await page.evaluate(() => document.activeElement?.blur?.());
+  // The site never shows the Season 1 ৳500 reward or the ৳500 referral draw
+  // (they are being retired). Hide the card that carries either, so a
+  // re-capture can't bring them back onto the landing page.
+  await page.evaluate(() => {
+    const bad = /season\s*1|৳\s?500\s*at the end|shot at ৳\s?500|draw for ৳\s?500/i;
+    for (const el of document.querySelectorAll("body *")) {
+      if (!el.isConnected || el.children.length > 12) continue;
+      const t = el.innerText || "";
+      if (!bad.test(t) || t.length > 260) continue;
+      let card = el;
+      while (card.parentElement && (card.parentElement.innerText || "").length < 320) card = card.parentElement;
+      card.style.display = "none";
+    }
+  });
   await page.waitForTimeout(300);
 }
 
@@ -80,7 +94,17 @@ try {
   await still.screenshot({ path: raw });
   webp(raw, `${OUT}/gold.webp`, { height: 1688 });
 
-  for (const [name, tab] of [["practise", "Practise"], ["learn", "Learn"]]) {
+  // The quick check behind "What kind of investor am I?", and the arcade.
+  // The Practise tab now opens on the arcade; the practice account lives at /portfolio.
+  for (const [name, path] of [["check", "/check"], ["arcade", "/play"], ["practise", "/portfolio"]]) {
+    await still.goto(`${APP}${path}`, { waitUntil: "networkidle" });
+    await still.waitForTimeout(3500); await prep(still);
+    raw = join(tmp, `${name}.png`);
+    await still.screenshot({ path: raw });
+    webp(raw, `${OUT}/${name}.webp`, { height: 1688 });
+  }
+
+  for (const [name, tab] of [["learn", "Learn"]]) {
     await still.goto(`${APP}/dashboard`, { waitUntil: "networkidle" });
     await still.waitForTimeout(2500); await prep(still);
     await still.locator(`text=${tab}`).last().click({ timeout: 9000 }).catch(() => {});
@@ -109,6 +133,11 @@ try {
     await tall.goto(`${APP}/invest`, { waitUntil: "networkidle" });
     await tall.waitForTimeout(4000); await prep(tall);
     await tall.locator("text=DSE stocks").first().click().catch(() => {});
+    await tall.waitForTimeout(4000); await prep(tall);
+  });
+  // The learning path scrolls: XP, streak, lessons and the mini-games in it.
+  await reel("learn-path", async () => {
+    await tall.goto(`${APP}/learn`, { waitUntil: "networkidle" });
     await tall.waitForTimeout(4000); await prep(tall);
   });
   await reel("stock", async () => {

@@ -12,7 +12,7 @@ export const STAT_HOOK =
   "~98% of Bangladeshis don\u2019t have a formal investment account";
 
 /** Short form: hero, footer, page straplines. */
-export const VP_SHORT = "Learn money and investing, since we were never taught.";
+export const VP_SHORT = "Building Bangladesh\u2019s first generation of confident investors.";
 
 /** Full form: meta description, page intros. */
 export const VP_LONG =
@@ -25,6 +25,6 @@ export const PROMISE_CHIPS = [
   "We never touch your money",
 ];
 
-export const MAIL = "koshinitiative@gmail.com";
+export const MAIL = "hello@koshfinance.com";
 export const mailto = (subject: string) =>
   `mailto:${MAIL}?subject=${encodeURIComponent(subject)}`;

@@ -45,7 +45,7 @@ const Investors = () => (
           />
         </div>
         <p style={{ fontSize: 13.5, opacity: 0.6, marginTop: 10 }}>
-          Click the right or left edge, or use the arrow keys, to move between slides.
+          Swipe, tap the edges or use the arrow keys to move between slides.
         </p>
 
         <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 22 }}>

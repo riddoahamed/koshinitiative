@@ -87,7 +87,7 @@ export default function NSUSessions() {
                   <label className="nsu-sessions__check"><input name="nsu_student" type="checkbox" required /><span>I’m an NSU student.</span></label>
                   <label className="nsu-sessions__check"><input name="contact_consent" type="checkbox" required /><span>Kosh may email me about these sessions and their schedule.</span></label>
                   <button className="nsu-sessions__cta" disabled={!ready || busy} type="submit">{busy ? "Registering…" : ready ? "Register" : "Loading sessions…"}<ArrowRight size={18} aria-hidden="true" /></button>
-                  <p className="nsu-sessions__privacy">For session updates only. To update or remove your details, email <a href="mailto:hello@koshbd.com">hello@koshbd.com</a>.</p>
+                  <p className="nsu-sessions__privacy">For session updates only. To update or remove your details, email <a href="mailto:hello@koshfinance.com">hello@koshfinance.com</a>.</p>
                 </form>}
               </>}
               {error && <p className="nsu-sessions__error" role="alert">{error}</p>}

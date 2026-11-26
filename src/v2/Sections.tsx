@@ -4,21 +4,16 @@ import {
   PieChart,
   MoonStar,
   ArrowRight,
-  Target,
   BookOpen,
 } from "lucide-react";
 import { KOSH_APP_URL } from "@/lib/links";
 import { PROMISE_CHIPS } from "./copy";
-import ShaderBg from "./ShaderBg";
-import Starfield from "./Starfield";
 
 /* ---------------- PROMISE — the one line, said plainly ----------------
    First thing after the hero. One sentence a beginner understands, one
    sentence explaining how, and the low-commitment door as the primary CTA. */
 export const Pitch = () => (
   <section className="sec about" id="about">
-    <ShaderBg />
-    <div className="veil" aria-hidden="true" />
     <div className="wrap" data-stagger="110">
       <p className="eyebrow" data-reveal>what kosh does</p>
       <h2 className="h-display" data-reveal>
@@ -26,9 +21,9 @@ export const Pitch = () => (
         to your first real investment.
       </h2>
       <p className="h-sub" data-reveal>
-        Free lessons in plain language. Practice on real market prices with
-        money that isn&rsquo;t real. Then your real options side by side,
-        with the fees and the catch, so <strong>you can decide for yourself.</strong>
+        Free lessons in simple words. Practise with pretend money on real
+        prices. Then see your real options side by side, fees and all,
+        and <strong>decide for yourself.</strong>
       </p>
       <div className="about__ctas" data-reveal="scale">
         <a className="btn btn-primary" href="/bd/start">Learn something free</a>
@@ -44,58 +39,52 @@ export const Pitch = () => (
 /* ---------------- PATHS — the beginner routes, made explicit ----------------
    The thing the site was missing: an actual door for someone who has never
    invested and doesn't want a pitch. Three, and they all really work. */
+/* Each door opens the real app (guest mode, no sign-up) on the feature it
+   names, with a real screen of it on the card. A taste, not a page about it. */
 const DOORS = [
   {
-    icon: Target,
-    kicker: "60 seconds",
+    shot: "/img/app/check.webp",
+    kicker: "1 minute",
     t: "What kind of investor am I?",
-    p: "Six honest questions. You get a straight read on where you actually stand, and what to do about it.",
-    href: "/bd/quiz",
-    cta: "Take the quiz",
-    accent: "a",
+    p: "A few taps about your life and money. Everything after it is tuned to you.",
+    href: `${KOSH_APP_URL}/check`,
+    cta: "Start the check",
   },
   {
-    icon: BookOpen,
-    kicker: "2 minutes each",
-    t: "Teach me one thing",
-    p: "Six short lessons: what investing is, the buffer that comes first, Sanchaypatra vs DPS, funds, and how a scam here actually sounds.",
-    href: "/learn",
-    cta: "Read a lesson",
-    accent: "b",
+    shot: "/img/app/learn.webp",
+    kicker: "2 minutes a lesson",
+    t: "Learn it like a game",
+    p: "Short lessons with XP, streaks and mini-games like Scam Spotter. Lesson one is waiting.",
+    href: `${KOSH_APP_URL}/learn`,
+    cta: "Start lesson one",
   },
   {
-    // The third door used to be /start, which is a page on this site — so all
-    // three doors led back into more reading. This one opens the app's Discover
-    // feed instead, which is the actual point of the funnel: read a lesson,
-    // then go look at real options. /start is still one tap away in the nav
-    // under "If I started today".
-    icon: Compass,
-    kicker: "real options",
-    t: "Show me what's out there",
-    p: "Sanchaypatra, DPS, FDR, funds, gold and shares, with what each one really pays after tax. Browse as a guest.",
-    href: `${KOSH_APP_URL}/invest`,
-    cta: "Open Discover",
-    accent: "c",
+    shot: "/img/app/arcade.webp",
+    kicker: "10 games",
+    t: "Play with money",
+    p: "Fly Doggesh through a candle chart, swipe on pitches, play the scammer. Zero real money.",
+    href: `${KOSH_APP_URL}/play`,
+    cta: "Open the arcade",
   },
 ];
 
 export const Paths = () => (
   <section className="sec paths" id="start">
-    <div className="blob m" style={{ width: 420, height: 420, right: "-8%", top: "10%" }} />
     <div className="wrap">
       <p className="eyebrow" data-reveal>start here</p>
       <h2 className="h-display" data-reveal style={{ ["--d" as string]: "80ms" }}>
         &ldquo;If I were to start investing today&hellip;&rdquo;
       </h2>
       <p className="h-sub" data-reveal style={{ ["--d" as string]: "150ms" }}>
-        Pick the door that sounds like you. All three are free, none of them
-        need an account, and every one ends with something you can actually do
-        this week.
+        Get a taste of how Kosh teaches: short, simple, and played like a game.
+        Tap one and you&rsquo;re in the app. No sign-up.
       </p>
       <div className="paths__grid" data-stagger="120">
         {DOORS.map((d) => (
-          <a className={`door glass ${d.accent}`} key={d.t} href={d.href} data-reveal="scale">
-            <div className="door__icon"><d.icon size={22} strokeWidth={1.9} /></div>
+          <a className="door" key={d.t} href={d.href} data-reveal="scale">
+            <div className="door__shot" aria-hidden="true">
+              <img src={d.shot} alt="" loading="lazy" decoding="async" />
+            </div>
             <span className="door__kicker">{d.kicker}</span>
             <h3>{d.t}</h3>
             <p>{d.p}</p>
@@ -113,7 +102,6 @@ export const Paths = () => (
    child or team — without making the main promise feel like an upsell. */
 export const KoshLearnTeaser = () => (
   <section className="sec learn-teaser" id="offerings">
-    <div className="blob p" style={{ width: 360, height: 360, left: "-10%", top: "12%" }} />
     <div className="wrap">
       <div className="learn-teaser__head" data-stagger="100">
         <div>
@@ -161,7 +149,7 @@ const STATS = [
   {
     num: <>4<small> in </small>5</>,
     lede: <>lack basic financial literacy</>,
-    src: "S&P Global FinLit Survey",
+    src: "S&P Global FinLit Survey · 2014",
   },
   {
     num: <><span data-count="53">0</span><small>%</small></>,
@@ -172,16 +160,16 @@ const STATS = [
 
 export const Problem = () => (
   <section className="sec problem" id="problem">
-    <Starfield density={1.6} />
     <div className="wrap">
       <p className="eyebrow" data-reveal>the problem</p>
       <h2 className="h-display" data-reveal style={{ ["--d" as string]: "80ms" }}>
         Everyone tells you to invest. Nobody tells you <span className="grad-text">how.</span>
       </h2>
       <p className="h-sub" data-reveal style={{ ["--d" as string]: "160ms" }}>
-        The information isn&rsquo;t missing anymore. It&rsquo;s scattered across
-        forty tabs, group chats, and gurus selling the basics as masterclasses,
-        and you can&rsquo;t tell which half is lying.
+        The info is out there, spread across forty tabs and group chats. Then
+        there are the trading &ldquo;gurus&rdquo; who don&rsquo;t understand
+        how markets work, selling the basics for &#2547;4,000&ndash;5,000 and
+        calling it a masterclass. You can&rsquo;t tell who to trust.
       </p>
 
       <div className="problem__cards">
@@ -189,18 +177,16 @@ export const Problem = () => (
           <span className="pcard__tag">nobody shows you the how</span>
           <h3>What&rsquo;s actually worth your money?</h3>
           <p>
-            Finding one opportunity, checking it, and understanding it is a
-            full-time job. <strong>So most people never get past deciding to
-            decide.</strong>
+            Finding a good option, checking it and understanding it takes
+            hours. <strong>So most people never start.</strong>
           </p>
         </div>
         <div className="pcard glass b" data-reveal="right" style={{ ["--d" as string]: "140ms" }}>
           <span className="pcard__tag">and trust is broken</span>
           <h3>Decades of scams taught one lesson: stay out.</h3>
           <p>
-            Crashes, Ponzis, and fine print pushed a whole generation to the
-            sidelines. <strong>And staying out has a price nobody quotes
-            you.</strong>
+            Share crashes, Ponzi schemes and hidden fine print scared a whole
+            generation off. <strong>But staying out costs you too.</strong>
           </p>
         </div>
       </div>
@@ -234,7 +220,6 @@ const EXTRAS = [
 
 export const Product = () => (
   <section className="sec product" id="product">
-    <div className="blob p" style={{ width: 460, height: 460, right: "-10%", top: "6%" }} />
     <div className="wrap">
       <p className="eyebrow" data-reveal>how kosh works</p>
       <h2 className="h-display" data-reveal style={{ ["--d" as string]: "80ms" }}>
@@ -247,10 +232,10 @@ export const Product = () => (
 
       <ol className="loop" data-stagger="90">
         {[
-          ["01", "Discover", "AI agents read funds, gold, Sanchaypatra and DSE filings every day, and surface what's worth your attention."],
-          ["02", "Verify", "Every number is computed from its source, not written by the AI. Cards that score low wait for a human before they publish."],
-          ["03", "Understand", "Explainable AI tells you why it surfaced, in plain language, with the numbers shown. No jargon, no hype."],
-          ["04", "Practise", "Paper-invest with real market data and zero risk, until the decision feels obvious instead of scary."],
+          ["01", "Discover", "Every day, our AI reads the news and filings on funds, gold, Sanchaypatra and DSE shares, and picks out what matters."],
+          ["02", "Verify", "Numbers come straight from the source, never made up by AI. If something looks off, a person checks it first."],
+          ["03", "Understand", "Each card tells you, in simple words, why it's there. No jargon, no hype."],
+          ["04", "Practise", "Practise with pretend money on real prices, until it stops feeling scary."],
           ["05", "Invest", "When you're ready, we show where and how to open the real thing. We never touch your money."],
         ].map(([n, h, p]) => (
           <li className="loop__step" key={n} data-reveal="fade">
