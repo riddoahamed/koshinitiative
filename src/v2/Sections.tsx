@@ -158,7 +158,7 @@ const STATS = [
   },
 ];
 
-export const Problem = () => (
+export const Problem = ({ homepage = false }: { homepage?: boolean }) => (
   <section className="sec problem" id="problem">
     <div className="wrap">
       <p className="eyebrow" data-reveal>the problem</p>
@@ -192,7 +192,8 @@ export const Problem = () => (
       </div>
 
       <div className="problem__stats" data-stagger="110">
-        {STATS.map((s) => (
+        {/* the hero already says 98%; on the homepage the <2% stat would repeat it */}
+        {(homepage ? STATS.slice(1) : STATS).map((s) => (
           <div className="mini" key={s.src} data-reveal="fade">
             <b className="grad-text">{s.num}</b>
             <span>{s.lede}</span>

@@ -165,8 +165,11 @@ const HeroMachine = () => {
   const explore = () => {
     const wrapEl = wrapRef.current;
     if (!wrapEl) return;
+    /* Land the next section just under the fixed nav. Scrolling to the exact
+       end of the hero put the nav on top of the numbers bar's first row. */
+    const nav = document.querySelector<HTMLElement>(".nav");
     window.scrollTo({
-      top: wrapEl.offsetTop + wrapEl.offsetHeight + 2,
+      top: wrapEl.offsetTop + wrapEl.offsetHeight - (nav?.offsetHeight ?? 0),
       behavior: "smooth",
     });
   };

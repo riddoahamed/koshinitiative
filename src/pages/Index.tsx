@@ -3,7 +3,8 @@ import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HeroMachine from "@/v2/HeroMachine";
-import { Paths } from "@/v2/Sections";
+import { Problem } from "@/v2/Sections";
+import { WhyKosh, LearnPaths } from "@/v2/Sell";
 import { FootV2, NavV2 } from "@/v2/Closing";
 import { NumbersBar, Mission, StickyCta } from "@/v2/Refresh";
 import { Funance } from "@/v2/Funance";
@@ -92,7 +93,9 @@ const Index = ({ path = "/" }: { path?: "/" | "/bd" }) => {
       <main>
         <HeroMachine />
         <NumbersBar />
-        <Paths />
+        <Problem homepage />
+        <WhyKosh />
+        <LearnPaths />
         <Inside />
         <Offer />
         <Tools />

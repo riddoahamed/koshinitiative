@@ -9,9 +9,9 @@ import { KOSH_APP_URL } from "@/lib/links";
    StickyCta:  one next step that follows you on a phone.                 */
 
 const NUMBERS = [
-  { n: "৳0", t: "to start learning" },
-  { n: "৳499", t: "founding price per course" },
-  { n: "৳10,00,000", t: "practice money, real prices" },
+  { n: "৳0", t: "for the whole learning path" },
+  { n: "৳10,00,000", t: "to invest and trade with, simulated on real, live prices" },
+  { n: "61", t: "two-minute lessons, from your first taka to a ten-year plan" },
   { n: "10", t: "money games, zero real money" },
 ];
 

@@ -1,5 +1,5 @@
 import { ArrowRight } from "lucide-react";
-import { KOSH_DOWNLOAD_URL, KOSH_WAITLIST_EMAIL_URL } from "@/lib/links";
+import { KOSH_APP_URL, KOSH_WAITLIST_EMAIL_URL } from "@/lib/links";
 import { mailto } from "./copy";
 
 /* ---------------- OFFER — what is free, what costs money ----------------
@@ -8,32 +8,35 @@ import { mailto } from "./copy";
    offer (Nov 2026). When a price changes in the app, change it here the same
    week; the courses branch keeps its own copy in src/v2/courses.ts.        */
 
-const COURSE_LIST = "৳999";
-const COURSE_FOUNDING = "৳499";
+/* Course prices live on the courses page, not here: on the homepage the
+   message is that learning is free; the paid courses are a specialised
+   extra for people who want them. */
+const COURSES_URL = "/bd/offerings/courses";
 
 export const Offer = () => (
   <section className="sec offer paper-sec" id="offer">
     <div className="wrap">
       <p className="eyebrow" data-reveal>what it costs</p>
       <h2 className="h-display" data-reveal style={{ ["--d" as string]: "80ms" }}>
-        Most of Kosh is free.
+        Learning on Kosh is <span className="grad-text">free.</span>
       </h2>
       <p className="h-sub" data-reveal style={{ ["--d" as string]: "150ms" }}>
-        Free or paid, every course is self-paced, so you actually finish it.
-        Paid ones are priced as low as we can make them.
+        The whole learning path, the practice account and the games cost
+        nothing. For people who want to go deeper, we run specialised courses
+        and programmes.
       </p>
 
       <div className="offer__grid" data-stagger="110">
         <div className="offer__card glass" data-reveal="scale">
           <span className="offer__tag">Free</span>
           <ul>
-            <li><b>Money basics</b> · a learning journey in the app</li>
-            <li><b>Practice money</b> on real market prices</li>
+            <li><b>The learning path</b> · 10 units, 61 lessons</li>
+            <li><b>৳10,00,000 to practise with</b> on real, live prices</li>
             <li><b>Tools</b> · fund screener, FDR and SIP calculators</li>
             <li><b>Money Lab</b> · Compare, Asset Battle and Time Machine presets, coming soon</li>
           </ul>
-          <a className="offer__cta" href={KOSH_DOWNLOAD_URL}>
-            Get the app <ArrowRight size={15} strokeWidth={2.2} />
+          <a className="offer__cta" href={KOSH_APP_URL}>
+            Open the app free <ArrowRight size={15} strokeWidth={2.2} />
           </a>
         </div>
 
@@ -51,10 +54,9 @@ export const Offer = () => (
           <span className="offer__tag offer__tag--paid">Paid</span>
           <ul>
             <li>
-              <b>Courses</b> on this website, Money basics included · {COURSE_LIST} each, or {COURSE_FOUNDING} if you
-              have a Kosh account and{" "}
-              <a href={KOSH_WAITLIST_EMAIL_URL}>joined the waitlist</a> for the
-              full app with a licensed broker
+              <b>Specialised courses and programmes</b> · self-paced, for when
+              you want to go deeper.{" "}
+              <a href={COURSES_URL}>See courses</a>
             </li>
             <li>
               <b>Kosh Plus</b> · ৳99 a month, ৳594 for 6 months or ৳1,188 for
@@ -69,8 +71,8 @@ export const Offer = () => (
       </div>
 
       <p className="offer__help" data-reveal="fade">
-        Want to learn but can&rsquo;t afford it?{" "}
-        <a href={mailto("I want to learn but can't afford it")}>Email us</a>{" "}
+        Want a course but can&rsquo;t afford it?{" "}
+        <a href={mailto("I want a course but can't afford it")}>Email us</a>{" "}
         and we&rsquo;ll try to sort it out.
       </p>
     </div>

@@ -180,27 +180,6 @@ export const Inside = () => (
         </div>
       </div>
 
-      <div className="claim" data-reveal>
-        <div className="claim__text">
-          <p className="claim__kicker">and the part that sticks</p>
-          <h3>A path, not a library you&rsquo;ll never finish.</h3>
-          <p>
-            Short lessons in order, with XP, streaks and mini-games along the
-            way, tuned to where you live and earn. <b>Start with Money basics, free
-            in the app.</b>
-          </p>
-        </div>
-        <div className="claim__shot">
-          <Phone
-            src="/img/app/learn-path.webp"
-            reel
-            speed={36}
-            alt="The Kosh learning path scrolling: level and streak, Unit 1 Understand how money works, lessons like Why your FDR is quietly losing, and the Scam Spotter and IPO Launch games along the path"
-            cap="Bangladesh, Gulf, UK, US, SE Asia. The lessons move with you."
-          />
-        </div>
-      </div>
-
       <div className="inside__cta" data-reveal="fade">
         <a className="btn btn-primary" href={KOSH_APP_URL} target="_blank" rel="noreferrer">
           Try Kosh <ArrowRight size={16} strokeWidth={2.4} />
