@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { KOSH_APP_URL } from "@/lib/links";
+import { PLUS_TRIAL } from "./copy";
 
 /* ── Nov 2026 refresh pieces ──────────────────────────────────────────────
    NumbersBar: the pitch as four facts, no adjectives. Every number is the
@@ -60,6 +61,7 @@ export const Mission = ({ story = true }: { story?: boolean }) => (
         <a className="btn btn-primary" href={KOSH_APP_URL}>Explore the app free</a>
         {story && <a className="btn btn-glass" href="/about">Read our story</a>}
       </div>
+      <p className="mission__trial" data-reveal="fade">{PLUS_TRIAL}</p>
     </div>
   </section>
 );

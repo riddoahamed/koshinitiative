@@ -3246,3 +3246,11 @@
 .unit__games { font-size: 12.5px; color: var(--mint); }
 .learnpath__ctas { display: flex; flex-wrap: wrap; gap: 10px; margin-top: clamp(24px, 3vw, 34px); }
 @media (max-width: 600px) { .learnpath__ctas .btn { width: 100%; justify-content: center; } }
+
+/* the Plus trial, under the main sign-up buttons */
+.hero__trial {
+  margin-top: 10px; font-size: 12.5px; line-height: 1.4; color: rgba(242, 242, 247, 0.82);
+  text-shadow: 0 2px 12px rgba(2, 5, 11, 0.95);
+}
+.mission__trial { margin-top: 14px; font-size: 14px; color: var(--ink-soft); }
+@media (max-width: 640px) { .hero__trial { font-size: 12px; margin-top: 8px; } }

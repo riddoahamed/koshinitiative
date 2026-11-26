@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { KOSH_APP_URL } from "@/lib/links";
+import { PLUS_TRIAL } from "./copy";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -311,6 +312,7 @@ const HeroMachine = () => {
             <a className="btn btn-primary" href={KOSH_APP_URL}>Explore the app free</a>
             <a className="btn btn-glass" href="/bd/quiz">Take the 1-min quiz</a>
           </div>
+          <p className="hero__trial">{PLUS_TRIAL}</p>
         </div>
 
         {/* The fact arrives like a message on your phone, not a banner. */}

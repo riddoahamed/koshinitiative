@@ -188,8 +188,8 @@ export const Inside = () => (
           <AndroidGlyph size={17} /> Get the Android app
         </a>
         <p>
-          <span className="dot" /> in beta · explore as a guest · we never touch
-          your money
+          <span className="dot" /> in beta · explore as a guest · sign up and get
+          3 months of Kosh Plus free, no card needed
         </p>
       </div>
     </div>

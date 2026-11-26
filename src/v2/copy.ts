@@ -12,6 +12,10 @@ export const STAT_HOOK =
   "~98% of Bangladeshis don\u2019t have a formal investment account";
 
 /** Short form: hero, footer, page straplines. */
+/* Live in the app since 27 Nov 2026: every new account gets 3 months of
+   Kosh Plus automatically. Payment is manual, so no card is ever asked for. */
+export const PLUS_TRIAL = "Sign up and get 3 months of Kosh Plus free. No card needed.";
+
 export const VP_SHORT = "Building Bangladesh\u2019s first generation of confident investors.";
 
 /** Full form: meta description, page intros. */
